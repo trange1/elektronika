@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Visual Basic Example</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Automation Interfaces\nThe Mathcad Embedding API\nVisual Basic Example");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Visual Basic Example</h1></td>
+	</tr>
+</table>
+
+<p>This example uses a simple Visual Basic 6.0 program and the <a href="oldAutomation.html">Automation Embedding API</a> to set the variable in0 in a Mathcad OLE object to a complex number, allow Mathcad to perform a calculation, and put the answer into a TextBox control.</p>
+
+<h3>Step 1: Add a Reference to the Mathcad object to the object browser.</h3>
+
+<ol type="1">
+	<li>Choose <b>References</b> from the <b>Project</b> menu.</li>
+	<li>In the list of Available References, select Mathcad.</li>
+	<li>Make sure the check box to the left of Mathcad is checked and click &quot;OK.&quot;</li>
+	<li>To view Mathcad's object model, choose <b>Object Browser</b> from the <b>View</b> menu and select Mathcad in the list of available libraries.</li>
+</ol>
+
+<h3>Step 2: Design the form. For example, your form might look like this:</h3>
+
+<p class="blockindent"><img src="Graphics/vboleexample.jpg" alt="Using the Automation interface to control Mathcad from a VB application" width="474" height="218" border="0"></p>
+
+<p>On the left is the Mathcad Document object within an OLE Container control. It contains statements to show the input, perform a single calculation, and display the output. On the right are text boxes to provide input and view output from the Mathcad object. There is also a CommandButton control used to submit the input to Mathcad, recalculate, and extract the output to the output TextBox controls.</p>
+
+<h3>Step 3: Write the code.</h3>
+
+<code>
+Private Sub cmdSubmit_Click()<br>
+Dim objMC As Object<br>Dim varInReal As Variant, varInImag As Variant<br>
+Dim varOutReal As Variant, varOutImag As Variant<br>
+<br>
+<span class="comment">'set a reference to the Mathcad object in the OLE container</span><br>
+Set objMC = OLE1.Object<br>
+<br>
+<span class="comment">'pass data to Mathcad worksheet via the SetComplex method<br>
+'getting inputs from the contents of the text boxes<br>
+'NOTE: normally you would validate inputs here prior to conversion from string values</span><br>
+<br>
+varInReal = CDbl(txtInReal.Text)<br>
+varInImag = CDbl(txtInImag.Text)<br>
+Call objMC.SetComplex(&quot;in0&quot;, varInReal, varInImag)<br>
+<br>
+<span class="comment">'recalculate worksheet</span><br>
+Call objMC.Recalculate<br>
+<br>
+<span class="comment">'retrieve data from Mathcad using the GetComplex method</span><br>
+Call objMC.GetComplex(&quot;out0&quot;, varOutReal, varOutImag)<br>
+<br>
+<span class="comment">'assign outputs to text boxes</span><br>
+txtOutReal.Text = CStr(varOutReal)<br>
+txtOutImag.Text = CStr(varOutImag)<br>
+<br>
+End Sub<br>
+<br>
+</code>
+
+<h4>Note:</h4>
+
+<ul>
+<li>See the VB projects in the <b>qsheet\samples\vbasic</b> folder in your Mathcad installation directory for working projects that demonstrate <a href="Automation.html">Mathcad's Automation interface</a>.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

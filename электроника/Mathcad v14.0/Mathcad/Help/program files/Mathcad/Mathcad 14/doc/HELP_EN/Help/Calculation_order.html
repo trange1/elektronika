@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Calculation Order</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Getting Started\nEntering and Evaluating Expressions\nCalculation Order");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Calculation Order</h1></td>
+	</tr>
+</table>
+
+<p>Math regions in your worksheet often depend on other math regions to calculate correctly.</p>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('tutorial\\Primers\\tu_04.xmcd')"
+	   class="fakelink">Tutorial - First Things First</a></h5>
+	   
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Discussion and Example</td></tr>
+</table>
+</h2>
+
+<p>With the <a href="Global_definition_operator.html">exception of global definitions</a>, 
+  math expressions in a worksheet are evaluated from left to right and top to 
+  bottom. Before using a variable or function, you must <a href="Equal_sign_for_definition.html">define it</a> above and to the left of the expression in which you wish to use it. As you <a href="Equal_sign_for_evaluation.html">evaluate</a> new expressions, you will see results flow down the page.</p>
+
+<p>The left-hand worksheet below shows an attempt to use <span class="math"> y</span> before it is defined. Note how <span class="math">y</span> is red, indicating an error. If you were to click on the expression defining <span class="math">x</span>, you would see an <a href="Numerical_Errors.html">error message</a> saying that the variable is undefined. To correct the error, you must <a href="Region.html#move">move the region</a> containing <span class="math">y</span> above the definition for <span class="math">x</span>, as shown in the right-hand worksheet below.</p>
+
+<p class="blockindent"><img src="Graphics/UNDEFINE.GIF" alt="an undefined variable" width="228" height="141" border="0"></p>
+
+<p>This concept is important not only for previously undefined variables, but also for knowing which value a variable currently holds, since variables can be redefined. Consider the following evaluations of <span class="math">f(x)</span> for different values of <span class="math">x</span>:</p>
+
+<table class="blockindent" border="0" cellpadding="5">
+<tr valign="top"> 
+    <td><p><a href="Equal_sign_for_definition.html">Define a variable x:</a></p></td>
+	<td><p class="vmath">x := 1</p></td>
+</tr>
+<tr>
+    <td><p><a href="Defining_a_Function.html">Define a function:</a></p></td>
+	<td><p class="vmath">f(z) := 3&middot;z</p></td>
+</tr>
+<tr>
+    <td><p><a href="Equal_sign_for_evaluation.html">Evaluate the function:</p></a></td>
+	<td><p class="vmath">f(x) = 3</p></td>
+</tr>
+<tr>
+	<td><p>Redefine the variable <span class="math">x</span>:</p></td>
+	<td><p class="vmath">x := 10</p></td>
+</tr>
+<tr>
+    <td><p>Reevaluate the function: </p></td>
+	<td><p class="vmath">f(x) = 30</p></td>
+</tr>
+</table>
+
+<p> Since the first evaluation of the function <span class="math">f</span> occurs 
+  before the definition <span class="math">x := 10</span>,  
+  the value of <span class="math">x</span> is 1. The second evaluation of <span class="math">f</span> 
+  occurs below the <span class="math">x := 10</span> definition, so it considers 
+  <span class="math">x</span> to be 10.</p>
+  
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Determining and correcting order of evaluation</td></tr>
+</table>
+</h2>
+
+<p>With large regions, such as <a href="X-y_plot.html">2D</a> or <a href="Insert_Graph.html#3D">3D graphs</a>, <a href="Picture.html">Picture operators</a>, or large expressions, it may be difficult to tell where the edges of the regions are, and they may overlap or precede other regions in unobvious ways. If you are having trouble locating the boundaries of regions, choose  <a href="View_-_Regions.html"><b>View &gt; Regions</b></a>. You can easily line up regions in the same horizontal row using <a href="Aligning_regions.html"><b>Format &gt; Align Regions</b></a>.</p>
+  
+<p>Note that if regions are evaluated in an unintended order, they do not create errors if all the required definitions exist previously in the document. They simply generate unexpected results. For example, this graph </p>
+
+<p class="blockindent"><img src="Graphics/order1.gif" width="365" height="195" alt="one order of operations"></p>
+
+<p>does not use the range variable <span class="math">z</span>, because it's defined below the top corner of the graph. Instead, the graph assigns its own <a href="Quickplots.html">QuickPlot</a> range. To use the range variable <span class="math">z</span>, its region should be positioned above the graph as illustrated below:</p>
+
+<p class="blockindent"><img src="Graphics/order2.gif" width="339" height="203" alt="a second order of operations"></p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

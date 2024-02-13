@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Principal Component Analysis Functions</title>
+
+<meta name="template" content="Function Template.htt">	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Principal Component Analysis");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DAEP.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Principal Component Analysis</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath"><a name="Nipals">Nipals(DATA, NumPC, maxiter, &quot;scale/noscale&quot;, 
+ Acc)</a></b> Takes a matrix of multivariate <b class="math">DATA</b>, 
+ and returns <b class="math">numPC</b> 
+ principal components, calculated with a maximum of <b class="math">maxiter</b> 
+ iterations. The fourth argument may be set to &quot;<b class="math">scale</b>&quot; 
+ if you wish to scale the data to the standard deviation, or &quot;<b class="math">noscale</b>&quot; 
+ if you do not. The convergence accuracy is given by <b class="math">Acc</b>, 
+ typically of the order of 10<sup>-10</sup> or smaller.</p>
+
+<p>The output contains the scores, loadings, 
+ cumulative variance explained, and the principal components (eigenvalues) in nested format.  These can be accessed using matrix indexing or can be extracted with 
+ the other functions mentioned on this page.</p>
+
+<p><b class="hmath"><a name="Nipals2">Nipals2(Nipals, numAddPC)</a></b> Takes the nested matrix output of the <a 
+ href="#Nipals"><b>Nipals</b></a> function and the number of additional principal 
+ components to calculate. <b>Nipals2</b> returns a nested matrix of the scores, 
+ loadings, eigenvalues, and cumulative variances for the original plus 
+ the additional number of principal components.</p>
+
+
+
+<p><b class="hmath"><a name="loadings">loadings(Nipals)</a></b> Takes the results array from the <a href="#Nipals"><b>Nipals</b></a> or <a href="#Nipals2"><b>Nipals2</b></a> 
+ function and returns the entry corresponding to the loadings of the principal components.</p>
+
+
+
+<p><b class="hmath"><a name="PCAeigenvals">PCAeigenvals(Nipals)</a></b> Takes the results array from the <a href="#Nipals"><b>Nipals</b></a> 
+ or <a href="#Nipals2"><b>Nipals2</b></a> function and returns the eigenvalues 
+ of the principal components.</p>
+
+
+
+<p><b class="hmath"><a name="PCAvariance">PCAvariance(Nipals)</a></b> Takes the results array from the <a href="#Nipals"><b>Nipals</b></a> 
+ or <a href="#Nipals2"><b>Nipals2</b></a> function and returns the cumulative 
+ variance explained by each calculated principal component.</p>
+
+
+
+<p><b class="hmath"><a name="scores">scores(Nipals)</a></b> Takes the results array from the <a href="#Nipals"><b>Nipals</b></a> 
+ or <a href="#Nipals2"><b>Nipals2</b></a> function and returns the scores array.</p>
+
+<hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

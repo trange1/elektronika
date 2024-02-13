@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Creating a User DLL</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Writing Mathcad DLLs");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Creating a User DLL</h1></td>
+	</tr>
+</table>
+
+<p>You can extend Mathcad's functionality by writing your own customized functions. Your functions will behave like Mathcad's <a href="../Help/Mcad.htm#Builtin_math_functions.html" target="_top">built-in functions</a>. A custom 32-bit <acronym lang="en" title="Dynamically Linked Library">DLL</acronym> can have many of the same features as Mathcad built-in functions, such as customized error messages, interruption, and exception handling in case of overflow and divide by zero. Custom functions are allowed to pass complex scalars, complex matrices, and string variable types.</p>
+
+<p>To create customized functions, you will need to:</p>
+
+<ol type="1">
+	<li>Create source code in C or C++ (or wrap FORTRAN code in a C wrapper).</li>
+	<li>Compile the source code with a 32-bit compiler.</li>
+	<li>Link the object files together with the Mathsoft-provided <b>MCADUSER.LIB</b>  library to create a DLL.</li>
+	<li>Place your DLL into the <b>UserEFI</b> subdirectory of the Mathcad install  directory.</li>
+	<li>Add an entry to <b>Doc/Funcdoc/USER_EN.XML</b> so that your function appears in the <a href="../Help/Mcad.htm#Insert_Function_Dialog_Options.html" target="_top">Insert Function</a> dialog box.</li>
+	<li>Modify the  <b>Doc/Help_XX/user/userHelp.htm</b>  file to create Help that will appear when you type the function and click <b>F1</b>.</li>
+
+</ol>
+
+<p>The first four steps can all be done through the Visual Studio development environment. <a href="UserDLL_Compiling.html">Instructions are provided</a> for finding all the right resources, such as the <b>MCADUSER.LIB</b> library.</p>
+
+<ul type="disc">
+	<li><a href="UserDLL_Compiling.html">Setting up Your Programming Environment</a></li>
+	<li><a HREF="UserDLL_code.html">Creating Mathcad-readable Libraries</a></li>
+	<li><a HREF="UserDLL_coderef.html">Special Mathcad Structure and Function Reference</a></li>
+	<li><a href="UserDLL_InsertFunc_listing.html">Listing Your Functions in the Insert Function dialog</a></li>
+	<li><a href="UserDLL_Help.html">Creating F1 Help for your Functions</a></li>
+	<li><a href="UserDLL_FORTRAN.html">Wrapping FORTRAN code</a></li>
+</ul>
+
+<h3>Terms of Use</h3>
+
+<p>DLL interface specifications contained in this Developer's Reference can be used for creating user-written external functions that work with Mathcad for your personal or internal business use only. These specifications may not be used for creating external functions for commercial resale without prior written consent from PTC.</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

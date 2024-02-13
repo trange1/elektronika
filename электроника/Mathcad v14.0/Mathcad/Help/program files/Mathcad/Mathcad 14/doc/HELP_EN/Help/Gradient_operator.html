@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Gradient operator</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Operators\nCalculus Operators\nGradient operator");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Gradient Operator</h1></td>
+	</tr>
+</table>
+
+<p>Keystroke: <b>[Ctrl]&nbsp;[Shift]&nbsp;G</b></p>
+
+<p class="blockindent"><img src="Graphics/gradient1.GIF" alt="Returns the gradient of f evaluated at a,b,c,..." width="72" height="16" align="bottom" border="0"></p>
+
+<p>Returns the gradient of the scalar function <span class="math">f</span> with respect to the variables <span class="math">a,&nbsp;b,&nbsp;c&nbsp;...</span>.</p>
+  
+<p class="blockindent"><img src="Graphics/graddef1.GIF" alt="Defintion of gradient with respect to a list of variables" width="125" height="157" border="0"></p>  
+  
+<p>The result is a column vector whose length equals the number of variables in the list <span class="math">a,&nbsp;b,&nbsp;c&nbsp;...</span>.</p>
+
+<p>Alternatively, you can specify the variables as a single vector <span  class="math">x</span>, and write <span class="math">f</span> in terms of subscripted variables <span class="math">x<sub>0</sub>,&nbsp;x<sub>1</sub>,...,&nbsp;x<sub>n</sub></span>.</p>
+  
+<p class="blockindent"><img src="Graphics/graddef2.GIF" alt="Definition of gradient for subscripted variables" width="87" height="162" border="0"></p>  
+
+<h4>Operands:</h4>
+
+<ul type="disc">
+  <li><span class="hmath">f</span> is a scalar-valued function. The function <span class="math">f</span> can be complex, and can depend on any number of variables, including ones that do not appear in the list <span class="hmath">a,&nbsp;b,&nbsp;c,&nbsp;...</span>. If any of the variables is numerically undefined, you can only evaluate the gradient <a href="Symbolic_calculation.html">symbolically</a>.</li>
+
+  <li><span class="hmath">a,&nbsp;b,&nbsp;c,&nbsp;...</span> is a comma-separated list of the variables. If there is only one variable name in the list, and the expressions in <span class="math">f</span> contain that variable with subscripts,  Mathcad interprets the variable as a vector, as in the second case above.</li>
+  
+</ul>
+
+<h4>Examples:</h4>
+
+<p class="blockindent"><img src="Graphics/gradientex1.gif" alt="Gradient example with list of variables" width="180" height="103" align="bottom" border="0"></p>
+
+<p>The following example computes the gradient of a function with respect to a vector <span class="math">x</span> of subscripted variables.</p>
+
+<p class="blockindent"><img src="Graphics/gradientex3.GIF" alt="Gradient with respect to a vector of subscripted variables" width="179" height="158" border="0"></p>
+
+<p>The gradient operator is especially useful for setting up arguments for the curve-fitting function <a href="Genfit.html"><b>genfit</b></a>.</p>
+
+<p><b>Note:</b> The preceding example, and the remarks that follow, assume that the built-in variable <a href="Array_origin.html"><span class="math">ORIGIN</span></a>, which sets the starting index for all arrays, has its default value of <span class="math">0</span>. <a href="#origin">Changing the Value of ORIGIN</a> describes how changing <span class="math">ORIGIN</span> the affects the behavior of the gradient operator.</p>
+
+<p>In the preceding example, the variable with the largest subscript appearing in <span class="math">f</span> is <span class="math">x<sub>2</sub></span>. As a result, Mathcad assumes that there are three variables, <span class="math">x<sub>0</sub>,&nbsp;x<sub>1</sub></span> and <span class="math">x<sub>2</sub></span>, and returns a gradient vector of length 3, containing the partial derivatives with respect to these variables. Note that if either <span class="math">x<sub>0</sub></span> or <span class="math">x<sub>1</sub></span> did not appear in <span class="math">F</span>, Mathcad would still return a vector of length 3, but the entries corresponding to variables not appearing in <span class="math">f</span> would be 0.</p>
+
+<p>In general, if the largest subscript appearing in <span class="math">f</span> is <span class="math">n</span>, Mathcad assumes that there are <span class="math">n&nbsp;+&nbsp;1</span> variables, <span class="math">x<sub>0</sub>,&nbsp;x<sub>1</sub>, ... , x<sub>n</sub></span>, and returns the gradient of length <span class="math">n&nbsp;+&nbsp;1</span>. </p> 
+
+<p>Since <span class="math">x<sub>0</sub></span> and <span class="math">x<sub>1</sub></span> are the only variables appearing in the expression, Mathcad takes the partial derivatives with respect to <span class="math">x<sub>0</sub></span> and <span class="math">x<sub>1</sub></span> and returns a vector of length 2.</p>
+
+<p>If you define <span class="math">x</span> numerically, you can evaluate the gradient with the equal sign (=). Mathcad evaluates the gradient at the values in <span class="math">x</span> and returns a vector of numbers, representing the gradient at the point <span class="math">x</span>. The length of <span class="math">x</span> must be greater than the largest subscript appearing in <span class="math">f</span>, and Mathcad returns a gradient with <span class="math">length(x)</span> entries. For example:</p>
+
+<p class="blockindent"><img src="Graphics/gradientex2.GIF" alt="Gradient evaluated at a numerically defined vector" width="122" height="130" border="0"></p>
+
+<p>However, if you define <span class="math">x</span> to be a vector of length 3, Mathcad assumes that there is an additional variable, <span class="math">x<sub>2</sub></span>, which does not appear in the expression for the function, and returns a vector of length 3.</p>
+
+<p class="blockindent"><img src="Graphics/gradientex4.GIF" alt="Gradient evaluated for a defined vector" width="113" height="138" border="0"></p>
+
+<p> The last entry of the result, which is the partial derivative with respect to <span class="math">x<sub>2</sub></span>, is 0 because <span class="math">x<sub>2</sub></span> does not appear in the expression.</p>
+
+<h2>
+	<table>
+		<tr>
+			<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+			<td valign="top"><a name="origin">Changing the Value of ORIGIN</a></td>
+		</tr>
+	</table>
+</h2>
+
+<p>If you change the value of <span class="math">ORIGIN</span> to a positive integer <span class="math">p</span>, then all subscripts in <span class="math">f</span> must be greater than or equal to <span class="math">p</span>. If <span class="math">n</span> is the largest subscript appearing in <span class="math">f</span>, Mathcad assumes that there are <span class="math">n&nbsp;&minus;&nbsp;p&nbsp;+&nbsp;1</span> variables, <span class="math">x<sub>p</sub>,&nbsp;x<sub>p+1</sub>,&nbsp;...,&nbsp;x<sub>n</sub></span>. The gradient has length <span class="math">n&nbsp;&minus;&nbsp;p&nbsp;+&nbsp;1</span>.</p>
+
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object>
+</p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('tutorial\\newfeat\\jacobian.xmcd')"
+	   class="fakelink">New Features - Gradient and Jacobian</a></h5>
+	   
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Calculus_DEs\\vctrdiff.xmcd')"
+	   class="fakelink">QuickSheet - Gradient, Divergence, and Curl</a></h5>	   
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

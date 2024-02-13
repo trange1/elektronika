@@ -1,0 +1,1849 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 sp2 U (http://www.altova.com) by Nikolay Kojuharov (Mathsoft) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ml="http://schemas.mathsoft.com/math20" xmlns:p="http://schemas.mathsoft.com/provenance10" xmlns:ws="http://schemas.mathsoft.com/worksheet20" xmlns="http://schemas.mathsoft.com/worksheet20" targetNamespace="http://schemas.mathsoft.com/worksheet20" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0.2">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+			<h1>Mathsoft Mathcad 13.0 Document Schema</h1>
+			<p>See <a href="http://schemas.mathsoft.com/worksheet20">the Mathcad 13 Schema
+				Documentation</a> for an introduction</p>
+			<hr/>
+			<pre>
+  $Workfile:: worksheet20.xsd                                            $
+  $Revision:: 1                                                          $
+    $Author:: jlew                                                       $
+      $Date:: 2006-06-08 13:10:55-04:00                                  $
+$NoKeywords::                                                            $
+			</pre>
+		</xs:documentation>
+	</xs:annotation>
+	<xs:import namespace="http://schemas.mathsoft.com/math20" schemaLocation="Math20.xsd"/>
+	<xs:import namespace="http://schemas.mathsoft.com/provenance10" schemaLocation="provenance10.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="W3C-CopyOf-xml.xsd">
+    <xs:annotation>
+      <xs:documentation>
+        Get access to the xml: attribute groups such as xml:lang and xml:space
+      </xs:documentation>
+    </xs:annotation>
+  </xs:import>
+	<xs:element name="worksheet">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The Mathcad Worksheet</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="pointReleaseData" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Additions to point/service releases are added here to avoid breaking compatibility with unpatched versions.  Major releases will push these changes into a new schema version.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+						<xs:anyAttribute namespace="##any" processContents="lax"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="metadata" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="identityInfo" minOccurs="0">
+								<xs:complexType>
+									<xs:all>
+										<xs:element name="documentID" type="p:guidType" default="00000000-0000-0000-0000-000000000000" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Identifies a document</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="branchID" type="p:guidType" default="00000000-0000-0000-0000-000000000000" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Identifies Designate reuse branch</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="versionID" type="p:guidType" default="00000000-0000-0000-0000-000000000000" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Identifies a unique version of a document.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="parentVersionID" type="p:guidType" default="00000000-0000-0000-0000-000000000000" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Parent worksheet's version ID value.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="revision" type="xs:positiveInteger" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Monotonically increasing revision number.</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="comment" type="xs:anyType" minOccurs="0"/>
+										<xs:element name="savedOn" type="xs:dateTime" minOccurs="0"/>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="generator" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Identifies program/version responsible for generating this XML</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="userData" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Metadata enterred by the user.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:all>
+										<xs:element name="author" type="xs:string" minOccurs="0"/>
+										<xs:element name="company" type="xs:string" minOccurs="0"/>
+										<xs:element name="description" type="xs:string" minOccurs="0"/>
+										<xs:element name="keywords" type="xs:string" minOccurs="0"/>
+										<xs:element name="revisedBy" type="xs:string" minOccurs="0"/>
+										<xs:element name="title" type="xs:string" minOccurs="0"/>
+										<xs:element name="customValues" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="customValue" type="userValueType" minOccurs="0" maxOccurs="unbounded"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:all>
+								</xs:complexType>
+							</xs:element>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="settings">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="presentation">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Settings affecting the visible presentation of the worksheet.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="textRendering">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Text rendering preferences</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="textStyles">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="textStyle" maxOccurs="unbounded">
+																	<xs:complexType>
+																		<xs:sequence>
+																			<xs:element name="blockAttr">
+																				<xs:complexType>
+																					<xs:attributeGroup ref="textBlockAttrs"/>
+																				</xs:complexType>
+																			</xs:element>
+																			<xs:element name="inlineAttr">
+																				<xs:complexType>
+																					<xs:attributeGroup ref="inlineAttrAttrs"/>
+																				</xs:complexType>
+																			</xs:element>
+																		</xs:sequence>
+																		<xs:attribute name="name" type="xs:string" use="required"/>
+																		<xs:attribute name="base-style" type="xs:string" use="optional"/>
+																	</xs:complexType>
+																	<!-- 4/15/04 Removing keyrefs due to MSXML bug
+																	<xs:keyref name="No-base-style-textStyle" refer="textStyleNameKey">
+																		<xs:selector xpath="."/>
+																		<xs:field xpath="@base-style"/>
+																	</xs:keyref>
+-->
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="mathRendering">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Math rendering preferences</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="operators">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">Controls the appearance of certain operators</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute name="multiplication" default="narrow-dot">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="auto-select"/>
+																		<xs:enumeration value="dot"/>
+																		<xs:enumeration value="narrow-dot"/>
+																		<xs:enumeration value="large-dot"/>
+																		<xs:enumeration value="x"/>
+																		<xs:enumeration value="thin-space"/>
+																		<xs:enumeration value="no-space"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="derivative" default="derivative">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="derivative"/>
+																		<xs:enumeration value="partial"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="literal-subscript" default="large">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="large"/>
+																		<xs:enumeration value="small"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="definition" default="colon-equal">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="colon-equal"/>
+																		<xs:enumeration value="equal"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="global-definition" default="triple-equal">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="equal"/>
+																		<xs:enumeration value="triple-equal"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="local-definition" default="left-arrow">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="left-arrow"/>
+																		<xs:enumeration value="equal"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="equality" default="bold-equal">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="bold-equal"/>
+																		<xs:enumeration value="equal"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="symbolic-evaluation" default="right-arrow">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="right-arrow"/>
+																		<xs:enumeration value="equals"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="mathStyles">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="mathStyle" minOccurs="10" maxOccurs="10">
+																	<xs:complexType>
+																		<xs:attribute name="name" type="xs:string" use="required"/>
+																		<xs:attributeGroup ref="inlineAttrAttrs"/>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="dimensionNames">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">Controls whether and how to display dimension names in calculation results</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute name="mass" type="xs:string" use="optional" default="mass"/>
+															<xs:attribute name="length" type="xs:string" use="optional" default="length"/>
+															<xs:attribute name="time" type="xs:string" use="optional" default="time"/>
+															<xs:attribute name="current" type="xs:string" use="optional" default="current"/>
+															<xs:attribute name="thermodynamic-temperature" type="xs:string" use="optional" default="temperature"/>
+															<xs:attribute name="luminous-intensity" type="xs:string" use="optional" default="luminosity"/>
+															<xs:attribute name="amount-of-substance" type="xs:string" use="optional" default="substance"/>
+															<xs:attribute name="display" type="xs:boolean" use="optional" default="false"/>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="symbolics">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">Symbolics Rendering Options</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute name="derivation-steps-style" use="optional" default="vertical-insert">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="vertical-insert"/>
+																		<xs:enumeration value="vertical"/>
+																		<xs:enumeration value="horizontal"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="show-comments" type="xs:boolean" use="optional" default="false"/>
+															<xs:attribute name="evaluate-in-place" type="xs:boolean" use="optional" default="false"/>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="results" type="resultFormatGlobalType"/>
+												</xs:sequence>
+												<xs:attribute name="equation-color" type="colorType"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="pageModel" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Printed page settings</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="margins" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">Page margins</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute name="left" type="pageUnitType" use="required"/>
+															<xs:attribute name="right" type="pageUnitType" use="required"/>
+															<xs:attribute name="top" type="pageUnitType" use="required"/>
+															<xs:attribute name="bottom" type="pageUnitType" use="required"/>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="header" type="headerFooterType" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">Page header</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="footer" type="headerFooterType" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">Page footer</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:sequence minOccurs="0">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">Optional header/footer which applies only to the first page.</xs:documentation>
+														</xs:annotation>
+														<xs:element name="pageOneHeader" type="headerFooterType"/>
+														<xs:element name="pageOneFooter" type="headerFooterType"/>
+													</xs:sequence>
+												</xs:sequence>
+												<xs:attribute name="show-page-frame" type="xs:boolean" use="optional" default="false"/>
+												<xs:attribute name="show-header-frame" type="xs:boolean" use="optional" default="false"/>
+												<xs:attribute name="show-footer-frame" type="xs:boolean" use="optional" default="false"/>
+												<xs:attribute name="header-footer-start-page" type="xs:positiveInteger" use="optional" default="1"/>
+												<xs:attribute name="page-width" type="pageUnitType" use="optional" default="0">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">Width of page, including margins, in points.  Mathcad outputs this attribute for informational purposes only.  Use the page-code attribute to change to a different paper size.</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="page-height" type="pageUnitType" use="optional" default="0">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">Height of page (including margins), in points. Mathcad outputs this attribute for informational purposes only.  Use the page-code attribute to change to a different paper size.</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="paper-code" type="xs:integer" use="optional" default="1">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">Paper size code.  See Microsoft's documentation of the DEVMODE dmPaperSize field for possible values:
+http://msdn.microsoft.com/library/default.asp?url=/library/en-us/gdi/prntspol_8nle.asp</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="orientation" use="optional" default="portrait">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="landscape"/>
+															<xs:enumeration value="portrait"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="print-single-page-width" type="xs:boolean" default="false"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="colorModel">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="palette" minOccurs="0">
+														<xs:complexType>
+															<xs:attribute name="item-idref" type="binaryItemIDType" use="required"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="background-color" type="colorType"/>
+												<xs:attribute name="default-highlight-color" type="colorType"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="language" minOccurs="0">
+											<xs:complexType>
+												<xs:attribute name="math" type="languageType" use="optional" default="EN">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">The language used for translating units and function names</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="UI" type="languageType" use="optional" default="EN">
+													<xs:annotation>
+														<xs:documentation xml:lang="en">The language of the Mathcad application UI (e.g. menus, dialogs, etc.)</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="calculation" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Worksheet-global calculation settings</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="builtInVariables" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Overrides the default values of various built-in worksheet variables</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:attribute name="array-origin" type="xs:integer" default="0"/>
+												<xs:attribute name="convergence-tolerance" default="0.001">
+													<xs:simpleType>
+														<xs:restriction base="xs:double">
+															<xs:minInclusive value="0"/>
+															<xs:maxInclusive value="1"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="constraint-tolerance" default="0.001">
+													<xs:simpleType>
+														<xs:restriction base="xs:double">
+															<xs:minInclusive value="0"/>
+															<xs:maxInclusive value="1"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+												<xs:attribute name="random-seed" type="xs:integer" default="1"/>
+												<xs:attribute name="prn-precision" type="xs:integer" default="4"/>
+												<xs:attribute name="prn-col-width" type="xs:integer" default="8"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="calculationBehavior" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Misc. controls over various aspects of calculation</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="compatibility" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation xml:lang="en">Temporary switches to help with compatibility issues</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute name="multiple-assignment" type="compatType" use="optional" default="MC12"/>
+															<xs:attribute name="local-assignment" type="compatType" use="optional" default="MC11"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="strings-use-origin" type="xs:boolean" use="optional" default="false"/>
+												<xs:attribute name="automatic-recalculation" type="xs:boolean" use="optional" default="true"/>
+												<xs:attribute name="matrix-strict-singularity-check" type="xs:boolean" use="optional" default="false"/>
+												<xs:attribute name="optimize-expressions" type="xs:boolean" use="optional" default="false"/>
+												<xs:attribute name="exact-boolean" type="xs:boolean" use="optional" default="false"/>
+												<xs:attribute name="zero-over-zero" use="optional" default="error">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="error"/>
+															<xs:enumeration value="0"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="units" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Specifies unit system</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="currentUnitSystem">
+														<xs:complexType>
+															<xs:attribute name="name" type="unitSystemType" use="required">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">Specifies the domain of quantities and units for the worksheet, and the simplification units if they aren't customized.</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+															<xs:attribute name="customized" type="xs:boolean" use="optional" default="false">
+																<xs:annotation>
+																	<xs:documentation xml:lang="en">If customized is false, then the unit-system's default base and derived simplification units are in effect.
+If customized is true, then the unit-system specifies the domain of units and quantities available to the document, and the customized base and derived units determine how results of calculations are simplified.</xs:documentation>
+																</xs:annotation>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="customUnitSystem" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="baseUnits">
+																	<xs:annotation>
+																		<xs:documentation xml:lang="en">Specify the unit to be used anytime a base quantity is referenced in a math result.
+E.g. For the base quantity "length" results that are of quantity length or cannot be simplified to a derived unit and contain length as one of its dimensions could use "feet" or "meter" or "micron".</xs:documentation>
+																	</xs:annotation>
+																	<xs:complexType>
+																		<xs:sequence minOccurs="0" maxOccurs="7">
+																			<xs:element name="unit" type="customBaseUnitType"/>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+																<xs:element name="derivedUnits">
+																	<xs:complexType>
+																		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+																			<xs:element name="unit" type="customDerivedUnitType"/>
+																		</xs:sequence>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+															<xs:attribute name="base-unit-system" use="required">
+																<xs:simpleType>
+																	<xs:restriction base="unitSystemType">
+																		<xs:enumeration value="si"/>
+																		<xs:enumeration value="mks"/>
+																		<xs:enumeration value="cgs"/>
+																		<xs:enumeration value="us"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="editor">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Settings which affect editing behavior</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ruler">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="tabs" minOccurs="0">
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="tab" maxOccurs="unbounded">
+																	<xs:complexType>
+																		<xs:attribute name="position" type="pageUnitType" use="required"/>
+																		<xs:attribute name="show-guide" type="xs:boolean" use="optional" default="false"/>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="is-visible" type="xs:boolean" use="optional" default="false"/>
+												<xs:attribute name="ruler-unit" use="required">
+													<xs:annotation>
+														<xs:documentation source="http://www.w3.org/TR/CSS21/syndata.html#absrel-units" xml:lang="en">Unit names were taken from the CSS spec describing "absolute length units".
+<dl>
+																<dt>in</dt>
+																<dd>inches - 1 inch is equal to 2.54 centimeters.</dd>
+																<dt>cm</dt>
+																<dd>centimeters</dd>
+																<dt>pt</dt>
+																<dd>points - the points used by CSS 2.1 are equal to 1/72th of an inch.</dd>
+																<dt>pc</dt>
+																<dd>picas - 1 pica is equal to 12 points.</dd>
+															</dl>
+														</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value="in"/>
+															<xs:enumeration value="cm"/>
+															<xs:enumeration value="pt"/>
+															<xs:enumeration value="pc"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="plotTemplate" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Default plot/axis/trace format.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:all>
+													<xs:element name="xy" minOccurs="0">
+														<xs:complexType>
+															<xs:attribute name="item-idref" type="binaryItemIDType" use="required"/>
+														</xs:complexType>
+														<!-- 4/15/04 Removing keyrefs due to MSXML bug
+														<xs:keyref name="No-xy-binaryContent" refer="ws:binaryContentIDKey">
+															<xs:selector xpath="."/>
+															<xs:field xpath="@item-idref"/>
+														</xs:keyref>
+-->
+													</xs:element>
+													<xs:element name="polar" minOccurs="0">
+														<xs:complexType>
+															<xs:attribute name="item-idref" type="binaryItemIDType" use="required"/>
+														</xs:complexType>
+														<!-- 4/15/04 Removing keyrefs due to MSXML bug
+
+														<xs:keyref name="No-polar-binaryContent" refer="ws:binaryContentIDKey">
+															<xs:selector xpath="."/>
+															<xs:field xpath="@item-idref"/>
+														</xs:keyref>
+-->
+													</xs:element>
+												</xs:all>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="grid">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Snap-to grid settings</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:attribute name="granularity-x" type="pageUnitType"/>
+												<xs:attribute name="granularity-y" type="pageUnitType"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="protection-level" use="optional" default="none">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="none"/>
+												<xs:enumeration value="low"/>
+												<xs:enumeration value="medium"/>
+												<xs:enumeration value="high"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="view-regions" type="xs:boolean" use="optional" default="false"/>
+									<xs:attribute name="view-annotations" type="xs:boolean" use="optional" default="false"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="fileFormat">
+								<xs:complexType>
+									<xs:attribute name="save-numeric-results" type="xs:boolean" use="optional" default="true"/>
+									<xs:attribute name="exclude-large-results" type="xs:boolean" use="optional" default="false">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">If numeric results are being saved, specifies that large matrix results should be excluded (not saved).</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="image-type" use="optional" default="none">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="none"/>
+												<xs:enumeration value="image/jpg"/>
+												<xs:enumeration value="image/png"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="image-quality" type="xs:integer" use="optional" default="75"/>
+									<xs:attribute name="save-text-images" type="xs:boolean" use="optional" default="false">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">If true, Mathcad will attach image renderings of text regions.  Has no effect if image-type = "none".</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="screen-dpi" type="xs:positiveInteger" use="optional" default="96">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">This is the screen dots per inch (dpi) that Mathcad was running on when this worksheet was saved. </xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="miscellaneous">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">These may want to be opaque, since they are meaningless to the outside world.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="handbook">
+											<xs:complexType>
+												<xs:attribute name="handbook-region-tag-ub" type="xs:unsignedLong"/>
+												<xs:attribute name="can-delete-original-handbook-regions" type="xs:boolean"/>
+												<xs:attribute name="can-delete-user-regions" type="xs:boolean"/>
+												<xs:attribute name="can-print" type="xs:boolean"/>
+												<xs:attribute name="can-copy" type="xs:boolean"/>
+												<xs:attribute name="can-save" type="xs:boolean"/>
+												<xs:attribute name="file-permission-mask" type="xs:nonNegativeInteger"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="last-region-tag" type="xs:unsignedLong"/>
+									<xs:attribute name="status-vector" type="xs:long"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="regions">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">Collection of worksheet regions.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="region" type="regionType" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Worksheet Region</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="binaryContent" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:base64Binary">
+											<xs:attribute name="item-id" type="binaryItemIDType" use="required"/>
+											<xs:attribute name="content-encoding" type="xs:string" use="optional" default="none"/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="version" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Schema version</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="\d+\.\d+\.\d+"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+		<xs:key name="regionIDKey">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Each region must be uniquely identifiable within the set of all regions via its id attribute</xs:documentation>
+			</xs:annotation>
+			<xs:selector xpath="ws:regions/ws:region"/>
+			<xs:field xpath="@region-id"/>
+		</xs:key>
+		<xs:key name="binaryContentIDKey">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Each binary content item must be uniquely identifiable via its id attribute</xs:documentation>
+			</xs:annotation>
+			<xs:selector xpath="ws:binaryContent/ws:item"/>
+			<xs:field xpath="@item-id"/>
+		</xs:key>
+		<xs:key name="textStyleNameKey">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Each text style must be uniquely identifiable via its name attribute</xs:documentation>
+			</xs:annotation>
+			<xs:selector xpath="ws:settings/ws:presentation/ws:textRendering/ws:textStyles/ws:textStyle"/>
+			<xs:field xpath="@name"/>
+		</xs:key>
+	</xs:element>
+	<xs:element name="math" type="mathType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Math region content</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:group name="inlineTextClass">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Mixed text and all inline markup elements</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="b">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">bold</xs:documentation>
+					</xs:annotation>
+					<xs:complexType mixed="true">
+						<xs:sequence>
+							<xs:group ref="inlineTextClass"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="i">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">italic</xs:documentation>
+					</xs:annotation>
+					<xs:complexType mixed="true">
+						<xs:sequence>
+							<xs:group ref="inlineTextClass"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="u">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">underline</xs:documentation>
+					</xs:annotation>
+					<xs:complexType mixed="true">
+						<xs:sequence>
+							<xs:group ref="inlineTextClass"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="so">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">strikeout</xs:documentation>
+					</xs:annotation>
+					<xs:complexType mixed="true">
+						<xs:sequence>
+							<xs:group ref="inlineTextClass"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="sub">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">subscript</xs:documentation>
+					</xs:annotation>
+					<xs:complexType mixed="true">
+						<xs:sequence>
+							<xs:group ref="inlineTextClass"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="sup">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">superscript</xs:documentation>
+					</xs:annotation>
+					<xs:complexType mixed="true">
+						<xs:sequence>
+							<xs:group ref="inlineTextClass"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="c">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">color</xs:documentation>
+					</xs:annotation>
+					<xs:complexType mixed="true">
+						<xs:sequence>
+							<xs:group ref="inlineTextClass"/>
+						</xs:sequence>
+						<xs:attribute name="val" type="colorType" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="f">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">font</xs:documentation>
+					</xs:annotation>
+					<xs:complexType mixed="true">
+						<xs:sequence>
+							<xs:group ref="inlineTextClass"/>
+						</xs:sequence>
+						<xs:attribute name="family" type="xs:string" use="optional" default="inherit"/>
+						<xs:attribute name="charset" type="textCharsetType" use="optional" default="inherit"/>
+						<xs:attribute name="size" type="textPageUnitType" use="optional" default="inherit"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="inlineAttr">
+					<xs:complexType mixed="true">
+						<xs:sequence>
+							<xs:group ref="inlineTextClass"/>
+						</xs:sequence>
+						<xs:attributeGroup ref="inlineAttrAttrs"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="link">
+					<xs:complexType mixed="true">
+						<xs:complexContent mixed="true">
+							<xs:extension base="linkType">
+								<xs:sequence>
+									<xs:group ref="inlineTextClass"/>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="br">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">line break</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:restriction base="xs:anyType"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="tab">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">tab to next tabstop</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:restriction base="xs:anyType"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="sp">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">space character used only to preserve multiple consecutive spaces</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:attribute name="count" type="xs:positiveInteger" use="optional" default="1"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="region">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="math" type="mathType"/>
+							<xs:element name="metadata" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Region metadata</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="customValue" type="userValueType" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="indexes" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">Authoring mode index phrases</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence maxOccurs="unbounded">
+										<xs:element name="phrase" type="xs:string">
+											<xs:annotation>
+												<xs:documentation xml:lang="en">Phrase that displays in a help index</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="rendering" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation xml:lang="en">If specified, contains some sort of rendering of the region (picture, svg, etc)</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="element-image-map" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence maxOccurs="unbounded">
+													<xs:element name="box">
+														<xs:complexType>
+															<xs:attribute name="expr-idref" type="xs:nonNegativeInteger" use="required"/>
+															<xs:attributeGroup ref="rectAttrs"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="item-idref" type="binaryItemIDType" use="required"/>
+								</xs:complexType>
+								<!-- 4/15/04 Removing keyrefs due to MSXML bug
+								<xs:keyref name="No-rendering-binaryContent-embedded" refer="ws:binaryContentIDKey">
+									<xs:selector xpath="."/>
+									<xs:field xpath="@item-idref"/>
+								</xs:keyref>
+-->
+							</xs:element>
+						</xs:sequence>
+						<xs:attributeGroup ref="regionAttrs"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:attributeGroup name="customUnitAttrs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Attributes for custom simplification units</xs:documentation>
+			<xs:documentation xml:lang="en">Although this attribute group does apply to both custom base units and derived units, the quantity-name attribute has further restrictions when used on base units, and therefore this group is not referenced by the custom base unit definition.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="unit-name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Canonical unit name available in the current unit-system</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="quantity-name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Canonical quantity name available in the current unit-system.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="inlineAttrAttrs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">The set of attributes that can be applied to inline text</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="font-family" use="optional" default="inherit">
+			<xs:simpleType>
+				<xs:union memberTypes="xs:string">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="inherit"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:union>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="font-charset" type="textCharsetType" use="optional" default="inherit">
+			<xs:annotation>
+				<xs:documentation source="MS Windows SDK wingdi.h" xml:lang="en">The minimum windows charset value is ANSI_CHARSET (0) and the maximum charset value is OEM_CHARSET (255).
+Two other special charset values are DEFAULT_CHARSET (1) and SYMBOL_CHARSET (2)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="font-size" type="textPageUnitType" use="optional" default="inherit"/>
+		<xs:attribute name="font-weight" use="optional" default="inherit">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="inherit"/>
+					<xs:enumeration value="normal"/>
+					<xs:enumeration value="bold"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="font-style" use="optional" default="inherit">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="inherit"/>
+					<xs:enumeration value="normal"/>
+					<xs:enumeration value="italic"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="underline" type="textBooleanType" use="optional" default="inherit"/>
+		<xs:attribute name="line-through" type="textBooleanType" use="optional" default="inherit"/>
+		<xs:attribute name="vertical-align" use="optional" default="inherit">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="inherit"/>
+					<xs:enumeration value="baseline"/>
+					<xs:enumeration value="sub"/>
+					<xs:enumeration value="super"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="color" type="textColorType" use="optional" default="inherit"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="linkAttrs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Hyperlink attributes</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="href" type="xs:anyURI" use="required"/>
+		<xs:attribute name="title" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Contains the status line text</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="popup" type="xs:boolean" use="optional" default="false"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="numberFormatGlobalAttrs">
+		<xs:annotation>
+			<xs:documentation>Common global attributes for the different elements which specify the display format of numeric results</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="imaginary-value" use="optional" default="i">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="i"/>
+					<xs:enumeration value="j"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="zero-threshold" use="optional" default="15">
+			<xs:simpleType>
+				<xs:restriction base="xs:nonNegativeInteger">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="307"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="overridableResultFormatCommonAttrs">
+		<xs:annotation>
+			<xs:documentation>Common attributes of all number formats</xs:documentation>
+			<xs:documentation xml:lang="en">Common overridable attributes for the different elements which specify the display format of numeric results</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="precision" use="optional" default="3">
+			<xs:simpleType>
+				<xs:restriction base="xs:nonNegativeInteger">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="17"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="complex-threshold" use="optional" default="10">
+			<xs:simpleType>
+				<xs:restriction base="xs:nonNegativeInteger">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="63"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="overridableResultFormatGeneralAttrs">
+		<xs:annotation>
+			<xs:documentation>General number format's locally overridable attributes</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="overridableResultFormatCommonAttrs"/>
+		<xs:attribute name="radix" type="radixType" use="optional" default="dec"/>
+		<xs:attribute name="show-trailing-zeros" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="use-engineering-format" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="exponential-threshold" use="optional" default="3">
+			<xs:simpleType>
+				<xs:restriction base="xs:nonNegativeInteger">
+					<xs:minInclusive value="0"/>
+					<xs:maxInclusive value="17"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="overridableResultFormatDecimalAttrs">
+		<xs:annotation>
+			<xs:documentation>Decimal number format's locally overridable attributes</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="overridableResultFormatCommonAttrs"/>
+		<xs:attribute name="radix" type="radixType" use="optional" default="dec"/>
+		<xs:attribute name="show-trailing-zeros" type="xs:boolean" use="optional" default="false"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="overridableResultFormatScientificAttrs">
+		<xs:annotation>
+			<xs:documentation>Scientific number format's locally overridable attributes</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="overridableResultFormatCommonAttrs"/>
+		<xs:attribute name="radix" type="radixType" use="optional" fixed="dec"/>
+		<xs:attribute name="show-trailing-zeros" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="use-e-notation" type="xs:boolean" use="optional" default="false"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="overridableResultFormatEngineeringAttrs">
+		<xs:annotation>
+			<xs:documentation>Engineering number format's locally overridable attributes</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="overridableResultFormatCommonAttrs"/>
+		<xs:attribute name="radix" type="radixType" use="optional" fixed="dec"/>
+		<xs:attribute name="show-trailing-zeros" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="use-e-notation" type="xs:boolean" use="optional" default="false"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="overridableResultFormatFractionAttrs">
+		<xs:annotation>
+			<xs:documentation>Fraction number format's locally overridable attributes</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="overridableResultFormatCommonAttrs"/>
+		<xs:attribute name="radix" type="radixType" use="optional" fixed="dec"/>
+		<xs:attribute name="use-mixed-numbers" type="xs:boolean" use="optional" default="false"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="rectAttrs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Attributes common to rectangles</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="top" type="pageUnitType" use="required"/>
+		<xs:attribute name="left" type="pageUnitType" use="required"/>
+		<xs:attribute name="height" type="pageUnitType" use="required"/>
+		<xs:attribute name="width" type="pageUnitType" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="regionAttrs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Attributes common to all regions</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="region-id" type="xs:nonNegativeInteger" use="required"/>
+		<xs:attributeGroup ref="rectAttrs"/>
+		<xs:attribute name="align-x" type="pageUnitType" use="optional"/>
+		<xs:attribute name="align-y" type="pageUnitType" use="optional"/>
+		<xs:attribute name="is-protected" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="show-border" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="show-highlight" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="background-color" use="optional" default="inherit">
+			<xs:simpleType>
+				<xs:union memberTypes="colorType">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="inherit"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:union>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="tag" type="xs:string" use="optional"/>
+		<xs:attribute name="href" type="xs:anyURI" use="optional"/>
+		<xs:attribute name="z-order" type="xs:integer" use="optional" default="0">
+			<xs:annotation>
+				<xs:documentation>Defines the order in which regions are drawn.  Lower z-orders are drawn first, therefore higher z-orders will appear on top of lower. </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="textBlockAttrs">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Style attributes that apply to a text block (paragraph)</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="margin-left" type="textPageUnitType" use="optional" default="inherit"/>
+		<xs:attribute name="margin-right" type="textPageUnitType" use="optional" default="inherit"/>
+		<xs:attribute name="text-indent" type="textPageUnitType" use="optional" default="inherit"/>
+		<xs:attribute name="text-align" use="optional" default="inherit">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="inherit"/>
+					<xs:enumeration value="left"/>
+					<xs:enumeration value="right"/>
+					<xs:enumeration value="center"/>
+					<xs:enumeration value="justify"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="list-style-type" use="optional" default="inherit">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="inherit"/>
+					<xs:enumeration value="none"/>
+					<xs:enumeration value="disc"/>
+					<xs:enumeration value="decimal"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="tabs" type="tabListType" use="optional" default="inherit"/>
+	</xs:attributeGroup>
+	<xs:complexType name="areaType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Base type for area and confidentialArea elements</xs:documentation>
+		</xs:annotation>
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="region" type="regionType"/>
+		</xs:sequence>
+		<xs:attribute name="password" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Hash of the password used to protect the area</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="name" type="xs:string" use="optional"/>
+		<xs:attribute name="is-collapsed" type="xs:boolean" use="required"/>
+		<xs:attribute name="show-border" type="xs:boolean" use="optional" default="true"/>
+		<xs:attribute name="show-name" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="show-icon" type="xs:boolean" use="optional" default="true"/>
+		<xs:attribute name="show-timestamp" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="allow-expand" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="is-locked" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="timestamp" type="xs:string" use="optional"/>
+		<xs:attribute name="bottom-lock-id" type="xs:positiveInteger" use="required"/>
+		<xs:attribute name="top-lock-id" type="xs:positiveInteger" use="required"/>
+		<xs:attribute name="bottom-tag" type="xs:string" use="optional"/>
+	</xs:complexType>
+	<xs:complexType name="componentArgumentsType">
+		<xs:annotation>
+			<xs:documentation>Base type for the inputs and outputs of a component region</xs:documentation>
+		</xs:annotation>
+		<xs:group ref="ml:expressionClass" minOccurs="0" maxOccurs="unbounded"/>
+	</xs:complexType>
+	<xs:complexType name="confidentialAreaType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Base type for confidentialArea elements</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="item-idref" type="binaryItemIDType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="customBaseUnitType">
+		<xs:annotation>
+			<xs:documentation>Custom base unit</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="unit-name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Canonical unit name available in the current unit-system</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="quantity-name" use="required">
+			<xs:annotation>
+				<xs:documentation xml:lang="en">Canonical quantity name available in the current unit-system. Must be one of the base quantities of the current unit-system</xs:documentation>
+				<xs:documentation xml:lang="en">Mathcad 13 requires that the base units come from this list of base quantities, Mpl does not, and a future version of Mathcad may lift this restriction.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="mass"/>
+					<xs:enumeration value="length"/>
+					<xs:enumeration value="time"/>
+					<xs:enumeration value="current"/>
+					<xs:enumeration value="thermodynamic_temperature"/>
+					<xs:enumeration value="luminous_intensity"/>
+					<xs:enumeration value="amount_of_substance"/>
+					<xs:enumeration value="charge"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="customDerivedUnitType">
+		<xs:annotation>
+			<xs:documentation>Custom derived unit</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="ws:customUnitAttrs"/>
+	</xs:complexType>
+	<xs:complexType name="headerFooterPaneType" mixed="true">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">A left/center/right 'pane' in the page header/footer</xs:documentation>
+		</xs:annotation>
+		<xs:sequence minOccurs="0">
+			<xs:element name="image">
+				<xs:complexType>
+					<xs:attribute name="item-idref" type="binaryItemIDType"/>
+				</xs:complexType>
+				<!-- 4/15/04 Removing keyrefs due to MSXML bug
+				<xs:keyref name="No-image-binaryContent" refer="ws:binaryContentIDKey">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@item-idref"/>
+				</xs:keyref>
+-->
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="headerFooterType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Page header/footer definition</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="left" type="headerFooterPaneType" minOccurs="0"/>
+			<xs:element name="center" type="headerFooterPaneType" minOccurs="0"/>
+			<xs:element name="right" type="headerFooterPaneType" minOccurs="0"/>
+		</xs:all>
+		<xs:attribute name="use-full-page-width" type="xs:boolean" use="optional" default="false"/>
+	</xs:complexType>
+	<xs:complexType name="linkType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Hyperlinks on regions</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="linkAttrs"/>
+	</xs:complexType>
+	<xs:complexType name="mathType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Math region</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:group ref="ml:expressionClass"/>
+			</xs:choice>
+			<xs:element name="resultFormat" type="resultFormatLocalType" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="optimize" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="disable-calc" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="error" type="xs:string" use="optional"/>
+		<xs:attribute name="push-down" type="xs:boolean" use="optional" default="false"/>
+	</xs:complexType>
+	<xs:complexType name="regionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Base type for a Mathcad region</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:sequence>
+					<xs:choice>
+						<xs:element name="oldAnimation">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Legacy animation region support</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:attribute name="href" type="xs:anyURI" use="required"/>
+								<xs:attribute name="is-in-shadow" type="xs:boolean" use="required"/>
+								<xs:attribute name="show-border" type="xs:boolean" use="required"/>
+								<xs:attribute name="trackbar-height" type="xs:float" use="required"/>
+								<xs:attribute name="orig-width" type="xs:float" use="required"/>
+								<xs:attribute name="orig-height" type="xs:float" use="required"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="area">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Area region content</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="areaType"/>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="confidentialArea" type="confidentialAreaType">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Area whose content is not visible either in Mathcad or in XML without a password.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="component">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Mathcad component region content</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="inputs" type="componentArgumentsType"/>
+									<xs:element name="outputs" type="componentArgumentsType"/>
+								</xs:sequence>
+								<xs:attribute name="item-idref" type="binaryItemIDType"/>
+								<xs:attribute name="disable-calc" type="xs:boolean" use="optional" default="false"/>
+								<xs:attribute name="hide-arguments" type="xs:boolean" use="optional" default="false"/>
+								<xs:attribute name="clsid" type="p:guidType" use="optional">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Component CLSID (read-only)</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+								<xs:attribute name="clsid-buddy" type="p:guidType" use="optional">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">clsid of the component buddy (if any).  Optional, read-only.</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="math"/>
+						<xs:element name="ole">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">OLE object region content</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:attribute name="item-idref" type="binaryItemIDType" use="required"/>
+								<xs:attribute name="clsid" type="xs:string" use="optional">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Read-only.  Ignored by Mathcad when reading files.</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+								<xs:attribute name="type" use="optional">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Read-only.  Ignored by Mathcad when reading files.</xs:documentation>
+									</xs:annotation>
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="embedded"/>
+											<xs:enumeration value="link"/>
+											<xs:enumeration value="static"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:attribute>
+								<xs:attribute name="link-source" type="xs:string" use="optional">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Result of IOleLink::GetSourceDisplayName for this object</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="pageBreak">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Page break region content</xs:documentation>
+							</xs:annotation>
+							<xs:complexType/>
+						</xs:element>
+						<xs:element name="metafile">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">WMF region content</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:attribute name="mapping-mode" type="xs:integer" use="required"/>
+								<xs:attribute name="x-extent" type="pageUnitType" use="required"/>
+								<xs:attribute name="y-extent" type="pageUnitType" use="required"/>
+								<xs:attribute name="item-idref" type="binaryItemIDType" use="required"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="png">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Png  region content</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:attribute name="item-idref" type="binaryItemIDType"/>
+								<xs:attribute name="display-width" type="pageUnitType" use="optional"/>
+								<xs:attribute name="display-height" type="pageUnitType" use="optional"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="text">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Text region content</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="p" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">paragraph</xs:documentation>
+										</xs:annotation>
+										<xs:complexType mixed="true">
+											<xs:sequence>
+												<xs:group ref="inlineTextClass"/>
+											</xs:sequence>
+											<xs:attribute name="style" type="xs:string" use="required"/>
+											<xs:attributeGroup ref="textBlockAttrs">
+												<xs:annotation>
+													<xs:documentation xml:lang="en">Override the style's block attributes</xs:documentation>
+												</xs:annotation>
+											</xs:attributeGroup>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+								<xs:attribute name="use-page-width" type="xs:boolean" use="optional" default="false"/>
+								<xs:attribute name="push-down" type="xs:boolean" use="optional" default="false"/>
+								<xs:attribute name="lock-width" type="xs:boolean" use="optional" default="true">
+									<xs:annotation>
+										<xs:documentation xml:lang="en">Locking the width of a text region means that it will wrap at the current region width when additional text is added. When it is not locked, the text region will move its right edge, increasing its width, up to the right page margin before wrapping the text to the next line.</xs:documentation>
+									</xs:annotation>
+								</xs:attribute>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="plot">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Plot region content</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:attribute name="item-idref" type="binaryItemIDType"/>
+								<xs:attribute name="disable-calc" type="xs:boolean" use="optional" default="false"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+					<xs:element name="link" type="linkType" minOccurs="0"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="reference">
+						<xs:annotation>
+							<xs:documentation xml:lang="en">Reference region content</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:group ref="p:annotClass"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="link" type="linkType"/>
+				</xs:sequence>
+			</xs:choice>
+			<xs:element name="metadata" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Region metadata</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="customValue" type="userValueType" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="indexes" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Authoring mode index phrases</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence maxOccurs="unbounded">
+						<xs:element name="phrase" type="xs:string">
+							<xs:annotation>
+								<xs:documentation xml:lang="en">Phrase that displays in a help index</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rendering" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">If specified, contains some sort of rendering of the region (picture, svg, etc)</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="element-image-map" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence maxOccurs="unbounded">
+									<xs:element name="box">
+										<xs:complexType>
+											<xs:attribute name="expr-idref" type="xs:nonNegativeInteger" use="required"/>
+											<xs:attributeGroup ref="rectAttrs"/>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="item-idref" type="binaryItemIDType" use="required"/>
+				</xs:complexType>
+				<!-- 4/15/04 Removing keyrefs due to MSXML bug
+				<xs:keyref name="No-rendering-binaryContent" refer="ws:binaryContentIDKey">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@item-idref"/>
+				</xs:keyref>
+-->
+			</xs:element>
+		</xs:sequence>
+		<xs:attributeGroup ref="regionAttrs"/>
+	</xs:complexType>
+	<xs:complexType name="resultFormatLocalType">
+		<xs:annotation>
+			<xs:documentation>Result format applied to a specific math region</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice minOccurs="0">
+				<xs:element name="general" type="resultFormatGeneralType"/>
+				<xs:element name="decimal" type="resultFormatDecimalType"/>
+				<xs:element name="scientific" type="resultFormatScientificType"/>
+				<xs:element name="engineering" type="resultFormatEngineeringType"/>
+				<xs:element name="fraction" type="resultFormatFractionType"/>
+			</xs:choice>
+			<xs:element name="matrix" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="display-style" type="matrixDisplayStyleType" use="optional" default="auto"/>
+					<xs:attribute name="expand-nested-arrays" type="xs:boolean" use="optional" default="false"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="unit" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="format-units" type="xs:boolean" use="optional" default="true"/>
+					<xs:attribute name="simplify-units" type="xs:boolean" use="optional" default="true"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="table" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="item-idref" type="binaryItemIDType" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="resultFormatGlobalType">
+		<xs:annotation>
+			<xs:documentation>Default result format that applies to all math regions that don't have their own</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="general">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="resultFormatGeneralType">
+								<xs:attributeGroup ref="numberFormatGlobalAttrs"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="decimal">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="resultFormatDecimalType">
+								<xs:attributeGroup ref="numberFormatGlobalAttrs"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="scientific">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="resultFormatScientificType">
+								<xs:attributeGroup ref="numberFormatGlobalAttrs"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="engineering">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="resultFormatEngineeringType">
+								<xs:attributeGroup ref="numberFormatGlobalAttrs"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="fraction">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="resultFormatFractionType">
+								<xs:attributeGroup ref="numberFormatGlobalAttrs"/>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="matrix" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="display-style" type="matrixDisplayStyleType" use="optional" default="auto"/>
+					<xs:attribute name="expand-nested-arrays" type="xs:boolean" use="optional" default="false"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="unit" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="format-units" type="xs:boolean" use="optional" default="true"/>
+					<xs:attribute name="simplify-units" type="xs:boolean" use="optional" default="true"/>
+					<xs:attribute name="fractional-unit-exponent" type="xs:boolean" use="optional" default="false"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="table" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="item-idref" type="binaryItemIDType" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="resultFormatGeneralType">
+		<xs:annotation>
+			<xs:documentation>Type for General number format applied to specific math region</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="overridableResultFormatGeneralAttrs"/>
+	</xs:complexType>
+	<xs:complexType name="resultFormatDecimalType">
+		<xs:annotation>
+			<xs:documentation>Type for Decimal number format applied to specific math region</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="overridableResultFormatDecimalAttrs"/>
+	</xs:complexType>
+	<xs:complexType name="resultFormatScientificType">
+		<xs:annotation>
+			<xs:documentation>Type for Scientific number format applied to specific math region</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="overridableResultFormatScientificAttrs"/>
+	</xs:complexType>
+	<xs:complexType name="resultFormatEngineeringType">
+		<xs:annotation>
+			<xs:documentation>Type for Engineering number format applied to specific math region</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="overridableResultFormatEngineeringAttrs"/>
+	</xs:complexType>
+	<xs:complexType name="resultFormatFractionType">
+		<xs:annotation>
+			<xs:documentation>Type for Fraction number format applied to specific math region</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="overridableResultFormatFractionAttrs"/>
+	</xs:complexType>
+	<xs:complexType name="userValueType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">User defined metadata. It must be named and has a type for simple validation. In general, there is an unlimited sequence of elements with this type.</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="name" type="xs:string" use="required"/>
+				<xs:attribute name="type" use="required">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="date"/>
+							<xs:enumeration value="number"/>
+							<xs:enumeration value="text"/>
+							<xs:enumeration value="yesno"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="binaryItemIDType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Identifier of a particular item of binary content</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger"/>
+	</xs:simpleType>
+	<xs:simpleType name="charsetType">
+		<xs:annotation>
+			<xs:documentation source="summary" xml:lang="en">Windows font character set</xs:documentation>
+			<xs:documentation source="MS Windows SDK wingdi.h" xml:lang="en">The minimum windows charset value is ANSI_CHARSET (0) and the maximum charset value is OEM_CHARSET (255).
+Two other special charset values are DEFAULT_CHARSET (1) and SYMBOL_CHARSET (2)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:maxInclusive value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="colorType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">RGB color specifed using HTML color #hhh or #hhhhhh syntax</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="#([\da-fA-F]{3}|[\da-fA-F]{6})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="languageType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Mathcad supported language</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EN"/>
+			<xs:enumeration value="DE"/>
+			<xs:enumeration value="FR"/>
+			<xs:enumeration value="JP"/>
+			<xs:enumeration value="DA"/>
+			<xs:enumeration value="NL"/>
+			<xs:enumeration value="FI"/>
+			<xs:enumeration value="IT"/>
+			<xs:enumeration value="NO"/>
+			<xs:enumeration value="PT"/>
+			<xs:enumeration value="ES"/>
+			<xs:enumeration value="SV"/>
+			<xs:enumeration value="BG"/>
+			<xs:enumeration value="HU"/>
+			<xs:enumeration value="RU"/>
+			<xs:enumeration value="EL"/>
+			<xs:enumeration value="KO"/>
+			<xs:enumeration value="ZH"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="matrixDisplayStyleType">
+		<xs:annotation>
+			<xs:documentation>Display styles for matrix results</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="auto"/>
+			<xs:enumeration value="matrix"/>
+			<xs:enumeration value="table"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="pageUnitType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">All graphical positions and sizes are stored as this type.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	<xs:simpleType name="radixType">
+		<xs:annotation>
+			<xs:documentation>Allowable radix attribute values for number formats</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="dec"/>
+			<xs:enumeration value="bin"/>
+			<xs:enumeration value="oct"/>
+			<xs:enumeration value="hex"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tabListType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Text block attribute type for a list of tab stops</xs:documentation>
+		</xs:annotation>
+		<xs:union>
+			<xs:simpleType>
+				<xs:list itemType="pageUnitType"/>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="textBooleanType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">xs:boolean + "inherit"</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:boolean">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="textCharsetType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">charsetType + "inherit"</xs:documentation>
+		</xs:annotation>
+		<xs:union>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="charsetType"/>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="textColorType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">colorType + "inherit"</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="colorType">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="textPageUnitType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">pageUnitType + "inherit"</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="pageUnitType">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="inherit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+	<xs:simpleType name="unitSystemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Supported unit system name or "none"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="si"/>
+			<xs:enumeration value="mks"/>
+			<xs:enumeration value="cgs"/>
+			<xs:enumeration value="us"/>
+			<xs:enumeration value="none"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="compatType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MC11"/>
+			<xs:enumeration value="MC12"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

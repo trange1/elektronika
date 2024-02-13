@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>RadioButton Control</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Mathsoft Controls\nButtons\nRadioButton Control");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Mathsoft RadioButton Control </h1></td>
+	</tr>
+</table>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Overview</td></tr>
+</table>
+</h2>
+
+<p>The Mathsoft RadioButton <a href="Controls.html">control</a> allows you to select between an arbitrarily large collection of choices. Each member in the radio button group returns either a 1 or a 0 (on or off), much like the related <a href="Control_button.html">PushButton</a> and <a href="Control_CheckBox.html">CheckBox</a> controls. More sophisticated behavior is programmed through a script using the <a href="Script_buttonclass.html">Button class</a>, and other features of your scripting language.</p>
+
+<p>You can change the appearance of a radio button group by right-clicking and choosing <b>Properties</b>, or, in some cases, you can access formatting properties through the script.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Simple Annotated Example</td></tr>
+</table>
+</h2>
+
+<p>Here is an example that shows the default script and the resulting behavior of the RadioButton control in the worksheet.</p>
+
+<h3>Default Script</h3>
+
+<code>
+Sub RadioBtnEvent_Start()<br>
+&nbsp;&nbsp;&nbsp;<span class="comment">Rem TODO: Add your code here</span><br>
+End Sub<br>
+<br>
+Sub RadioBtnEvent_Exec(Inputs,Outputs)<br>
+&nbsp;&nbsp;&nbsp;Outputs(0).Value = RadioBtn.SelectedButton()<br>
+End Sub<br>
+<br>
+Sub RadioBtnEvent_Stop()<br>
+&nbsp;&nbsp;&nbsp;<span class="comment">Rem TODO: Add your code here</span><br>
+End Sub<br>
+<br>
+Sub RadioBtn_Click()<br>
+&nbsp;&nbsp;&nbsp;RadioBtn.Recalculate()<br>
+End Sub<br>
+<br>
+Sub RadioBtn_SelectionChange()<br>
+&nbsp;&nbsp;&nbsp;RadioBtn.Recalculate()<br>
+End Sub<br>
+<br>
+</code>
+
+<h3>How It Appears in the Worksheet</h3>
+
+<p class="blockindent"><img src="Graphics/SIMPLE_RADIO_BUTTON.GIF" alt="simple radio button" width="135" height="70" border="0"></p>
+
+<h3>Comments</h3>
+
+<p>In the script, there are five events, <a href="Script_StartEvent.html">Start</a>, <a href="Script_ExecEvent.html">Exec</a>, <a href="Script_StopEvent.html">Stop</a>, <a href="Control_btnevents.html">Click</a>, and <a href="Control_lstevent.html#SelChanged">Selection Change</a>. The <b>Exec</b> event is where inputs and outputs can be processed, namely returning the state of the button. In the case of radio buttons, this is where state changes are handled because both check boxes and radio buttons support the <a href="Control_btnstate.html#Check">Check property</a> which delivers the state of the button. Procedures for formatting the button itself can be taken care of in the <b>Start</b> event or using the Properties dialog box. The <b>Click</b> event is where the control is re-executed after the user has clicked the control. The <b>Selection Change</b> event is needed to support groups of radio buttons in which case a change of state to the individual radio button must take place when another button in the group is clicked. Here are the scripts for a group of radio buttons working together, and their effect on the appearance and behavior of the controls:</p>
+
+<h3>Modified Scripts</h3>
+
+<table cellspacing="1" cellpadding="5" border="1">
+<tr>
+	<td width="50%" valign="middle"><p align="center"><b>First Radio Button</b></p></td>
+	<td width="50%" valign="middle"><p align="center"><b>All Other Radio Buttons</b></p></td>
+</tr>
+	<tr>
+		<td>
+		<code>
+		Sub RadioBtnEvent_Start()<br>
+		&nbsp;&nbsp;&nbsp;RadioBtn.GroupID = 1<br>
+		&nbsp;&nbsp;&nbsp;RadioBtn.ButtonID = 1<br>
+		&nbsp;&nbsp;&nbsp;RadioBtn.Text = &quot;Radio Button 1&quot;<br>
+		End Sub<br>
+		<br>
+		Sub RadioBtnEvent_Exec(Inputs,Outputs)<br>
+		&nbsp;&nbsp;&nbsp;Outputs(0).Value = RadioBtn.SelectedButton()<br>
+		End Sub<br>
+		<br>
+		Sub RadioBtnEvent_Stop()<br>
+		&nbsp;&nbsp;&nbsp;<span class="comment">Rem TODO: Add your code here</span><br>
+		End Sub<br>
+		<br>
+		Sub RadioBtn_Click()<br>
+		&nbsp;&nbsp;&nbsp;RadioBtn.Recalculate()<br>
+		End Sub<br>
+		<br>
+		Sub RadioBtn_SelectionChange()<br>
+		&nbsp;&nbsp;&nbsp;RadioBtn.Recalculate()<br>
+		End Sub</code>
+		</td>
+		<td>
+		<code>Sub RadioBtnEvent_Start()<br>
+		&nbsp;&nbsp;&nbsp;RadioBtn.GroupID = 1<br>
+		&nbsp;&nbsp;&nbsp;RadioBtn.ButtonID = 2<br>
+		&nbsp;&nbsp;&nbsp;RadioBtn.Text = &quot;Radio Button 2&quot;<br>
+		End Sub<br>
+		<br>
+		Sub RadioBtnEvent_Exec(Inputs,Outputs)<br>
+		&nbsp;&nbsp;&nbsp;<span class="comment">Rem TODO: Add your code here</span><br>
+		End Sub<br>
+		<br>
+		Sub RadioBtnEvent_Stop()<br>
+		&nbsp;&nbsp;&nbsp;<span class="comment">Rem TODO: Add your code here</span><br>
+		End Sub<br>
+		<br>
+		Sub RadioBtn_Click()<br>
+		&nbsp;&nbsp;&nbsp;RadioBtn.Recalculate()<br>
+		End Sub<br>
+		<br>
+		Sub RadioBtn_SelectionChange()<br>
+		&nbsp;&nbsp;&nbsp;RadioBtn.Recalculate()<br>
+		End Sub</code>
+		</td>
+	</tr>
+</table>
+
+<h3>How It Appears in the Worksheet</h3>
+
+<p class="blockindent"><img src="Graphics/MODIFIED_RADIO_BUTTON.GIF" alt="modified radio button" width="147" height="169" border="0"></p>
+
+<h3>Comments</h3>
+
+<p>In the script for the first button, the group identifier and the button identifier are specified, and the label has been changed. All other aspects of the script remain the same. Output is specified as the number of the radio button selected. In the script for the remaining buttons, the group and button identifiers are updated and the label changed, but there is no output specified. Because the script for these buttons does not require an output variable, you can remove it by right-clicking on the control and selecting <b>Remove Output Variable</b> from the menu.</p>
+
+<h3>Sample File</h3>
+
+<p>Here is a sample file that demonstrates the use of radio buttons in a worksheet.</p>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+               id="objLaunchMathcad"
+               border="0"
+               width="1"
+               height="1"
+               align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('samples\\controls\\quiz.xmcd')"
+	   class="fakelink">Mathcad Example</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

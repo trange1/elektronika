@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Mathcad's Automation Interface</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Automation Interfaces");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Mathcad's Automation Interface</h1></td>
+	</tr>
+</table>
+
+<p>Mathcad's Automation interface provides a mechanism for communicating with Mathcad from within another Windows application, including a custom stand-alone application you write yourself. Using <acronym lang="en" title="Object Linking and Embedding">OLE</acronym> Automation commands, you can:</p>
+
+<ul type="disc">
+	<li>send data or assign variable values to Mathcad from another application</li>
+	<li>open, execute, and close Mathcad worksheets</li>
+	<li>send results back to the original application</li>
+</ul>
+
+<p>To use Automation technology, write a program in Visual Basic 5.0 (or higher) or in an application that can serve as an Automation client, such as Microsoft Excel version 5.0 (or higher). The program you write defines and retrieves variables in Mathcad worksheets. The variables defined in and retrieved from Mathcad can be complex scalars, strings, or matrices. Dimensions (units) are not retained.</p>
+
+<p>Mathcad provides two APIs for automation:</p>
+
+<ul type="disc">
+	<li>the newer, more complete <a href="IMathcadApplication_Overview.html">scripting API</a>, for Mathcad 2001i and higher</li>
+	<li><a href="oldAutomation.html">an API for embedded objects</a>, deprecated, but presented for the sake of completeness. This API is used when a Mathcad worksheet is linked or embedded in another application.</li>
+</ul>
+
+<h3>Examples</h3>
+
+<p>The following examples of the scripting API suggest what is possible with Mathcad Automation and could form the basis of expanded projects. They demonstrate the use of the primary features of the <a href="IMathcadApplication_Overview.html">IMathcad Application</a> API:</p>
+  
+<ol type="1">
+	<li>A <a href="Automation_ex1.html">Visual Basic program</a> that displays a Windows form, allowing you to set an input variable, apply this value in an .mcd file, and return the results from the file.</li>
+	<li>A <a href="Automation_vbembed.html">Visual Basic program</a> that includes a Mathcad OLE Embedded object, which is useful for setting and getting complex values.</li>
+	<li>An <a href="Automation_ex2.html">Excel Spreadsheet</a> that allows you to highlight a row of data, feed those values into the correct entries in a Mathcad sheet, and return values from the sheet into new cells in Excel.</li>
+	<li>An <a href="Automation_excelembed.html">Excel Spreadsheet</a> that uses the embedding interface to set and get complex values.</li>
+</ol>
+
+<h4>Notes:</h4>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<ul type="disc">
+	<li>If you would rather script an OLE object within the Mathcad environment, see the section on <a href="ScriptableObject.html">Scripting Custom Objects</a>. You can also call <a href="IMathcadApplication_Overview.html">Automation objects</a> from within a Scripted Object (<a href="Script_automation.html">call Mathcad from Mathcad</a>), as shown in this <a onMouseOver="document.body.style.cursor='hand'"
+ 	 onMouseOut="document.body.style.cursor='arrow'"
+	 onClick="objLaunchMathcad.OpenResourceCenter('Applications\\inelastic.xmcd')"
+	 class="fakelink">example</a>.</li>
+ 	<li>Check any third-party application's documentation to find out if it can serve as an OLE Automation client.</li>
+<li><p>Mathcad 12 and higher support the GetActiveObject COM API function to retrieve a pointer to the Application object of an already running and visible instance of Mathcad. It is used like this:</p>
+
+<code>(Visual C++)<br>
+<br>
+#import "progid:Mathcad.Application"<br>
+<br>
+Mathcad::MathcadApplicationPtr GetMathcadApp()<br>
+{<br>
+CComPtr< IUnknown > spAppUnk;<br>
+//Get the active instance of Mathcad from the ROT.<br>
+if ( SUCCEEDED( ::GetActiveObject( __uuidof( Mathcad::Application ), NULL, & spAppUnk) )<br>
+<br>
+{<br>
+<span class="doubleindent">return ( IUnknown * )spAppUnk;</span><br>
+}<br>
+<br>
+return NULL;<br>
+}<br>
+</code>
+</li>
+
+<li>For more information, you can search on <a href="http://msdn.microsoft.com/">Microsoft's developers site</a>.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

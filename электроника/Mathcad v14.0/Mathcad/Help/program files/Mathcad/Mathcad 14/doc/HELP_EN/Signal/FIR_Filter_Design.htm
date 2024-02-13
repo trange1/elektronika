@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+
+<head>
+
+<title>FIR Filter Design</title>
+
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+ <link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Digital Filtering\nFIR Filter Design");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Signal.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>FIR Filter Design</h1></td>
+	</tr>
+</table>
+
+
+<p><b class="hmath">bandpass(f1, f2, n, [w])</b> Returns 
+ coefficients for a bandpass FIR filter with <span class="math">n</span> 
+ coefficients and cutoff frequencies <span class="math">f1</span> 
+ and <span class="math">f2</span>, windowed with a taper 
+ <span class="math">w</span>.</p>
+
+<p><b class="hmath">bandstop(f1, f2, n, [w]) </b>Returns 
+ coefficients for a bandstop FIR filter with <span class="math">n</span> 
+ coefficients and cutoff frequencies <span class="math">f1</span> 
+ and <span class="math">f2</span>, windowed with taper <span class="math">w</span>.</p>
+
+<p><b class="hmath">highpass(f, n, [w])</b> Returns 
+ coefficients for a highpass FIR filter with <span class="math">n</span> 
+ coefficients and cutoff frequency <span class="math">f</span>, 
+ windowed with taper <span class="math">w</span>.</p>
+
+<p><b class="hmath">lowpass(f, n, [w])</b> Returns coefficients 
+ for a lowpass FIR filter with <span class="math">n</span> 
+ coefficients and cutoff frequency <span class="math">f</span>, 
+ windowed with taper <span class="math">w</span>.</p>
+
+<p><b class="hmath">setwindow(n)</b> Returns the currently 
+ selected window for FIR filter design using the functions <b class="math">lowpass</b>, 
+ <b class="math">highpass</b>, <b class="math">bandpass</b>, and <b class="math">bandstop</b>. 
+ The argument <span class="math">n</span> sets the window 
+ to one of six available windows.</p>
+
+<h4>Arguments:</h4>
+
+<ul>
+<li><span class="hmath">f</span>, <span class="hmath">f1</span>, 
+ and <span class="hmath">f2</span> are real-valued cutoff 
+ or bandpass frequencies, given as a fraction of the sampling frequency, 
+ between 0 and 0.5.</li>
+<li><span class="hmath">n</span> is an integer 
+ greater than 2. It represents the number of coefficients for the filter</li>
+<li><p><span class="hmath">w</span> (optional) 
+ is an integer representing a windowing function. A rectangular window 
+ is used if <span class="math">w</span> is omitted. The 
+ following table shows values for <span class="math">w</span> 
+ and the windows they correspond to:</p>
+
+    <table>
+      <tr> 
+        <td> 
+          <p><b>Value of w</b></p>
+        </td>
+        <td> 
+          <p><b>Window</b></p>
+        </td>
+      </tr>
+      <tr> 
+        <td> 
+          <p align="center">1</p>
+        </td>
+        <td> 
+          <p>rectangular</p>
+        </td>
+      </tr>
+      <tr> 
+        <td> 
+          <p align="center">2</p>
+        </td>
+        <td> 
+          <p>tapered rectangular</p>
+        </td>
+      </tr>
+      <tr> 
+        <td> 
+          <p align="center">3</p>
+        </td>
+        <td> 
+          <p>triangular</p>
+        </td>
+      </tr>
+      <tr> 
+        <td> 
+          <p align="center">4</p>
+        </td>
+        <td> 
+          <p>Hanning</p>
+        </td>
+      </tr>
+      <tr> 
+        <td> 
+          <p align="center">5</p>
+        </td>
+        <td> 
+          <p>Hamming</p>
+        </td>
+      </tr>
+      <tr> 
+        <td> 
+          <p align="center">6</p>
+        </td>
+        <td> 
+          <p>Blackman</p>
+        </td>
+      </tr>
+      <tr> 
+        <td> 
+          <p align="center">7</p>
+        </td>
+        <td> 
+          <p>Nuttall</p>
+        </td>
+      </tr>
+    </table>
+
+ 
+ </li>
+</ul>
+
+<hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

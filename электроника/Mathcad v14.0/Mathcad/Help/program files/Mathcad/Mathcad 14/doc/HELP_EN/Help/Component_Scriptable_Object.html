@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Scriptable Object Component</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<meta name="MS-HAID" content="Scripted Object">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("External Files and Applications\nScriptable Objects\nScriptable Object Component");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Scriptable Object Component</h1></td>
+	</tr>
+</table>
+
+<p>Although Mathcad has several application-specific <a href="Components.html">components</a>, 
+  you can exchange data between a Mathcad worksheet and any other application, 
+  as long as that application supports OLE Automation. The Scriptable Object
+  component allows you to control any OLE application, including Mathcad, installed
+  on your computer. Before using the Scriptable Object component, you should be
+  proficient in a supported scripting language and understand how the other
+  application has implemented OLE.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="Insert">Inserting a Scriptable Object Component</a></td></tr>
+</table>
+</h2>
+
+<p>When you <a href="Components.html#insert">insert</a> a Scriptable Object component  
+  the Scripting Wizard launches 
+  to guide you through the configuration process.</p>
+
+<p>On the first page of the Wizard you must select the object to script. You 
+  can either create an empty component or create one based upon a particular 
+  application file.</p>
+
+<p>The second page of the Wizard allows you to specify the scripting language 
+  used by the component. Although you can script objects using any scripting language available on your 
+  computer, Mathcad officially supports two scripting languages, VBScript
+  and JScript. If you select either of these options, Mathcad creates a
+  script shell containing the appropriate event handlers. For any other scripting 
+  language, Mathcad creates an empty script.</p>
+
+<p>On the third page of the Wizard, you can specify a name for the object. You use this name in the script to refer to the object when calling its automation 
+  interface. You can also specify the number of <a href="Input_variable.html">input 
+  and output variables</a> associated with the component.</p>
+
+<h4>Note:</h4>
+
+<ul type="disc">
+	<li><p>For more information on Microsoft's scripting languages and to download
+	 the latest versions, refer to Microsoft Inc.'s Web site, <a
+	 href="http://msdn.microsoft.com/scripting" target="_blank">http://msdn.microsoft.com/scripting</a>.</p></li>
+</ul>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="Configure">Configuring A Scriptable Object Component</a></td></tr>
+</table>
+</h2>
+
+<p>Right-clicking on a Scripted object and selecting <b>Properties</b> 
+ allows you to set the number of <a href="Input_variable.html">input and 
+ output variables</a>, change the name of the object, and <a href="Scripting_an_object.html">edit 
+ the script</a> associated with the component. When configuring the component, 
+ keep the following limitations in mind:</p>
+
+<ul type="disc">	
+	<li><p>The Scripted Object component supports a maximum of four inputs
+	 and four outputs.</p></li>
+	<li><p>If you change the name of the component on the Properties page,
+	 you must manually update the name in the script or the component
+	 returns an error when you evaluate it.</p></li>
+	<li><p>You can switch scripting languages after you insert the component
+	 but you must completely rewrite the script, including the event handlers.
+	 You cannot switch languages within a script.</p></li>
+	<li><p>Your script must write to every output variable. Any variable it
+	 does not write to is undefined and the component returns an error.</p></li>
+</ul>
+
+<p>Scripted objects can be <a href="Components_redistributing.html">exported</a> 
+  for reuse, allowing you to insert them in other worksheets or distribute them 
+  to other users.</p>
+
+<p>The <a href="../DevRef/DevRef.htm#index.html" target="_top">Developer's 
+ Reference</a> provides more information about the Scriptable Object component.</p>
+
+<h4>Note:</h4>
+
+<ul type="disc">
+	<li><p>Mathcad can protect you from potentially damaging code within
+	 Scriptable Object components. By default, you are prompted to enable
+	 or disable evaluation of scriptable components upon opening a worksheet
+	 containing them. The security level can be set on the <a href="Dialog_Preferences.html#Script">Script Security</a> tab of the
+	 Preferences dialog.</p></li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('samples\\scripted\\FreqResp.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Saving and Redistributing Components','Components_redistributing.html','Scripting an Object','Scripting_an_object.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Solving Partial Differential Equations</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Differential Equations">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nDifferential Equation Solving\nSolving Partial Differential Equations");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Partial Differential Equations in Solve Blocks</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">Pdesolve(u, x, xrange, t, trange, [xpts], [tpts])</b> Returns a
+ function or vector of functions <b class="math">u(x,t)</b> that solve a 1-dimensional
+ nonlinear <acronym lang="en" title="Partial Differential Equation">PDE</acronym> or
+ system of PDEs, with <span class="math">n</span> independent equality constraints for
+ an <span class="math">n</span>th order differential equation. Values are interpolated
+ from a matrix of solution points calculated using the numerical method of lines.</p>
+
+<p><b>Pdesolve</b> must be used in a <a href="Solve_Block.html">Solve Block</a>.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><b class="hmath">u</b> is the scalar function name, or vector of function 
+    names (with no variable names included) as they appear within the solve block. 
+    For example, if you are solving for the functions <span class="math">f(x,t)</span> 
+    and <span class="math">g(x,t)</span>, <b class="math">u</b> would be 
+
+   <p class="blockindent"><img src="Graphics/PDEfunc.gif" width="27" height="39" alt="vector of functions f and g"></p>
+
+    Neither <a href="Literal_Subscript_Operator.html">literal</a> or <a href="Array_subscript_operator.html">array 
+    subscripts</a> may be used when naming functions, to accommodate the subscript 
+    partial differential notation. </li>
+  <li><span class="hmath">x</span> is the spatial variable name.</li>
+  <li><b class="hmath">xrange</b> is a 2-element column vector containing the 
+    real boundary values for <span class="math">x</span>. </li>
+  <li><span class="hmath">t</span> is the time variable name.</li>
+  <li><b class="hmath">trange</b> is a 2-element column vector containing the 
+    real boundary values for <span class="math">t</span>. </li>
+  <li><span class="hmath">xpts</span> (optional) is the integer number of spatial 
+    discretization points.</li>
+  <li><span class="hmath">tpts</span> (optional) is the integer number of temporal 
+    discretization points.<br>
+  </li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li><p>The universal notes on constructing <a href="Solve_Block.html">Solve Blocks</a> 
+    apply. Within the body of the block:</p>
+    <ul type="disc">
+      <li><b>Unknown functions:</b> Functions must be defined explicitly in terms 
+        of their variables, for example, use <span class="math">u(x,t),</span> not just 
+        <span class="math">u</span>. Subscript notation is used to indicate partial 
+        derivatives within the solve block, for example, <span class="math">u<sub>xx</sub>(x,t)</span><b class="math"> 
+        </b>is the second partial derivative of <span class="math">u</span> with 
+        respect to <span class="math">x</span>. </li>
+      <li><b>PDE Equations:</b> Equations must be defined using <a href="Equal_to_operator.html">Boolean 
+        equals</a>. Second partial derivatives are not allowed on the left-hand-side 
+        of equations, you must convert your equation to a system of equations 
+        in first derivatives only (see the QuickSheet example).</li>
+      <li><b>Boundary conditions:</b> There must be an initial condition <span class="math">u(x,0)</span> 
+        , and <span class="math">n</span> boundary conditions, where <span class="math">n</span> 
+        is the order of the PDE, for each unknown function. Boundary conditions 
+        can be of type Dirichlet (<span class="math">u(x0,t) = f(t)</span>) or 
+        Neumann (<span class="math">u<sub>x</sub>(x0,t)=g(t)</span>), and can 
+        be specified at either endpoint of the spatial integration range. The 
+        endpoints used in boundary conditions must match the endpoints specified 
+        in the ode/pdesolve command. Mathcad checks for the correct type 
+        and number of constraints and give an error if there is a mistake.</li>
+      <li><b>Constraints:</b> Algebraic constraints of the form <span class="math">u(x,t) 
+        + v(x,t) + w(x,t) = 0</span> are allowed. This adds an extra unknown function, 
+        <span class="math">w</span>, to the system, which must be specified as 
+        one of the output functions in the ode/pdesolve call. Inequality constraints 
+        are not allowed.</li>
+    </ul>
+  </li>
+  <li>Assign the output of the pdesolve function to a function name, or vector 
+    of function names.</li>
+  <li>If you wish to change the approximation method used for the partial derivatives, 
+    right-click on the <b>Pdesolve</b> function and choose another method. This 
+    may affect calculation time.</li>
+  <li>The numerical method of lines is only appropriate for solving hyperbolic 
+    and parabolic PDEs, and partial algebraic equations. If you need to solve 
+    an equation in a program loop, use <a href="numol.html">numol</a>. 
+    If you need to solve an elliptic PDE, such as Poisson's equation, use <a href="Poissons_equation.html">relax 
+    or multigrid</a>.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Calculus_DEs\\wave.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Deriving Initial Conditions for an ODE','Linear_shooting.html','Differential Equation Solvers','Differential_equation_solvers.html','ODE Solvers','ODE_solvers.html','Partial Differential Equation solver','numol.html','Relaxation PDE Solver','Poissons_equation.html','Solving Ordinary Differential Equations','ode_solve.html','State Space ODE Solver','Statespace.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

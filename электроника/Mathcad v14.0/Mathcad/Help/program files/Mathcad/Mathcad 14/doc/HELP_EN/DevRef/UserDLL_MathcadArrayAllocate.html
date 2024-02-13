@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>MathcadArrayAllocate</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Writing Mathcad DLLs\nStructure and Function Definitions\nMathcadArrayAllocate");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>MathcadArrayAllocate</h1></td>
+	</tr>
+</table>
+
+<code>
+<br>
+BOOL MathcadArrayAllocate(array, rows, cols, allocateReal,<br>
+allocateImaginary)<br>
+COMPLEXARRAY* const array;<br>
+unsigned int rows;<br>
+unsigned int cols;<br>
+BOOL allocateReal;<br>
+BOOL allocateImaginary;<br>
+</code>
+
+<p>Allocates memory for a <b><a href="UserDLL_COMPLEXARRAY.html">COMPLEXARRAY</a></b> of <span class="math">cols</span> columns and <span class="math">rows</span> rows. Sets the <span class="math">hReal</span>, <span class="math">hImag</span>, <span class="math">rows</span> and <span class="math">cols</span> members of the argument array.</p>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Parameter</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+<tr>
+	<td valign="top"><p>array</p></td>
+	<td valign="top"><p>Points to the <b>COMPLEXARRAY</b> structure that is to be filled with the information about an array.</p>
+<p>The <b>COMPLEXARRAY</b> structure has the following form:</p>
+
+<code>&amp;#9;typedef struct tagCOMPLEXARRAY {<br>
+unsigned int rows;<br>
+unsigned int cols;<br>
+double **hReal;<br>
+double **hImag;<br>
+} COMPLEXARRAY;</code>
+</td>
+</tr>
+<tr>
+	<td valign="top"><p>rows</p></td>
+	<td valign="top"><p>Row dimension of the array that is being allocated. After a successful allocation, the <span class="math">rows</span> member of the argument array is set to the value of <span class="math">rows</span>.</p></td>
+</tr>
+<tr>
+	<td valign="top"><p>cols</p></td>
+	<td valign="top"><p>Column dimension of the array that is being allocated. After a successful allocation, the <span class="math">cols</span> member of the argument array is set to the value of <span class="math">cols</span>.</p></td>
+</tr>
+<tr>
+	<td valign="top"><p>allocateReal</p></td>
+	<td valign="top"><p>Boolean flag indicating whether a memory block should be allocated to store the real part of the array. If allocateReal is FALSE the function does not allocate storage for the real part of the array and sets the <span class="math">hReal</span> member to NULL.</p></td>
+</tr>
+<tr>
+	<td valign="top"><p>allocateImag</p></td>
+	<td valign="top"><p>Boolean flag indicating whether a memory block should be allocated to store the imaginary part of the array. If allocateImag is FALSE the function does not allocate storage for the imaginary part of the array and sets the hImag member to NULL.</p></td>
+</tr>
+</table>
+
+<h3>Return value</h3>
+
+<p>Returns TRUE if the allocation is successful, FALSE otherwise.</p>
+
+<h4>Note:</h4>
+
+<ul>
+<li><span class="math">hReal</span> and <span class="math">hImag</span> members of the argument array are allocated as a 2-dimensional array of the range <span class="math">[0 .. cols – 1][0 .. rows – 1]</span>. Free memory using <a href="UserDLL_MathcadArrayFree.html"><b>MathcadArrayFree</b></a>. To allocate memory for scalars, use <a href="UserDLL_MathcadAllocate.html"><b>MathcadAllocate</b></a>. See the <a href="UserDLL_code.html">example</a>.</li>
+</ul>
+ 
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

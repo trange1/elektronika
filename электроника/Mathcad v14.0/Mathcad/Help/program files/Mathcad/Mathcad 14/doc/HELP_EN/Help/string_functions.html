@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>String Functions</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nString Functions");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>String Functions</h1></td>
+	</tr>
+</table>
+
+<p>The following functions are useful when working with <a href="Creating_a_String.html">strings</a>:</p>
+
+<p><b class="hmath">concat(S1, S2, S3, ...)</b> Returns the string formed by concatenating strings <span class="math">S1</span>, <span class="math">S2</span>, and so on.</p>
+
+<p><b class="hmath">substr(S, m, n)</b> Returns the substring of <span class="math">S</span> having <span class="math">n</span> characters starting at position <span class="math">m</span>.</p>
+
+<p><b class="hmath">search(S, SubS, m)</b> Returns the starting position of the substring <span class="math">SubS</span> in <span class="math">S</span>, beginning from position <span class="math">m</span> in <span class="math">S</span>. If the substring is not found after the specified starting position, it returns either
+  &minus;1 or <span class="math"><a href="Array_origin.html">ORIGIN</a>-1</span>, depending on whether <a href="Dialog_Worksheet_Options.html#Calc">strings are indexed to ORIGIN</a> or not.</p>
+
+<p><b class="hmath">strlen(S)</b> Returns the integer number of characters in <span class="math">S</span>.</p>
+
+<p><b class="hmath">num2str(z)</b> Converts a scalar <span class="math">z</span> into a string.</p>
+<p><b class="hmath">format(Sf, x1, x2, x3, ...)</b> Returns a string containing the value of the arguments <span class="math">x1, x2, x3, ...</span> with print order and surrounding text specified by <span class="math">Sf</span>. </p>
+
+<p><b class="hmath">str2num(Sn)</b> Converts a string of numbers <span class="math">Sn</span> into a constant.</p>
+
+<p><b class="hmath">str2vec(S)</b> Converts a string <span class="math">S </span>to a vector of ANSI codes.</p>
+
+<p><b class="hmath">vec2str(v)</b> Converts a vector of integer ANSI codes to a string.</p>
+
+<p><b class="hmath">IsString(x)</b> Returns 1 if <span class="math">x</span> is a string, otherwise returns 0. This function is most useful inside the conditional statement of a <a href="Programming.html">program</a>.</p>
+
+<p><b class="hmath"><a name="error">error(S)</a></b> Returns the string <span class="math">S</span> as an error message. Typically used in a <a href="Program_error.html">program</a>. <span class="math">S</span> may contain the characters <span class="math">\n</span>, which cause the resulting error message to wrap to a new line.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><span class="hmath">S, S1, S2, S3, SubS...</span> are strings.</li>
+  <li><span class="hmath">Sn</span> is a string representing a number. The number may be complex, in engineering notation, or in decimal, binary, octal, or hexadecimal format, using Mathcad's conventions for <a href="Entering_numbers.html">expressing numbers</a>. For example, the number 255 may be represented by the string <span class="math">0FFh,</span> using a leading 0 to distinguish the <span class="math">&quot;FF&quot;</span> as digits. </li>
+  <li><span class="hmath">Sf</span> (optional for one-variable case) is a string containing control codes to specify location of the formatted argument(s) in the output. Each argument is referenced as <span class="math">{#}</span>, starting with 0. For example, <span class="math">format(&quot;The date is {0}/{1}/{2}&quot;, m, d, y).</span></li>
+  <li><span class="hmath">x, x1, x2, x3, ...</span> are any valid mathcad expressions, including scalars, arrays, and so on.</li>
+  <li><span class="hmath">m</span> and <span class="hmath">n</span> are non-negative integers. </li>
+  <li><span class="hmath">z</span> is a scalar.</li>
+  <li><b class="hmath">v</b> is a vector of integers representing ANSI code points for any valid string character. Acceptable values are integers in the range 9, 10, 13, or 32 - 255. You may find it convenient to enter these in <a href="Entering_numbers.html#otherbases">hexadecimal format</a>.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li>The position of the first character in a string is zero, unless you decide to <a href="Dialog_Worksheet_Options.html#Calc">associate string indexing</a> with the array ORIGIN for the worksheet. For example, in the string &quot;yes&quot; the letter &quot;y&quot; is the 0th character.</li>
+  <li>The <b>str2num</b> function could be used along with an import of hex, octal, or binary data as strings. Append the appropriate suffix using <b>concat</b>, and convert the numbers to their decimal values for further processing in Mathcad.</li>
+  <li>You can use the <b>format</b> function in place of <b>concat</b> when you need to make a string out of multiple values of different types. This function is used internally to create the output for the <a href="Program_debugging.html">debugging functions</a>.</li>
+  <li>The mapping of codes to characters is done by your system codepage, and depends on the language of your operating system. It is possible for the same document to produce different strings/codes depending on the currently installed codepage of the system on which it is run.</li>
+	<li>The <b>vec2str</b> and <b>str2vec</b> functions both work with zero-length strings:
+			<p class="vmath">str2vec(&quot;&quot;) = 0</p>
+			<p class="vmath">vec2str(0) = &quot;&quot;</p></li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Techniques\\charstr7.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

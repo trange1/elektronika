@@ -1,0 +1,55 @@
+// 28-Dec-99 $$1  TWH  Created.
+// 27-Oct-00 $$2  TWH  Add uninstall
+// 25-Apr-01 $$3  TWH  Limit PossibleLangs to usascii
+// 22-May-02 $$4  TWH  Require fileserver_pkg
+// 12-Aug-02 $$5  TWH  Add PossibleArchs
+// 21-Aug-03 K-01-13  $$6  TWH  Add RC_README_TPL
+// 09-Apr-04 K-01-26  $$7  TWH  Add Ad_list
+
+(Product fileserver
+    (Name                      "Pro/INTRALINK File Server")
+    (WelcomeImage              "fileserver_name.gif")
+    (Packages                  "fileserver_pkg"
+                               "proidemos"
+                               "uninstall")
+    (ProgramFiles              False)
+    (LpDirName                 "fileserver")
+    (Screens                   "ScreenProd")
+    (PossibleArchs             "sun4_solaris"
+                               "hpux11_pa32"
+                               "ibm_rs6000"
+                               "i486_nt")
+    (PossibleLangs             "usascii")
+    (Installed                 True)
+    (RC_README_TPL             "fs_readme")
+    (Ad_list                   "whatsnew_auto"
+                               "whatsnew_dataexchange"
+                               "whatsnew_newui"
+                               "whatsnew_p2p"
+                               "whatsnew_3ddrawings"
+                               "whatsnew_ID"
+                               "whatsnew_rs"
+                               "whatsnew_simulation"
+                               "whatsnew_production"
+                               "installscreen_casestudy"
+                               "tools_menumapper"
+                               "tools_onlinehelp"
+                               "tools_productivityT"
+                               "tools_refcards"
+                               "tools_tutorials")
+)
+
+(Package fileserver_pkg
+    (Name                      "Pro/INTRALINK File Server")
+    (Screens                   "ScreenVault"
+                               "LpcfgLinkpath")
+    (Binscripts                "fserv_shutdown"
+                               "fserv_startup"
+                               "changefspwd")
+    (Cdsections                "fileserver"
+                               "Install")
+    (Installed                 True)
+    (Required                  True)
+)
+
+

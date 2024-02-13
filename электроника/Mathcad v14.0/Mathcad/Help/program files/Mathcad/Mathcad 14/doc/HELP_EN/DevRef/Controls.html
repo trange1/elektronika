@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Mathsoft Controls</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Mathsoft Controls");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Mathsoft Controls</h1></td>
+	</tr>
+</table>
+
+<p>Controls, such as list boxes, sliders, and buttons, allow you or other users of your Mathcad documents to enter information other than by defining a variable. This is particularly useful if the end user is new to Mathcad or if you want to streamline a repetitious process. A set of controls allows you to identify and quickly specify control parameters in a calculation and, in some cases, limit the available input choices.</p>
+
+<p>There are six types of controls:</p>
+
+<ul type="disc">
+	<li><a href="Control_CheckBox.html">Check boxes</a></li>
+	<li><a href="Control_RadioButton.html">Radio buttons</a></li>
+	<li><a href="Control_button.html">Push buttons</a></li>
+	<li><a href="Control_TextBox.html">Text boxes</a></li>
+	<li><a href="Control_ListBox.html">List boxes</a></li>
+	<li><a href="Control_Slider.html">Sliders</a></li>
+</ul>
+
+<h3>Creating and Customizing Controls</h3>
+
+<p>You can create a control in your worksheet by choosing <b>Controls</b> from the <b>Insert</b> menu, or by using the <a href="../Help/mcad.htm#Toolbars_-_Control.html" target="_top">Controls toolbar</a>. You must create a control in a blank area of the worksheet before assigning its output to a variable value. The definition equals sign appears automatically as part of the control.</p>
+
+<h3>Scripting</h3>
+
+<p>Some controls can be used with little or no modification, such as a simple push button
+that assigns a value of 1 or 0 to whatever variable name you choose. Others require
+additional scripting to be useful. All controls have scripts written in VBScript as a
+default. These scripts can be modified by right-clicking on the control and choosing
+<b>Edit Script</b>. If you wish you can use the <a href="ScriptableObject.html">Scriptable
+Object component</a> with a Mathsoft control from the object list to script in JScript.</p>
+
+<p>Properties and methods of the control having to do with values and items held by the control are accessible through the script. <a href="Script_Exporting.html">Controls can also be exported</a> for reuse in other worksheets.</p>
+
+<p>These are the class definitions for the four control types:</p>
+
+<ul type="disc">
+	<li><a href="Script_buttonclass.html">button class</a> (push, radio, check box)</li>
+	<li><a href="Script_textboxclass.html">text box class</a></li>
+	<li><a href="Script_listboxclass.html">list box class</a></li>
+	<li><a href="Script_sliderclass.html">slider class</a></li>
+</ul>
+
+<h3><a name="inputs">Interacting with the Mathcad worksheet</a></h3>
+
+<p>The default setting for all controls is one output and no inputs, that is, the control only responds to value changes to itself, not to any worksheet variables. You can modify the number of inputs and outputs, limited only by your system resources. For example, if you wish to use a Mathcad variable value as an input to a script, right-click on the control and choose <b>Add Input Variable</b>. A placeholder will appear below the control, into which you can enter any valid Mathcad supported data type including numbers, arrays, and strings, or any expression that produces one of these values.</p>
+
+<p>Within the script, in the <a href="Script_Events.html">Exec event</a>, values from these placeholders are addressed as <span class="math">Inputs(0).Value</span> and <span class="math">Outputs(0).Value</span>. Indexing of input and output variables starts at 0. Inputs and Outputs are members of <a href="Script_datavalues.html">DataValue collections</a>, with associated <a href="Script_dataval.html">properties and methods</a>. Using outputs of one control as inputs to another, you can include <a href="Control_multiple.html">multiple controls</a> in the same worksheet.</p>
+
+<p>You can also get and set values in the worksheet by using Mathcad's <a href="Script_automation.html">Automation</a> commands in the script if you need to manipulate these values in event handlers other than the Exec event. You should still set input and output values when you use the Automation commands. By associating a component or control with input and output values, you define its place in the calculation order of the worksheet, and notify it to recalculate when input values change, as well as notify the worksheet when to update the output values. It is therefore important that you assign input and output values to any component that will use these worksheet variables, even if you access the value of the variable through Mathcad's Automation interface using <a href="IMWGetValue.html">GetValue</a> or <a href="IMWSetValue.html">SetValue</a> methods.</p>
+
+<p>Finally, note that there is a general Recalculate method which can be called inside any event handler in a script, causing the component to recalculate the region.</p>
+
+<h3>Display</h3>
+
+<p>Properties and methods of each control having to do with display (font, alignment, images, and so on) are modified through the Properties dialog. Right-click on a control and choose <b>Properties</b> to see the available options for a particular control.</p>
+
+<p>In order to hide control arguments from end users, right-click the control and select <b>Hide Arguments</b>. To reveal the arguments, right-click the control again and select  <b>Show Arguments</b>.</p>
+
+<h3>Enabling Controls</h3>
+
+<p>As a safeguard against potentially destructive code, Mathcad issues a warning message  every time you attempt to open a worksheet that contains scripted objects. If you are  opening a worksheet containing scripted objects that you know to be safe, such as the  sample files that demonstrate these controls, click &quot;No&quot; when the warning box  comes up. Doing so enables all the scripted objects in the worksheet. If you answer &quot;Yes&quot; and still want to enable these components in the worksheet, either right-click a single control and select <b>Enable Evaluation</b>, or select one or more controls, right-click and select <b>Properties</b> from the menu. In the Properties dialog on the Calculation tab, uncheck <b>Disable Evaluation</b>.</p>
+
+<h3>Examples</h3>
+
+<p>Here are a few examples of how controls might be used:</p>
+
+<ul type="disc">
+	<li>Use a push button, check box, or radio button to set a binary state (yes or no, true or false, on or off).</li>
+	<li>Use a list box to allow the end user to choose from a variety of materials, which in turn selects properties from a table.</li>
+	<li>Use a radio button group to create a numerically-based quiz.</li>
+</ul>
+
+<p>Example worksheets contained in the <b>\qsheet\samples\controls</b> folder of your installation of Mathcad illustrate how to use the controls in a variety of ways. These files are listed in QuickSheets, under the Programming section.</p>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Programming\\progrtoc.xmcd')"
+	   class="fakelink">Mathcad Example</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

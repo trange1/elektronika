@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Generating an Index</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Creating an Electronic Book\nSteps to Create an Electronic Book\nDeveloping a Searchable Index\nIndexing and Checking the HBK File");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Author.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Generating an Index</h1></td>
+	</tr>
+</table>
+
+<p>Once you have created all the <a href="Creating_index_entries_in_regions.htm">index entries</a> in your worksheets, run <a href="Checking_your_HBK_file.htm">HBKmode</a> to access the Handbook Utilities dialog. To create your index:</p>
+
+<ol>
+<li>Select the &quot;Generate Index&quot; option and click &quot;OK.&quot; </li>
+<li>Browse to select your HBK file.</li>
+<li>Mathcad will create a file called INDEX.TXT in the same location as your HBK file.</li>
+</ol>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="sortingindex">Sorting the index</a></td></tr>
+</table>
+</h2>
+
+<p>In order to complete the index process, you must sort the contents of INDEX.TXT:</p>
+
+<ol type="1">
+	<li>Open INDEX.TXT in Microsoft Word or another word processing application.<br>
+	 <br>We recommend that you use Word because you can convert the entire contents of the file to a table. To do so in Word, choose <b>Select All</b> from the <b>Edit</b> menu, then choose <b>Convert &gt; Text to Table</b> from the <b>Table</b> menu. In the Convert Text to Table dialog box, specify 3 columns and separate text with a vertical bar,&nbsp;|.</li>
+	<li>Sort the table by the first column (index entry), then the third column (file name), then the second column (region number). To do so in Word, choose <b>Sort</b> from the <b>Table</b> menu, and use the dialog box.</li>
+	<li>Once you have sorted the table, convert the table back to text. To do so in Word, choose <b>Select Table</b> from the <b>Table</b> menu, then choose <b>Convert &gt; Table to Text</b>. In the Convert Table to Text dialog box, specify a vertical bar, |, as the separator.</li>
+	<li>Save your newly sorted index as Text Only or .txt format.</li>
+	<li>Now you need to save the file in Unicode. To do so, reopen the file in Notepad and choose <b>Save As</b> from the <b>File</b> menu and select Save as Type: Text and Encoding:  Unicode.</li>
+</ol>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Processing the Index</td></tr>
+</table>
+</h2>
+
+<p>To process the index:</p>
+
+<ol>
+<li>Place the following files in one folder:<br><br>
+	<ul>
+		<li>NEWDICT.EXE (the indexing utility, located in the Mathcad folder)</li>
+		<li>INDEX.TXT</li>
+		<li>the HBK file (in this example, ALGEBRA.HBK)</li>
+		</ul>
+</li>
+<li>Open the <b>Command Prompt</b> from <b>Programs &gt; Accessories</b> in the Windows <b>Start</b> menu. Run NEWDICT.EXE by typing:<br><br>
+
+	 <code><b>newdict index.txt algebra.hbk</b><br><br></code>
+	 
+If there is an error in the index file, NEWDICT.EXE stops its execution and issues a line number on which the error occurs. If an error occurs, check and fix errors, then re-run NEWDICT.EXE.</li>
+	<li>If no errors occur, NEWDICT.EXE creates two files, OUT.DCT and OUT.RFS. Rename these files to correspond to the name of the HBK file and folder for your E-book. For example, if you have a folder called ALGEBRA and an HBK file called ALGEBRA.HBK, rename the files ALGEBRA.DCT and ALGEBRA.RFS.</li>
+	<li>Place the .DCT and .RFS files inside your E-book folder.</li>
+</ol>
+
+<p>When you are satisfied with the results, you can <a href="Opening_your_E-book.htm">open your E-book</a>.</p>
+
+<h4>Notes:</h4>
+
+<ul>
+	<li>If you change the contents of the worksheets comprising the E-book, or if you change the HBK file, you must rerun the index and recheck your E-book.</li>
+	<li>Check both INDEX.TXT and the HBK file to make sure the file names are consistent before indexing your E-book.</li>
+	<li>Errors will occur if there are any blank lines in either the index or the HBK file. Many errors also occur because of discrepancies between file names in the index file and the HBK file or because file names are missing.</li>
+	<li>Fixing index errors may involve going back to your worksheets and modifying specific index entries. In this case, you must regenerate the index. Keep this in mind when you are creating index entries initially, or if you decide to change your index in any way.</li>
+	<li>The index.txt and HBK file must be Unicode files.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

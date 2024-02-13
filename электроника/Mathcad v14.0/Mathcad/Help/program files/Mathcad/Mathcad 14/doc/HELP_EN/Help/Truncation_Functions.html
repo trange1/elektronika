@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Truncation and Rounding Functions</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nTruncation and Rounding Functions");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Truncation and Rounding Functions</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">floor(z)</b> Returns the greatest integer <span class="math">&le; 
+ z</span>.<br>
+ <b class="hmath">Floor(z, y)</b> Returns the greatest multiple of <span
+ class="math">y &le; z</span>.</p>
+
+<p><b class="hmath">ceil(z)</b> Returns the smallest integer <span class="math">&ge;
+ z</span>.<br>
+ <b class="hmath">Ceil(z, y)</b> Returns the smallest multiple of <span
+ class="math">y &ge; z.</span></p>
+
+<p><b class="hmath">round(z, [n])</b> Returns <span class="math">z</span> rounded to
+ <span class="math">n</span> decimal places. If <span class="math">n</span> is omitted,
+ returns <span class="math">z</span> rounded to the nearest integer (<span
+ class="math">n</span> is assumed to be zero). If <span class="math">n &lt; 0</span>,
+ returns<span class="math"> z</span> rounded to <span class="math">n</span> places to
+ the left of the decimal point. If the <span class="math">(n + 1)th</span> decimal
+ place is less than 5, the number is rounded down, otherwise, it is rounded
+ up.<br>
+  <b class="hmath">Round(z, y)</b> Returns <span class="math">round(z <i>/</i> 
+  y) &middot; y</span>, which rounds z to the closest multiple of y. Note that <span class="math">round(z, 1) = Round(z, 0.1)</span>.</p>
+
+<p><b class="hmath">trunc(z)</b> Returns the integer part of <span class="math">z</span> 
+ by removing the fractional part.<br><b class="hmath">Trunc(z, y)</b> Returns <span
+ class="math">trunc(z <i>/</i> y) &middot; y</span>.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+	<li>
+    <p><span class="hmath">z</span> is a real or complex scalar or vector. For 
+      the lowercase functions, <span class="math">z</span> must be dimensionless. 
+      For the two-argument uppercase functions, <span class="math">z</span> and 
+      <span
+	 class="math">y</span> must have the same dimensions.</p>
+  </li>
+	<li><p><span class="hmath">y</span> is a real, nonzero scalar or vector.</p></li>
+	<li><p><span class="hmath">n</span> is an integer.</p></li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	<li>
+    <p>The uppercase versions of these functions are used to correctly evaluate 
+      truncation of <a href="Units_and_Dimensions.html">united</a> values. For 
+      example, if you wish to find the <b>Ceil</b> of <span class="math">x:=3.23&middot;m</span> 
+      in feet, use <span class="math">Ceil(x,ft)&nbsp;=&nbsp;11&middot;ft</span>.</p>
+  </li>
+	<li><p><b>floor</b> and <b>trunc</b> return the same results for positive values 
+	 of x. For negative values of x, however, the results are different: <span class="math">floor(-2.6) 
+	 = -3</span> but <span class="math">trunc(-2.6) = -2</span>.</p></li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Techniques\\roundoff.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

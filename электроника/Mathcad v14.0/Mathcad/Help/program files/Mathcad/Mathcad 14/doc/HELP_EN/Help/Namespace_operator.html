@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Namespace Operator</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Operators\nNamespace Operator");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Namespace Operator</h1></td>
+	</tr>
+</table>
+
+<p>Keystroke: <b>[Ctrl]&nbsp;[Shift]&nbsp;N</b></p>
+
+<p class="vmath">m<sub>[mc]</sub></p>
+
+<p>This subscript specifies which version of a variable or function name to use in an expression. It resolves ambiguous definitions. Available module names are: </p>
+<ul>
+<li><span class="math">mc</span>, for any built-in Mathcad function or dimensionless constant (for example, <span class="math">e</span> or <span class="math">&pi;</span>),</li>
+<li><span class="math">unit</span>, for any built-in Mathcad unit or dimensioned constant, </li> 
+<li><span class="math">user</span>, for any function in a <a href="Creating_user_DLLs.html">UserDLL</a>, and</li> 
+<li><span class="math">doc</span>, referring to the most recent <i>previous</i> definition in the document.</li>
+</ul>
+
+<p>To use it:</p>
+
+<ol type="1">
+  <li> 
+    <p>Type the first part of the name (<span class="math">m</span>), the part that 
+      comes before the subscript.</p>
+  </li>
+  <li> 
+    <p>Type <b>[Ctrl]&nbsp;[Shift]&nbsp;N</b>. A set of square braces appear with a placeholder between them.
+   </p>
+  </li>
+ <li> 
+    <p> Type the name of a Mathcad module, for example, <b class="math">unit</b>, to indicate that <b class="math">m</b> represents a built-in Mathcad unit (in this case, meters). 
+   </p>
+  </li>
+</ol>
+
+<p>Namespace clarification is useful when you are reusing variable or function names.  For example, if you want to distinguish between a variable named <span class="math">m</span> in your document, and the unit meters as defined inside Mathcad, you would type </p>
+
+<p class="vmath">m:= 3&middot;m<sub>[unit]</sub></p>
+
+meaning that the worksheet variable <span class="math">m</span> has value 3 meters. 
+<p>Use this operator to clarify function definitions which seem 
+  to be recursive but really depend upon previous definitions. For example, defining</p>
+
+<p class="vmath">sin(x):= sin<sub>[mc]</sub>(x&middot;deg)</p>
+
+produces a new version of the sine function with arguments in degrees. The use 
+of the <span class="math">[mc]</span> namespace is not essential, but it is clearer. 
+In addition, once you have redefined the built-in function, you can still access 
+the original definition using the <span class="math">[mc]</span> namespace. Use 
+the namespace <span class="math">[doc]</span> when you need to refer to the most 
+recent worksheet definition of a function name outside of the current definition, 
+rather than a built-in Mathcad function name. 
+<h4>Notes:</h4>
+<ul type="disc">
+  <li>Be sure not to confuse namespace subscripts with <a href="Array_subscript_operator.html">array 
+    subscripts</a> or <a href="Literal_Subscript_Operator.html">literal subscripts</a>.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('tutorial\\migration\\mg_programming.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+ 
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

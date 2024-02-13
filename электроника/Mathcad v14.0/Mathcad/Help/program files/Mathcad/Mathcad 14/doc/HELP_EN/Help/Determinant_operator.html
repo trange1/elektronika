@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Determinant, Magnitude and Inverse Operators</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Operators\nVectors and Matrices\nDeterminant, Magnitude and Inverse Operators");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Determinant, Magnitude and Inverse Operators</h1></td>
+	</tr>
+</table>
+
+<p>Keystroke: <b>[|]</b></p>
+
+  <p class="vmath"><b>|v|</b> or <b>|M|</b></p>
+
+<p>Returns the magnitude (norm) of a vector, the absolute value of a scalar, or the determinant of a matrix. When evaluated, Mathcad tries to assign the correct functional meaning to the operator, based on the argument. If Mathcad cannot determine the argument (for example, when it is used as part of a function definition), it defaults to the norm, or absolute value, definition. To force the operator to return the determinant, right-click on it, and choose <b>Square Matrix Determinant</b> from the menu.</p>
+
+<p>During numeric evaluation, Mathcad may change the meaning to resolve an error. When this happens, Mathcad updates the selection on the context menu. During symbolic evaluation, Mathcad may change the meaning of the operator as well, but this change is not indicated on the context menu.</p>
+
+<p>Keystroke: <b>[^]&nbsp;[&minus;]1</b></p>
+
+<p class="vmath"><b>M&nbsp;[^]&nbsp;[&minus;]&nbsp;1</b></p>
+
+<p>Returns the inverse of a matrix. If <b class="math">M</b> does not have an 
+  inverse, an appropriate error message appears. To compute the determinant 
+  or inverse, Mathcad performs an <a href="LU_decomposition.html">LU decomposition</a> 
+  of the matrix. The BLAS/LAPACK libraries (<a href="http://www.intel.com/software/products/mkl/features/lin_alg.htm" target="_blank">http://www.intel.com/software/products/mkl/features/lin_alg.htm</a>) 
+  from Intel are used.</p>
+
+<h4>Operands:</h4>
+
+<ul type="disc">
+  <li>
+    <p><b class="hmath">v</b> is a column vector or a scalar.</p>
+  </li>
+  <li> 
+    <p><b class="hmath">M</b> is a dimensionless square matrix.</p>
+  </li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	<li><b class="math">|v|</b> is the square root of the sum of the squared magnitudes of the elements in <b class="math">v</b>. To take the magnitude of each element in a matrix or vector, place <b class="math">|M|</b> between the editing lines, and apply the <a href="Vectorize_operator.html">vectorize operator</a>, <b>[Ctrl]&nbsp;[&minus;]</b>.</li>
+	<li>All square matrices that have a determinant are invertible. However, if a matrix has a determinant near zero, then the typical algorithms that compute inverses become unstable and fail to work. Mathcad uses LU decomposition, which becomes unstable when a matrix is: 
+		<ul type="circle">
+			<li>singular - its <a href="Determinant_operator.html">determinant</a> is equal to zero,</li>
+			<li>nearly singular - a linear combination of some rows nearly reproduces another row, as indicated by a high <a href="Condition_number.html">condition number</a>,</li>
+			<li> or ill-conditioned - the ratio of the largest magnitude eigenvalue 
+        to the smallest is greater than the precision of floating point numbers.</li>
+		</ul>
+		<p>In these cases, matrix inversion may give an error, or it may give results that are not a genuine inverse matrix, that is, <b class="math">M&middot;M<sup>-1</sup></b> may not be equal to the identity matrix. When matrix inversion fails, you can try the <a href="Rank_of_a_matrix.html"><b>geninv</b></a> function. If you get invalid results, you can check the <a href="Dialog_Worksheet_Options.html#Calc">strict singularity</a> check box in Worksheet Options, which uses a slower algorithm that rejects matrices that are nearly singular and gives an error.</p></li>
+	<li>You can also use these operators to find symbolic determinants, magnitudes, 
+    and inverses, using the <a href="Symbolic_equal_sign.html">live symbolic operator</a>.</li>
+</ul>
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Techniques\\complex.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

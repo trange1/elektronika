@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Preconditioning Functions</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Preconditioning Functions");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DAEP.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Preconditioning Functions</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath"><a name="filterNaN">filterNaN(v)</a></b> Takes a vector or matrix <b class="math">v</b> and trims any rows containing a NaN.</p>
+
+<p>Using <b>filterNaN</b> is equivalent to using <b><a href="#matchNaN">matchNaN</a></b>
+ followed by the <b class="math"><a href="#Trim">trim</a></b> function, but concatenates them into one step.</p>
+
+
+<p><b class="hmath"><a name="markNaN">markNaN(v, vindex)</a></b> Takes a complex vector or matrix <b class="math">v</b> and a vector of indices
+ <b>vindex</b> given either as integers or nested 2 x 1 matrices
+ specifying elements in <b class="math">v</b>. The contents of each element 
+ specified by <b>vindex</b> in <b class="math">v</b> is
+ changed to contain a NaN. The indices specified in <b>vindex</b> 
+ are relative to <a href="../Help/Mcad.htm#Array_origin.html" target="_top"><b
+ class="math">ORIGIN</b></a>.</p>
+
+<p><b class="hmath"><a name="matchNaN">matchNaN(v)</a></b> Takes a vector or matrix <b class="math">v</b>, and returns the index or pair of
+ indexes of the NaN entries. The indexes returned are relative to <a href="../Help/Mcad.htm#Array_origin.html" target="_top"><b class="math">ORIGIN</b></a>.</p>
+
+<p><b class="hmath"><a name="Scale">Scale(M, min, max)</a></b> Takes a real matrix <b class="math">M</b> and real scalars <b>min</b>  
+ and <b>max</b>, and scales the data between these values.</p>
+
+<p><b class="hmath"><a name="Grubbs">Grubbs(v, a)</a></b> Takes a real vector <b class="math">v</b> and a probability <span class="math">0 
+  &lt;<b class="math"> a</b> &lt; 1</span>, and returns a three column matrix 
+  containing the index of suspected outliers, the Grubbs test statistic for that 
+  outlier, and its distance from the critical statistic.</p>
+
+<p>This function can also take a real matrix <b class="math">M</b> in place 
+ of a vector, in which case it returns the pair of indices for each outlier 
+ candidate in the first column as nested matrices.</p>
+
+<p><b class="hmath"><a name="GrubbsClassic">GrubbsClassic(v, a)</a></b> Takes a real vector <b class="math">v</b> and a probability <span class="math">0 
+  &lt;<b class="math"> a</b> &lt; 1</span>, and returns a 1 x 3 vector containing 
+  the index of the <span class="math">single</span> point most likely to be an 
+  outlier, the Grubbs test statistic for that outlier, and its distance from the 
+  critical statistic.</p>
+
+<p>This function can also take a real matrix <b class="math">M</b> in place 
+ of a vector, in which case it returns the pair of indices for the outlier 
+ candidate in the first column as a nested matrix.</p>
+
+<p><b class="hmath"><a name="3Sigma">ThreeSigma(v)</a></b> Takes a real vector or matrix <b class="math">v</b> 
+ and returns a two column matrix containing the index of points whose mean 
+ divided by standard deviation is greater than three and the value of this 
+ quantity for each point.</p>
+
+<p>This function can also take a real matrix <b class="math">M</b> in place 
+ of a vector, in which case it returns the pair of indices for each outlier 
+ candidate in the first column as nested matrices.</p>
+
+<p><b class="hmath"><a name="Trim">trim(v, vindex)</a></b> Takes a complex vector or matrix <b class="math">v</b>, 
+ and trims out the entries (rows) specified by integer-valued vector <b>vindex</b>. The indices 
+ specified in <span class="math">vindex</span> are relative to <a href="../Help/Mcad.htm#Array_origin.html" target="_top"><b class="math">ORIGIN</b></a>.</p>
+
+<p><b class="hmath"><a name="Vsmooth">VSmooth(v, w)</a></b> Takes a vector of complex data <b class="math">v</b> 
+ and a vector of (or a single) window-widths, <b class="math">w</b>, 
+ and repeatedly median smooths data until no additional change has occurred 
+ for each window width. Convergence of the smoothing depends on <a href="../Help/Mcad.htm#Accuracy.html" target="_top"><b class="math">TOL</b></a>. 
+ Elements of <b class="math">w</b> must be non-negative, 
+ odd integers smaller than the length of <b class="math">v</b>.</p>
+ 
+ <hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

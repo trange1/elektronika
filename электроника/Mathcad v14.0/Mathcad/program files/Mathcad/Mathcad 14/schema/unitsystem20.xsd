@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://schemas.mathsoft.com/unit-system20"
+                     xmlns="http://schemas.mathsoft.com/unit-system20"
+                  xmlns:us="http://schemas.mathsoft.com/unit-system20"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              elementFormDefault="qualified"
+            attributeFormDefault="unqualified"
+                         version="2.0.0">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+			<h1>Mathsoft Mathcad 13.0 Unit System Schema</h1>
+			<p>Currently this schema is for internal use only.</p>
+			<hr/>
+			<pre>
+  $Workfile:: E:\Projects\Mathcad13\mcd\sources\mcxml\UnitSystem20.xsd   $
+  $Revision:: 9                                                          $
+    $Author:: mlippert                                                   $
+      $Date:: 2005-06-15 17:24:05-04:00                                  $
+$NoKeywords::                                                            $
+			</pre>
+		</xs:documentation>
+	</xs:annotation>
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="W3C-CopyOf-xml.xsd">
+		<xs:annotation>
+			<xs:documentation>
+		       Get access to the xml: attribute groups such as xml:lang and xml:space
+			</xs:documentation>
+		</xs:annotation>
+	</xs:import>
+	<xs:element name="unitSystem">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="quantities">
+					<xs:annotation>
+						<xs:documentation>Collection of quantities known by this unit system</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="quantity">
+								<xs:annotation>
+									<xs:documentation>Named property ascribed to phenomena, bodies, or substances that can be quantified for, or assigned to, a particular phenomenon, body, or substance. Examples are mass and electric charge.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="description" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Description used to help understand the quantity</xs:documentation>
+											</xs:annotation>
+											<xs:complexType mixed="true">
+												<xs:attribute ref="xml:lang" use="optional" default="en"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="displayName" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Displayable description of quantity (language specific)</xs:documentation>
+											</xs:annotation>
+											<xs:complexType mixed="true">
+												<xs:attribute ref="xml:lang" use="optional" default="en"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="name" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">Unique name for this quantity.</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="base-quantity" type="xs:boolean" default="false">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">The quantity is a base quantity if it is one of the orthogonal quantities that defines the unit system. All other quantities are derived quantities (ie derived from the base quantities)</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="default-unit" type="xs:string">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">A quantity has a default-unit if it is desired that results that can be simplified to this quantity use this particular unit (which must belong to the quantity) rather than a monomial expression of base quantity units.
+Base quantities MUST have a default unit (although the schema doesn't enforce this).
+</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+								<!--xs:unique name="UniqueCanonicalQuantityName">
+									<xs:selector xpath="."/>
+									<xs:field xpath="@name"/>
+								</xs:unique-->
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="units">
+					<xs:annotation>
+						<xs:documentation>Collection of units known by this unit system</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence minOccurs="0" maxOccurs="unbounded">
+							<xs:element name="unit">
+								<xs:annotation>
+									<xs:documentation>Named amount of a quantity</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="description" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Description to help understand the unit</xs:documentation>
+											</xs:annotation>
+											<xs:complexType mixed="true">
+												<xs:attribute ref="xml:lang" use="optional" default="en"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="symbol" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation source="general" xml:lang="en">English Symbol used to denote this unit in an equation. The 1st symbol is the "primary" symbol.</xs:documentation>
+												<xs:documentation source="uniqueness" xml:lang="en">A symbol must be unique among the group of all unit's symbols for a given language.</xs:documentation>
+												<xs:documentation source="primary symbol definition" xml:lang="en">When there is more than one symbol for a unit, the 1st symbol is considered the primary symbol. The primary symbol is the one that will be used by default to represent the unit.</xs:documentation>
+											</xs:annotation>
+											<xs:complexType mixed="false">
+												<xs:sequence minOccurs="0" maxOccurs="unbounded">
+													<xs:element name="localSymbol">
+														<xs:annotation>
+															<xs:documentation>Translation of the english symbol for another language</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:attribute name="name" type="xs:string" use="required"/>
+															<xs:attribute ref="xml:lang" use="required"/>
+														</xs:complexType>
+														<!--xs:unique name="UniqueUnitSymbolTranslation">
+															<xs:selector xpath="."/>
+															<xs:field xpath="@xml:lang"/>
+														</xs:unique-->
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="name" type="xs:string" use="required"/>
+												<xs:attribute ref="xml:lang" use="optional" fixed="en"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="displayName" maxOccurs="unbounded">
+											<xs:annotation>
+												<xs:documentation>Displayable description of unit (language specific)</xs:documentation>
+											</xs:annotation>
+											<xs:complexType mixed="true">
+												<xs:attribute ref="xml:lang" use="optional" default="en"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="name" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">Unique name for this unit</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+									<xs:attribute name="quantity-name" type="xs:string" use="required">
+										<xs:annotation>
+											<xs:documentation xml:lang="en">Reference to the quantity (sometimes known as a dimension) that this unit is a member of (ie length, time, acceleration etc.)</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+								<!--xs:unique name="UniqueCanonicalUnitName">
+									<xs:selector xpath="."/>
+									<xs:field xpath="@name"/>
+								</xs:unique-->
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+		<xs:key name="quantityNameKey">
+			<xs:selector xpath="us:quantities/us:quantity"/>
+			<xs:field xpath="@name"/>
+		</xs:key>
+		<xs:key name="unitNameKey">
+			<xs:selector xpath="us:units/us:unit"/>
+			<xs:field xpath="@name"/>
+		</xs:key>
+	</xs:element>
+</xs:schema>

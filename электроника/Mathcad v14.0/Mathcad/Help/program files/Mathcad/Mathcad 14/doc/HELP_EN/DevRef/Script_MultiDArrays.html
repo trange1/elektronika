@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Multi-Dimensional Arrays</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Scripting Custom OLE Objects\nMulti-Dimensional Arrays");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Multi-Dimensional Arrays</h1></td>
+	</tr>
+</table>
+
+<p>JScript's internal array creation mechanism only supports single-dimension arrays. Therefore you can declare an array of 5 elements (x=new Array(5)), but you cannot directly declare a 2D array. To circumvent this restriction, JScript allows &quot;nested&quot; arrays to achieve multiple dimensions. An example of this would be the following code which creates a 2 x 2 2D array:</p>
+
+<code>var js2DArray = new Array(2);<br>
+for (var j = 0; j &lt; js2DArray.length; j++)<br>
+{ <br>
+
+<span class="blockindent">// Prepare to fill it with rows.</span><br>
+<span class="blockindent">var aRow = new Array(2); // Create a row.</span><br>
+<span class="blockindent">for (var i = 0; i &lt; aRow.length; i++)</span><br>
+
+<span class="doubleindent">{ </span><br>
+<span class="doubleindent">// fill the row with zeroes.</span><br>
+<span class="doubleindent">&nbsp;aRow[i] = 0;</span><br>
+<span class="doubleindent">}</span><br>
+<span class="doubleindent">// Put the row into the outer array.</span><br>
+<span class="doubleindent">js2DArray[j] = aRow; </span><br>
+
+} <br>
+			
+</code>
+
+<p>Once a nested array is declared, elements in the array can be accessed using multiple sets of brackets ([]). For example, js2DArray[col][row] is valid for the example above, while js2DArray[col,row] would generate an error.</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>LRESULT</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Writing Mathcad DLLs\nStructure and Function Definitions\nLRESULT");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>My C Function</h1></td>
+	</tr>
+</table>
+
+<code><br>
+LRESULT MyCFunction(returnValue, argument1,...)<br>
+void * const returnValue;<br>
+const void * const argument1;<br>
+...<br>
+</code>
+
+<p>The type definition LRESULT appears in <a href="UserDLL_coderef.html">mcadincl.h</a>.<b> MyCFunction</b> is the actual code which executes the user function. Mathcad arguments and a pointer to a return value are passed to this function. It puts the result of the calculation in the return value.</p>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+	<tr>
+		<td width="26%" valign="middle"><p align="center"><b>Parameter</b></p></td>
+		<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+	</tr>
+	<tr>
+		<td valign="top"><p>returnValue</p></td>
+		<td valign="top"><p>Points to a <b><a href="UserDLL_COMPLEXARRAY.html">COMPLEXARRAY</a></b>, a <b><a href="UserDLL_COMPLEXSCALAR.html">COMPLEXSCALAR</a> </b>, or a <b>MCSTRING</b> structure where the function result is to be stored. If you are implementing a Mathcad user function that returns a scalar, returnValue is a pointer to a <b>COMPLEXSCALAR</b> structure, as implemented by the struct <b>LPCOMPLEXSCALAR</b> construct in the mcadincl.h file.</p></td>
+	</tr>
+	<tr>
+		<td valign="top"><p>argument1</p></td>
+		<td valign="top"><p>Points to a read-only <b>COMPLEXARRAY</b>, <b>COMPLEXSCALAR</b>, or <b>MCSTRING</b> structure where the first function argument is stored. If you are implementing a Mathcad user function that has a scalar as its first argument, argument1 is a pointer to a <b>LPCCOMPLEXSCALAR</b> structure as implemented in the mcadincl.h file.</p></td>
+	</tr>
+	<tr>
+		<td valign="top"><p>...</p></td>
+		<td valign="top"><p>If you are implementing a Mathcad user function that has more than one argument, your <b>MyCFunction</b> will have additional arguments, each of which must be one of the types defined above and in the mcadincl.h file. The additional arguments will be pointers to the read-only structures where the data for the corresponding Mathcad user function argument is stored.</p></td>
+	</tr>
+</table>
+
+<h3>Parameter Requirements</h3>
+
+<p>The arrays and scalars that you can pass in and out of a user DLL are always complex, and arrays are always two dimensional. So remember to specifically strip off the real and complex parts of any scalar input values using the <span class="math">ParamName->real</span> and <span class="math">ParamName->imag</span> constructs. Arrays are indexed by column, then row, as opposed to the order of indices inside Mathcad (by row, then column). All arrays are assumed to have two dimensions; to reference a vector, you will still need the first array index (column) set to 0, for example:</p>
+
+<ul type="disc">
+  	<li><code>ArrayName->hReal[0][row]</code>, or </li>
+    <li><code>ArrayName->hImag[0][row]</code></li>
+</ul>
+
+<p>Before manipulating an array, you'll first need to strip off the <b>ArrayName->hReal[col][row]</b> or <b>ArrayName->hImag[col][row]</b> parts, as defined in mcadincl.h.</p>
+
+<h3>Return value</h3>
+
+<p><b>MyCFunction</b> should return 0 to indicate an error-free return. To indicate an error <b>MyCFunction</b> should return an error code in the low word of the returned<b> LRESULT</b>, and in the high word the number of the argument under which the error box should be placed. If the high word is zero the error message box is placed under the function itself. See the section on error handling to find out more about error codes.</p>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	<li><b>MyCFunction</b> is a placeholder for the library-supplied function name. You can name the function that executes your Mathcad user function anything you would like, but you must register the address of your executable code with Mathcad by setting the <b>lpfnMyCFunction</b> member of the <b><a href="UserDLL_FUNCTIONINFO.html">FUNCTIONINFO</a></b> structure.</li>
+	<li>See the full <a href="UserDLL_code.html">example</a> with annotated code.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

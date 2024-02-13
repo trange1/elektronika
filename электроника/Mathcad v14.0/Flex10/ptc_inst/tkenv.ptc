@@ -1,0 +1,89 @@
+// 28-Dec-99 $$1  TWH  Created.
+// 05-May-00 $$2  TWH  Chg CmdType tag, add oldtag
+// 27-Oct-00 $$3  TWH  Add uninstall
+// 14-Dec-00 $$4  TWH  Drop ptcmonitor
+// 30-Jan-01 $$5  TWH  Add CmdType Prop values
+// 08-Mar-01 $$6  TWH  Add PossibleArchs
+// 27-Jun-01      TWH  Add ptcutil pkg
+// 27-Jun-01 $$7  TWH  Chg Product Name
+// 31-Jan-02 $$8  MAZ  Use ptchostid script
+// 18-Oct-02 $$9  MAZ  Add AEplpVersion for ae_msg file creation
+// 19-Feb-03 J-03-41+ MAZ  $$10  Change AEplpVersion to 3.3
+// 15-Apr-03 K-01-06 TWH  drop ibm from possible archs
+// 29-Apr-03 K-01-06 TWH  $$11  Use ScreenDftCmds LpcfgCmdList
+// 21-Jul-03 K-01-11 $$12  JJE  Add ptcborrow and ptcreturn scripts
+// 15-Dec-03 K-01-20 $$13  MAZ  Remove borrow scripts
+// 09-Apr-04 K-01-26 $$14  TWH  Add LicenseSimp; Ad_list
+
+(Product tkenv
+    (Name                      "Pro/INTRALINK Toolkit Environment")
+    (WelcomeImage              "tkenv_name.gif")
+    (Packages                  "tkenv_pkg"
+                               "adv_cfg"
+                               "demos"
+                               "ptcutil"
+                               "uninstall")
+    (ProgramFiles              False)
+    (LpDirName                 "proitkenv")
+    (Screens                   "ScreenProd")
+    (Installed                 True)
+    (VersionDir                False)
+    (HostProd                  "proitkit")
+    (StandAlone                True)
+    (PossibleArchs             "sun4_solaris"
+                               "hpux11_pa32"
+                               "sgi_elf2"
+                               "sgi_mips4"
+                               "alpha_unix"
+                               "i486_win95"
+                               "i486_nt")
+    (AEplpVersion              "3.4")
+    (LicenseSimplification     True)
+    (Ad_list                   "whatsnew_auto"
+                               "whatsnew_dataexchange"
+                               "whatsnew_newui"
+                               "whatsnew_p2p"
+                               "whatsnew_3ddrawings"
+                               "whatsnew_ID"
+                               "whatsnew_rs"
+                               "whatsnew_simulation"
+                               "whatsnew_production"
+                               "installscreen_casestudy"
+                               "tools_menumapper"
+                               "tools_onlinehelp"
+                               "tools_productivityT"
+                               "tools_refcards"
+                               "tools_tutorials")
+)
+
+(Package tkenv_pkg
+    (Name                      "Toolkit Environment")
+    (Screens                   "ScreenLicList"
+                               "ScreenDftCmds"
+                               "LpcfgCmdList"
+                               "LpcfgLinkpath"
+                               "ScreenDbssvr")
+    (CmdTypes                  "tkenv")
+    (Binscripts                "ptchostid"
+                               "ptcflush"
+                               "ptcstatus"
+                               "tnsping")
+    (Cdsections                "proitkenv"
+                               "oraruntime"
+                               "flexclient"
+                               "Install")
+    (Installed                 True)
+)
+
+(CmdType tkenv
+    (Name                      "proilinktk22")
+    (DefName                   "proilinktk")
+    (OldTag                    "prointralink")
+    (Type                      "Pro/INTRALINK")
+    (Prefixes                  "ILINK_TK_ACCESS_")
+    (Featvars                  "__ILINK_FEATURE_NAME__")
+    (Template                  "f_proitkit_start")
+    (UseExtensions             False)
+    (UseOptions                False)
+)
+

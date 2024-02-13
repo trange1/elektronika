@@ -1,0 +1,492 @@
+// 12-Apr-99 $$1  JJE  Created.
+// 26-Apr-99 $$2  JJE  Add more binscripts and J.Link
+// 04-Oct-99 $$3  MAZ  Add missing pkgs and binscripts
+// 14-Oct-99      MAZ  Use keyCdSection
+// 20-Oct-99 $$4  MYA  Add DefName for proe cmd
+// 03-Nov-99 $$5  MYA  Add keycdsection to catia
+// 19-Nov-99 $$6  JJE  Add a proehelp cdsection
+// 07-Dec-99 $$7  JJE  Package changes
+// 10-Dec-99 $$8  MAZ  Add uninstall pkg
+// 13-Dec-99 $$9  TWH  Ncpost template name chg
+// 15-Dec-99 $$10 JJE  Reorder the packages, fix cdt name
+// 20-Dec-99 $$11 JJE  Move proehelp to its own file
+// 06-Jan-00      JJE  Add modelcheck script
+// 10-Jan-00      MAZ  Add OldTag
+// 11-Jan-00 $$12 JJE  Don't use 22 in command names
+// 17-Jan-00 $$13 JJE  Add mydocs argument
+// 31-Jan-00      JJE  Set icon names
+// 09-Feb-00      JJE  Rm mydocs argument, chg icon name
+// 10-Feb-00 $$14 MAZ  Add classpath env var
+// 24-Feb-00 $$15 MAZ  Set Installed=1 for pkgs with subpkg Inst=1 (msi fix)
+// 17-Feb-00 $$16 JJE  Add dcadsetup script
+// 12-Apr-00      JJE  New moldcat package
+// 19-Apr-00 $$17 JJE  Add LpcfgDcadCmd
+// 12-Jun-00 $$18 TWH  Re-Add demos as Package of proe
+// 17-Jul-00      JJE  Add pronethelper and protutorial scripts
+// 20-Jul-00 $$19 JJE  Add ProeTreeTwo
+// 17-Aug-00      TWH  Fix case of key names
+// 17-Aug-00 $$20 MAZ  Use EnvVarValues as a Prop
+// 19-Oct-00 $$21 JJE  Add new cdsections
+// 30-Jan-01 $$22 TWH  Add CmdType Prop values
+// 06-Feb-01 $$23 JJE  Sel gpost by default
+// 19-Mar-01      TWH  Add mdimpex to proe_base
+// 15-Mar-01      JJE  No classpath setting for modelcheck
+// 22-Mar-01 $$24 JJE  Move cdm stuff to cdt package
+// 29-Oct-01 $$25 TWH  Remove cmd_type nc_post; mv Demos into base pkg
+// 31-Oct-01 $$26 MAZ  Set MSIVisible to FALSE for cadds5v8 (SPR 866523)
+// 12-Nov-01 $$27 MAZ  SPR 901682: Move uninstall into proe_base pkg
+// 04-Jan-02 $$28 TWH  Force LicenseSimplification
+// 01-Feb-02 $$29 JJE  Add proevconf startup script
+// 12-Feb-02 $$30 MAZ  Use ptchostid script (SPR 921507) & Add PSF_EXE
+// 27-Feb-02      MAZ  Add progid and desc to Extensions array
+// 05-Mar-02      ALG  Add dbatchs, dbatchc
+// 05-Mar-02 $$31 ALG  Split uitools resources into separate cdsection
+// 20-Mar-02 $$32 MAZ  Add jre cdsection for pvx
+// 28-Mar-02      ALG  Package dbatchc: Drop LpcfgDcadCmd; Add LpcfgWindows
+//                       and LpcfgLinkpath
+// 28-Mar-02      ALG  Add "Install", "dbatchchelp" cdsections to dbatchc pkg
+// 01-Apr-02      MAZ  Add License Screen for JRE
+// 01-Apr-02 $$33 JJE  Rm LpcfgBrowser
+// 08-Apr-02 $$34 TWH  Help changes Mech
+// 29-Apr-02 $$35 MAZ  Support Conference Server
+// 10-May-02 $$36 ALG  SPR 919642: Rm "uninstall" cdsection/Add "uninstall" pkg
+// 21-Jun-02 $$37 JJE  Rm protutorial script
+// 11-Jul-02 $$38 JJE  Add introfiles section
+// 01-Jul-02      MAZ  SPR 962375: Rm pdgs pkg and scripts
+// 10-Jul-02 $$39 MAZ  SPR 958276: use the new icon ptclogo.ico
+// 18-Jul-02 $$40 JJE  Disable dbatchc pkg for sneak peek 2
+// 07-Aug-02 $$41 JJE  Allow update from sp1
+// 12-Aug-02 $$42 MAZ  Enable dbatchc and rm temp HostProd 
+// 21-Aug-02 J-03-32  ALG  $$43  Change "proevconf" -> "ptcvconf"
+// 23-Sep-02 J-03-34  JJE  $$44  SPR 977992: Take out the mechhelp section
+// 10-Oct-02 J-03-35  MAZ  $$45  Use proelogo for shortcuts
+// 23-Oct-02 J-03-36  MAZ  $$46  SPR 985240: Rm pronethelper script
+// 29-Oct-02          ALG        SPR 985737: Add UnregServerDll to proe_base
+// 05-Nov-02 J-03-37  MAZ  $$47  SPR 986656: Make proehelp a pkg (not a subpkg)
+// 15-Nov-02          MAZ        SPR 989209: put pro_anim cdsection in proe_base
+// 21-Nov-02 J-03-38  ALG  $$48  SPR 971401: Add "AEOnly" shortcut "dbatchc_ae"
+//                                 and AEBinscript "ptcdbatch_ae"
+// 13-Dec-02 J-03-39+ ALG  $$49  SPR 993604: New ptcvconf cdsections
+// 17-Dec-02 J-03-39+ MAZ  $$50  SPR 994166: add pfcweblinkwiz cdsection
+// 20-Dec-02 J-03-39+ MAZ  $$51  Use ShowLogoMsg to show logo msg 
+// 24-Dec-02 J-03-39+ MAZ  $$52  Use new mc and vconf icon files
+// 31-Dec-02          TWH        Add mdimpex_old
+// 13-Jan-03 J-03-40  ALG  $$53  Use new dbatchc icon file
+// 08-Apr-03          MAZ        Add phaFile to extensions list
+// 15-Apr-03 K-01-05  MAZ  $$54  Modify vconf cmdtype to handle psf files
+// 04-Mar-03 K-01-06  TWH  $$55  LpcfgWindows->ScreenWindows
+// 19-May-03          MAZ        Quote ptcvconf CmdArgs
+// 19-May-03 K-01-07  TWH  $$56  Add Advert image list
+// 02-Jun-03 K-01-07+ TWH        Add Mech interaction LP env. var.
+// 02-Jun-03 K-01-07+ TWH  $$57  Weblink install be default
+// 21-Jul-03 K-01-11  JJE  $$58  Add ptcborrow and ptcreturn scripts
+// 25-Aug-03 K-01-13  TWH        Add WelcomeImage
+// 25-Aug-03 K-01-13  TWH  $$59  New Ad_list
+// 17-Sep-03 K-01-15  TWH        Add translations; drop dbatchc_ae
+// 02-Sep-03 K-01-15  MAZ  $$60  SPR 1046093: hide logo tooltip for pre-prod
+// 07-Oct-03 K-01-16  TWH        update Ad_list
+// 07-Oct-03 K-01-16  MAZ  $$61  SPR 1052302: change Mechanica LPLabel
+// 14-Oct-03 K-01-16 $$62  JJE  Remove borrow scripts for now
+// 15-Oct-03               MAZ  SPR 1054181: rm dbatchc_ae 
+// 03-Nov-03               TWH   Add cdsection Mozilla
+// 29-Oct-03 K-01-17 $$63  MAZ  SPR 1055698: Add J2RE package
+// 13-Nov-03 K-01-17+$$64  TWH   Add cdsection fileopensaveas
+// 10-Dec-03 K-01-20 $$65  MAZ   Add proeborrow shortcut & proe_borrow script
+// 19-Dec-03 K-01-21       MAZ   Rm proeborrow shortcut
+// 12-Dec-03 K-01-21 $$66  TWH   Fix appmgr handling
+// 23-Jan-04 K-01-22+$$67  MAZ   SPR 1070051: Fix appmgr block (missing ")")
+// 09-Feb-04 K-01-23+$$68  TWH   Turn on ShowLogoMsg
+// 01-Mar-04 K-01-24 $$69  TWH   Add new advert images
+// 09-Mar-04 K-01-25       MAZ   Add Cdonlysecs
+// 15-Mar-04 K-01-25 $$70  TWH   Drop drawlesmodel from Ad list
+// 18-Mar-04 K-01-25       JJE   New section weld_data
+// 18-Mar-04 K-01-25+$$71  MAZ   Drop RegKey name from mech ProductInteraction
+// 31-Mar-04 K-01-25+$$72  MAZ   SPR 1079838: add AltCdsections to protoolkit
+// 19-Apr-04 K-01-26+$$73  TWH   Chg appmgr product interaction env var
+// 20-May-04 K-03-02 $$74  MAZ   Modify PostFuncRunCmd value
+// 02-Jul-04 K-03-05 $$75  MAZ   SPR 1086133: rm graphic-library field
+// 28-Feb-05 K-03-20 $$76  TWH   New Ad list
+// 24-Mar-05 K-03-21 $$77  MAZ   SPR 1136799: rename "Pro/J.Link" to "J-Link"
+// 24-May-05 K-03-23+      MAZ   SPR 1147145: set ShowLogoMsg to False for FCS 
+// 26-May-05 K-03-24+ $$78 MAZ   Update from K-03-23
+// 25-Aug-05 K-03-31 $$79  TWH   Externalize name of pkg groups
+// 10-Nov-05 K-03-36 $$80  TWH   Add Mozilla for dbatchc
+// 21-Dec-05 K-03-38 $$81  JSP   Switch j2re section to call just jre.exe from obj dir
+
+(Product proe
+    (Name                      "Pro/ENGINEER")
+    (WelcomeImage              "proe_name.gif")
+    (Packages                  "proe_base"
+                               "proehelp"
+                               "ptcutil"
+                               "proeoptions"
+                               "api_toolkits"
+                               "interfaces"
+                               "uninstall")
+    (ProgramFiles              True)
+    (LpDirName                 "proe")
+    (Screens                   "ScreenProd")
+    (Installed                 True)
+    (SaveList                  "text/menu_def.pro"
+                               "text/config.pro")
+    (LicenseSimplification     True)
+    (PSF_EXE                   "proe.exe")
+    (Extensions                "psf=psfFile=PTC Startup File"
+                               "pha=phaFile=PTC Helper App File"
+                               "asm=asmFile=Pro/E Assembly File"
+                               "dgm=dgmFile=Pro/E Diagram File"
+                               "drw=drwFile=Pro/E Drawing File"
+                               "frm=frmFile=Pro/E Format File"
+                               "lay=layFile=Pro/E Layout File"
+                               "mfg=mfgFile=Pro/E Manufacturing File"
+                               "mrk=mrkFile=Pro/E Markup File"
+                               "prt=prtFile=Pro/E Part File"
+                               "sec=secFile=Pro/E Sketcher Section File")
+   (ShowLogoMsg                False)
+   (Ad_list                    "whatsnew_continuerd"
+                               "whatsnew_coredrivepattern"
+                               "whatsnew_lightweightwarp"
+                               "whatsnew_manufactpro"
+                               "whatsnew_mateditor"
+                               "whatsnew_ncgeometry"
+                               "whatsnew_processguide"
+                               "whatsnew_robustmesh"
+                               "whatsnew_shadeddraw"
+                               "whatsnew_sketcherpal"
+                               "whatsnew_sweptblend"
+                               "whatsnew_toolpath")
+)
+
+(Package proe_base
+    (Name                      "Pro/ENGINEER")
+    (OldTag                    "proe_pkg")
+    (Screens                   "ScreenLicAgree" 
+                               "ScreenLicList"
+                               "ScreenWindows"
+                               "ScreenDftCmds"
+                               "LpcfgCmdList"
+                               "LpcfgLinkpath"
+                               "LpcfgInterOpt"
+                               "LpcfgOle"
+                               "LpcfgRbm"
+                               "LpcfgDcadCmd"
+                               "LpcfgConfServer"
+                               "LpcfgProHelp")
+    (CmdTypes                  "proe"
+                               "proe_shortcut"
+                               "vconf")
+    (Binscripts                "ptchostid"
+                               "tempmgr"
+                               "batch_status"
+                               "pro_b_exec"
+                               "pro_batch"
+                               "proe_borrow"
+                               "protk_unlock"
+                               "proigsutil"
+                               "ptcflush"
+                               "ptcstatus"
+                               "propostl"
+                               "propostq"
+                               "propostg"
+                               "purge"
+                               "protab"
+                               "pro_mcs_comp"
+                               "pro_ncl_cvt"
+                               "procvter"
+                               "procvtutil"
+                               "convert_image"
+                               "image_to_mip"
+                               "pix2fb"
+                               "showmip"
+                               "ptcportmap"
+                               "proe"
+                               "dcadshutdown"
+                               "dcadsetup"
+                               "mdimpex"
+                               "mdimpex_old"
+                               "ptcvconf"
+                               "pro_build_library_ctg")
+    (Cdsections                "ProE Tree"
+                               "ProeTreeTwo"
+                               "Mozilla"
+                               "proe"
+                               "applstart"
+                               "ptcvconf"
+                               "ptcvconfhelp"
+                               "introfiles"
+                               "uitools_res"
+                               "dsq"
+                               "dbatchs"
+                               "jre"
+                               "Install"
+                               "mechanism"
+                               "ncexpert"
+                               "Demos"
+                               "animation"
+                               "weld_data"
+                               "flexclient")
+    (Installed                 True)
+    (UnregServerDll            "_LP_\_ARCH_\lib\pfcscom.dll")
+)
+
+(Package api_toolkits
+    //(Name                      "API Toolkits")
+    (Name                      "@@Pkg_api_toolkits")
+    (SubPackages               "pro_java"
+                               "protoolkit"
+                               "weblink")
+    (Installed                 True)
+)
+
+(Package interfaces
+    //(Name                      "Interfaces")
+    (Name                      "@@Pkg_interfaces")
+    (SubPackages               "cadds5v8"
+                               "catia"
+                               "cptr"
+                               "fempost")
+)
+
+(Package proeoptions
+    //(Name                      "Options")
+    (Name                      "@@Pkg_proeoptions")
+    (SubPackages               "dbatchc" 
+                               "moldcat"
+                               "modelcheck"
+                               "proplastic"
+                               "gpost"
+                               "vericut"
+                               "j2re")
+    (Installed                 True)
+)
+
+(Package modelcheck
+    (Name                      "ModelCHECK")
+    (Installed                 True)
+    (Cdsections                "ModelCHECK")
+    (Binscripts                "modelcheck")
+    (CmdTypes                  "ModChkStart")
+)
+
+(Package j2re
+    (Name                      "JRE")
+    (Installed                 False)
+    (Cdsections                "jre")
+    (HostArchTypes             "WIN32")
+    (PostFuncRunCmd  "_LP_\_ARCH_\obj\jre.exe")
+)
+
+(Package pro_java
+    (Name                      "J-Link")
+    (Installed                 True)
+    (Cdsections                "java"
+                               "jlinkwiz")
+)
+
+(Package moldcat
+    (Name                      "Mold Component Catalog")
+    (Cdsections                "apps_data")
+)
+
+(Package proplastic
+    (Name                      "Pro/Plastic Advisor")
+    (Cdsections                "ppa_files"
+                               "ppa_data"
+                               "ppa_wu")
+    (Cdonlysecs                "ppaudb")
+    (Binscripts                "mfuname")
+)
+
+(Package weblink
+    (Screens                   "weblink")
+    (Name                      "Pro/Web.Link")
+    (OldTag                    "proweblink")
+    (Installed                 True)
+    (Cdsections                "weblink"
+                               "weblinkplugins"
+                               "pfcweblinkwiz"
+                               "weblinkwiz")
+)
+
+(Package protoolkit
+    (Name                      "Pro/TOOLKIT")
+    (Cdsections                "protoolkit"
+                               "protoolkit_non_levela"
+                               "protkwiz")
+    (AltCdsections             "protoolkit"
+                               "protoolkit_levela"
+                               "protk_levelawiz")
+)
+
+
+(Package cadds5v8
+    (Name                      "Pro/INTERFACE for CADDS5")
+    (Cdsections                "cadds5v8")
+    (MSIVisible                "FALSE")
+)
+
+(Package gpost
+    (Name                      "Pro/NC-GPOST")
+    (Cdsections                "gpost")
+    (Installed                 True)
+    (Binscripts                "progpostg"
+                               "progpostl"
+                               "progpostq")
+)
+
+(Package vericut
+    (Name                      "VERICUT (R) for Pro/ENGINEER")
+    (Cdsections                "vericut")
+    (Binscripts                "proems"
+                               "proev")
+)
+
+(Package dbatchc
+    (Name                      "Distributed Pro/BATCH")
+    (Screens                   "LpcfgLinkpath"
+                               "ScreenWindows")
+    (KeyCdSection              "dbatchc")
+    (Cdsections                "dbatchc"
+                               "uitools_res"
+                               "fileopensaveas"
+                               "Install"
+                               "Mozilla"
+                               "dbatchchelp")
+    (Binscripts                "ptcdbatch")
+//    (AEBinscripts              "ptcdbatch_ae")
+    (CmdTypes                  "dbatchc")
+)
+
+(Package catia
+    (Name                      "Pro/INTERFACE for CATIA")
+    (KeyCdSection              "pro_to_cat")
+    (Cdsections                "pro_to_cat"
+                               "Install")
+    (Binscripts                "pro_from_cat"
+                               "pro_from_cat4"
+                               "pro_to_cat"
+                               "pro_to_cat4"
+                               "progeo_to_cat4")
+)
+
+(Package cptr
+    (Name                      "Pro/CDT")
+    (KeyCdSection              "pro_from_cptr")
+    (Cdsections                "pro_from_cptr"
+                               "pro_from_cdm"
+                               "Unicode"
+                               "Install")
+    (Binscripts                "pro_from_cptr"
+                               "pro_from_cdm")
+)
+
+(Package fempost
+    (Name                      "Pro/FEMPOST")
+    (KeyCdSection              "pro_from_feas")
+    (Cdsections                "pro_from_feas"
+                               "Install")
+    (Binscripts                "pro_from_feas")
+)
+
+(CmdType proe
+    (Name                      "proe")
+    (DefName                   "proe")
+    (SimpName                  "proe1")
+    (Type                      "Pro/ENGINEER")
+    (Prefixes                  "PROE_")
+    (Featvars                  "__PROE_FEATURE_NAME__")
+    (Template                  "proengineer_start")
+    (IconPath                  "_LP_\install\nt\proelogo.ico")
+    (IconIndex                 "0")
+    (UseExtensions             True)
+    (UseOptions                True)
+)
+
+(ProductInteraction proiclient 
+    (Decorated                 True)
+    (Label                     "@@ProdI_Ilinkopt_label")
+//  (Label                     "Pro/INTRALINK integration (optional)")
+    (RegKeyName                "Pro/INTRALINK Client")
+    (ShowLP                    True)
+    (LPRequired                False)
+    (LPEnv                     "INTRALINK_DIR")
+    (ShowCmd                   True)
+    (CmdTypeTag                "ilink")
+    (CmdRequired               False)
+    (CmdEnv                   "ILINK_CMD_NAME")
+)
+
+(ProductInteraction appmgr
+    (Decorated                 False)
+    (RegKeyName                "PTC Application Manager")
+    (OS                        "UNIX")
+    (ShowLP                    True)
+    (LPRequired                False)
+    (LPEnv                     "PTC_APPMGR_DIR")
+    (LPLabel                   "PTC Application Manager")
+    (ShowCmd                   False)
+)
+
+(ProductInteraction promech
+    (Decorated                 False)
+    (ShowLP                    True)
+    (LPRequired                False)
+    (LPEnv                     "MECH_LP")
+    (LPLabel                   "Mechanica")
+    (ShowCmd                   False)
+)
+
+(CmdType ModChkStart
+    (Name                      "ModelCHECK")
+    (Type                      "Shortcut")
+    (CmdPath                   "_LP_\bin\modelcheck.bat")
+    (IconPath                  "_LP_\install\nt\modelcheck.ico")
+    (IconIndex                 "0")
+)
+
+(CmdType dbatchc
+    (Name                      "Distributed Pro/BATCH")
+    (Type                      "Shortcut")
+    (CmdPath                   "_LP_\bin\ptcdbatch.bat")
+    (IconPath                  "_LP_\install\nt\dbatchc.ico")
+    (IconIndex                 "0")
+)
+
+//(CmdType dbatchc_ae
+//    (AEOnly                    True)
+//    (Name                      "Distributed Pro/BATCH (AE)")
+//    (Type                      "Shortcut")
+//    (CmdPath                   "_LP_\bin\ptcdbatch_ae.bat")
+//    (IconPath                  "_LP_\install\nt\dbatchc.ico")
+//    (IconIndex                 "0")
+//)
+
+(CmdType vconf
+    (Name                      "Conference Center") 
+    (Type                      "Shortcut")
+    (CmdPath                   "_LP_\bin\proe.exe")
+    (CmdArgs                   "\"_LP_\bin\ptcvconf.psf\"")
+    (IconPath                  "_LP_\install\nt\vconf.ico")
+    (IconIndex                 "0")
+)
+
+(CmdType proe_shortcut
+    (Name                      "Pro/ENGINEER")
+    (Type                      "Shortcut")
+    (CmdPath                   "_LP_\bin\proe.exe")
+    (IconPath                  "_LP_\install\nt\proelogo.ico")
+    (IconIndex                 "0")
+)
+
+//
+// Remove the shortcut, and use the proe_borrow.bat file instead
+//(CmdType proeborrow
+//    (Name                      "Pro/ENGINEER (License Borrowing)")
+//    (Type                      "Shortcut")
+//    (CmdPath                   "_LP_\bin\proe.exe")
+//    (CmdArgs                   "-borrow")
+//    (IconPath                  "_LP_\install\nt\proelogo.ico")
+//    (IconIndex                 "0")
+//)
+//
+

@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Creating an Error Message Table</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Writing Mathcad DLLs\nError Messages\nCreating an Error Message Table");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Creating an Error Message Table</h1></td>
+	</tr>
+</table>
+
+<code>BOOL CreateUserErrorMessageTable(hDLL, n, ErrorMessageTable)</span><br>
+<br>
+<span class="blockindent">HINSTANCE hDLL;</span><br>
+<span class="blockindent">unsigned int n;</span><br>
+<span class="blockindent">char * ErrorMessageTable[ ];</span><br>
+<br>
+</code>
+  
+<p><b>CreateUserErrorMessageTable</b>, as defined in <a href="UserDLL_coderef.html">mcadincl.h</a>, is called when the DLL is attaching to the address space of the current process in order to register the user error message table with Mathcad. This allows error messages to be displayed when the user clicks on a UserDLL function in the same way that they are for built-in functions.</p>
+  
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+	<tr>
+		<td width="26%" valign="middle"><p align="center"><b>Parameter</b></p></td>
+		<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+	</tr>
+	<tr>
+		<td valign="top"><p>hDLL</p></td>
+		<td valign="top"><p>Handle of the DLL supplied by the DLL entry point routine.</p></td>
+	</tr>
+	<tr>
+		<td valign="top"><p>n</p></td>
+		<td valign="top"><p>Number of error messages in the table.</p></td>
+	</tr>
+	<tr>
+		<td valign="top"><p><a href="UserDLL_ErrorMessages.html">ErrorMessageTable</a></p></td>
+		<td valign="top"><p>An array of n strings with the text of the error messages.</p></td>
+	</tr>
+</table>
+
+<h3>Return value</h3>
+
+<p>The return value is TRUE if the registration is successful. Otherwise, it is FALSE.</p>
+
+<h4>Note:</h4>
+
+<ul>
+<li>Use the <a href="UserDLL_ErrorMessages.html">MAKELRESULT</a> command in your function definition to specify which errors are returns and which variables are highlighted for particular user errors.</li>
+</ul>
+ 
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

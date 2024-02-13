@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Solving Linear Systems</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Solving">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nSolving and Optimization\nSolving Linear Systems");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Solving Linear Systems</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">lsolve(M, v)</b> Returns the solution <b class="math">x</b> for the linear system of equations <b class="math">M&middot;x = v</b>, using <a href="LU_decomposition.html">LU decomposition</a>. The BLAS/LAPACK libraries (<a href="http://www.intel.com/software/products/mkl/features/lin_alg.htm" target="_blank">http://www.intel.com/software/products/mkl/features/lin_alg.htm</a>) from Intel are used.</p>
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><b class="hmath">M</b> is a real or complex matrix. If the matrix is square, it must be non-singular.</li>
+  <li><b class="hmath">v</b> is a real or complex vector or matrix having the same number of rows as <b class="math">M</b>.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	<li>A matrix is singular if its <a href="Determinant_operator.html">determinant</a> is 0. It is nearly singular if it has a high <a href="Condition_number.html">condition number</a>. These conditions make it difficult to compute the inverted matrix used to solve the problem. The <b>lsolve</b> function may fail or may produce meaningless results in these cases. You may wish to use other <a href="Array_functions.html#decompositions">decompositions</a> for nearly singular matrices.</li>
+	<li>Another test for a system with a unique solution is to check if <span class="math"><a href="Rank_of_a_matrix.html"><b>rank(M)</b></a> = <a href="Dimensions_of_a_matrix.html"><b>cols(M)</b></a></span>, that is, if all the columns of <b class="math">M</b> are linearly independent.</li>
+	<li>You can use matrix <a href="Determinant_operator.html">inversion</a> directly to solve this type of system, but <b>lsolve</b> is faster, and, in some cases, more accurate. To solve a linear system of equations in natural notation, you may wish to use a <a href="Solve_Block.html">Solve Block</a>.</li>
+	<li>In the case of an inconsistent system of equations, <b>lsolve</b> returns the least-squares solution, given also by <b class="math">geninv(M)&middot;v</b>.</li>
+	<li>For matrix values of <span class="math">v</span>, <b class="math">lsolve(M,v<sup>&lt;i&gt;</sup>)</b> returns the <i>i</i>th column of <b class="math">geninv(M)&middot;v</b>.</li>
+	<li>More information on <b>lsolve</b>, including its use in under- and over-constrained systems can be found in the E-book <b>Inside Mathcad: Solving and Optimization</b>, available from the Mathcad <a href="http://www.ptc.com/go/mathsoft/mathcad_download/">download site</a>.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Solving\\solvline.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Approximate Solutions of Equations','Approximate_solutions.html','Finding Roots','Finding_roots.html','Mathcad Solve Block','Solve_Block.html','Minimizing or Maximizing a Function','Maximizing_or_minimizing_a_function.html','Solver Algorithms and AutoSelect','Solving_algorithms.html','Solving Systems of Equations','find.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

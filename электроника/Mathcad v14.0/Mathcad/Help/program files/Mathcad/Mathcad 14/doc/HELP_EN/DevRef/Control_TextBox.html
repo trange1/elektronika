@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+
+<head>
+	<title>Overview of Text Boxes</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Mathsoft Controls\nTextBoxes");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Mathsoft TextBox Control</h1></td>
+	</tr>
+</table>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Overview</td></tr>
+</table>
+</h2>
+
+<p>The Mathsoft TextBox <a href="Controls.html">control</a> allows you to accept user input in the form of text, which can then be used as string or number data for calculations. You modify the behavior of the control on input, and the resulting output, through a script in the Exec event using the <a href="Script_textboxclass.html">TextBox class</a>. You change the appearance of a text box using the Properties dialog box.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Simple Annotated Example</td></tr>
+</table>
+</h2>
+
+<p>Here’s an example that shows the default script and the resulting behavior of the TextBox control in the worksheet.</p>
+
+<h3>Default Script </h3>
+
+<p>(right-click on the text box and choose <b>Edit Script</b>)</p>
+
+<code>
+Sub TextBoxEvent_Start()<br>
+&nbsp;&nbsp;&nbsp;Rem TODO: Add your code here<br>
+End Sub<br>
+<br>
+Sub TextBoxEvent_Exec(Inputs,Outputs)<br>
+&nbsp;&nbsp;&nbsp;Outputs(0).Value = TextBox.Text<br>
+End Sub<br>
+<br>
+Sub TextBoxEvent_Stop()<br>
+&nbsp;&nbsp;&nbsp;Rem TODO: Add your code here<br>
+End Sub<br>
+<br>
+</code>
+
+<h3>How It Appears in the Worksheet</h3>
+
+<p class="blockindent"><img src="Graphics/SIMPLE_TEXT_BOX.GIF" alt="simple text box" width="166" height="80" border="1"></p>
+
+<h3>Comments</h3>
+
+<p>In the script, notice three events, <a href="Script_StartEvent.html">Start</a>, <a href="Script_ExecEvent.html">Exec</a>, and <a href="Script_StopEvent.html">Stop</a>. Since this text box control merely takes what is entered and returns it as output, there is no code in either the Start or Stop events. All action associated with processing user entries in the text box itself should be written in the Exec event, including parsing text, converting the data type or any other processes.</p>
+
+<p>Some formatting can be scripted in the Start event, some requires right-clicking and choosing <b>Properties</b>. Font-related properties are only available through the Properties dialog box. Here’s a slightly modified piece of script and a picture that shows its effect on the appearance and behavior of the control.</p>
+
+<h3>Modified Script</h3>
+
+<code>
+Sub TextBoxEvent_Start()<br>
+&nbsp;&nbsp;&nbsp;TextBox.ClientEdge = False<br>
+&nbsp;&nbsp;&nbsp;TextBox.Border = True<br>
+&nbsp;&nbsp;&nbsp;TextBox.BackColor = RGB(255,210,230)<br>
+&nbsp;&nbsp;&nbsp;TextBox.ForeColor = RGB(200,0,100)<br>
+End Sub<br>
+<br>
+Sub TextBoxEvent_Exec(Inputs,Outputs)<br>
+&nbsp;&nbsp;&nbsp;Outputs(0).Value = &quot;Hello, &quot; + TextBox.Text + &quot;!&quot;<br>
+End Sub<br>
+<br>
+Sub TextBoxEvent_Stop()<br>
+&nbsp;&nbsp;&nbsp;Rem TODO: Add your code here<br>
+End Sub<br>
+<br>
+</code>
+
+<h3>How It Appears in the Worksheet</h3>
+
+<p class="blockindent"><img src="Graphics/MODIFIED_TEXT_BOX.GIF" alt="modified text box" width="331" height="87" border="1"></p>
+
+<p>Note that you can only change font settings for the TextBox control using the Properties dialog box. Font-related properties are not available through the script.</p>
+ 
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+ 	   onMouseOut="document.body.style.cursor='arrow'"
+ 	   onClick="objLaunchMathcad.OpenResourceCenter('samples\\controls\\controls.xmcd')"
+ 	   class="fakelink">Mathcad Example</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

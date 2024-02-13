@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?validation-md5-digest 677464674aad7937b7124133a237253d?>
+<worksheet version="3.0.3" xmlns="http://schemas.mathsoft.com/worksheet30" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ws="http://schemas.mathsoft.com/worksheet30" xmlns:ml="http://schemas.mathsoft.com/math30" xmlns:u="http://schemas.mathsoft.com/units10" xmlns:p="http://schemas.mathsoft.com/provenance10" xmlns:prd="http://schemas.mathsoft.com/point-release-data">
+<pointReleaseData></pointReleaseData>
+<metadata>
+<generator>Mathcad Professional 14.0</generator>
+<userData>
+<title>Evaluating Vectorized Functions and Operators Symbolically</title>
+<description>This new Mathcad feature allows a vectorized function or operator to be applied to a vector and the result to be evaluated symbolically.</description>
+<author>Parametric Technology Corporation</author>
+<company>Parametric Technology Corporation</company>
+<keywords>vectorized functions operators vectorize</keywords>
+<revisedBy />
+</userData>
+<identityInfo>
+<revision>12</revision>
+<documentID>D367732F-5DD2-4972-8A1B-615DE987EAA9</documentID>
+<versionID>F11B7742-DF26-4BAE-8BC8-AF13EA24004A</versionID>
+<parentVersionID>00000000-0000-0000-0000-000000000000</parentVersionID>
+<branchID>00000000-0000-0000-0000-000000000000</branchID>
+</identityInfo>
+</metadata>
+<settings>
+<presentation>
+<textRendering>
+<textStyles>
+<textStyle name="Normal">
+<blockAttr margin-left="0" margin-right="0" text-indent="inherit" text-align="left" list-style-type="inherit" tabs="inherit"></blockAttr>
+<inlineAttr font-family="Times New Roman" font-charset="0" font-size="12" font-weight="normal" font-style="normal" underline="false" line-through="false" vertical-align="baseline"></inlineAttr>
+</textStyle>
+<textStyle name="Chapter Head">
+<blockAttr margin-left="0" margin-right="0" text-indent="0" text-align="left" list-style-type="none" tabs="inherit"></blockAttr>
+<inlineAttr font-family="Arial" font-charset="0" font-size="10" font-weight="normal" font-style="normal" underline="false" line-through="false" vertical-align="baseline" color="#808000"></inlineAttr>
+</textStyle>
+<textStyle name="Section Title">
+<blockAttr margin-left="0" margin-right="0" text-indent="0" text-align="left" list-style-type="none" tabs="inherit"></blockAttr>
+<inlineAttr font-family="Arial" font-charset="0" font-size="16" font-weight="normal" font-style="normal" underline="false" line-through="false" vertical-align="baseline" color="#008080"></inlineAttr>
+</textStyle>
+<textStyle name="Heading 1">
+<blockAttr margin-left="0" margin-right="0" text-indent="0" text-align="left" list-style-type="none" tabs="inherit"></blockAttr>
+<inlineAttr font-family="Verdana" font-charset="0" font-size="10" font-weight="bold" font-style="normal" underline="false" line-through="false" vertical-align="baseline" color="#800000"></inlineAttr>
+</textStyle>
+<textStyle name="Heading 2">
+<blockAttr margin-left="0" margin-right="0" text-indent="0" text-align="left" list-style-type="none" tabs="inherit"></blockAttr>
+<inlineAttr font-family="Verdana" font-charset="0" font-size="10" font-weight="bold" font-style="normal" underline="false" line-through="false" vertical-align="baseline" color="#800000"></inlineAttr>
+</textStyle>
+<textStyle name="Column Head">
+<blockAttr margin-left="0" margin-right="0" text-indent="inherit" text-align="left" list-style-type="inherit" tabs="inherit"></blockAttr>
+<inlineAttr font-family="inherit" font-charset="inherit" font-size="12" font-weight="bold" font-style="normal" underline="false" line-through="false" vertical-align="baseline"></inlineAttr>
+</textStyle>
+<textStyle name="List_custom" base-style="Normal">
+<blockAttr margin-left="14.25" margin-right="0" text-indent="-14.25" text-align="left" list-style-type="none" tabs="inherit"></blockAttr>
+<inlineAttr font-family="Times New Roman" font-charset="0" font-size="12" font-weight="normal" font-style="normal" underline="false" line-through="false" vertical-align="baseline"></inlineAttr>
+</textStyle>
+<textStyle name="List_number" base-style="Normal">
+<blockAttr margin-left="inherit" margin-right="inherit" text-indent="0" text-align="inherit" list-style-type="decimal" tabs="inherit"></blockAttr>
+<inlineAttr font-family="inherit" font-charset="inherit" font-size="inherit" font-weight="inherit" font-style="inherit" underline="inherit" line-through="inherit" vertical-align="inherit"></inlineAttr>
+</textStyle>
+<textStyle name="List_bullet" base-style="Normal">
+<blockAttr margin-left="inherit" margin-right="inherit" text-indent="0" text-align="inherit" list-style-type="disc" tabs="inherit"></blockAttr>
+<inlineAttr font-family="inherit" font-charset="inherit" font-size="inherit" font-weight="inherit" font-style="inherit" underline="inherit" line-through="inherit" vertical-align="inherit"></inlineAttr>
+</textStyle>
+</textStyles>
+</textRendering>
+<mathRendering equation-color="#000">
+<operators multiplication="narrow-dot" derivative="derivative" literal-subscript="large" definition="colon-equal" global-definition="triple-equal" local-definition="left-arrow" equality="bold-equal" symbolic-evaluation="right-arrow"></operators>
+<mathStyles>
+<mathStyle name="Variables" font-family="Times New Roman" font-charset="0" font-size="12" font-weight="normal" font-style="normal" underline="false"></mathStyle>
+<mathStyle name="Constants" font-family="Times New Roman" font-charset="0" font-size="12" font-weight="normal" font-style="normal" underline="false"></mathStyle>
+<mathStyle name="User 1" font-family="Arial" font-charset="0" font-size="10" font-weight="normal" font-style="normal" underline="false"></mathStyle>
+<mathStyle name="User 2" font-family="Courier New" font-charset="0" font-size="10" font-weight="normal" font-style="normal" underline="false"></mathStyle>
+<mathStyle name="User 3" font-family="Arial" font-charset="0" font-size="10" font-weight="bold" font-style="normal" underline="false"></mathStyle>
+<mathStyle name="User 4" font-family="Times New Roman" font-charset="0" font-size="10" font-weight="normal" font-style="italic" underline="false"></mathStyle>
+<mathStyle name="User 5" font-family="Times New Roman" font-charset="0" font-size="10" font-weight="normal" font-style="normal" underline="false"></mathStyle>
+<mathStyle name="User 6" font-family="Arial" font-charset="0" font-size="10" font-weight="normal" font-style="normal" underline="false"></mathStyle>
+<mathStyle name="User 7" font-family="Times New Roman" font-charset="0" font-size="10" font-weight="normal" font-style="normal" underline="false"></mathStyle>
+<mathStyle name="Math Text Font" font-family="Times New Roman" font-charset="0" font-size="14" font-weight="normal" font-style="normal" underline="false"></mathStyle>
+</mathStyles>
+<dimensionNames mass="mass" length="length" time="time" current="current" thermodynamic-temperature="temperature" luminous-intensity="luminosity" amount-of-substance="substance" display="false"></dimensionNames>
+<symbolics derivation-steps-style="vertical-insert" show-comments="false" evaluate-in-place="false"></symbolics>
+<results>
+<general precision="3" show-trailing-zeros="false" radix="dec" complex-threshold="10" zero-threshold="15" imaginary-value="i" exponential-threshold="3"></general>
+<matrix display-style="auto" expand-nested-arrays="false"></matrix>
+<unit format-units="true" simplify-units="true" fractional-unit-exponent="false"></unit>
+</results>
+</mathRendering>
+<pageModel show-page-frame="false" show-header-frame="false" show-footer-frame="false" header-footer-start-page="1" paper-code="1" orientation="portrait" print-single-page-width="false" page-width="612" page-height="792">
+<margins left="86.4" right="86.4" top="86.4" bottom="86.4"></margins>
+<header use-full-page-width="false"></header>
+<footer use-full-page-width="false">
+<left>{\rtf1\ansi\deff0\deftab720{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman\fcharset2 Symbol;}{\f2\fnil\fprq6 Arial;}{\f3\fswiss Arial;}}
+{\colortbl\red0\green0\blue0;}
+\deflang1033\pard\plain\f3\fs20 \{f\}
+\par }</left>
+<center>{\rtf1\ansi\deff0\deftab720{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman\fcharset2 Symbol;}{\f2\fnil\fprq6 Arial;}{\f3\fswiss Arial;}}
+{\colortbl\red0\green0\blue0;}
+\deflang1033\pard\qc\plain\f3\fs20 \{n\}
+\par }</center>
+<right>{\rtf1\ansi\deff0\deftab720{\fonttbl{\f0\fswiss MS Sans Serif;}{\f1\froman\fcharset2 Symbol;}{\f2\fnil\fprq6 Arial;}{\f3\fswiss Arial;}}
+{\colortbl\red0\green0\blue0;}
+\deflang1033\pard\qr\plain\f3\fs20 \{d\}
+\par }</right>
+</footer>
+</pageModel>
+<colorModel background-color="#fff" default-highlight-color="#ffff80"></colorModel>
+<language math="EN" UI="EN"></language>
+</presentation>
+<calculation>
+<builtInVariables array-origin="0" convergence-tolerance="0.001" constraint-tolerance="0.001" random-seed="1" prn-precision="4" prn-col-width="8"></builtInVariables>
+<calculationBehavior automatic-recalculation="true" matrix-strict-singularity-check="false" optimize-expressions="false" exact-boolean="true" strings-use-origin="false" zero-over-zero="error">
+<compatibility multiple-assignment="MC12" local-assignment="MC11"></compatibility>
+</calculationBehavior>
+<units>
+<currentUnitSystem name="si" customized="false"></currentUnitSystem>
+</units>
+</calculation>
+<editor view-annotations="false" view-regions="false">
+<ruler is-visible="false" ruler-unit="in">
+<tabs>
+<tab show-guide="true" position="351"></tab>
+</tabs>
+</ruler>
+<grid granularity-x="6" granularity-y="6"></grid>
+</editor>
+<fileFormat image-type="image/png" image-quality="75" save-numeric-results="true" exclude-large-results="false" save-text-images="false" screen-dpi="96"></fileFormat>
+<miscellaneous>
+<handbook handbook-region-tag-ub="143" can-delete-original-handbook-regions="true" can-delete-user-regions="true" can-print="true" can-copy="true" can-save="true" file-permission-mask="4294967295"></handbook>
+</miscellaneous>
+</settings>
+<regions>
+<region region-id="42" left="6" top="6" width="9" height="57.75" align-x="6" align-y="6" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<picture>
+<png item-idref="1" display-width="7.5" display-height="56.25"></png>
+</picture>
+<link href=".\..\..\map.xmcd" title="Links to Mathcad Resources" popup="false"></link>
+<rendering item-idref="2"></rendering>
+</region>
+<region region-id="43" left="18" top="8.25" width="96.75" height="12" align-x="18" align-y="18" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<text use-page-width="false" push-down="false" lock-width="true">
+<p style="Chapter Head" margin-left="0" margin-right="0" text-indent="inherit" text-align="left" list-style-type="inherit" tabs="inherit">
+<f family="Arial" charset="0" size="11">
+<inlineAttr font-weight="normal">
+<c val="#808000">NEW FEATURES</c>
+</inlineAttr>
+</f>
+</p>
+</text>
+<link href="./new.xmcd" title="Links to New Features" popup="false"></link>
+</region>
+<region region-id="60" left="18" top="38.25" width="91.5" height="12" align-x="18" align-y="48" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<text use-page-width="false" push-down="false" lock-width="true">
+<p style="Normal" margin-left="inherit" margin-right="inherit" text-indent="inherit" text-align="inherit" list-style-type="inherit" tabs="inherit">
+<f family="Arial" charset="0" size="11">
+<b>
+<c val="#808080">
+<link href=".\..\..\toc_tuto.xmcd" title="Links to Tutorials" popup="false">tutorials</link>
+</c>
+</b>
+</f>
+</p>
+</text>
+</region>
+<region region-id="63" left="18" top="50.25" width="350.25" height="12" align-x="46.5" align-y="60" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<text use-page-width="false" push-down="false" lock-width="true">
+<p style="Normal" margin-left="inherit" margin-right="inherit" text-indent="inherit" text-align="inherit" list-style-type="inherit" tabs="inherit">
+<f family="Arial" charset="0" size="11">
+<b>
+<inlineAttr line-through="false">
+<c val="#800000">Evaluating Vectorized Functions and Operators Symbolically</c>
+</inlineAttr>
+</b>
+</f>
+</p>
+</text>
+<indexes>
+<phrase>new features</phrase>
+<phrase>features, in Mathcad</phrase>
+</indexes>
+</region>
+<region region-id="74" left="6" top="96.75" width="338.25" height="85.5" align-x="25.5" align-y="108" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<text use-page-width="false" push-down="false" lock-width="true">
+<p style="Normal" margin-left="inherit" margin-right="inherit" text-indent="inherit" text-align="inherit" list-style-type="inherit" tabs="inherit">In Mathcad 14, you can now apply a vectorized function or operator to a vector and evaluate the result symbolically. You vectorize a function by applying the <b>vectorize</b> operator. In previous versions of Mathcad, you could only evaluate vectorized functions or operators with the numerical equal sign (=). See <b>
+<u>
+<link href=".\..\..\Techniques\mo90qvec.xmcd" title="Links to section" popup="false">Vectorizing an Expression</link>
+</u>
+</b> for a more detailed description of the <b>vectorize</b> operator. </p>
+</text>
+<indexes>
+<phrase>vectorized symbolics</phrase>
+<phrase>vectorize operator</phrase>
+</indexes>
+</region>
+<region region-id="140" left="6" top="192.75" width="342" height="28.5" align-x="6" align-y="204" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<text use-page-width="false" push-down="false" lock-width="true">
+<p style="Normal" margin-left="inherit" margin-right="inherit" text-indent="0" text-align="inherit" list-style-type="none" tabs="inherit">As an example, suppose you want to apply the sine function to the elements of the following vector and evaluate the result symbolically.</p>
+</text>
+</region>
+<region region-id="75" left="36" top="234.75" width="49.5" height="111.75" align-x="49.5" align-y="294" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<math optimize="false" disable-calc="false">
+<ml:define>
+<ml:id xml:space="preserve">v</ml:id>
+<ml:matrix rows="3" cols="1">
+<ml:apply>
+<ml:div></ml:div>
+<ml:id xml:space="preserve">π</ml:id>
+<ml:real>2</ml:real>
+</ml:apply>
+<ml:apply>
+<ml:div></ml:div>
+<ml:id xml:space="preserve">π</ml:id>
+<ml:real>3</ml:real>
+</ml:apply>
+<ml:apply>
+<ml:div></ml:div>
+<ml:id xml:space="preserve">π</ml:id>
+<ml:real>6</ml:real>
+</ml:apply>
+</ml:matrix>
+</ml:define>
+</math>
+<rendering item-idref="3"></rendering>
+</region>
+<region region-id="142" left="6" top="354.75" width="340.5" height="85.5" align-x="13.5" align-y="366" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<text use-page-width="false" push-down="false" lock-width="true">
+<p style="Normal" margin-left="0" margin-right="0" text-indent="inherit" text-align="left" list-style-type="inherit" tabs="inherit">To do so:</p>
+<p style="Normal" margin-left="inherit" margin-right="inherit" text-indent="inherit" text-align="inherit" list-style-type="inherit" tabs="inherit"></p>
+<p style="Normal" margin-left="14.25" margin-right="0" text-indent="-14.25" text-align="left" list-style-type="none" tabs="inherit">
+<b>
+<c val="#008080">1.</c>
+</b>
+<sp count="2"></sp>Type sin(v).</p>
+<p style="Normal" margin-left="14.25" margin-right="0" text-indent="-14.25" text-align="left" list-style-type="none" tabs="inherit"></p>
+<p style="Normal" margin-left="14.25" margin-right="0" text-indent="-14.25" text-align="left" list-style-type="none" tabs="inherit">
+<b>
+<c val="#008080">2.</c>
+</b>
+<sp count="2"></sp>Press <b>[Ctrl] [-]</b> to insert the vectorize operator, which is displayed as an arrow above sin(v). </p>
+</text>
+</region>
+<region region-id="77" left="36" top="448.5" width="27.75" height="24" align-x="48" align-y="468" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<math optimize="false" disable-calc="false">
+<ml:apply>
+<ml:vectorize></ml:vectorize>
+<ml:apply>
+<ml:id xml:space="preserve">sin</ml:id>
+<ml:id xml:space="preserve">v</ml:id>
+</ml:apply>
+</ml:apply>
+</math>
+<rendering item-idref="4"></rendering>
+</region>
+<region region-id="94" left="18" top="486.75" width="312.75" height="28.5" align-x="18" align-y="498" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<text use-page-width="false" push-down="false" lock-width="true">
+<p style="Normal" margin-left="inherit" margin-right="inherit" text-indent="inherit" text-align="inherit" list-style-type="inherit" tabs="inherit">The vectorize operator causes the sine function to be applied element-wise to the vector v.</p>
+</text>
+</region>
+<region region-id="95" left="0" top="522" width="6000" height="6" align-x="0" align-y="522" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<pageBreak></pageBreak>
+</region>
+<region region-id="143" left="6" top="528.75" width="234.75" height="42.75" align-x="9.75" align-y="540" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<text use-page-width="false" push-down="false" lock-width="true">
+<p style="Normal" margin-left="14.25" margin-right="0" text-indent="-14.25" text-align="left" list-style-type="none" tabs="inherit">
+<b>
+<c val="#008080">3.</c>
+</b>
+<sp count="2"></sp>Press <b>[Ctrl] [.]</b> to insert the symbolic equal sign.</p>
+<p style="Normal" margin-left="14.25" margin-right="0" text-indent="-14.25" text-align="left" list-style-type="none" tabs="inherit"></p>
+<p style="Normal" margin-left="14.25" margin-right="0" text-indent="-14.25" text-align="left" list-style-type="none" tabs="inherit">
+<b>
+<c val="#008080">4.</c>
+</b>
+<sp count="2"></sp>Press <b>[Enter]</b>.</p>
+</text>
+</region>
+<region region-id="80" left="36" top="591" width="80.25" height="96" align-x="71.25" align-y="642" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<math optimize="false" disable-calc="false">
+<ml:symEval style="default" hide-keywords="false" hide-lhs="false">
+<ml:apply>
+<ml:vectorize></ml:vectorize>
+<ml:apply>
+<ml:id xml:space="preserve">sin</ml:id>
+<ml:id xml:space="preserve">v</ml:id>
+</ml:apply>
+</ml:apply>
+<ml:symResult>
+<ml:matrix rows="3" cols="1">
+<ml:real>1</ml:real>
+<ml:apply>
+<ml:div></ml:div>
+<ml:apply>
+<ml:sqrt></ml:sqrt>
+<ml:real>3</ml:real>
+</ml:apply>
+<ml:real>2</ml:real>
+</ml:apply>
+<ml:apply>
+<ml:div></ml:div>
+<ml:real>1</ml:real>
+<ml:real>2</ml:real>
+</ml:apply>
+</ml:matrix>
+</ml:symResult>
+</ml:symEval>
+</math>
+<rendering item-idref="5"></rendering>
+</region>
+<region region-id="81" left="6" top="702.75" width="340.5" height="42.75" align-x="6" align-y="714" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<text use-page-width="false" push-down="false" lock-width="true">
+<p style="Normal" margin-left="0" margin-right="0" text-indent="inherit" text-align="left" list-style-type="inherit" tabs="inherit">
+<b>
+<c val="#008080">Note:</c>
+</b>
+<b>
+<sp></sp>
+</b>
+<inlineAttr font-weight="normal">Many built-in functions are implicitly vectorized for numerical evaluation. For example, </inlineAttr>
+<inlineAttr font-weight="normal">you can numerically evaluate the sine of a vector without using the vectorize operator. </inlineAttr>
+</p>
+</text>
+</region>
+<region region-id="82" left="36" top="759.75" width="93.75" height="57.75" align-x="70.5" align-y="792" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<math optimize="false" disable-calc="false">
+<ml:eval placeholderMultiplicationStyle="auto-select" resultMultiplicationStyle="auto-select">
+<ml:apply>
+<ml:id xml:space="preserve">sin</ml:id>
+<ml:id xml:space="preserve">v</ml:id>
+</ml:apply>
+<result xmlns="http://schemas.mathsoft.com/math30">
+<ml:matrix rows="3" cols="1">
+<ml:real>1</ml:real>
+<ml:real>0.8660254037844386</ml:real>
+<ml:real>0.49999999999999994</ml:real>
+</ml:matrix>
+</result>
+</ml:eval>
+</math>
+<rendering item-idref="6"></rendering>
+</region>
+<region region-id="83" left="6" top="834.75" width="339" height="28.5" align-x="6" align-y="846" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<text use-page-width="false" push-down="false" lock-width="true">
+<p style="Normal" margin-left="inherit" margin-right="inherit" text-indent="inherit" text-align="inherit" list-style-type="inherit" tabs="inherit">However, if you want to apply these functions to vectors and evaluate the results symbolically, you must use the <b>vectorize</b> operator.</p>
+</text>
+</region>
+<region region-id="135" left="6" top="876" width="426.75" height="5.25" align-x="6" align-y="876" show-border="false" show-highlight="false" is-protected="true" z-order="0" background-color="inherit" tag="">
+<picture>
+<png item-idref="7" display-width="425.25" display-height="3.75"></png>
+</picture>
+<rendering item-idref="8"></rendering>
+</region>
+</regions>
+<binaryContent>
+<item item-id="1">iVBORw0KGgoAAAANSUhEUgAAAAoAAABLCAIAAADGVIEjAAAAAXNSR0IArs4c6QAAAARnQU1B
+AACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAA
+AAlwSFlzAAALEwAACxMBAJqcGAAAAFFJREFUSEtj/P//PwMesHiFOh7EMCqNLXyGb7A8xwsY
+CEi/K8/HgxhGpbGFz/ANFsoS0/K+TjyIYVQaW/gM32ChLDHNm3YUD2IYlcYWPsM2WAAcpUm4
+oQOl6gAAAABJRU5ErkJggg==</item>
+<item item-id="2">iVBORw0KGgoAAAANSUhEUgAAAAwAAABNCAYAAACScYUuAAAAAXNSR0IArs4c6QAAAARnQU1B
+AACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAA
+AIJJREFUSEtj/A8EDKQAkAZSAANI8dJVikRhsGtGNRAIrdFQIiY9DatQev78+X9iMNzTxCgG
+qYFreF+a/Z8YPKphNJRwJJWRnTRIznEka1ja1/OfGIwo+UY14A6x0VAacWmJ5BxHsoY50479
+JwbDEx8xikFqRjUQE1KjoTTUQ4mUriUARjXUyAnjlhAAAAAASUVORK5CYII=</item>
+<item item-id="3">iVBORw0KGgoAAAANSUhEUgAAAEIAAACVCAYAAADsbyx/AAAAAXNSR0IArs4c6QAAAARnQU1B
+AACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAA
+A3VJREFUeF7tnIFu6yAMRfv+/6P32q2pKHWIbdwIO6fSpE1iBA7XF2yy/fu5f258brcHiJU/
+9zUKGd5RPzFPCRnqZydHg7c+dtTfsiCiIWzQ9vpdEsS3IIxgLAfi2xD2YADiSWYpEGepQVIF
+ILIr4qGevS/tttoqcBlFbJPSTGKbwNtEnAevV1+aB5/RxuMPgNjiulGBB+Qzz/rtbanQsCoP
+RQwUYVVGeo/oJ2wx21Z56UFYw2ivPSC68EptlhGqQBEo4l1HKCK7IkbJlmcLRRHZFRGxU3Cg
+EigSGoQG26doLyVCo91KvSaaHoSUhntglAPRlt0sQNKDkCZrrU6VqVn2MADxqEJf+V5jU4QX
+QqnQmIFQBsQshBIgJAgeMOm3z70CjeUMUUIR1glzr3FALH1ooIgoAhRmKMzULcxERAlmiUfg
+EXjEyEvwCDwCj8Aj8AjFiQuzxCwxS8wSs7yCWY5eM1TM/9Uk9a7xGjx/wfO3oO2Fjudyp8y9
+BiC6w1Cvjst4xDZRSRHWEEltlpICPC+kl/EISwjstU2viAgIKKKhiCIi03CrQ2uSnyjJa/v5
+UER7dt9ix+vE2kG07SKhWp4vhkY/GMvgRkmQph9Nm36BIl4fCgdhWQWprRbE7HP63981Symz
+i354aRBnhUb0oqAIzfapjVdtO80qRvaleV6fuPHfAp5VrtQgel+yKKGMIqRQ8oRXyVwDEHed
+eyCUS8O9EEqB6JNFq2HiEZoDlZVqRPsZefdboWU8KKKqIryKSq+IiFNlqV3D4gejOkjqXGMW
+AopoCKb3iAg1oAgU8akjQqPqgcrrGSgCRbxrB0WgCBQh+imhQWgQGoTG6LCFR+AReAQeUdoj
+Ru9sWTLR1GYpvfl32XuNtt7Yf38ZRUh3nSiiOw9Y1FCmit2qwPvGcGqzlDxh20UuqQjrpKX2
+6RURAaGMR0TAQBFkn2SftbLPUbLl2ULxCDwCj6jlERFnh7YPPAKPKOwRM3+qUCY0vJWpvsqV
++s3bWQhlsk9A3JeyLc3NAEnvEX1e4YHR9rGMR1jvJqSJW2G8FX+jT2oz/VkmAojBPYYF5MdN
+2cwKfuN3LZOR7jW0Y+qfs5RHWH1ia2+B1x+kXj9rCZ7ZzjMxy/hEf7F0cGbbb8HY63e50JBq
+BVELMIK7NAiPZ+xBO1LY8iCi1HDUz381ymShJqO3cQAAAABJRU5ErkJggg==</item>
+<item item-id="4">iVBORw0KGgoAAAANSUhEUgAAACUAAAAgCAYAAACVU7GwAAAAAXNSR0IArs4c6QAAAARnQU1B
+AACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAA
+APFJREFUWEftl0kOhTAMQ/n3PzSDRKr81AGXofWCSmxQUV4dJw2/eV2T2tqgRq5Vjyp8/WYA
+YQSTgNotVOSQgfJgBWqTUOYZYKE0pHlLJn3e7BJQctUn26eiySTS90FdbTdf+ljlKKVQ2TIB
+mO+6tgQGyA7WpXm2ACEwKn1Mqvyex6H8+AJPsY+vtq9qfGi8dWORzU3oezgl/N3UIPgZcJwg
+j9SDBreYjOwINjUpUArB0lBe2gy2qpQAceSnkp4T8NTomTrdoRiQIVCxKrKfCaaKUCvJ0vv6
+OPx4n2ptlNn+FrAu10zWLth0vnLN3FVbEmoBDLZOlBDHnEMAAAAASUVORK5CYII=</item>
+<item item-id="5">iVBORw0KGgoAAAANSUhEUgAAAGsAAACACAYAAAAMPJdNAAAAAXNSR0IArs4c6QAAAARnQU1B
+AACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAA
+BQ9JREFUeF7tnY1y2yAQhNv3f+jWTiQPJsD9sAtSvJ7pjFPBcux3B0h207//Hq8/et3DgScs
+vd4deJDbYok17p6otljhG9QyzKeSbzUaX7AKX3eDOkPpxSFYh0NXATUCJljfB6z8ulX1ZGrh
+ooRNd70QwuCnxvkHNYM6ro+HhQBVwmHqCRZwCTzuWVGF9aVTwhcswYImF00MvccwKqvU/OjK
+Qu8vgkWrK+yR3bqhnZnGmVSqrBkXG32Z1SpYggV2gCSHrgLGjbEOGBd9HtjLSe1Z4GeCpOJ/
+uzHWnsV0GaStylJlgVJpkQz6gMEKW5WlymLlFkdXlcXxlaIqWBRbOaKCxfGVoipYFFs5ooLF
+8ZWiKlgUWzmigsXxlaIqWBRbOaKCxfGVoipYFFs5omhY5YePo/fR2ejZIOHZIBr+CVWwwLBY
+oJ7ABEuwoqvx3vbIauhp1XtXZsaqrAWV1QKYSRDBAsKKAIi01QGjWIcyxrWWMa+Ot109hipr
+cWVlQek0eKTujIFl9ls65SFDB4yMA4nKQhwYLLCjZXb7lzwzwSfZ/OgWGfusjt5+4o0pMuYl
+DxiZCXjNGbXLjFv3iWpE219yz8pMYhZYZswZWJnxLgmrDGoWgrd/xryyj9W/PFhYbT0rwGvP
+qoV3/uw1e7Zd1sDXfQ/4X/r35nPJ+6yseVlo2fE+HlbWuCyomWX3o2HtADUDa7ZvNMEuswzu
+AjVr+Mq4LwMrmmXI9isNn4lbsAKPmxgn4wg8wQrAihjLaCtYgsXIK56m9iyet3DlXwkrOylP
+P08bOKVDcOfYkTnR96yIEZG2kUlabXeNa8VVX6fCypiQ6dOadEQn0tYyuDzeW22j138trMiT
+CRSsWgele0LtwmplSDn4q+Pxe8x7JVv+fa3Zy0LkJD1anjaeKmjpoLTL5Hv7DoYFxQI5ympP
+9iEn6Kkw9Hh1gnpAe9o0K6sXfAtiXaK9nyPtRuaViRJ93zPk1rDObBxVgVUhluGR6vNk3aiN
+BcO6nh0frdvds1qVgKist7W383E4cpIeLU+bKDCmprln1ZVwh8ryGuZt5wWG1hueBnsHiNYe
+US6ZFkDPxouaaEQn0tYChtTqnbAp38jNBJ7pYxloXUeN2dJBaXeP7tbkItcjwUbaRmKw2qLG
+ba08KO0lsDz3Od42lunZ60hDszF4+pmnQY/I3dsI1o0ICpZgwR3QMviwVJUFzyueoGDxvIUr
+CxbcUp6gYPG8hSsLFtxSnqBg8byFKwsW3FKeoGDxvIUrCxbcUp6gYPG8hSsLFtxSnqBg8byF
+KwsW3FKeIAMWU5PyHQyevVhlpLHlR/vYKPWrwr/8RMI6ATE1VVngMhAssKErqgAZsj4p1jKI
+zCe+FnPJQkavylJlIfOJr6XK4nsMG0GwYFbyhdCwWDfG2rNIexYjxQRLsBh5xdNEL4OsSFVZ
+qixWbnF0VVkcXymqgkWxlSM6C6s8qvfeIyLXnqU9C5FH6zRmK2tVpKosVdaqXMOMo8rC+LhE
+RbCW2IwZRLAwPi5RQcJiPXF/GqEDBvCAUUNHJoFgHXWLMrWlg9IWLDCs1potWOCdDGloHRpS
+W3sWcM9igxIs0lKIrKhyv/p6D15ZbieHNBepdRpZagoW6D+GZoBSZTVqf9Zo1tH9x/3b7dYt
+QsAIWK0PH2dDFayOg7PAZsF4TpQfv2eVJl0FWC8OwapSejew0fiCRThwZJdEK1EEK+vshn7/
+ASUG5U+3tCtlAAAAAElFTkSuQmCC</item>
+<item item-id="6">iVBORw0KGgoAAAANSUhEUgAAAH0AAABNCAYAAACL+muIAAAAAXNSR0IArs4c6QAAAARnQU1B
+AACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAA
+A9VJREFUeF7tXItu3DAMW///o7feYSl8mW2RkvzIzAIDitrWgxTp3CHY1+/vn1/6OQuBF+n6
+eQ/+I2DIqPMZnQ6mIwPIwSV+hI/WezzpUQBnkl3mitR9NOkR4FaRnUH8saTPIHzXHCJ9gGRf
+ZF//BoQP3+9Hkj5DgX8/Co/m/B2f7UekD6SFJcNbCptHpHuRBs6xZAAhq1vYPMeRPuuu9diu
+l3Q215GkR8BlzrIKZGLf9zK5RHoEaeMsQ0S0DCaXSI+i3TnPEBEtg8kl0qNoi/SBCCaFZhQR
+STnzCxo9yG10z0aGhj3LDLPsnUV30/0ifZN7duZ8iHSR3p032ftMOQ7MJaVL6VJ6iQCjiIHC
+TA/N9CV7T4d/TUCRLnuXvcveP2dA9r7GjdOzyt5l77J32bvsPd1adwgoe5e9y95l77L3Hdw4
+vYZ0e2cCsqryxvaixuZjXpku35bp5bHeqrHWa70zfQ37nE4VMfE/BPDWZZ2rraN/Y4WyJekW
+QNGivSp/nUNrYwlD9lu5rfVe38zZIUpnCrga8ZzxkI/mQUi0FHqPYeW21oeRXrtPymKu31t3
+XQuscn/rzoo0jQ4AmoMl/e4iLcIt3FrrVn9oX+86W9NaI9caiJ59IlOPFF7WUPs9CxwP6Vf/
+vcFvOdudbAQLy2nKXB9YIQdrSu8Vj9zZXlAtUq11FExPfQxOljMwzx/W3n/EcQepZi9MMz1Q
+S/dABsMi0LM+inRrSKLrVq8W7k2lW1ZfmyjEtu+u0CoQIWRXe4+Sap0fRnpL0ScqHbFf62rs
+CcIiGRGAlR++02sPFDV1lQ8tHrXXrhVrmjPWPWBaBLXAbV1hiBWzvSIxf3hkgyP7WWCtBxEk
+J7rHUxsae+W+5aSzJM4kYmaumUPA9DXkG7n7g1uveabYDBBn58uoGYnB9DWUdKTY2XsYcGbX
+FsnH9CXSI0hvdFakd8hgwNmIU7MUpi8p3YTzGRtEupTenVQp/RlCNquU0qV0Kb1EgFGEKa+N
+NjB9yd43Ii5SikiXvcveZe+fMyB7j3jqRmdl77J32bvsXfaeasr3N42s4Pe3kKz96LrsfZK9
+l0AjoCN7UJLv+5jYepBzooy+NzfrahHpE5TOkj7K1q9WRfqGpEfsGDEjkf4A0l8lMkT1iKcf
+JpEp+t/2ZIDN2nsNw4w6PMNz3IOcBySUMJZEdn9LfGwcke60MSndCdzKY6w6LLWz8dj9WSp/
+O91K4FfmzgQdUf2oj2yePo4lPetuf+LgHk36k4n3KPzni5yVk7pL7giAK3qI1nu80j1fY64g
+OrNOkb6SwUW5/wBwRMsCCi8megAAAABJRU5ErkJggg==</item>
+<item item-id="7">iVBORw0KGgoAAAANSUhEUgAAAkQAAAAFCAMAAACTpQOIAAAAAXNSR0IArs4c6QAAAARnQU1B
+AACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAA
+AwBQTFRFAAAAgICAgAAAgIAAAIAAAICAAACAgACAgIBAAEBAAID/AECAQAD/gEAA////wMDA
+/wAA//8AAP8AAP//AAD//wD///+AAP+AgP//gID//wCA/4BAwNzApsrwbWlzTAB/PwCCMQCG
+IgCJEgCMAgCPAA6TACCWADOZAEacAFqgAG+jAIWmAJupAK2nALCWALODALdwALpdAL1IAMAz
+AMQdAMcGEMoAKc0AQtEAXNQAdtcAktsArt4Ay+EA5OEA6MkA67AA7pcA8XwA9WIA+EYA+ykA
+/wwACwsLFhYWISEhLCwsNzc3QkJCTU1NWFhYY2Njbm5ueXl5hYWFkJCQm5ubpqamsbGxvLy8
+x8fH0tLS3d3d6Ojo8/PzKwAAVQAAqgAA1QAAADMAKzMAVTMAgDMAqjMA1TMA/zMAAGYAK2YA
+VWYAgGYAqmYA1WYA/2YAAJkAK5kAVZkAgJkAqpkA1ZkA/5kAAMwAK8wAVcwAgMwAqswA1cwA
+/8wAK/8AVf8AgP8Aqv8A1f8AAABVKwBVVQBVgABVqgBV1QBV/wBVADNVKzNVVTNVgDNVqjNV
+1TNV/zNVAGZVK2ZVVWZVgGZVqmZV1WZV/2ZVAJlVK5lVVZlVgJlVqplV1ZlV/5lVAMxVK8xV
+VcxVgMxVqsxV1cxV/8xVAP9VK/9VVf9VgP9Vqv9V1f9V//9VAACqKwCqVQCqgACqqgCq1QCq
+/wCqADOqKzOqVTOqgDOqqjOq1TOq/zOqAGaqK2aqVWaqgGaqqmaq1Waq/2aqAJmqK5mqVZmq
+gJmqqpmq1Zmq/5mqAMyqK8yqVcyqgMyqqsyq1cyq/8yqAP+qK/+qVf+qgP+qqv+q1f+q//+q
+KwD/VQD/gAD/qgD/1QD/ADP/KzP/VTP/gDP/qjP/1TP//zP/AGb/K2b/VWb/gGb/qmb/1Wb/
+/2b/AJn/K5n/VZn/gJn/qpn/1Zn//5n/AMz/K8z/Vcz/gMz/qsz/1cz//8z/K///Vf//qv//
+1f////vwoKCk2AWPPxGsViNa2xjW4wAAAAlwSFlzAAAOzQAADtYBytAvAAAAADNJREFUSEvt
+0jENADAQw8CoAMwf7peDV3vPcsqoBKTA5L55AoxXCRgB/okqASnQiSRgcziJX4ONC7U4ewAA
+AABJRU5ErkJggg==</item>
+<item item-id="8">iVBORw0KGgoAAAANSUhEUgAAAjkAAAAHCAYAAADqBFyZAAAAAXNSR0IArs4c6QAAAARnQU1B
+AACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAA
+AIBJREFUaEPt2dsJACAMA8C6u3v7AsEVDFdwgJ75CNrGmjIECBAgQIAAgTSBXXIMAQIECBAg
+QCBNoNIWsg8BAgQIECBA4PxUXYZeNRwGMiADMiADMiADP2fgrXdecpRdAgQIECBAIFJAyYm8
+VksRIECAAAECSo4MECBAgAABApECE5ZGttPv8pZQAAAAAElFTkSuQmCC</item>
+</binaryContent>
+</worksheet>

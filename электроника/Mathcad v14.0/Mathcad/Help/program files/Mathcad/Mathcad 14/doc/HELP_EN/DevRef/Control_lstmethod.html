@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>ListBox Methods</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Mathsoft Controls\nListBoxes\nListbox Methods");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>ListBox Methods</h1></td>
+	</tr>
+</table>
+
+<h3><a name="AddString">AddString, DeleteString, and InsertString</a></h3>
+
+<p>The <b>AddString</b> method adds a string item to the end of the ListBox list. If the <a href="Control_lstformat.html#Sort">Sort</a> property is TRUE, string appears in the list in its sorted position. The <b>DeleteString</b> method deletes a string item from the ListBox list. The <b>InsertString</b> method inserts a string into the ListBox at a specified index.</p>
+
+<code><i>longRet</i> = ListBox.<b>AddString</b>(<i>strItem</i> as String)<br>
+<i>longRet</i> = ListBox.<b>DeleteString</b>(<i>intItem</i> as Long)<br>
+<i>longRet</i> = ListBox.<b>InsertString</b>(<i>longIndex</i> as Long, <i>strItem</i> as String)<br>
+<br>
+</code>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+	<tr> 
+		<td valign="top"><p><i>longRet</i></p></td>
+		<td valign="top"><p>Returns the index at which string was added.</p></td>
+	</tr>
+	<tr> 
+		<td valign="top"><p><i>strItem</i></p></td>
+		<td valign="top"><p>A string to be added to the ListBox.</p></td>
+	</tr>
+	<tr> 
+		<td valign="top"><p><i>intItem</i></p></td>
+		<td valign="top"><p>A integer indicating the index of the item to remove.</p></td>
+	</tr>
+</table>
+
+<h3><a name="DisableNoScroll">FindString and FindStringExact</a></h3>
+
+<p>The <b>FindString</b> method finds the index of the first item in a ListBox which contains the string argument, as well as other characters. The <b>FindStringExact</b> method searches for the first identical match to the whole string with no additional characters. Search is case independent for both methods. See <a href="#SelectString"><b>SelectString</b></a> to search and select an item.</p>
+
+<code><i>longRet</i> = ListBox.<b>FindString</b>(<i>longStartAfter</i> as Long, <i>strItem</i> as String)<br>
+<i>longRet</i> = ListBox.<b>FindStringExact</b>(<i>longStartAfter</i> as Long, <i>strItem</i> as String)<br>
+<br>
+</code>
+  
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+  <tr> 
+    <td valign="top"><p><i>longRet</i></p></td>
+    <td valign="top"><p>Returns the index at which the string was found or <a href="Control_lststate.html#LBERR">LBERR</a> if not found.</p></td>
+  </tr>
+  <tr> 
+    <td valign="top"><p><i>strItem</i></p></td>
+    <td valign="top"><p>The string to search for.</p></td>
+  </tr>
+  <tr> 
+    <td valign="top"><p><i>longStartAfter</i></p></td>
+    <td valign="top"><p>An integer indicating the index at which to begin search. If set to -1, entire ListBox is searched.</p></td>
+  </tr>
+</table>
+
+<h3><a name="GetText">GetText</a></h3>
+
+<p>The <b>GetText</b> method get the text of an item at a specified index. Note that index is zero based.</p>
+
+<code><i>strRet</i> = ListBox.<b>GetText</b>(<i>longIndex</i> as Long)<br>
+<br>
+</code>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+  <tr> 
+    <td valign="top"><p><i>stRet</i></p></td>
+    <td valign="top"><p>The string at the specified index.</p></td>
+  </tr>
+  <tr> 
+    <td valign="top"><p><i>longIndex</i></p></td>
+    <td valign="top"><p>The integer index at which to find the text.</p></td>
+  </tr>
+</table>
+
+<h3><a name="Recalculate">Recalculate</a></h3>
+
+<p>The <b>Recalculate</b> method recalculates the control. Use within the framework of the Mathcad worksheet to force the scripted object to recalculate. This fires the <a href="Script_StartEvent.html">Start</a>, <a href="Script_ExecEvent.html">Exec</a>, and <a href="Script_StopEvent.html">Stop</a> events. This method can be called from within events the control might listen for, including the <a href="Control_lstevent.html#SelChanged">SelChanged event</a>. After the ListBox recalculates, any dependent expressions in the Mathcad worksheet will also update if AutoCalculate is on.</p>
+
+<code>ListBox.<b>Recalculate</b>()<br>
+<br>
+</code>
+
+<h3><a name="ResetContent">ResetContent</a></h3>
+
+<p>The <b>ResetContent</b> method clears the ListBox by removing all strings from the list.</p>
+  
+<code>ListBox.<b>ResetContent</b>()<br>
+<br>
+</code>
+
+<h3><a name="SelectString">SelectString</a></h3>
+
+<p>The <b>SelectString</b> method selects the string at a specified index of the ListBox.</p>
+
+<code><i>longRet</i> = ListBox.<b>SelectString</b>(<i>longStartAfter</i> as Long, <i>strItem</i> as String)<br>
+<br>
+</code>
+  
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+  <tr> 
+    <td valign="top"><p><i>longRet</i></p></td>
+    <td valign="top"><p>Returns the index of the selected string, or <a href="Control_lststate.html#LBERR">LBERR</a> if no string is found.</p></td>
+  </tr>
+  <tr> 
+    <td valign="top"><p><i>strItem</i></p></td>
+    <td valign="top"><p>The string to select.</p></td>
+  </tr>
+  <tr> 
+    <td valign="top"><p><i>longStartAfter</i></p></td>
+    <td valign="top"><p>The location at which to start searching. -1 indicates to search the entire ListBox.</p></td>
+  </tr>
+</table>
+
+<br>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Minimizing or Maximizing a Function</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <META NAME="MS-HAID" CONTENT="Solving">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Solving\nMinimizing or Maximizing a Function");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Minimizing or Maximizing a Function</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">Minimize(f, var1, var2, ...)<br>
+  </b><b class="hmath">Maximize(f, var1, var2, ...)</b></p>
+  
+<p>Return the values of <span class="math">var1, var2...</span> that satisfy the 
+  constraints in a <a href="Solve_Block.html">Solve Block</a>, and make the function 
+  <span class="math">f (var1, var2, ...)</span> take on its smallest or largest 
+  value, respectively. <b>Minimize </b>and <b>Maximize</b> differ from <a href="find.html"><b>Find</b></a> 
+  and <a href="Approximate_solutions.html"><b>Minerr</b></a> in that they refer 
+  to functions defined outside of the Solve Block, rather than defined in the 
+  body of the Block. Functions are used as objective functions, rather than as 
+  constraints, as they are with <b>Find</b> and <b>Minerr</b>. If you are solving 
+  for <span class="math">n</span> variables, the solve block must have <span class="math">n</span> 
+  equations. The functions choose an appropriate method from a <a href="Solving_algorithms.html">group 
+  of available methods</a>, depending on whether the problem is linear or nonlinear, 
+  and other attributes.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><span class="hmath">var1, var2,...</span> are scalar or array variables 
+    found in the system of equations. Guess values for each variable must be <a href="Defining_a_Variable.html">defined</a> 
+    above the <b>Given</b> keyword, or within the body of the Solve Block. If 
+    solutions are expected to be complex, complex guess values must be used.</li>
+  <li> <span class="hmath">f</span> is a function defined above the solve block. 
+    The function is supplied without its arguments to <b>Maximize</b> and <b>Minimize</b>.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li> The universal notes on constructing <a href="Solve_Block.html">Solve Blocks</a> 
+    apply. Within the body of the block: 
+    <ul>
+      <p><b>Equations:</b> Equations to be solved must be defined using <a href="Equal_to_operator.html">Boolean 
+        equals</a>. Values in the equations and guess values may be defined within 
+        the body of the block using <a href="Equal_sign_for_definition.html">:=</a>.</p>
+      <p><b>Constraints:</b> Inequality constraints, using Boolean operators, 
+        are allowed.</p>
+    </ul>
+  </li>
+  <li>Output may be assigned to a single variable, a vector of explicit variable 
+    names, or a function of argument names in the objective function. The resulting 
+    parameterized solve block can be used either to supply guess values for the 
+    solved variables in the objective function, or to supply parameters in the 
+    objective function or the constraints after the block. Even if the parameters 
+    don't appear in the objective function, they must be named as an argument 
+    to the function. 
+    <p>If the solved variables have different units, they may only be assigned 
+      to an explicit vector of names, to avoid mixed units in matrices.</p>
+  </li>
+  <li>When there is one unknown scalar variable, the solution is a scalar. Otherwise 
+    the solution is a vector whose first element is <span class="math">var1</span>, 
+    second element is <span class="math">var2</span>, and so on. You cannot solve 
+    for a single element of a vector used in the block. All vector values are 
+    adjusted simultaneously to minimize the error.</li>
+  <li>The Levenberg-Marquardt method is not available for <b>Maximize</b> and 
+    <b>Minimize</b>.</li>
+  <li><a href="Accuracy.html">TOL and CTOL</a> can affect the solution to nonlinear 
+    systems. Setting these values too small may cause the solver to not converge. 
+    If adjusting these parameters does not help, try different guess values, or 
+    add an inequality constraint. </li>
+  <li>If there are no constraints, the keyword <b>Given</b> is not necessary, 
+    and <b>Maximize</b> and <b>Minimize</b> may be used without a Solve Block, 
+    like a multivariable version of <a href="Finding_roots.html"><b>root</b></a>. 
+    They still require guess variables. </li>
+</ul>
+
+<p>
+	<object CLASSID="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+	</object>
+</p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Solving\\nonlinop.xmcd')"
+	   class="fakelink">QuickSheet - Nonlinear Optimization</a></h5>
+	   
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Solving\\linprogr.xmcd')"
+	   class="fakelink">QuickSheet - Linear Programming</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Approximate Solutions of Equations','Approximate_solutions.html','Finding Roots','Finding_roots.html','Mathcad Solve Block','Solve_Block.html','Solver Algorithms and AutoSelect','Solving_algorithms.html','Solving Linear Systems','solving_linear_systems.html','Solving Systems of Equations','find.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

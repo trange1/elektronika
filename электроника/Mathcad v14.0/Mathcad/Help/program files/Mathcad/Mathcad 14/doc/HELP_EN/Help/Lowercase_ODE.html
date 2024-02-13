@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Final-Value Ordinary Differential Equation Solvers</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Final-Value Ordinary Differential Equation Solvers</h1></td>
+	</tr>
+</table>
+
+<p>These functions are deprecated. Please use or switch to the <a href="Differential_equation_solvers.html">uppercase ODE solvers</a> or an ODE solve block. We expect to support these functions only for the next two versions of Mathcad.</p>
+
+<p>The properties of each of these solvers are the same as the <a href="Differential_equation_solvers.html">corresponding uppercase functions</a>, but they calculate fewer values of the solution. Instead of specifying the number of points in the result, specify the level of accuracy, and allow the functions to generate a solution at the required number of points along the interval.</p>
+
+<p><b class="hmath">bulstoer(init, x1, x2, acc, D, kmax, s)</b> Smooth systems using the Bulirsch-Stoer method.</p>
+
+<p><b class="hmath">rkadapt(init, x1, x2, acc, D, kmax, s)</b> Fourth-order Runge-Kutta with adaptive step size.</p>
+
+<p><b class="hmath">stiffb(init, x1, x2, acc, D, AJ, kmax, s)</b> uses the Bulirsch-Stoer 
+  method for stiff systems.</p>
+  
+<p><b class="hmath">stiffr(init, x1, x2, acc, D, AJ, kmax, s)</b> uses the Rosenbrock 
+  method for stiff systems.</p>
+  
+<p><b class="hmath">radau(init, x1, x2, acc, D, kmax, s)</b> uses the RADAU5 method 
+  for stiff systems.</p>
+  
+<p>Each of these functions returns a matrix in which the first column contains, at minimum, <span class="math">x1</span> and <span class="math">x2</span>, and subsequent columns contain the corresponding values of the solution(s) to the <span class="math">n</span>th-order <acronym lang="en" title="Ordinary Differential Equation">ODE</acronym>(s), and the <span class="math">n&nbsp;&minus;&nbsp;1</span> derivatives of the solution(s).</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><b class="hmath">init</b> is either a vector of <span class="math">n</span> real initial values or a single scalar initial value, in the case of a single ODE.</li>
+  <li><span class="hmath">x1</span> and <span class="hmath">x2</span> are real, scalar endpoints of the interval over which the solution to the ODE(s) will be evaluated. Initial values in <b class="math">init</b> are the values of the ODE function(s) evaluated at <span class="math">x1</span>.</li>
+  <li><span class="hmath">acc</span> is a real, scalar accuracy. Small <span class="math">acc</span> forces smaller steps along the solution trajectory, increasing the accuracy of the solution. Values of <span class="math">acc</span> around 0.001 generally yield accurate solutions.</li>
+  <li><b class="hmath">D(x,y)</b> is an <span class="math">n</span>-element vector-valued function of the independent variable, <span class="math">x</span>, and a vector of functions, <b class="math">y</b>, containing the equations for the <i>first derivatives</i> of all unknown functions in the system of ODEs. To create this vector, cast your equation(s) with a first derivative term by itself on the left-hand-side, with no multipliers, and no higher order derivatives in the equation. For example, a single ODE of the function <span class="math">y(x)</span> which contains a second derivative must be written as a system of equations in <span class="math">y<sub>0</sub>(x)</span> and <span class="math">y<sub>1</sub>(x)</span>, where the first derivative of <span class="math">y<sub>0</sub></span> is <span class="math">y<sub>1</sub></span>.</li>
+
+  <li><b class="hmath">AJ</b> is a function which returns an <span class="math">n&nbsp;&times;&nbsp;(n&nbsp;+&nbsp;1)</span> matrix of partial derivatives of the system of equations in <b class="math">D</b>. The first column contains the derivatives with respect to <span class="math">x</span>; the remaining columns form the Jacobian matrix (partials with respect to <span class="math">y<sub>n</sub></span>) for the system of differential equations.</li>
+  
+  <li><span class="hmath">kmax &ge; 2 </span> is the integer number of intermediate points at which the solution will be approximated.</li>
+	
+  <li><span class="hmath">s</span> is a real number representing the minimum spacing between intermediate <span class="math">x</span>-values at which the solutions are to be approximated.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li>The number of intermediate values returned depends on a combination of <span class="math">acc</span>, 
+    <span class="math">kmax</span> and <span class="math">s</span>.</li>
+  <li> The functions <b class="math">D</b> and <b class="math">AJ</b> are provided to the solver without their arguments, and the functions <span class="math">y<sub>n</sub>(x)</span> are specified in <b class="math">D</b> and <b class="math">AJ</b> without their argument. The second argument to <b class="math">D</b> and <b class="math">AJ</b> must be subscripted as a vector, even if there is only a single entry.</li>
+  <li>You may wish to use <a href="ode_solve.html">ODE Solve Blocks</a> to simplify the entry of your equations and initial conditions.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

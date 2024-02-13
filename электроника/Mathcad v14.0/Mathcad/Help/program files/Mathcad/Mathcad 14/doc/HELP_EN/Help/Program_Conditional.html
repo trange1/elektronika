@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Conditional (if and otherwise) Operators</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Programming">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Programming\nConditional Operators");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top">
+      <h1>Conditional (if and otherwise) Operators</h1>
+    </td>
+	</tr>
+</table>
+
+<h3><a name="If">if</a></h3>
+
+<p class="blockindent">Keystroke: <b>[}]</b></p>
+
+<p class="blockindent"><i>Do not type the word &quot;if.&quot; It does not produce the operator.</i></p>
+
+<p class="vmathindent">x&nbsp;if&nbsp;y</p>
+
+<p class="blockindent">Evaluates <span class="math">x</span> if <span class="math">y</span> is nonzero 
+  (true). The enclosing program proceeds to the next line regardless of whether 
+  <span class="math">x</span> is evaluated or not. Conditional statements allow 
+  Mathcad to execute or skip certain calculations. Use a conditional statement 
+  whenever you want to direct program execution along a particular branch.</p>
+  
+<h3><a name="Otherwise">otherwise</a></h3>
+
+<p class="blockindent">Keystroke: <b>[Ctrl]&nbsp;[Shift]&nbsp;]</b></p>
+
+<p class="blockindent"><i>Do not type the word &quot;otherwise.&quot; 
+  It does not produce the operator.</i></p>
+  
+<p class="vmathindent">x otherwise</p>
+
+<p class="blockindent">Evaluates <span class="math">x</span> if the <b>if</b> statement immediately preceding <span class="math">x</span> is 0 (false). The <b>otherwise</b> 
+  operator only works with the <b>if</b> operator. In the following example,</p>
+  
+<p class="doubleindent"><img src="Graphics/prog_if6.gif" alt="otherwise operator" width="222" height="59" border="0"></p>
+
+<p class="blockindent">the function returns <span class="math">0</span> if <span class="math">x</span> 
+  is greater than <span class="math">2</span> or less than <span class="math">&minus;2</span>. 
+  When <span class="math">x</span> is between <span class="math">&minus;2</span> 
+  and <span class="math">2</span>, the function returns the square root of <span class="math">4 
+  &minus; x<sup>2</sup></span>.</p>
+  
+<h4>Operands:</h4>
+
+<ul type="disc">
+  <li><span class="hmath">x</span> is any valid Mathcad expression.</li>
+  <li><span class="hmath">y</span> is any valid Mathcad expression that can evaluate 
+    to <span class="math">0</span> in some cases. Only the return value of <span class="math">y</span> 
+    is considered; it can be a <a href="Boolean_toolbar.html">boolean expression</a> 
+    or any other Mathcad expression. For example, a <a href="Local_Assignment_Operator.html">local 
+    assignment</a> or a sequence of programming steps is allowed.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul>
+  <li>Each conditional evaluation is considered on its own. When Mathcad encounters 
+    several sequential <b>if</b> statements at the same level, it evaluates 
+    each <b>if</b> statement in turn, regardless of the results of the previous statement. 
+    If you wish to evaluate an expression based on whether a particular <b>if</b> 
+    statement evaluates as true or false, use the <b>otherwise</b> operator. 
+
+    <p class="blockindent"><img src="Graphics/otherwise.gif" alt="otherwise operator" width="182" height="127" border="0"></p>
+
+</li>
+   <li>If you use more than one <b>if</b> statement before an <b>otherwise</b> 
+      statement, the otherwise statement is executed only when all previous conditions 
+      are false. However, all previous <b>if</b> statements continue to be evaluated 
+      regardless of the results of the previous <b>if</b>. In the example above <span class="math">fy(5) 
+      = 9</span> and <span class="math">fy(2) = 1</span>. There is no &quot;else if&quot; 
+      or &quot;case&quot; statement in Mathcad that allows you to switch on multiple cases, 
+      other than to use nested <b>if ... otherwise</b> pairs.
+  </li>
+</ul>
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Programming\\condtnl.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Defining a Function with a Program','Defining_a_Program.html','Error Handling in Programs','Program_error.html','Exiting Loops and Programs','Program_Control.html','Program Debugging','Program_debugging.html','Program Loops','Program_Loops.html','Programming','Programming.html','Programming Operator','Add_line_operator.html','Programming Toolbar','Programming_toolbar.html','Recursion','Recursion.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

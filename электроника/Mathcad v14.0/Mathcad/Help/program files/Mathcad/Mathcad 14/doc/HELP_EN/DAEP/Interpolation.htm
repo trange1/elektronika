@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Interpolation Functions</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+ <link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Interpolation Functions");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DAEP.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Interpolation Functions</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath"><a name="bicubic2D">Bicubic2D(vx, vy, Z, p, q)</a></b> Takes two sorted vectors of real points <b class="math">vx</b> and <b class="math">vy</b>, 
+  their corresponding matrix of real values, <b class="math">Z</b>, and two real 
+  scalars <span class="math">p</span> and <span class="math">q</span> containing 
+  an intermediate point within the range of <b class="math">vx</b> and <b class="math">vy</b>. 
+  Returns the scalar interpolated value at <span class="math">(p,q)</span>.</p>
+
+
+<p><b class="hmath"><a name="polycoeff">polycoeff(vx, vy)</a></b> Takes two real vectors of the same length 
+ <b class="math">vx</b> and <b class="math">vy</b> and returns the 
+ coefficients of the interpolating polynomial function.</p>
+
+<p>Returns a vector of length(<b class="math">vx</b>)-1 containing 
+ the polynomial coefficients, beginning with the lowest order coefficient.</p>
+
+<p><b class="hmath"><a name="polyint">polyint(vx, 
+ vy, x)</a></b> Takes two real-valued vectors of the same 
+ length <b class="math">vx</b> 
+ and <b class="math">vy</b>, and 
+ a real scalar point, <span class="math">x</span>, 
+ at which to interpolate a value using a polynomial function, then returns 
+ a two-element vector containing the interpolated value of the function 
+ and an estimate of the error. </p>
+
+<p><b class="hmath"><a name="polyiter">polyiter(vx, vy, x, N, e)</a></b> Takes two real vectors of the same length 
+ <b class="math">vx</b> and <b class="math">vy</b>; a real scalar 
+ point, <span class="math">x</span>, 
+ at which to interpolate a value using a polynomial function; the integer 
+ maximum order of the polynomial, <span class="math">N</span>, 
+ which cannot be larger than one less than the number of points in <b class="math">vx</b>; and an error, 
+ <span class="math">e</span>, which is 
+ a real scalar.</p>
+
+<p><b class="hmath"><a name="rationalint">rationalint(vx, 
+ vy, x)</a></b> Takes two real vectors of the same length, 
+ <b class="math">vx</b> and <b class="math">vy</b>, and a real scalar 
+ <span class="math">x</span>, the point 
+ at which to interpolate a value using rational functions.</p>
+
+<p><b class="hmath"><a name="Spline2">Spline2(<b>vx, 
+ vy, n, [vw], [u], [level]</b>)</a></b> Takes two real vectors <b class="math">vx</b> 
+ and <b class="math">vy</b>, of 
+ identical length; <span class="math">n</span>, 
+ an integer indicating the degree (1, 2, or 3) of polynomials used for the Bspline; an optional 
+ vector of weights for the spline, <b class="math">vw</b>, 
+ of the same length as <b class="math">vx</b> 
+ and <b class="math">vy</b>; an 
+ optional vector of user-defined knots for the Bspline, <b class="math">u</b>, 
+ which should be shorter than <b class="math">vx</b>; 
+ and an optional argument <span class="math">level</span>, 
+ the reject level expressed as a percentage between 0 and 1, inclusive.</p>
+
+<p>Results vector contains the new knots for interpolation, coefficients for the bsplines, and other statistical information.  Results are used with <a href="#Binterp">Binterp</a> to get interpolated values.</p>
+
+
+
+<p><b class="hmath"><a name="Binterp">Binterp(x, b)</a></b> The interpolation routine for <a href="#Spline2">Spline2</a>; 
+ takes a real scalar <b class="math">x</b> 
+ to interpolate and the output vector, <b class="math">b</b>, 
+ of Spline2, and returns a four-element vector containing the interpolated 
+ value, and its first, second, and third derivatives.</p>
+
+
+
+<p><b class="hmath"><a name="DWS">DWS(b)</a></b> Takes a vector, <b class="math">b</b>, 
+ the result vector from the <a href="#Spline2">Spline2</a> function and 
+ returns the Durbin-Watson statistic of the spline.</p>
+
+
+
+<p><b class="hmath"><a name="Thiele">Thiele(vx, coeff, x)</a></b> Takes a real vector <b class="math">vx</b>, 
+ the output vector of <a href="#Thielecoeff">Thielecoeff</a>, <b class="math">coeff</b>, 
+ and the evaluation point <span class="math">x</span>, 
+ and returns the interpolated <span class="math">y</span>-value at <span class="math">x</span>. 
+ <span class="math">x</span> must be a real scalar.</p>
+
+
+
+<p><b class="hmath"><a name="Thielecoeff">Thielecoeff(vx, vy)</a></b> Takes two real vectors of the same length, <b class="math">vx</b> and <b class="math">vy</b>, 
+  and returns a vector of the same length as <b class="math">vx</b> containing 
+  the continued fraction coefficients to interpolate the data.</p>
+
+<hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

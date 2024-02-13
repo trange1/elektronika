@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Events for Scriptable Objects</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Scripting Custom OLE Objects\nEvents for Scriptable Objects");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Events for Scriptable Objects and Controls</h1></td>
+	</tr>
+</table>
+
+<p>The <a href="ScriptableObject.html">scripting component</a> uses an event-driven model framework. The model defines three basic events:</p>
+
+<ul type="disc">
+	<li> <a href="Script_StartEvent.html">Start</a> </li>
+	<li><a href="Script_ExecEvent.html">Exec</a> </li>
+	<li><a href="Script_StopEvent.html">Stop</a></li>
+</ul>
+
+<p>These are triggered by Mathcad as the worksheet is recalculated, when internal scripted conditions have been met (such as when data is received back from an external application), when a user clicks or pushes a button, or when a file is read and converted. In addition, you may wish to use the events defined for Mathsoft Controls: <a href="Control_btnevents.html">buttons</a>, <a href="Control_lstevent.html">list boxes</a>, and <a href="Control_sldevent.html">sliders</a>.</p>
+
+<p>There will be event functions associated with any scriptable OLE object’s type library. Check the Automation reference for any application which you are trying to script in order to provide appropriate event handler functions in a Mathcad component, as required.</p>
+
+<h3>Syntax in VBScript and JScript</h3>
+
+<p>The event function syntax is language-specific. Most scripting languages provide a standard mechanism for event functions, usually a combination of the object which defines the event (&quot;sources&quot; the event) and the name of the event. VBScript, for example, uses the name of the event source, followed by an underscore, followed by the event name.</p>
+
+<code> 
+Sub MyEventSrc_Event1()<br>
+'add your code here<br>
+End Sub<br>
+</code>
+  
+<p>The examples in this section use this VBScript syntax for the Start, Exec, and Stop events, as well as for those associated with the Mathsoft <a href="Controls.html">Controls</a> classes. JScript event handlers are case sensitive, whereas VBScript's are not. JScript's event mechanism specifies the event by the object name followed by a double colon (::) followed by the event name.</p>
+
+<code>
+function MyEventSrc::Event1()<br>
+{<br>
+<span class="blockindent">// add your code here</span><br>
+}<br>
+<br>
+</code>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

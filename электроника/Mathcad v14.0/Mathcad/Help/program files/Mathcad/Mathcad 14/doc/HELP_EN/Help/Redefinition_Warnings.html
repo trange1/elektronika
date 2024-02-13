@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Redefinition Warnings</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Redefinition Warnings</h1></td>
+	</tr>
+</table>
+
+<p>Mathcad will warn you whenever an expression redefines an existing function, 
+ variable, unit, or matrix by flagging them with a wavy green underscore. 
+ You can change the default setting for warnings on the <a href="Dialog_Preferences.html#Warnings">Warnings</a> 
+ tab of the Preferences dialog.</p>
+
+<p>In addition, Mathcad will also warn you if a redefinition occurs within 
+ a <a href="#collapsed">collapsed area</a> or a <a href="#Referenced">referenced 
+ worksheet</a>.</p>
+
+<p>Redefinition warnings can be turned on and off with the keystroke sequence 
+ <b>[Ctrl]&nbsp;[Shift]&nbsp;R</b>.</p>
+
+<h3>Mathcad built-in functions</h3>
+
+<p class="blockindent">The flagged expression overrides the definition of an existing function. 
+ When you redefine a function as a variable, its original definition as 
+ a function is no longer available in the worksheet and may result in errors 
+ if used after the redefinition.</p>
+
+<p class="blockindent">Certain functions will not be flagged if they are redefined: <a href="if_function.html">if</a>, 
+  <a href="find.html">Find</a>, <a href="Maximizing_or_minimizing_a_function.html">Maximize</a>, 
+  <a href="Approximate_solutions.html">Minerr</a>, <a href="Maximizing_or_minimizing_a_function.html">Minimize</a>, 
+  <a href="ode_solve.html">Odesolve</a>, and <a href="PDE_solve.html">Pdesolve</a>. 
+  Additionally, the functions <a href="Maxima_and_minima.html">min</a>, <a href="F_Distribution.html">pF</a>, 
+  and <a href="Trigonometric_functions.html">sec</a> are also the names of built-in 
+  units; redefining one of these three functions will only be reported as a unit 
+  redefinition.</p>
+
+<h3><a name="unit">Mathcad built-in units</a></h3>
+
+<p class="blockindent">The flagged expression overrides the definition of an existing unit. This applies 
+  to all units, regardless of the unit system in use. If <a href="Dialog_Worksheet_Options.html#UnitSystem">no unit system</a> is in use in the worksheet, 
+  redefining a built-in unit such as <b>m</b> (meters) will not be flagged, as 
+  built-in units are undefined.</p>
+
+<p class="blockindent"><a href="Maxima_and_minima.html">min</a>, <a href="F_Distribution.html">pF</a>, 
+  and <a href="Trigonometric_functions.html">sec</a> are also the names of Mathcad 
+  functions. They will only be flagged as unit redefinitions, and not as function 
+  redefinitions.</p>
+
+<h3>Mathcad built-in constants</h3>
+
+<p class="blockindent">The flagged expression overrides the definition of a built-in constant. 
+ Mathcad's built-in constants are e, <span style="font-family: Symbol, serif;">p</span>, &infin;, and %.</p>
+
+<h3>Mathcad built-in variables</h3>
+
+<p class="blockindent">The flagged expression overrides the definition of one of Mathcad's 
+ built-in variables. Some built-in variables &mdash; such as <a href="Array_origin.html">ORIGIN</a> 
+ &mdash; affect features from solve blocks to matrices to the writing of structured 
+ data files. Built-in variables should never be used for anything other 
+ than their intended purpose.</p>
+
+<p class="blockindent">The following built-in variables will be flagged if they are redefined:</p>
+
+<table class="doubleindent" cellspacing=1 width="75%">
+<col width="33%">
+<col width="33%">
+<col width="33%">
+<tr>
+<td><p><a href="Built_in_constants.html#system">FRAME</a></p></td>
+<td><p><a href="Accuracy.html">CTOL</a></p></td>
+<td><p><a href="Accuracy.html">TOL</a></p></td>
+</tr>
+<tr>
+<td><p><a href="Array_origin.html">ORIGIN</a></p></td>
+<td><p><a href="Current_working_directory.html">CWD</a></p></td>
+<td><p><a href="Built_in_constants.html#system">ERR</a></p></td>
+</tr>
+<tr>
+<td><p><a href="Built_in_constants.html#system">PRNCOLWIDTH</a></p></td>
+<td><p><a href="Built_in_constants.html#system">PRNPRECISION</a></p></td>
+<td><p>in0&minus;in9</p></td>
+</tr>
+</table>
+
+<h3>Previously defined functions or variables</h3>
+
+<p class="blockindent">The flagged expression overrides a function previously 
+  defined in your worksheet. When you redefine a function as a variable, its original 
+  definition as a function is no longer available in the worksheet. Note that 
+  global definitions of variable names will never be flagged with redefinition 
+  warnings, because of the order in which they are evaluated in a worksheet.</p>
+
+<h3>Previously defined matrices</h3>
+
+<p class="blockindent">When a matrix is redefined, complications may arise if the redefined 
+ matrix contains fewer rows and/or columns than the original. Because 
+ matrices are overwritten on an element-by-element basis, existing elements 
+ outside the range of the redefinition will not be nullified and may cause 
+ problems in your worksheet.</p>
+
+<h3><a name="Collapsed">One or more expressions in this collapsed area redefine 
+ an existing definition</a></h3>
+
+<p class="blockindent"><a href="Areas.html">Collapsed areas</a> allow you to hide regions in your 
+  worksheet. However, because these regions are not visible within the worksheet, you may 
+  not be aware of a redefinition that may cause an error or incorrect result in 
+  your worksheet. Expanding the area will display the problem expression.</p>
+
+<p class="blockindent">Regardless of the display settings for the collapsed area, the icon 
+ will be visible when a collapsed area is flagged due to a redefinition.</p>
+
+<h3><a name="Referenced">One or more expressions in this referenced worksheet 
+ redefine an existing definition</a></h3>
+
+<p class="blockindent"><a href="Referenced_worksheets.html">Referenced worksheets</a> allow 
+  you to include expressions from one worksheet within another, without retyping them. However, since these expressions are not visible within your 
+  worksheet, you may not be aware of their contents. Double-clicking on the reference 
+  will open the worksheet for editing.</p>
+
+<h4>Note:</h4>
+
+<ul type="disc">	
+	<li><p>Since the referenced worksheet and the worksheet 
+ containing the reference are two separate files, the problem expression 
+ may not be flagged when you attempt to find it. For this reason, you should 
+ be very careful to compare the contents of the two worksheets when tracking 
+ down a redefinition in a referenced file.</p></li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

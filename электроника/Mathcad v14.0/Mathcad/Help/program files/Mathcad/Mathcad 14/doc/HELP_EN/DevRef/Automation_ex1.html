@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Automation Example: Visual Basic</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Automation Interfaces\nThe Mathcad Automation API\nAutomation Example: Visual Basic");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Automation Example: Visual Basic Form</h1></td>
+	</tr>
+</table>
+
+<p>It is useful to build a &quot;front end&quot; to a Mathcad worksheet if non-Mathcad users are required to enter values and run calculations in the sheet, without needing to manipulate the equations. In this example, we build a VB form application that allows the user to select a Mathcad worksheet, input a single variable from a selected set, and returns the results of the worksheet back to the form using <a href="Automation.html">Automation</a>. The finished application will look like this:</p>
+
+<p class="blockindent"><img src="Graphics/automation_app.gif" alt="A simple front end for choosing a load from a predetermined list and returning the stress it generates" width="343" height="264"></p>
+
+<h3>Setting Up the Environment</h3>
+
+<p>This example was developed using Microsoft's Visual Studio .NET. You will want to load the <a href="IMathcadApplication_Overview.html">Mathcad Automation classes</a> into your Project so that they show up in autofill as you type. Create a new VB Windows Application Project in Visual Studio. Choose <b>Project > Add Reference</b>, and then, from the COM tab, choose <b><a href="IMAEnumerations.html">Mathcad Automation 1.0 Type Library</a></b>.</p>
+
+<p>The application interface in this example was built using the Form Designer that opens when you create a new VB Windows app. When starting from scratch, place and name the appropriate input and output fields, then double-click on any form field to edit the code. Add all of the Automation classes and other control code that make the buttons interact with Mathcad.</p>
+
+<p>There are some important techniques you should use when coding a VB application to control Mathcad.</p>
+ 
+<ul type="disc">
+	<li>You must dimension the variable names representing the <a href="IMathcadApplication.html">Mathcad.Application</a>, <a href="IMathcadWorksheets.html">Mathcad.Worksheets</a>, and <a href="IMathcadWorksheet.html">Mathcad.Worksheet</a> objects at the start of your application. The <b>Mathcad.Application</b> object allows you to open and close the application, the <b>Mathcad.Worksheets</b> object opens and keeps track of the child worksheet(s) of the Application object, and the <b>Mathcad.Worksheet</b> object controls the values, recalculation, saving, closing, and other operations for a particular worksheet.</li>
+	<li>All values set using <a href="IMWSetValue.html">Mathcad.Application.Worksheet.SetValue</a> are set before other evaluations in the worksheet take place. Beware of resetting or reusing variable names in your calculations, you may wish to make external variable names unique.</li>
+	<li>You should specifically release memory used by Mathcad after you are done working with the Mathcad.Application object.</li>
+</ul>
+
+<p>This example code, as well as the project in Visual Studio, is located in the <b>qsheet/samples/vbasic/beamdef</b> folder in your Mathcad install directory.</p>
+
+<h3>Code</h3>
+
+<code>
+Public Class Form1<br>
+Inherits System.Windows.Forms.Form<br>
+<br>
+<span class="comment">'Dimension Objects using Intellisense</span><br>
+Dim MC As <a href="IMathcadApplication.html">Mathcad.Application</a><br>
+Dim WK As <a href="IMathcadWorksheets.html">Mathcad.Worksheets</a><br>
+Dim WS As <a href="IMathcadWorksheet.html">Mathcad.Worksheet</a><br>
+<br>
+#Region &quot; Windows Form Designer generated code &quot;<br>
+<span class="comment">[code snipped here for brevity - this is autogenerated by Visual Studio]</span><br>
+#End Region<br>
+<br>
+Private Sub ExitButton(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitButton.Click<br>
+<br>
+<span class="comment">'The Cleanup subroutine (see below) closes the application objects in the <br>
+'.NET Environment and releases the memory taken up by the Mathcad executable<br>
+'Cleanup() is called only if a process was started, and only on exiting the application</span><br>
+If IsNothing(MC) = False Then<br>
+&nbsp;&nbsp;&nbsp;Cleanup()<br>
+End If<br>
+End Sub<br>
+<br>
+Private Sub CalculateButton(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalculateButton.Click<br>
+<br>
+<span class="comment">'Dimension the force and file path variables used in the script</span><br>
+Dim Load As Integer<br>
+Dim Path As String<br>
+<br>
+<span class="comment">'Extract the path to the Mathcad file from the first text box (MathcadPath)</span><br>
+Path = MathcadPath.Text<br>
+<br>
+<span class="comment">'Create the Mathcad application object if one does not already exist</span><br>
+If IsNothing(MC) = True Then<br>
+<br>
+&nbsp;&nbsp;&nbsp;MC = CreateObject(&quot;<a href="IMathcadApplication.html">Mathcad.Application</a>&quot;)<br>
+<br>
+&nbsp;&nbsp;&nbsp;<span class="comment">'Open the Mathcad sheet found at the specified path. If the sheet is not found,<br>
+&nbsp;&nbsp;&nbsp;'trap the error and return a message stating that it could not be found. Allow<br>
+&nbsp;&nbsp;&nbsp;'the user to update the path by returning focus to the App.</span><br>
+&nbsp;&nbsp;&nbsp;Err.Number = 0<br>
+&nbsp;&nbsp;&nbsp;On Error Resume Next<br>
+&nbsp;&nbsp;&nbsp;WK = <a href="IMathcadWorksheets.html">MC.Worksheets</a><br>
+&nbsp;&nbsp;&nbsp;WS = <a href="IMWsOpen.html">WK.Open(Path)</a><br>
+<br>
+&nbsp;&nbsp;&nbsp;If Err.Number &lt;&gt; 0 Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MsgBox(&quot;File not found!&quot;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exit Sub<br>
+&nbsp;&nbsp;&nbsp;End If<br>
+&nbsp;&nbsp;&nbsp;On Error GoTo 0<br>
+<br>
+End If<br>
+<br>
+<span class="comment">'Assign the input value from the combobox (InputLoad) to the variable Load</span><br>
+Load = InputLoad.SelectedItem<br>
+<span class="comment">'Note that Load is currently cast as an integer.</span><br>
+<br>
+<span class="comment">'Pass Load to the Mathcad sheet where it is bound to a Mathcad variable called F</span><br>
+WS.SetValue(&quot;F&quot;, Load)</span><br>
+<br>
+<span class="comment">'Extract the variable Smax from the Mathcad sheet, treat it as a string, and place<br>
+'it in the third text box (MaxStress), now enabled on the form</span><br>
+MaxStress.Enabled = True<br>
+MaxStress.Text = WS.GetValue(&quot;Smax&quot;).AsString<br>
+End Sub<br>
+<br>
+Sub Cleanup()<br>
+<br>
+<span class="comment">'Close the Mathcad application running in the background and do not prompt to save<br>
+'changes</span><br>
+WS.Close(<a href="IMWClose.html">Mathcad.MCSaveOption.mcDiscardChanges</a>)<br>
+System.Runtime.InteropServices.Marshal.ReleaseComObject(WK)<br>
+System.Runtime.InteropServices.Marshal.ReleaseComObject(WS)<br>
+System.Runtime.InteropServices.Marshal.ReleaseComObject(MC)<br>
+<br>
+End Sub<br>
+<br>
+Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load<br>
+<br>
+<span class="comment">'Populate the combobox with the desired loads available to the user</span><br>
+InputLoad.Items.Add(&quot;10&quot;)<br>
+InputLoad.Items.Add(&quot;15&quot;)<br>
+InputLoad.Items.Add(&quot;20&quot;)<br>
+InputLoad.Items.Add(&quot;25&quot;)<br>
+InputLoad.Items.Add(&quot;30&quot;)<br>
+<br>
+<span class="comment">'The values of items could also be calculated, based on the index, or<br>
+'this could be a free entry text box, requiring error checking and<br>
+'type conversion.</span><br>
+<br>
+<span class="comment">'ComboBox defaults to the first item on the list, 10<br>
+'Units are added in the Mathcad worksheet - they cannot be passed here<br>
+<br>
+'The combobox defaults to its first entry</span><br>
+InputLoad.SelectedIndex = 0<br>
+<br>
+End Sub<br>
+End Class<br>
+<br>
+</code>
+	
+<h4>Notes:</h4>
+
+<ul type="disc">
+	<li>To run a VB application compiled under Visual Studio .NET, you must be using Windows XP, or you must download and install a .NET Framework from Microsoft at <a href="http://www.microsoft.com" target="_top">http://www.microsoft.com</a>.</li>
+	<li>If you choose to move the executable file you must place the Interop.Mathcad.dll file in the same directory as the Mathcad Automation Example.exe or put it in the Global Access Cache (GAC). For more information on the GAC, please visit <a href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpguide/html/cpconinstallingassemblyintoglobalassemblycache.asp" target="_top">http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpguide/html/cpconinstallingassemblyintoglobalassemblycache.asp</a></li>
+	<li>You may wish to examine another <a href="Automation_vbembed.html">Visual Basic example</a> using an embedded Mathcad object.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

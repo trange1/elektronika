@@ -1,0 +1,174 @@
+// 11-May-99 $$1  MYA  Created.
+// 04-Oct-99 $$2  MYA  Add DefName.
+// 22-Oct-99 $$3  MAZ  Fix CmdTypes and Rm obsolete pkgs
+// 16-Nov-99 $$4  JJE  Add uninstall
+// 29-Nov-99      MYA  remove PossibleArchs, PossibleLangs
+// 06-Dec-99 $$5  MAZ  Add missing uninstall entry
+// 08-Dec-99 $$6  JJE  Add mech icon section
+// 04-Feb-00 $$7  MYA  Add AeKeyDir
+// 16-Aug-00 $$8  TWH  fix case of property tags
+// 18-Oct-00 $$9  JJE  Change to lowercase aekeydir
+// 30-Jan-01 $$10  TWH  Add CmdType Prop values
+// 14-Nov-01 $$11 JJE  Turn off Mech by default for ProE cd
+// 31-Jan-02 $$12 MAZ  Use ptchostid script
+// 08-Apr-02 $$13 TWH  Drop aekeydir
+// 11-Jun-02 $$14 ALG  SPR 952386: Remove Integrated Mode configuration
+// 15-Jul-02 $$15 JJE  Reference external mechhelp package
+// 24-Jul-02 $$16 JJE  Add ScreenLicAgree for mech sneak peek
+// 26-Nov-02 J-03-38+  $$17   MAZ  SPR 988325: Use HostArchs for mech 
+// 16-Jan-03 J-03-39+         MAZ  SPR 998309: Add mechInstall, rm mech_icon
+// 16-Jan-03 J-03-40+  $$18   MAZ  SPR 998309: Add mechInstall, rm mech_icon
+// 14-Mar-03 J-03-42+         MAZ  SPR 1006430: Add PossibleLangs (like student)
+// 24-Mar-03 K-01-03   $$19   MAZ  SPR 1006430: Add PossibleLangs (like student)
+// 04-Mar-03 K-01-06   $$20   TWH  LpcfgWindows->ScreenWindows
+// 20-Jun-03 J-03-45+         JJE  SPR 1024619: Add ia64_nt
+// 20-Jun-03 K-01-09   $$21   JJE  Sub to K01
+// 21-Jul-03 K-01-11 $$22  JJE  Add ptcborrow and ptcreturn scripts
+// 25-Aug-03 K-01-13 $$23  TWH  Add WelcomeImage
+// 27-Aug-03 K-01-13+  $$24   TWH  Add back tooltip
+// 07-Oct-03 K-01-16          TWH  Add Ad_list
+// 07-Oct-03 K-01-16   $$25   MAZ  Change pkg name to Mechanica
+// 14-Oct-03 K-01-16 $$26  JJE  Remove borrow scripts for now
+// 15-Mar-04 K-01-25 $$27  TWH  New Ad list
+// 28-Feb-05 K-03-20 $$28  TWH  New Ad list
+// 26-May-05 K-03-23+      MAZ  SPR 1147561: support i486_linux in PTC.Setup
+// 26-May-05 K-03-24+ $$29 MAZ  Update from K-03-23 
+// 22-JUN-05 K-03-26  $$30 MTP  x86e_win64 support
+// 25-OCT-05 K-03-34  $$31 MTP  sun_solaris_x64 support
+// 03-Jan-06 K-03-39  $$32 TWH  drop mmotion CmdType and shortcut
+// 24-Feb-06 K-03-39+ $$33 TWH  1185042: Undo SPR 1147561: support i486_linux
+// 24-May-06 K-03-42  $$34 JJE  Name change
+
+(Product promech 
+    (WelcomeImage              "promech_name.gif")
+    (Name                      "Pro/ENGINEER Mechanica")
+    (OldName                   "Structure and Thermal Simulation")
+    (Packages                  "promech_pkg" 
+                               "ptcutil"
+                               "mechhelp"
+                               "vermodels"
+                               "getstarted"
+                               "uninstall") 
+    (ProgramFiles              True)
+    (LpDirName                 "mech")
+    (Screens                   "ScreenLicAgree"
+                               "ScreenProd")
+    (Installed                 False)
+    (HostArchs                 "sun4_solaris" 
+                               "sun4_solaris_64"
+                               "sun_solaris_x64"
+                               "hpux11_pa32"
+                               "hpux_pa64"
+                               "sgi_elf4"
+                               "x86e_win64"
+                               "i486_nt")
+    (PossibleLangs             "usascii"
+                               "german"
+                               "french"
+                               "japanese")
+    (ToolTipMsg                "@@Prod_promech_Desc")
+   (Ad_list                    "whatsnew_continuerd"
+                               "whatsnew_coredrivepattern"
+                               "whatsnew_lightweightwarp"
+                               "whatsnew_manufactpro"
+                               "whatsnew_mateditor"
+                               "whatsnew_ncgeometry"
+                               "whatsnew_processguide"
+                               "whatsnew_robustmesh"
+                               "whatsnew_shadeddraw"
+                               "whatsnew_sketcherpal"
+                               "whatsnew_sweptblend"
+                               "whatsnew_toolpath")
+)
+
+(Package promech_pkg
+    (Name                      "Mechanica")
+    (Cdsections                "mech"
+                               "mech2"
+                               "mech3"
+                               "mech4"
+                               "mech5"
+                               "mech6"
+                               "mech7"
+                               "mech8"
+                               "mech9"
+                               "mech10"
+                               "mech11"
+                               "mech12"
+                               "mech13"
+                               "mech14"
+                               "mech15"
+                               "mechInstall"
+                               "flexclient"
+                               "Install")
+    (Screens                   "ScreenLicList"
+                               "ScreenWindows"
+                               "LpcfgLinkpath"
+                               "LpcfgAppmgr"
+                               "LpcfgMechfeat"
+                               "LpcfgProHelp"
+                               "LpcfgBrowser")
+    (CmdTypes                  "mstruct"
+//                               "mmotion"
+                               "mtherm"
+                               "mech")
+    (Binscripts                "ptchostid"
+                               "ptcflush"
+                               "ptcstatus")
+    (Installed                 True)
+)
+
+(Package vermodels
+    (Name                      "Verification Models") 
+    (SubPackages               "vm_structure"
+                               "vm_motion")
+    (Installed                 False)
+)
+
+(Package vm_structure
+    (Name                      "Structure")
+    (Cdsections                "Verification Models: Structure")
+    (Installed                 False)
+)
+
+(Package vm_motion
+    (Name                      "Motion")
+    (Cdsections                "Verification Models: Motion")
+    (Installed                 False)
+)
+
+//(CmdType mmotion 
+//    (Name                      "Motion")
+//    (DefName                   "motion")
+//    (IconPath                  "_LP_/install/nt/mmotion.ico")
+//    (IconIndex                 "0")
+//    (Type                      "Shortcut")
+//    (CmdPath                   "_LP_\bin\mmotion.bat")
+//)
+
+(CmdType mstruct
+    (Name                      "Structure")
+    (DefName                   "struct")
+    (IconPath                  "_LP_/install/nt/mstruct.ico")
+    (IconIndex                 "0")
+    (Type                      "Shortcut")
+    (CmdPath                   "_LP_\bin\mstruct.bat")
+)
+
+(CmdType mtherm
+    (Name                      "Thermal")
+    (DefName                   "therm")
+    (IconPath                  "_LP_/install/nt/mtherm.ico")
+    (IconIndex                 "0")
+    (Type                      "Shortcut")
+    (CmdPath                   "_LP_\bin\mtherm.bat")
+)
+
+(CmdType mech
+    (Name                      "Pro/Mechanica")
+    (Type                      "Pro/MECHANICA")
+    (Prefixes                  "MECH_")
+    (DefName                   "mech")
+    (UseExtensions             False)
+    (UseOptions                False)
+)

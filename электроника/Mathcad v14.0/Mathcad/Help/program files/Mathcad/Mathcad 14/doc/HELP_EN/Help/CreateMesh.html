@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>3D Parametric Surface Plots and Space Curves</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="3D Plots">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nGraphing\n3D Parametric Surface Plots and Space Curves");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>3D Parametric Surface Plots and Space Curves</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">CreateMesh(function, [s0, s1, t0, t1], [sgrid, tgrid], [fmap]) 
+  </b>Returns a nested array of three matrices representing the <span class="math">x,</span> 
+  <span class="math">y,</span> and <span class="math">z</span>-coordinates of 
+  a parametric surface defined by the function of two variables in the first argument.</p>
+  
+<p><b class="hmath">CreateSpace(function, [t0, t1], [tgrid], [fmap])</b> Returns 
+  a nested array of three vectors representing the <span class="math">x,</span> <span class="math">y,</span> and <span class="math">z</span>-coordinates of a parametric space curve defined by the function of one variable in the first argument.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><p><a name="3Dfunction"><b class="hmath">function</b></a> The first argument 
+   is one of the following:</p>
+	
+    <ul type="disc">
+      <li><p><span class="hmath">F(x, y)</span> a real, parametric, vector-valued 
+       function specifying the <span class="math">x,</span> 
+  <span class="math">y,</span> and <span class="math">z</span> values, for example</p>
+		  
+       <p class="blockindent"><img src="Graphics/F_mesh.gif" alt="a real, parametric, vector-valued function specifying the x, y, and z values" width="172" height="60" border="0"></p>
+      </li>
+	  
+      <li><p><span class="hmath">G(x, y)</span> a real, scalar-valued function of
+	   <span class="math">x</span> and <span class="math">y</span> that specifies 
+       only the <span class="math">z</span>-values, for example</p>
+		  		
+<p class="vmath">G(x, y)&nbsp;:=&nbsp;sin(x)&nbsp;+&nbsp;cos(y)</p>			
+			
+        <p>This type of function cannot be used with <b>CreateSpace</b>.</p></li>
+	  
+      <li><p><span class="hmath">f1(x, y), f2(x, y), f3(x, y)</span> three real, parametric, scalar-valued functions, separated by commas in the argument list, for example</p>
+	   
+<table class="vmath" cellpadding="10" cellspacing="0">
+<tr>
+	<td>f1(x, y)&nbsp;:=&nbsp;x</td>
+	<td>f2(x, y)&nbsp;:=&nbsp;y</td>
+	<td>f3(x, y)&nbsp;:=&nbsp;sin(x)&nbsp;+&nbsp;cos(y)</td>
+</tr>
+</table>
+			
+        <p>Each function must be defined as a function of two variables, even if only one variable is used.</p></li>
+    </ul>
+	
+    <p>For <b>CreateSpace</b>, the functions supplied must be functions of a single 
+    parameter instead of two parameters.</p></li>
+  <li><span class="hmath">s0, s1</span> (optional) are the real lower and upper 
+    bounds of the range for the first independent variable, <span class="math">u</span> 
+    or <span class="math">x</span>. The default values are &minus;5 and 5.</li>
+  <li><span class="hmath">t0, t1</span> (optional) are the real lower and upper 
+    bounds of the range for the second independent variable, <span class="math">v</span> 
+    or <span class="math">y</span>. The default values are &minus;5 and 5. If <span class="math">s0</span>, 
+    <span class="math">s1</span> are specified, <span class="math">t0, t1</span> 
+    must be specified.</li>
+  <li><span class="hmath">sgrid, tgrid</span> (optional) are the positive integer 
+    number of gridpoints in <span class="math">u</span> and <span class="math">v</span>. The default values are 20. The number of 
+    cells in the grid created is <span class="math">(sgrid &minus;1) &times; (tgrid 
+    &minus;1)</span>.</li>
+  <li><b class="hmath">fmap</b> (optional) is a real, three-element, vector-valued 
+    function of three variables that defines a <a href="mapping_functions.html">mapping</a> 
+    from any coordinate system to Cartesian coordinates, for example<br>
+	
+    <p class="blockindent"><img src="Graphics/fmap.gif" alt="example of fmap" width="200" height="66" border="0"></p>
+  </li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li>Functions are specified to <b>CreateMesh</b> without their arguments.</li>
+  <li><b>CreateMesh</b> is used internally by Mathcad when making 3D <a href="Quickplots.html">QuickPlots</a> 
+    of functions of two variables.</li>
+  <li>Note that you can also switch coordinate systems within a <a href="3D_Plot_Format_Dialog_Box_(QuickPlot_Data_Tab).html">3D 
+    plot</a>, rather than converting coordinates explicitly to Cartesian.</li>
+	<li>Because <a href="mapping_functions.html"><b>sph2xyz(r, &theta;, &phi;)</b></a> and <a href="mapping_functions.html"><b>cyl2xyz(r, &theta;, z)</b></a> take <span class="math">r</span> as their first argument, they can not be used with <b>CreateMesh</b> 
+    and <b>CreateSpace</b> if you want to get the same results as the 3D plot. </li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Visualization\\param2d.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','3D Bar Plots','3D_Bar_Plot.html','3D Scatter Plots','3d_Scatter_Plots.html','Annotating a 2D or 3D Plot','3D_plot_annotation.html','Contour Plots','Contour_Plot.html','Graphing Multiple 3D Plots','Graphing_multiple_3D_plots.html','Surface Plots','Surface_Plot.html','Vector Field Plots','Vector_Field_Plot.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

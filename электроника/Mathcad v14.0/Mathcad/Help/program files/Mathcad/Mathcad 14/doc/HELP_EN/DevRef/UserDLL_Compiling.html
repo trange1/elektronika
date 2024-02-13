@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Compiling and Linking Your DLL</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Writing Mathcad DLLs\nCompiling and Linking Your DLL");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Compiling and Linking Your DLL</h1></td>
+	</tr>
+</table>
+
+<p>To create your DLL, you need a 32-bit Microsoft compiler &mdash; Visual C++ 5.0, 6.0 or 7.0 (.NET) will all work. Instructions on compiling and linking your DLL are given in the <b>README.TXT</b> file in the USEREFI/microsft subdirectory, along with the outline given below. You can also build the samples with VCBuild.exe, a free, public domain tool from Microsoft. Go to <a href="http://www.gotdotnet.com/team/cplusplus/samples/vcbuild.zip">http://www.gotdotnet.com/team/cplusplus/samples/vcbuild.zip</a> to download it. The cl.exe (the C++ compiler) is still required to run VCBuild, so users who want to build with it have to get the Platform SDK from Microsoft, which contains the compiler, a linker, various libraries and documentation. The Platform SDK can be downloaded via Windows Update.</p>
+
+<p>In the <b>userefi/microsft/sources</b> directory there is a Visual Studio solution called userefi.sln that includes all the projects for UserDLL examples. In each example directory there is a .vcproj file. You can open and build each project file separately or the solution as a whole in the Visual Studio 2003 IDE. In addition you can use the following command to build all of the examples from the command line:</p>
+
+<code>&quot;%MS_DEV%devenv.exe&quot; userefi.sln /build debug<br></code>
+
+<p>This builds the debug configuration of the whole solution, assuming that userefi.sln is in the current working directory.</p>
+
+<p>To build a single project, use a command of the form:</p>
+
+<code>&quot;%MS_DEV%devenv.exe&quot; userefi.sln /build release /project multiply<br></code>
+
+<p>This builds the release configuration of the <b>multiply.vcproj</b> project.</p>
+
+<p>Default paths for required libraries and header files are:</p>
+
+<ul type="disc">
+	<li>Libraries:<br><br>
+	<code><b>&quot;c:\program files\mathsoft\mathcad 13\userefi\microsft\lib\MCADUSER.LIB&quot;</b></code></li>
+	<li>Header file path:<br><br>
+	<code><b>&quot;c:\program files\mathsoft\mathcad 13\userefi\microsft\include&quot;</b></code></li>
+</ul>
+
+<h3>In Visual Studio 7 or Visual C++ 7 (.NET)</h3>
+
+<p>To build your own projects from scratch, choose <b>File &gt; New &gt; Project</b> to create a Visual C++ Project.</p>
+
+<ol type="1">
+	<li>Choose a Win32 Project. In the resulting Application Settings wizard, specify a DLL type. Under <b>Additional Options</b>, specify an empty project.</li>
+	<li>Add or create your <a href="UserDLL_code.html">source files</a>. Use the <b>Source Files</b> directory in the project.</li>
+	<li>Right-click the project name in the Solution Explorer and choose <b>Properties</b>.</li>
+	<li>Under <b>C/C++ &gt; General properties</b>, set an <b>Additional Include Directory</b> (first choice). Specify the full path to the header file <a href="UserDLL_coderef.html">MCADINCL.H</a>. You must use quotes.</li>
+	<li>Under <b>Linker &gt; Input properties</b>, set an <b>Additional Dependency</b> (first choice) to the path and <b>MCADUSER.LIB</b> library file. You must use quotes.</li>
+	<li>Under <b>Linker &gt; Advanced properties</b>, set an <b>Entry Point</b> (first choice) to <b>DllEntryPoint</b>.</li>
+	
+</ol>
+
+<p>Build the project, and copy the resulting .dll file from the Project directory to the /userefi subdirectory under your Mathcad installation. (You can configure Visual Studio to automatically copy the .dll to this directory.) To use your new function, restart Mathcad with the new .dll in place.</p>
+
+<h3>Debugging</h3>
+
+<p>Specify mathcad.exe as the command line to launch when debugging the DLL project. Once Mathcad launches, you can call your compiled DLL function in Mathcad and use breakpoints in the code to debug.</p>
+
+<p>If you are still having trouble getting a UserDLL to run (particularly if you are trying to execute someone else's code), you may wish to use the Microsoft Development analyzer tools, such as depends.exe, which lists any files (typically system DLLs) upon which your DLL depends.</p>
+
+<h4>Note:</h4>
+
+<ul type="disc">
+	<li>Additional instructions are available to configure your environment to <a href="UserDLL_FORTRAN.html">wrap FORTRAN code</a>.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

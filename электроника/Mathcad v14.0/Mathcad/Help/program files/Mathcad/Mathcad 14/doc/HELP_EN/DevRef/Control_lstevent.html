@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>List Box Events</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Mathsoft Controls\nListBoxes\nListbox Events");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>List Box Events</h1></td>
+	</tr>
+</table>
+
+<h3><a name="AddString">AddString and DeleteString</a></h3>
+
+<p>The <b>AddString</b> method adds a string item to the end of the list box list. If the <a href="Control_lstformat.html#Sort">Sort</a> property is TRUE, string appears in the list in its sorted position. The <b>DeleteString</b> method deletes a string item from the list box list. The <b>InsertString</b> method inserts a string into the list box at a specified index.</p>
+  
+<code>
+<i>longRet</i> = ListBox.<b>AddString</b>(<i>strItem</i> as String)<br>
+<i>longRet</i> = ListBox.<b>DeleteString</b>(<i>intItem</i> as Long)<br>
+<i>longRet</i> = ListBox.<b>InsertString</b>(<i>longIndex</i> as Long, <i>strItem</i> as String)<br>
+<br>
+</code>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+  <tr> 
+    <td valign="top"><p><i>longRet</i></p></td>
+    <td valign="top"><p>Returns the index at which string was added.</p></td>
+  </tr>
+  <tr> 
+    <td valign="top"><p><i>strItem</i></p></td>
+    <td valign="top"> 
+      <p>A string to be added to the list box.</p></td>
+  </tr>
+  <tr> 
+    <td valign="top"><p><i>intItem</i></p></td>
+    <td valign="top"><p>A integer indicating the index of the item to remove.</p></td>
+  </tr>
+</table>
+
+<h3><a name="Error">Error</a></h3>
+
+<p>The <b>Error</b> event is fired when an error occurs.</p>
+
+<code>Private Sub ListBox_<b>Error</b>(short Number, BSTR* Description, SCODE Scode, BSTR Source, BSTR HelpFile, long HelpContext, boolean* CancelDisplay);<br>
+<br>
+</code>
+
+<h3><a name="SelChanged">SelChanged</a></h3>
+
+<p>The <b>SelChanged</b> event is fired when the selection in the list box changes. Can be used to confirm user selection. Within the Mathcad framework, the <a href="Control_lstmethod.html#Recalculate">Recalculate method</a> can be called to update control and retrieve the current selection in the <a href="Script_ExecEvent.html">Exec event</a> handler, using the <a href="Control_lststate.html#CurSel">CurSel property</a> and the <a href="Control_lstmethod.html#GetText">GetText method</a>.</p>
+ 
+<code>Private Sub ListBox_<b>SelChanged</b>()<br>
+<br>
+</code>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>ODBC Input Component</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("External Files and Applications\nODBC Input Component");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>ODBC Input Component</h1></td>
+	</tr>
+</table>
+
+<p>The ODBC (Open Database Connectivity) Input component can be  used to retrieve 
+  information from a database that supports SQL in its ODBC driver.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="Insert">Inserting an ODBC Input Component</a></td></tr>
+</table>
+</h2>
+
+<p>Before you can use an ODBC Input component in a worksheet, you must first
+ establish a link to the database you want to access. This can be done from either
+ the <b>Data Sources (ODBC)</b> control panel (Windows 2000/XP, located under
+ <b>Administrative Tools</b>) or the <b>ODBC Data Sources</b> control panel (Windows
+ NT).</p>
+
+<ol type="1">
+	<li><p>Open the appropriate control panel for your operating system.</p></li>
+	<li><p>On the <b>User DSN</b> tab, click &quot;Add&quot; to add a database.</p></li>
+	<li><p>In the <b>Create New Data Source</b> dialog, select the driver for
+	 the database you want to access. Click &quot;Finish.&quot;</p></li>
+	<li><p>Specify the database to which you want to link. Name your data source
+	 (which you will later select in the ODBC Input Wizard) and, if desired, enter
+	 a description. Click &quot;OK.&quot;</p></li>
+</ol>
+
+<p class="blockindent">Exactly how you carry out this step depends 
+ upon the driver you select. For example, if you want to link to a Microsoft 
+ Access database, you specify the database by clicking &quot;Specify&quot; 
+ and navigating to the appropriate Access (*.mdb) file, then naming the
+ database by filling out the <b>Data Source Name</b> field. Other databases may use
+ a differently named button, but the general procedure of specifying and naming the
+ database is the same, and is required to create a Data Source.</p>
+
+<ol start="5">	
+	<li><p>Click &quot;OK&quot; to close the Control Panel.</p></li>
+</ol>
+
+<p>Once you've linked to the database, you can <a href="Components.html#insert">insert
+ the component</a> as you would any other, launching the ODBC Input Wizard to
+ guide you through the configuration process.</p>
+
+<p>On the first page of the Wizard, select a linked data source. If the database
+ requires authorization, enter a valid username and password.</p>
+
+<p>The second page of the Wizard allows you to specify the table from which the
+ component reads data. A component can only access one table. After you
+ select a table, you can select the fields associated with that table
+ that you want to read. By default, Mathcad only shows you fields containing
+ supported data types.</p>
+
+<p>Once you've selected at least one field, you can click &quot;Finish&quot; to
+ exit the Wizard and insert the component.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="Configure">Configuring an ODBC Input Component</a></td></tr>
+</table>
+</h2>
+
+<p>Right-clicking on the component and selecting <b>Properties</b> allows you to
+ control what data the component sends to Mathcad. Unlike the other components, the
+ ODBC Input component supports only one output and no inputs.</p>
+
+<h3><a name="data_source">Data Source tab</a></h3>
+
+ <p class="blockindent">The Data Source tab of the ODBC Input Component
+  Properties dialog specifies the data accessed by the ODBC Input component.</p>
+
+ <p class="blockindent">If you want to change the data source for the component,
+  the Properties dialog lists all of the linked databases on your system or network.
+  If the database you want to access is not listed here, you first need to
+  <a href="#Insert">link</a> to it. If you change your data source, click
+  &quot;Connect&quot; to refresh the contents of the Properties dialog.</p>
+
+ <p class="blockindent">Some databases require you to enter a username 
+  and password before granting you access. If your database requires authentication,
+  enter a valid username and password for restricted databases. If the database 
+  is not password protected, these fields must be left blank.</p>
+
+ <p class="blockindent">Use the Select Table and Select Fields
+  lists to specify the data read in from the data source. By default, only field
+  types supported by Mathcad are listed; to see all of the available fields, check
+  &quot;Show fields with unsupported data types.&quot;</p>
+
+<h3><a name="advanced">Advanced tab</a></h3>
+
+ <p class="blockindent">You can use the Advanced tab of the ODBC Input
+  Component Properties dialog to further refine the data supplied by the ODBC Input
+  component.</p>
+
+ <p class="blockindent">If you know SQL, you can enter a <i>where</i> clause
+  to prefilter your data before importing it.</p>
+
+ <p class="blockindent">You can also control the order in which 
+  the ODBC Input component sends data to Mathcad. Fields are read from top 
+  to bottom, and appear in Mathcad running from left to right.</p>
+
+ <p class="blockindent">The ODBC Input component can add a row of column
+  labels to the data it reads from the data source. When accessing the data in
+  Mathcad, the first row will contain the column labels.</p>
+
+<h4>Notes:</h4>
+<ul type="disc">
+	<li><p>Each ODBC Input component can only access one table per database. In order
+	 to access another table from your database, use another component.</p></li>
+	<li><p>Checking the &quot;Show fields with unsupported data types&quot; option in
+	 the ODBC Input Wizard or on the <a href="#data_source">Data Source</a> tab of
+	 the Properties dialog displays all data fields, even those not supported by
+	 Mathcad variables. For example, Mathcad does not support any time data types,
+	 but you can select and display time indices from your database in a Mathcad
+	 output variable.</p></li>
+	<li><p>Database applications must support SQL in their ODBC drivers, such as Microsoft 
+     Access or FoxPro. There are some programs that have SQL support within their 
+     applications, but do not support SQL in their ODBC drivers, such as Microsoft 
+     Excel. For more information about ODBC and SQL support, check the documentation 
+	 that comes with your database application.</p></li>
+</ul>
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('samples\\ODBC\\odbcsamp.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+</html>

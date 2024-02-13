@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+<title>Polynomial Regression</title>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name="MS-HAID" content="Polynomial Regression">
+<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+ <link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nCurve Fitting and Smoothing\nPolynomial Regression");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table><tr class="whs1">
+<td valign=top>
+<h1>Polynomial Regression</h1></td></tr>
+</table>
+
+<p><b class="hmath">regress(vx, vy, n)</b> or <b class="hmath">regress(Mx, 
+ vy, n) </b>Returns a vector which <b>interp</b> uses to find the <span 
+ class="math">n</span>th order polynomial that best fits the <span class="math">x</span> 
+ and <span class="math">y</span> data values in <b class="math">vx</b> and 
+ <b class="math">vy</b> in the least-squares sense. Can also be used for 
+ multivariate regression, where a matrix <b class="math">Mx</b> of <span 
+ class="math">k</span> independent variables and a vector of dependent values, 
+ <b class="math">vy</b>, are used to fit an <span class="math">n</span>th order 
+ polynomial surface in <span class="math">k</span> dimensions.</p>
+
+<p><b class="hmath">interp(vs, vx, vy, x)</b> or <b class="hmath">interp(vs, 
+ Mx, vy, X) </b>Returns an interpolated <span class="math">y</span>-value 
+ corresponding to <span class="math">x</span> using the output vector <b 
+ class="math">vs</b> from <b>regress</b>. If regress has been used to fit 
+ a multidimensional surface, <b class="math">X</b> is a vector of independent 
+ variables at which to calculate the interpolated <span class="math">y</span>-value.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+	
+	<li><b class="hmath">vx</b> and <b class="hmath">vy</b> 
+ are the vectors of real data values with the same length.</li>
+	
+	<li><b class="hmath">Mx</b> is a matrix of 
+ real data values. There is one column for each independent variable (<span 
+ class="math">k</span> columns). In this case, <b class="math">vy</b> has the 
+ same number of rows as <b class="math">Mx</b>.</li>
+	
+	<li><b class="hmath">vs</b> is a vector generated 
+ by <b>regress</b>.</li>
+	
+	<li><span class="hmath">n</span> is a positive integer 
+ specifying the order of the polynomial you want to use to fit the data. 
+ The order of the polynomial cannot exceed the number of data points. If 
+ you want a 4th order polynomial in one variable, you must have at least 
+ 4 data points.</li>
+	
+	<li><span class="hmath">x</span> is the real value of the 
+ independent variable at which you want to evaluate the regression curve.</li>
+	
+	<li><b class="hmath">X</b> is the vector 
+ of values of the independent variables at which you want to evaluate the 
+ regression surface.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	
+	<li>The output of <b>regress</b> is a vector containing 
+ variable identification codes as well as the polynomial coefficients. 
+ You can either extract the coefficients, starting with the fourth entry, 
+ or use <b>interp</b> to generate the values of the polynomial. See the 
+ QuickSheet.</li>
+	
+	<li><b>regress</b> fits all 
+ data points using a single polynomial, so it does not work well when your 
+ data does not behave like a single polynomial. Use <a href="Loess.html"><b>loess</b></a> 
+ to perform a localized regression.</li>
+	
+	<li>
+	The number of data values, <span class="math">m</span>, must satisfy: 
+ 
+	<p class="blockindent"><img src="Graphics/regresscoeffs.gif" alt="number of terms, and hence, the number of coefficients, in the polynomial expression of degree n with k variables" height="37" border="0"></p>
+	
+	which is the number of terms, and hence, the number of coefficients, 
+ in the polynomial expression of degree <span class="math">n</span> with 
+ <span class="math">k</span> variables.
+	</li>
+	
+	<li>While any number of independent variables is allowed, 
+ specifying more than four independent variables takes substantially 
+ more memory and time to calculate.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+			id=objLaunchMathcad
+			border=0
+			width=1
+			height=1
+			align=left>
+</object></p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+		onMouseOut="document.body.style.cursor='arrow'"
+		onClick="objLaunchMathcad.OpenResourceCenter('Data_Analysis\\multivar.xmcd')"
+		class=fakelink>QuickSheet</a></h5>
+
+<p>
+
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Exponential Regression','Exponential_regression.html','Fitting Arbitrary Nonlinear Functions to Data','Genfit.html','Linear Regression','Linear_regression.html','Logarithmic Regression','Logarithmic_regression.html','Logistic Regression','Logistic_regression.html','Polynomial Regression, Localized','Loess.html','Power Regression','Power_regression.html','Sinusoidal Regression','Sinusoidal_regression.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+
+ </p>
+
+
+<hr size=2 width=100% align=center>
+
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

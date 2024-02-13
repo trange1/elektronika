@@ -1,0 +1,83 @@
+; VisSim Block Diagram Format (VBDF)
+; Copyright ©1989-1999 Visual Solutions
+POa="Leslie Bondaryk"
+PV=4.500
+PS=0
+PE=20
+PP=0.01
+PI=171
+PX=0.01
+PN=1e-006
+PL=5
+PT=1e-005
+Pn=-10,6,16,"Times New Roman"
+Pc=12
+Po=0.01,50,664,0
+Ppl=0
+Ppp=0
+Ppt=0
+Ppf=1
+Pe=0
+PD=1024x768
+PR=
+Pf=0x0
+Ps=2048,0,0,3840,0,0
+PM=1,1,1,1
+Qn="viscomm.dll"
+QLi[4]=1
+63
+1
+0
+N.1="comment"*3x2*96x25
+C="Bouncing Ball example: a ball is thrown into the air at 15m/sec at a height of 10m. Gravity slows the ascent and accelerates the ball towards the ground, elasticity (.8) causes it to lose upward velocity on each bounce.  Velocity is the integral of acceleration, and position the integral of velocity.  A reset integrator is used to indicate the change in direction when the ball hits the ground, that is, when position is 0, the b input on the integrator is set to -1, and the new velocity is set to -.8*previous negative velocity. Change in position is shown in blue.
+
+What do you notice about the curve?  What is the maximum height of the ball?  How long does it take before it no longer bounces?  What happens if you change the elasticity constant?  The initial position of the ball?  The initial velocity.  Make sure to choose Simulate/Reset Sim before rerunning the simulation.  A more sophisticated example of this document is also available in the Samples directory."
+N.2="integrator"<10;1;0>*44x33
+n="Position"
+N.3="gain"<-0.8>*28x42<R>
+n="Elasticity"
+N.4="const"<-9.81>*9x31
+n="gravity"
+N.5="wirePositioner"*36x48<R>
+N.6="resetIntegrator"<15;0;0>*26x31
+N.7="wirePositioner"*18x33
+N.8="/"*48x41
+n="normalize height"
+N.9="const"<25>*40x43
+N.10="plot"*78x29*45x27
+px="Time (sec)"
+pax=0
+pf=H
+pb=30,0
+pbx=20,0
+pbY=0,0
+pbX=20,-20
+pm=-1,0
+pb.0=0,0
+pb.1=30,0
+pb.2=0,0
+pb.3=0,0
+pb.4=0,0
+pb.5=0,0
+pb.6=0,0
+pb.7=0,0
+N.11="summingJunction"*52x47<R>
+n="locate ground bounce"
+N.12="const"<-1>*62x49<R>
+I.2.i1=6.o1
+I.3.i1=6.o1
+I.5.i1=11.o1
+I.6.i1=4.o1
+f6.2.i=lb
+I.6.i2=7.o1
+f6.3.i=lr
+I.6.i3=3.o1
+I.7.i1=5.o1
+f8.1.i=ll
+I.8.i1=2.o1
+f8.2.i=lr
+I.8.i2=9.o1
+I.10.i2=2.o1
+I.11.i1=8.o1
+I.11.i2=12.o1
+cEOF

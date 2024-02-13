@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Creating an HTML Template File</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Creating HTML Pages with Mathcad\nCreating an HTML Template File");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Author.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Creating an HTML Template File</h1></td>
+	</tr>
+</table>
+  
+<p>HTML Template files tell Mathcad how to read and where to insert HTML content exported from a Mathcad worksheet. These instructions are specified in certain comment lines and within the &lt;HEAD&gt; tags. Template files can include any valid HTML markup, such as:</p>
+  
+<ul type="disc">
+  <li>&lt;img&gt; tags and image maps for navigating through your content.</li>
+  <li>&lt;link&gt; tags for cascading style sheets.</li>
+  <li>hyperlinks to HTML files.</li>
+  <li>JavaScript to automatically generate links, create date stamps, or for any other functionality.</li>
+</ul>
+  
+<p>An HTML Template file is saved with a .mlt extension. In addition to whatever HTML markup you wish to appear in the final document, the template <i>must</i> include four sets of comment tags:</p>
+
+<ul>
+<li><p>Include these three sets of comment tags between the document <b>&lt;HEAD&gt;</b>
+ tags:</p>
+ <p class="blockindent"><code>
+	<span class="comment">&lt;!-- #BeginEditable &quot;Title&quot; --&gt;</span><br>
+	&lt;title&gt;sample title goes here&lt;/title&gt;<br>
+	<span class="comment">&lt;!-- #EndEditable --&gt;</span><br>
+	<br>
+	<span class="comment">&lt;!-- #BeginEditable &quot;WorksheetHeaders&quot; --&gt;</span><br>
+	<b>meta</b> tag information written here<br>
+	<span class="comment">&lt;!-- #EndEditable --&gt;</span><br>
+	<br>
+	<span class="comment">&lt;!-- #BeginEditable &quot;WorksheetStyles&quot; --&gt;</span><br>
+	Cascading styles written here<br>
+	<span class="comment">&lt;!-- #EndEditable --&gt;</span>
+</code></p>
+
+<p>Be sure to fill in a title between the title tags. This title is only overwritten when you specify a new title in the <a href="../Help/Mcad.htm#File_-_Save_as_Web_Page.html" target="_top">Save as Web Page</a> dialog box. If you do not specify a new title, the template title tags are used.</p>
+</li>
+ <li>
+ 
+<p>Include the fourth required set of comments within the document <b>&lt;body&gt;</b> tags of the template wherever you want the Mathcad worksheet to appear:</p>
+
+<p class="blockindent">
+<code>
+	<span class="comment">&lt;!-- #BeginEditable &quot;WorksheetContent&quot; --&gt;</span><br>
+	HTML Content from Mathcad worksheet are overwritten here<br>
+	<span class="comment">&lt;!-- #EndEditable --&gt;</span>
+</code>
+</p>
+</li>
+</ul>
+ 
+<p>These comments allow Mathcad to create the &lt;meta&gt; tags necessary to read exported .htm files back into Mathcad, write out any styles, and so on.</p>
+ 
+ <p>Save your template file with an .mlt extension.</p>
+ 
+ <p>Templates should be tested using a Web browser; Mathcad does not attempt to render or understand any of the template HTML markup, with the exception of the comment tags described above. You can test your templates by opening the .mlt file in a Web browser, or you can save a Mathcad document as HTML using the template, and open the resulting .htm file.</p>
+
+<p>To use your .mlt file, set your <a href="Setting_your_HTML_Output_Preferences.htm">HTML Output Preferences</a>.</p>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li>You can create an HTML template file using any text editor or HTML Markup application, but be sure to save the file with the .mlt extension, and save the contents as text-only. You can start with the sample file <b>HTMLtemplate.mlt</b> in the templates folder of your Mathcad program folder, then make changes to suit your own site. If you use the template files provided, be sure to enter your own affiliation and contact information, and change the title in the &lt;title&gt; tags. The image file <b>madewithmathcad.gif</b> is used in the HTML of the sample template file that ships with Mathcad. Be sure to copy this file into the folder of any exported files made using this template.</li>
+  <li>Be sure to move any images, style sheets, Javascript source files, or other files referenced by links in your template to the same folder in which you are saving your exported Mathcad files. Using a template and saving a Mathcad file is equivalent to moving the template file (with new content) to the new <b>Save As...</b> folder.</li> 
+   <li>Note that HTML Templates are different from <a href="../Help/Mcad.htm#Template.html" target="_top">Mathcad Worksheet templates</a>.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

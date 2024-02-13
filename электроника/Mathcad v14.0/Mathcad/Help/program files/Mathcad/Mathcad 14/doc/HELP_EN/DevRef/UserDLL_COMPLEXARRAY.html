@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>COMPLEXARRAY Structure</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Writing Mathcad DLLs\nStructure and Function Definitions\nCOMPLEXARRAY Structure");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>COMPLEXARRAY Structure</h1></td>
+	</tr>
+</table>
+
+<p>Array and vector values in custom Mathcad functions are passed as <b>COMPLEXARRAY</b> structures, as defined in <a href="UserDLL_coderef.html">mcadincl.h</a>. The <b>COMPLEXARRAY</b> structure has four members:</p>
+
+<ul type="disc">
+	<li><span class="math"> Array-&gt;rows</span>, the number of rows</li>
+	<li><span class="math">Array-&gt;cols</span>, the number of columns</li>
+	<li><span class="math">Array-&gt;hReal[col][row]</span>, the real part of the array values</li>
+	<li><span class="math">Array-&gt;hImag[col][row]</span>, the imaginary part of the array values</li>
+</ul>
+
+<p>When Mathcad sends an array to a UserEFI using the <b>COMPLEXARRAY</b> structure, it actually passes two arrays: one for the real part and one for the complex part. If no element of an array has an imaginary part, <span class="math">Array-&gt;hImag</span> is equal to NULL. If all elements are purely imaginary, <span class="math">Array-&gt;hReal</span> is equal to NULL.</p>
+
+<p>There are provisions made for matrices that contain non-numeric values, such as Mathcad string variables. Every entry in these arrays contains either a valid scalar number or a <span class="math">NaN</span>.  Mathcad marks non-scalar entries using two distinct <span class="math">NaN</span>s.  One <span class="math">NaN</span> is just a bit sequence indicating an unusable numeric value. The other <span class="math">NaN</span> indicates that the value stored in that location is not a number, but is a string or a function.</p>
+ 
+<p>Mathcad stores the values of any non-numeric matrix entries in a separate data structure that is not available to the UserEFI, so it is not possible for the UserEFI to determine the actual value of the string or function stored. Mathcad versions 11 and earlier stored an address for the contents of non-numeric entries in the array passed to the UserEFI. In Mathcad 12 and higher, however, only the <span class="math">NaN</span> marker that the element is not numeric is available, so it is not possible to recover the contents of a string or function entry in an array through the UserEFI interface. Strings may be passed individually using the <a href="UserDLL_MCSTRING.html">MCSTRING</a> type.</p>
+
+<p>If the result of your <a href="UserDLL_code.html">function</a> is a <b>COMPLEXARRAY</b> structure, allocate memory for the complex array using the <b><a href="UserDLL_MathcadArrayAllocate.html">MathcadArrayAllocate</a></b> function.</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

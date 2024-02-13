@@ -1,0 +1,119 @@
+// 21-Dec-04  K-03-19   $$1  MAZ   to K-03
+// 24-Feb-05  K-03-19+  $$2  MAZ   Change Name
+// 08-Apr-05  K-03-22   $$3  MAZ   SPR 1139478: set ProgramID to proexpress3p 
+// 21-Apr-05  K-03-23   $$4  MAZ   SPR 1141155: change cmd name (ProgramCmdName)
+// 16-May-05  K-03-24   $$5  AUC   Added convertFilesList for schools config.pro
+// 17-Aug-05  K-03-30   $$6  AUC   Updated converFileList to include searchpath.pro
+// 09-Jan-06  K-03-39   $$7  AUC   added proehelp cdsection
+// 02-Mar-06  K-03-40   $$8  TWH   Chg LpDirName to match Product name.
+// 27-Mar-06  K-03-40   $$9  JJE   SPR 1189095: set ProgramID back to proexpress3
+
+(Product student 
+    (Name                      "Pro/ENGINEER Schools Edition")
+    (Packages                  "proe_base"
+                               "proehelp"
+                               "uninstall")
+    (ProgramFiles              True)
+    (LpDirName                 "ProENGINEER Schools Edition")
+    (VersionDir                False)
+    (Screens                   "ScreenStudentLic"
+                               "ScreenLicAgree"               
+                               "ScreenProd")
+    (Installed                 True)
+    (SaveList                  "text/menu_def.pro"
+                               "text/config.pro")
+    (WebRegHyperLink           "webreg.html")
+    (ProgramID                 "proexpress3")
+    (ProgramCmdName            "proewildfire3-schools")
+    (ProgramFeature            "PROE_Schools")
+    (PSF_EXE                   "proe.exe")
+    (WelcomeImage              "proe_name.gif")
+    (Ad_list                   "whatsnew_auto"
+                               "whatsnew_dataexchange"
+                               "whatsnew_newui"
+                               "whatsnew_p2p"
+                               "whatsnew_3ddrawings"
+                               "whatsnew_ID"
+                               "whatsnew_rs"
+                               "whatsnew_simulation"
+                               "whatsnew_production"
+                               "installscreen_casestudy"
+                               "tools_menumapper"
+                               "tools_onlinehelp"
+                               "tools_productivityT"
+                               "tools_refcards"
+                               "tools_tutorials")
+)
+
+(Package proe_base
+    (Name                      "Pro/ENGINEER")
+    (OldTag                    "proe_pkg")
+    (Screens                   "ScreenWindows"
+                               "LpcfgLinkpath" 
+                               "LpcfgOle")
+    (CmdTypes                  "proe"
+                               "proe_shortcut")
+    (Binscripts                "ptchostid"
+                               "tempmgr"
+                               "batch_status"
+                               "pro_b_exec"
+                               "pro_batch"
+                               "protk_unlock"
+                               "proigsutil"
+                               "ptcflush"
+                               "ptcstatus"
+                               "propostl"
+                               "propostq"
+                               "propostg"
+                               "purge"
+                               "protab"
+                               "pro_mcs_comp"
+                               "pro_ncl_cvt"
+                               "procvter"
+                               "procvtutil"
+                               "convert_image"
+                               "image_to_mip"
+                               "pix2fb"
+                               "showmip"
+                               "ptcportmap"
+                               "pro_build_library_ctg")
+    (Cdsections                "ProE Tree"
+                               "proe"
+                               "applstart"
+                               "uitools_res"
+                               "jre"
+                               "Install"
+                               "apps_data"
+                               "animation"
+                               "mechanism"
+                               "ncexpert"
+                               "weld_data"
+                               "Demos"
+                               "flexclient")
+    (Installed                 True)
+    (UnregServerDll            "_LP_\_ARCH_\lib\pfcscom.dll")
+    (convertFilesList          "_LP_\text\config.pro=_LP_\text\config.pro"
+                               "_LP_\pro_standards\config_files\search_path.pro=_LP_\pro_standards\config_files\search_path.pro")
+)
+
+(CmdType proe
+    (Name                      "proe")
+    (DefName                   "proe")
+    (Type                      "Pro/ENGINEER")
+    (Prefixes                  "PROE_")
+    (Featvars                  "__PROE_FEATURE_NAME__")
+    (Template                  "proexpress_start")
+    (IconPath                  "_LP_\install\nt\proelogo.ico")
+    (IconIndex                 "0")
+    (UseExtensions             True)
+    (UseOptions                True)
+)
+
+(CmdType proe_shortcut
+    (Name                      "Pro/ENGINEER Schools Edition")
+    (Type                      "Shortcut")
+    (CmdPath                   "_LP_\bin\proe.exe")
+    (IconPath                  "_LP_\install\nt\proelogo.ico")
+    (IconIndex                 "0")
+)
+

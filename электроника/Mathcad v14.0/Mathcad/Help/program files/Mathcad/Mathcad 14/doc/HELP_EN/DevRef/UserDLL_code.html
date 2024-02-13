@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Creating Mathcad-Readable Function Libraries</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Writing Mathcad DLLs\nCreating Mathcad-Readable Function Libraries");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Creating Mathcad-Readable Function Libraries</h1></td>
+	</tr>
+</table>
+
+<p>To get you started writing DLLs for Mathcad, a number of code samples are included. The first example, discussed here, is the file MULTIPLY.C located in the <b>UserEFI\Microsft\sources\simple</b> subdirectory in your Mathcad install directory.<b> MULTIPLY.C</b> contains a two-argument function that multiplies an array by a scalar. When compiled and correctly linked, the new function <b>multiply(a, M)</b> will be available in Mathcad. </p>
+
+<p>In the following sections the code is broken down into parts accompanied by an explanation. To see the code in its entirety, open the sample file in Visual Studio or Notepad.</p>
+
+<h3>Headers</h3>
+
+<p>All UserEFIs must include the <a href="UserDLL_coderef.html">mcadincl.h</a> header file, located in the <b>UserEFI\Microsft\include</b> subdirectory in your Mathcad install directory. This file contains the data structures that will allow you to define functions that Mathcad can read, allocate and free scalars and arrays in a Mathcad-compatible way, and create error messages that can be returned to Mathcad using the graphical user interface.</p>
+
+<code>#include &quot;mcadincl.h&quot;</code>
+
+<h3>Error messages</h3>
+
+<p>Typically, the next part of the program defines error codes for the types of errors you might expect to encounter. Be sure to trap errors for inappropriate data types, as these are among the most common misuses of Mathcad functions. These are defined together so it is easy to count the total number of errors. This total will be required by the <a href="UserDLL_CreateUserErrorMessageTable.html">CreateUserErrorMessageTable</a> function.</p>
+
+<p>Mathcad traps the following floating point exceptions: overflow, divide by zero, and invalid operation. In the case of these exceptions, Mathcad will display a floating point error message under the function; you do not have to handle these errors specifically. Mathcad will also free all the memory allocated when one of these errors occurs.</p>
+
+<code>#define INTERRUPTED 1<br>
+#define INSUFFICIENT_MEMORY 2<br>
+#define MUST_BE_REAL 3<br>
+#define NUMBER_OF_ERRORS 3<br>
+<br>
+// tool tip error messages<br>
+// if your function never returns an error, you do not need to create this table<br>
+char * myErrorMessageTable[NUMBER_OF_ERRORS] =<br>
+{<br>
+<br>
+<span class="blockindent">&quot;interrupted&quot;,.</span><br>
+<span class="blockindent">&quot;insufficient memory&quot;,</span><br>
+<span class="blockindent">&quot;must be real&quot;</span><br>
+<br>
+};<br>
+</code>
+
+<h3>Algorithm</h3>
+
+<p>Next comes the code that executes your algorithm. If you are converting code from an existing library, you will have to recast it with the <a href="UserDLL_COMPLEXARRAY.html">COMPLEXARRAY</a>, <a href="UserDLL_COMPLEXSCALAR.html">COMPLEXSCALAR</a>, and MCSTRING types passed by and expected by Mathcad. Note that all values passed into and out of Mathcad are complex, having both a real and an imaginary part to their structure (see <a href="UserDLL_coderef.html">mcadincl.h</a>). You will have to split off the real and imaginary parts if you need to do independent manipulations on them. Also note that arrays are indexed by column, then row, as opposed to the order of indices inside Mathcad, which is by row, then column. Finally, all arrays are assumed to have two dimensions. If you wish to reference a vector, you will still need the first array index (column), always set to 0.</p>
+
+<p>The first argument to the algorithm is a pointer to the return value, in this case, <b>Product</b>. The remaining arguments are pointers to the input values coming from Mathcad.</p>
+
+<code>
+<span class="comment">// this code executes the multiplication</span><br>
+<a href="UserDLL_LRESULT.html">LRESULT</a> MultiplyRealArrayByRealScalar(<br>
+<br>
+<span class="blockindent">COMPLEXARRAY * const Product,</span><br>
+<span class="blockindent">const COMPLEXSCALAR * const Scalar,</span><br>
+<span class="blockindent">const COMPLEXARRAY * const Array )</span><br>
+<br>
+{<br>
+<span class="blockindent">unsigned int row, col;</span><br>
+<span class="blockindent"><span class="comment">// check that the scalar argument is real</span></span><br>
+<span class="blockindent">if ( Scalar-&gt;imag != 0.0)</span><br>
+<span class="blockindent"><span class="comment">// if not, display &quot;must be real&quot; under scalar argument</span></span><br>
+<span class="blockindent">return <a href="UserDLL_ErrorMessages.html">MAKELRESULT( MUST_BE_REAL, 1)</a>;</span><br>
+<span class="blockindent"><span class="comment">// check that the array argument is real</span></span><br>
+<span class="blockindent">if ( Array-&gt;hImag != NULL )</span></span><br>
+<span class="blockindent"><span class="comment">// if not, display &quot;must be real&quot; under array argument</span></span><br>
+<span class="blockindent">return MAKELRESULT( MUST_BE_REAL, 2);</span><br>
+<br>
+<span class="blockindent"><span class="comment">// allocate memory for the product</span></span><br>
+<span class="blockindent">if( !<a href="UserDLL_MathcadArrayAllocate.html">MathcadArrayAllocate</a>( Product, Array-rows,Array-cols,</span><br>
+<span class="blockindent"><span class="comment">// allocate memory for the real part</span></span><br>
+<span class="blockindent">TRUE,</span><br>
+<span class="blockindent"><span class="comment">// do not allocate memory for the imaginary part</span></span><br>
+<span class="blockindent">FALSE ))&amp;#9;</span><br>
+<span class="blockindent"><span class="comment">// if allocation is not successful, return with the appropriate error code</span></span><br>
+<span class="blockindent">return INSUFFICIENT_MEMORY;</span><br>
+<br>
+<span class="blockindent"><span class="comment">// if all is well so far, perform the multiplication</span></span><br>
+<span class="blockindent">for ( col = 0; col &lt; Product-&gt; cols; col++ )</span><br>
+<span class="blockindent">{</span><br>
+<br>
+<span class="doubleindent"><span class="comment">// check that a user has not tried to interrupt the calculation</span></span><br>
+<span class="doubleindent">if (<a href="UserDLL_isUserInterrupted.html">isUserInterrupted()</a>)</span><br>
+<span class="doubleindent">{</span><br>
+<span class="doubleindent"><span class="comment">// if user has interrupted, free the allocated memory</span></span><br>
+<span class="doubleindent"><a href="UserDLL_MathcadArrayFree.html">MathcadArrayFree</a>( Product );</span><br>
+<span class="doubleindent"><span class="comment">// and return with an appropriate error code</span></span><br>
+<span class="doubleindent">return INTERRUPTED;</span><br>
+<span class="doubleindent">}</span><br>
+<br>
+<span class="doubleindent">for ( row = 0; row &lt; Product-&gt; rows; row++ )</span><br>
+<span class="doubleindent">&nbsp;&nbsp;&nbsp;Product-&gt;hReal[col][row] =</span><br>
+<span class="doubleindent">&nbsp;&nbsp;&nbsp;Scalar-&gt; real*Array-&gt; hReal[col][row];</span><br>
+<br>
+<span class="blockindent">}</span><br>
+<span class="blockindent"><span class="comment">// normal return</span></span><br>
+<span class="blockindent">return 0;</span><br>
+<br>
+}</code>
+
+<h3>Register the Function with Mathcad</h3>
+
+<p>Fill out a <b>FunctionInfo</b> structure with the information needed for registering the function with Mathcad. This structure will define the name of the function within Mathcad, not the name of the algorithm above, which is MultiplyRealArrayByRealScalar. It will also define the parameters, and a description, as well as a pointer to the algorithm used. In versions previous to Mathcad 8, this description used to populate the Insert Function dialog. The code has since changed, so you will have to update the <a href="UserDLL_InsertFunc_listing.html">User_EN.xml</a> document separately to make your function definition show up in this dialog box.</p>
+
+<code><a href="UserDLL_FUNCTIONINFO.html">FUNCTIONINFO</a> multiply =<br>
+{<br>
+<span class="comment">// name by which Mathcad will recognize the function</span><br>
+&quot;multiply&quot;,<br>
+<span class="comment">// description of &quot;multiply&quot; parameters</span><br>
+&quot;a,M&quot;,<br>
+<span class="comment">// description of the function</span><br>
+&quot;returns the product of real scalar a and real array M&quot;,<br>
+<span class="comment">// pointer to the executable code</span><br>
+(LPCFUNCTION)MultiplyRealArrayByRealScalar;<br>
+<span class="comment">// multiply(a, M) returns a complex array</span><br>
+COMPLEX_ARRAY,<br>
+<span class="comment">// multiply takes on two arguments</span><br>
+2,<br>
+<span class="comment">// the first is a complex scalar, the second a complex array</span><br>
+{ COMPLEX_SCALAR, COMPLEX_ARRAY}<br>
+};</code>
+  
+<h3>Dynamically Link the Library</h3>
+
+<p>DLL stands for Dynamically Linked Library. The following code will make this library available to other Windows functions, in particular, Mathcad, through Windows' DLL interface. Note that you will also have to <a href="UserDLL_Compiling.html">specify</a> a reference to the entry point through your programming environment. The DLL entry point is called by the operating system when the DLL is loaded. Mathcad requires that you register your user functions and your error message table while the DLL is being loaded.</p>
+
+<code>
+<span class="comment">// all Mathcad DLLs must have a DLL entry point code</span><br>
+<span class="comment">// the _CRT_INIT function is needed if you are using Microsoft's 32-bit compiler</span><br>
+BOOL WINAPI _CRT_INIT(HINSTANCE hinstDLL, DWORD dwReason, LPVOID lpReserved);<br>
+BOOL WINAPI DllEntryPoint (HINSTANCE hDLL, DWORD dwReason, LPVOID lpReserved)<br>
+{<br>
+&nbsp;&nbsp;&nbsp; switch (dwReason)<br>
+{<br>
+&nbsp;&nbsp;&nbsp; case DLL_PROCESS_ATTACH:<br>
+if (!_CRT_INIT(hDLL, dwReason, lpReserved))<br>
+&nbsp;&nbsp;&nbsp; return FALSE;<br>
+</code> 
+  
+<h3>Errors again</h3>
+
+<p>Finally, register the error message table, and, if that succeeds, register the user function. If your function never returns an error, an error message table is not required. You can register only one error message table per DLL, but you can register more than one function per DLL. You'll also need to clean up any remaining processes and definitions.</p>
+
+<code>
+if ( <a href="UserDLL_CreateUserErrorMessageTable.html">CreateUserErrorMessageTable</a>( hDLL, NUMBER_OF_ERRORS, myErrorMessageTable ) )<br>
+<span class="comment">// and if the errors register properly, register the user function</span><br>
+<a href="UserDLL_CreateUserFunction.html">CreateUserFunction</a>( hDLL, &amp;multiply );<br>
+<br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</span><br>
+<br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case DLL_THREAD_ATTACH:</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case DLL_THREAD_DETACH:</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case DLL_PROCESS_DETACH:</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (!_CRT_INIT(hDLL, dwReason, lpReserved))</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return FALSE;</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</span><br>
+<span class="blockindent">}</span><br>
+<span class="blockindent">return TRUE;</span><br>
+<br>
+}<br>
+<br>
+#undef INTERRUPTED<br>
+#undef INSUFFICIENT_MEMORY<br>
+#undef MUST_BE_REAL<br>
+#undef NUMBER_OF_ERRORS<br>
+<br>
+</code>
+
+<br>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

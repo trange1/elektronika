@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Reading Data from a Data File</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Datafiles">
+	
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("External Files and Applications\nFile Input/Output Components and Data Tables");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Reading and Writing Data from/To a File</h1></td>
+	</tr>
+</table>
+
+<p>You can read and write data using <a href="Read_ASCII.html">functions</a>, 
+  or <b>Data components</b>, available from the <b>Insert &gt; Data</b> menu and the <b>Insert &gt; Components</b> menu. The <b>Data Import Wizard, File Input</b> and <b>Data Table</b> components allow you to assign data to a variable. The <b>Wizard</b> and <b>File Input</b> components establish an updatable connection to a data file; Data Tables import data once. The output of these components can be manipulated like any other Mathcad <a href="Vectors_and_matrices.html">array</a>.</p>
+
+<p>The <b>File Output</b> and <b>Output Table</b> components let you write the contents of an array to a file. The <a href="Read_ASCII.html">functions</a> allow you to change file names without activating the component, append data to existing files, and read and write files inside program loops.</p>
+  
+  <p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('tutorial\\features\\feat_06.xmcd')"
+	   class="fakelink">Tutorial: Handling Data</a></h5>
+  
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="connectingdata">Linking to a data file</a></td>
+</tr>
+</table>
+</h2>
+
+<p>To establish a connection for reading a data file, use the <b>Data File Input</b> component:</p>
+ 
+<ol type="1">
+	<li><p>Choose <b>Data</b> from the <b>Insert</b> menu, then choose <b>File Input</b> from the resulting list. This launches the File Input Setup Wizard.</p></li>
+	<li><p>Choose the file type, and the number of rows or columns of data that are read, or, in the case of Excel worksheets, specify named ranges or cell ranges.</p></li>
+</ol>
+
+<p>When you are done, enter the array variable name containing your data in the <a href="Placeholder_defined.html">placeholder</a> that appears at the left of the component. If you are having trouble importing your data because the <b>File Input</b> component doesn't recognize the file type, or you need more control over the import options, use the more sophisticated <a href="Data_wizard.html"><b>File Import Wizard</b></a>.</p>
+
+<p>To establish a connection for writing a data file, use the <b>Data File Output</b> component:</p>
+
+<ol type="1">
+	<li><p>Choose <b>Data </b>from the <b>Insert</b> menu, then choosing <b>File Output</b> from the resulting list. This launches the File Output Setup Wizard.</p></li>
+	<li><p>When you are done, enter the array variable name containing your data in the <a href="Placeholder_defined.html">placeholder</a> that appears at the bottom of the component. The variable containing the data must be an array, or a function which produces an array.</p></li>
+</ol>
+
+<p>Each time you calculate the worksheet, the data is read from/written to the specified file. You can modify the files, or change properties of these components by right-clicking and choosing <a href="Dialog_File_ReadWrite_component_properties.html">Properties</a>.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="importingonce">Importing/Exporting/Copying Data once from/to a File</a></td>
+</tr>
+</table>
+</h2>
+
+
+<p>To import data once from a data file, use a <b>Data Table</b>:</p>
+<ol type="1">
+	<li><p>Choose <b>Data</b> from the <b>Insert</b> menu, then choose <b>Table</b> from the resulting list. A table with row and column labels appears in your worksheet.</p></li>
+	<li><p>Right-click on the upper left corner of the <b>Data Table</b>, and choose <b>Import</b>, or simply <a href="Tables_of_numbers.html">type data in the table cells</a>. You can also paste tabular data into a <b>Data Table</b> by right-clicking on the corner and choosing <b>Paste Table</b>.</p></li>
+	<li><p>You can further configure the Table by right-clicking on the corner and choosing <a href="Input_table_properties_format.html"><b>Properties</b></a>.</p></li>
+</ol>
+
+<p>To export data once from a matrix:</p>
+<ol type="1">
+	<li><p>Display the results as an <a href="Displaying_vector_or_matrix.html">output table</a>. Large matrices display this way automatically. For small arrays, you may have to specify the display from the <a href="Dialog_result_format.html#Display">Result Format</a> dialog.</p></li>
+	<li><p>Right-click on the corner of the output table and choose <b>Export</b> from the resulting menu to bring up the <b>Write to File</b> dialog box.</p></li>
+</ol>
+
+<p>To copy and paste some or all of your data, select the cells you wish to copy, or right-click on the corner of the <b>Output Table</b> and choose <b>Select All</b> from the menu. Right-click again, and choose <b>Copy Selection</b>, to copy the contents to the clipboard.</p>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li>You cannot create a <b>Data Component</b> in an existing expression; you 
+    must begin from a blank region of the worksheet.</li>
+  <li>Pathnames are relative to the <a href="Current_working_directory.html">current 
+    working directory</a>.</li>
+  <li>Data may not be imported properly from files using more than one delimiter.</li>
+  <li>To read/write a file using comma as a decimal, verify that the options for 
+    your operating system specify the comma as the decimal symbol. Then click 
+    &quot;Use comma as decimal symbol&quot; in the dialog box as you choose the 
+    file type.</li>
+  <li> 
+    <p><a name="Supported_Data_Types">The following file types are supported by 
+      the components:</a></p>
+    <ul type="disc">
+      <li>Comma Separated Values (*.csv)</li>
+      <li>dbase Files (*.dbf)</li>
+      <li>Delimited Text (*.dat, *.txt)</li>
+      <li>Excel Files (*.xls) and Lotus 1-2-3 Files (*.wks, *.wk1, *.wk*)</li>
+      <li>MATLAB Files (*.mat)</li>
+    </ul>
+  </li>
+  <li>To read and write binary files, use <a href="READBIN_function.html"><b>READBIN</b> 
+    and <b>WRITEBIN</b></a>. To read and write delimited text files that store 
+    nested matrices, use <a href="Read_ASCII.html"><b>READPRN</b> and <b>WRITEPRN</b></a>.</li>
+  <li>To read cells from a specific worksheet in an Excel file, use the same naming 
+    conventions as in Excel itself, for example, Sheet2!B1:C5 gets the values 
+    in cells B1 through B5 and<br>
+    C1 through C5 from Sheet2. To read multiple ranges or output data to Excel, 
+    use the <a href="Component_Excel.html">Excel Component</a>.</li>
+  <li>To acquire data continuously from acquisition hardware, use the <a href="Component_DAQ.html">Data 
+    Acquisition component</a>.</li>
+  <li>It's also possible to read records from an <a href="Component_ODBC.html">ODBC 
+    database</a>, using a different component.</li>
+  <li>Data component creation buttons can be added to the <a href="Toolbar_Standard.html">Standard 
+    toolbar</a> by right-clicking on the toolbar.</li>
+</ul>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Data_Analysis\\fileIO.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Data File Input and Data File Output: Options','Dialog_File_ReadWrite_component_properties.html','Data Import Wizard','Data_wizard.html','Excel Component','Component_Excel.html','Reading and Writing Binary Data','READBIN_function.html','Reading and Writing Data (READPRN, WRITEPRN, APPENDPRN)','Read_ASCII.html','Reading Arbitrary Data Formats','READFILE.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+	   
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

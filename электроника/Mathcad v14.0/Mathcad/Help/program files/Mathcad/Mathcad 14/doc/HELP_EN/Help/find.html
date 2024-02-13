@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+<title>Solving Systems of Equations</title>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+ <link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <META NAME="MS-HAID" CONTENT="Solving">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Solving\nSolving Systems of Equations");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table><tr class="whs1">
+<td valign=top>
+<h1>Solving Systems of Equations</h1></td></tr>
+</table>
+
+<p><b class="hmath">Find(var1, var2, ...)</b> Returns the 
+ values of <span class="math">var1, var2...</span> that satisfy the equations 
+ and inequalities in a <a href="Solve_Block.html">Solve Block</a>. If you 
+ are solving for <span class="math">n</span> variables, the solve block must 
+ have <span class="math">n</span> equations. Matrix notation is allowed, 
+ as is solving for matrix variables. The <b>Find</b> function chooses an 
+ appropriate method from a <a href="Solving_algorithms.html">group of available 
+ methods</a>, depending on whether the problem is linear or nonlinear, 
+ and other attributes.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+	
+	
+  <li><span class="hmath">var1, var2,...</span> are scalar or array variables 
+    found in the system of equations. Guess values for each variable must be <a href="Defining_a_Variable.html">defined</a> 
+    above the <b>Given</b> keyword or within the body of the Solve Block. If solutions 
+    are expected to be complex, complex guess values must be used.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li> 
+    <p>The universal notes on constructing <a href="Solve_Block.html">Solve Blocks</a> 
+      apply. Within the body of the block:</p>
+    <ul 	type="disc">
+      <li>
+        <p><b>Equations:</b> Equations to be solved must be defined using <a href="Equal_to_operator.html">Boolean 
+          equals</a>. Values in the equations and guess values may be defined 
+          within the body of the block using <a href="Equal_sign_for_definition.html">:=</a>.</p>
+      </li>
+      <li>
+        <p><b>Constraints:</b> Inequality constraints, using Boolean operators, 
+          are allowed.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Output of the <b>Find</b> function may be assigned to a single variable, 
+      a vector of explicit variable names, or a function of other variable names 
+      within the solve block (including guess variables), parameterizing the solve 
+      block. See the QuickSheet example. If the variables have different units, 
+      they may only be assigned to an explicit vector of names or an explicit 
+      vector of function names, to avoid mixed units in matrices.</p>
+  </li>
+  <li> 
+    <p>When there is one unknown scalar variable, the solution is a scalar. Otherwise, 
+      the solution is a vector whose first element is <span class="math">var1</span>, 
+      second element is <span class="math">var2</span>, and so on. You cannot solve 
+      for a single element of a vector used in the block. All vector values are adjusted simultaneously to minimize the error.</p>
+  </li>
+  <li>
+    <p><b>Find</b> may also be evaluated <a href="Symbolic_equal_sign.html">symbolically</a>, 
+      giving a solution to the system of equations in terms of the variable names, 
+      if possible. Inequality constraints are not allowed in this case. </p>
+  </li>
+  <li>
+    <p><a href="Accuracy.html">TOL and CTOL</a> can affect the solution to nonlinear 
+      systems. Setting these values too small may cause the solver not to converge. 
+      If adjusting these parameters does not help, try different guess values, 
+      or add an inequality constraint.</p>
+  </li>
+  <li>
+    <p>If your system does not converge, and you would like to know the solution 
+      that was found, even though it did not meet the convergence criteria, use 
+      <a href="Approximate_solutions.html"><b>Minerr</b></a>.</p>
+  </li>
+  <li>If your system does not converge, there are other things you can do to <a href="find_not_converging.html">override</a> 
+    the error messages. </li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+			id=objLaunchMathcad
+			border=0
+			width=1
+			height=1
+			align=left>
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+		onMouseOut="document.body.style.cursor='arrow'"
+		onClick="objLaunchMathcad.OpenResourceCenter('Solving\\s020ufrt.xmcd')"
+		class=fakelink>QuickSheet</a></h5>
+
+<p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Approximate Solutions of Equations','Approximate_solutions.html','Finding Roots','Finding_roots.html','Mathcad Solve Block','Solve_Block.html','Minimizing or Maximizing a Function','Maximizing_or_minimizing_a_function.html','Solver Algorithms and AutoSelect','Solving_algorithms.html','Solving Linear Systems','solving_linear_systems.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

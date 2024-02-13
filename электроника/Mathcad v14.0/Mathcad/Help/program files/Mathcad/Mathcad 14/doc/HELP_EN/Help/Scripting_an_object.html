@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+<title>Scripting an Object</title>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name="MS-HAID" content="Scripted Object">
+<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+ <link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("External Files and Applications\nScriptable Objects");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table><tr class="whs1">
+    <td valign=top>
+      <h1>Scripting an Object</h1>
+    </td>
+  </tr>
+</table>
+
+<p>In order to use most <a href="Components.html">components</a>, you must create a script to control the object. Mathcad comes with a Script Editor, where you can write and maintain the script for each scripted object in your worksheet. </p>
+
+<ol type="1">
+	<li>To launch the Script Editor, right-click on the object you want to script and choose <b>Edit  Script</b>.</li>
+	<li>When you are done editing the script, select <b>Close &amp; Return</b> from the <b>File</b> menu to save the script and return to the worksheet.</li>
+</ol>
+
+<p>You can also save scripts for reuse with other scripted objects. Click <b>Export</b> on the <b>File</b> menu to save a copy of the script to disk. To use a saved script in a component, click <b>Import</b> on the <b>File</b> menu. When you import a script, check that the object name in the script matches the object name in the worksheet.</p>
+ 
+<p>To save your work without closing the Script Editor, click <b>Apply Changes</b> from the <b>File</b> menu. This also checks the syntax of your script.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Structure of a Script</td></tr>
+</table>
+</h2>
+ 
+<p>There are three required parts to each script, called event handlers. These three event handlers are called in sequence every time a component calculates.</p>
+
+<ul type="disc">
+	<li>The <b>Start Event</b>, which executes when the component is calculated.</li>
+	<li>The <b>Exec Event</b>, which executes after the Start Event is finished. This Event has arguments <b>Inputs</b> and <b>Outputs</b> that correspond to the <a href="Input_variable.html">input and output</a> variables for the component; use notation like Inputs(0) and Outputs(1) in the body of the subroutine to refer to the first input and the second output.</li>
+	<li>The <b>Stop Event</b>, which executes following the Exec event.</li>
+</ul>
+
+<p>For more specific information on how to script objects and Mathsoft Controls, see the Developer's Reference under the <b>Help</b> menu. Regardless of which <a href="Component_Scriptable_Object.html#insert">scripting language</a> you use, your script must contain these three event handlers. You can use other event handlers if you wish, but they are not required. A basic framework containing these event handlers is preloaded for any new scriptable component you create.</p>
+
+<h4>Note:</h4>
+
+<ul type="disc">
+	
+	<li>The name of the object in the script and the name assigned to the object in Mathcad must match. To control the name of the scripted object in Mathcad, right-click on the <a href="Component_Scriptable_Object.html">Scripted Object</a> and select <b>Properties</b>.</li>
+</ul>
+
+<p><object CLASSID="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+			ID=objLaunchMathcad
+			BORDER=0
+			width=1
+			height=1
+			align=left>
+</object> </p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+		onMouseOut="document.body.style.cursor='arrow'"
+		onClick="objLaunchMathcad.OpenResourceCenter('Data_Analysis\\fileIO.xmcd')"
+		class=fakelink>QuickSheet</a></h5>
+
+<p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Saving and Redistributing Components','Components_redistributing.html','Scriptable Object Component','Component_Scriptable_Object.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

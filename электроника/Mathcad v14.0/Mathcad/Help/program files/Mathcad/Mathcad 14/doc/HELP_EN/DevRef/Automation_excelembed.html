@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Excel Example</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Automation Interfaces\nThe Mathcad Embedding API\nExcel Example");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Excel Example</h1></td>
+	</tr>
+</table>
+
+<p>You can use an application such as Microsoft Excel to access <a href="Automation.html">Mathcad's <acronym lang="en" title="Object Linking and Embedding">OLE</acronym> Automation interface</a> using Excel's VBA environment. The following example sets the variable in0 in a Mathcad OLE object to a complex number, allows Mathcad to perform a calculation, and puts the answer back into Excel using the <a href="oldAutomation.html">Embedding API</a>.</p>
+
+<h3>Step 1: Insert an OLE object into an Excel worksheet.</h3>
+
+<ol type="1">
+	<li>Choose <b>Object</b> from the <b>Insert</b> menu.</li>
+	<li>Choose Mathcad Document on the New tab or choose an existing Mathcad worksheet on the Create from File tab.</li>
+	<li>Click &quot;OK.&quot;</li>
+</ol>
+
+<h3>Step 2: Set up the application so that there is data to pass to Mathcad and/or available cells to store data retrieved from Mathcad.</h3>
+
+<h3>Step 3: Write a Visual Basic macro module.</h3>
+
+<ol type="1">
+	<li>Choose <b>Macro > Macros</b> from the <b>Tools</b> menu.</li>
+	<li>Enter appropriate VBA code that refers to data in your worksheet and the variables in Mathcad.</li>
+</ol>
+
+<h3>Step 4: Run the macro.</h3>
+
+<ol type="1">
+	<li>First, double-click on the Mathcad object in the Excel worksheet to activate the object.</li>
+	<li>Run the macro from the Excel worksheet by choosing <b>Macro > Run</b> from the <b>Tools</b> menu.</li>
+</ol>
+
+<p>For example, the following is an Excel worksheet communicating with Mathcad through a VBA macro. The data stored in cells I7 through J8 are passed into the Mathcad variable in0. Mathcad performs a calculation (in this case, trivially adding 1 to the values, but you can use Mathcad to perform any calculation you can do in Mathcad). The results stored in the Mathcad variable out0 are passed into the cells I12 through J13.</p>
+
+<p><img src="Graphics/excelole.jpg" alt="Using OLE Automation to calculate a Mathcad worksheet from Excel" width="737" height="482" border="0"></p>
+
+<h3>Code</h3>
+
+<p>The VBA macro looks like this:</p>
+
+<code>
+Sub UpdateWorksheet()<br>
+Dim MathcadObject As Object<br>
+Dim outRe, outIm As Variant<br>
+Dim inRe, inIm As Variant<br>
+<br>
+<span class="comment">'Set a reference to the Mathcad object on the sheet</span><br>
+Set MathcadObject = ActiveSheet.OLEObjects(1).Object<br>
+<br>
+<span class="comment">'Read in values to be passed from Excel to Mathcad</span><br>
+inRe = ActiveSheet.Range(&quot;I7:I8&quot;).Value<br>
+inIm = ActiveSheet.Range(&quot;J7:J8&quot;).Value<br>
+<br>
+<span class="comment">'end the values over to Mathcad, assign them to variable in0,<br>
+'recalculate, and read the results from out0 back into Excel</span><br>
+Call MathcadObject.SetComplex(&quot;in0&quot;, inRe, inIm)<br>
+Call MathcadObject.Recalculate<br>
+Call MathcadObject.GetComplex(&quot;out0&quot;, outRe, outIm)<br>
+<br>
+<span class="comment">' Place the result values into the chosen Excel cells</span><br>
+ActiveSheet.Range(&quot;I12:I13&quot;).Value = outRe<br>
+ActiveSheet.Range(&quot;J12:J13&quot;).Value = outIm<br>
+<br>
+End Sub<br>
+<br>
+</code>
+
+<p>Note that in order to pass real data, you should have cell(s) containing zeros for the imaginary part.</p>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	<li>See <b>qsheet/samples/excel/traject.xls</b> in your Mathcad installation directory for a working example with documented code.</li>
+	<li>See an additional <a href="Automation_ex2.html">Excel example</a> using the updated <a href="IMathcadApplication_Overview.html">scripting Automation API</a>.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

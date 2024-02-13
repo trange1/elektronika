@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>DFT/IDFT of Complex Data</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Fourier Transforms">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nFourier and Wavelet Transforms\nDFT/IDFT of Complex Data");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>DFT/IDFT of Complex Data</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">cfft(A)</b> Returns the Discrete Fourier Transform of a vector 
+  or matrix. The result has the same number of rows and columns as <b class="math">A</b>. 
+  If <b class="math">A</b> is a vector, the result is given by:</p>
+
+<p class="blockindent"><img src="Graphics/fft_fft.gif" alt="example of a Discrete Fourier Transform of a vector" width="176" height="35" align="bottom" border="0"></p>
+
+<p>where <span class="math">n</span> is the number of elements in <b class="math">v</b>. 
+  For matrix arguments, <b>cfft</b> returns the two-dimensional Fourier transform, 
+  scaled by <span class="math">1/n</span>. Calculated using the Singleton method. 
+</p>
+
+<p><b class="hmath">icfft(u)</b> Returns the inverse Fourier transform for <b class="math">u</b> 
+  created with <b>cfft</b>.</p>
+  
+<p><b class="hmath">CFFT(A)</b> Returns the Discrete Fourier Transform of a vector 
+  or matrix. The formula is equivalent to <b>cfft</b>, but is scaled by <span class="math">1/n</span> 
+  instead of <span class="math">1/&radic;n </span>(<span class="math">1/n<sup>2</sup></span> 
+  in the 2-D case), and uses a negative exponent going from the time to the frequency 
+  domain.</p>
+  
+<p><b class="hmath">ICFFT(u)</b> Returns the inverse Fourier transform for <b class="math">u</b> 
+  created with <b>CFFT</b>. The formula is equivalent to <b>icfft</b>, but is 
+  scaled by <span class="math">1/n</span> instead of <span class="math">1/&radic;n</span>, 
+  and uses a positive exponent going from the frequency to the time domain.</p>
+  
+<h4>Arguments: </h4>
+
+<ul type="disc">	
+  <li><b class="hmath">A</b> is a complex vector or matrix of any size, although 
+    the function works faster when the number of elements in the vector is 
+    <span class="math">2<sup>m</sup></span>. A vector whose length is a large 
+    prime number slows down the function.</li>
+</ul>
+
+<h4>Notes: </h4>
+
+<ul type="disc">
+  <li>If <b class="math">A</b> is a real-valued vector that has <span class="math">2<sup> 
+    m</sup></span> elements (<span class="math">m &gt; 2</span>), use <a href="FFTs_of_real_data.html">fft/FFT</a> 
+    instead, for speed.</li>
+  <li> 
+    <p>The frequency spacing associated with the <span class="math">k</span>th 
+      element in the calculated FFT spectrum is given by:</p>
+    <p class="blockindent"><img src="Graphics/freq.gif" alt="The frequency associated with the kth element in the calculated FFT spectrum" width="63" height="38" border="0"></p>
+    <p>where <span class="math">f<sub>s</sub></span><b> </b>is the sampling frequency 
+    of the original signal and <span class="math">n</span> is the number of samples. 
+    As a consequence, since <a href="Array_subscript_operator.html">k must be 
+    an integer</a>, spreading in the spectrum occurs unless the sampling frequency 
+    is chosen so that</p> 
+    <p class="blockindent"><img src="Graphics/fftfreq.gif" alt="frequency spacing resulting from FFT" width="40" height="50" border="0"></p>
+    <p>is always equal to an integer for any period <span class="math">1/T</span> 
+    in the signal.</p></li>
+	
+  <li> The complex transform is cyclic, from 0 (inclusive) to 2pi (noninclusive). 
+    This means that the first half of the values returned corresponds to the 
+    positive frequency spectrum, and the second half to the negative frequency 
+    spectrum. The first value in the returned sequence is always at zero frequency 
+    (DC), and the remaining values can be split in half and recentered, if desired. 
+    If the input, <b class="math">A</b>, is real-valued, these remaining values 
+    are complex conjugate symmetric. See the QuickSheet.</li>
+  <li> The sampling frequency is distinct from the frequency(ies) of the original 
+    time-domain signal. </li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Applications\\f060.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Correlation','correl2d.html','Discrete Transform Functions','Discrete_transform_functions.html','FFT/IFFT of Real Data','FFTs_of_real_data.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

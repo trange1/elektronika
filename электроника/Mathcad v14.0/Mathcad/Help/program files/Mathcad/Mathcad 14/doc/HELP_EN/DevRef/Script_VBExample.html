@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>VBScript Example</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Scripting Custom OLE Objects\nScript Examples\nVBScript Examples");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>VBScript Example of a Scriptable Object Component</h1></td>
+	</tr>
+</table>
+
+<p>This version of the script will iterate through each available input using the <b>For Each...Next</b> construct.</p>
+
+<code>
+<span class="blockindent">Sub ScriptObjEvent_Start()</span><br>
+<span class="blockindent"><span class="comment">&nbsp; 'Add your code here</span></span><br>
+<span class="blockindent">End Sub</span><br>
+<br>
+<span class="blockindent">Sub ScriptObjEvent_Exec(Inputs,Outputs)</span><br>
+<br>
+<span class="blockindent">Dim i</span><br>
+<span class="blockindent">Dim dataval</span><br>
+<span class="blockindent">i=0</span><br>
+<br>
+<span class="blockindent"><span class="comment">'loop through Inputs collection</span></span><br>
+<span class="blockindent">For each dataval in Inputs</span><br>
+<br>
+<span class="blockindent"><span class="comment">'extract value of this particular Input</span></span><br>
+<span class="blockindent">val = dataval.Value</span><br>
+<br>
+<span class="blockindent"><span class="comment">'pop up a message box to show progress through collection, using</span></span><br>
+<span class="blockindent"><span class="comment">'only upper left element of array</span></span><br>
+<span class="blockindent">If IsArray(val) Then </span><br>
+<span class="blockindent">&nbsp;&nbsp; MsgBox &quot;Input: &quot; &amp; CStr(i) &amp; &quot; is an array&quot;</span><br>
+<span class="blockindent">Else</span><br>
+<span class="blockindent">&nbsp;&nbsp; MsgBox &quot;Input: &quot; &amp; CStr(i) &amp; &quot;, Value: &quot; &amp; CStr(val)</span><br>
+<span class="blockindent">End If</span><br>
+<br>
+<span class="blockindent"><span class="comment">'just pass inputs to the outputs, incrementing</span></span><br>
+<span class="blockindent">'the first element at 0,0 position by 1</span><br>
+<span class="blockindent">If i &lt; Outputs.Count Then</span><br>
+<span class="blockindent">&nbsp;&nbsp; If IsArray(val) Then</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; On Error Resume Next</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; vTemp = UBound(val,2)</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If Err.Number = 0 Then</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; val(0,0) = val(0,0) + 1</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Else</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; val(0) = val(0) + 1</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End If</span><br>
+<span class="blockindent">&nbsp;&nbsp; Else</span><br>
+<span class="blockindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val = val + 1</span><br>
+<span class="blockindent">&nbsp;&nbsp;End If</span><br>
+<span class="blockindent">&nbsp;&nbsp; Outputs(i).Value = val</span><br>
+<span class="blockindent">End If</span><br>
+<span class="blockindent">i = i + 1</span><br>
+<span class="blockindent">Next</span><br>
+<br>
+<span class="blockindent">End Sub</span><br>
+<br>
+<span class="blockindent">Sub ScriptObjEvent_Stop()</span><br>
+<span class="blockindent"><span class="comment">&nbsp; 'Add your code here</span></span><br>
+<span class="blockindent">End Sub</span><br>
+<br>
+</code>
+
+<p>The second version accomplishes the same task without using the <b>For Each...Next</b> construct:</p>
+
+<code>
+<span class="blockindent">Sub ScriptObjEvent_Start()</span><br>
+<span class="blockindent"><span class="comment">&nbsp; 'Add your code here</span></span><br>
+<span class="blockindent">End Sub</span><br>
+<br>
+<span class="blockindent">Sub ScriptObjEvent_Exec(Inputs,Outputs)</span><br>
+<span class="blockindent">Dim dataval</span><br>
+<br>
+<span class="blockindent"><span class="comment">'use for/next construct to loop over inputs</span></span><br>
+<span class="blockindent">for i=0 to Inputs.Count-1</span><br>
+<br>
+<span class="blockindent"><span class="comment">'get the current input and its value</span></span><br>
+<span class="blockindent">set dataval = Inputs(i)</span><br>
+<span class="blockindent">val = dataval.Value</span><br>
+<br>
+<span class="blockindent"><span class="comment">'pop up a message box to show progress through collection</span></span><br>
+<span class="blockindent">MsgBox(val(0,0))</span><br>
+<br>
+<span class="blockindent"><span class="comment">'just pass inputs on to the outputs, incrementing</span></span><br>
+<span class="blockindent"><span class="comment">'the first element by 1</span></span><br>
+<span class="blockindent">if i &lt; Outputs.Count then</span><br>
+<span class="blockindent">&nbsp; val(0,0) = val(0,0)+1</span><br>
+<span class="blockindent">&nbsp; Outputs(i).Value = val</span><br>
+<span class="blockindent">End if</span><br>
+<span class="blockindent">next</span><br>
+<span class="blockindent">End Sub</span><br>
+<br>
+<span class="blockindent">Sub ScriptObjEvent_Stop()</span><br>
+<span class="blockindent"><span class="comment">&nbsp; 'Add your code here</span></span><br>
+<span class="blockindent">End Sub</span><br>
+<br>
+</code>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

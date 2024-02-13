@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+
+<head>
+
+<title>Interpolation and Resampling</title>
+
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+ <link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Digital Filtering\nInterpolation and Resampling");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Signal.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Interpolation and Resampling</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">interpolate(v, n) </b>Returns an 
+ interpolated version of the vector <b class="math">v</b> 
+ with <span class="math">n</span> times as many points as 
+ <b class="math">v</b>.</p>
+
+<p><b class="hmath">multirate(v, n, m, [f]) </b>Returns 
+ a version of multichannel signal <b class="math">v</b> 
+ resampled by a factor of <span class="math">n</span>/<span class="math">m</span>, using the optional argument <b class="math">f</b> as the lowpass 
+ interpolating filter.</p>
+
+<p><b class="hmath">resample(v, m, n) </b>Returns a 
+ vector obtained from <b class="math">v</b> by <span class="math">n</span>-fold interpolation and then sampling 
+ every <span class="math">m</span>th point.</p>
+
+<h4>Arguments:</h4>
+
+<ul>
+<li><b class="hmath">v</b> is a vector 
+ or matrix of real or complex numbers representing the samples of a signal. 
+ If <b class="math">v</b> is a matrix, each column 
+ is processed individually. For <b class="math">resample</b>, 
+ data must be real.</li>
+<li><span class="hmath">n</span> is an integer, 
+ the upsampling/interpolation factor. For <b class="math">resample</b> 
+ and <b class="math">interpolate</b>, <span class="math">n</span> <span class="math">&ge;</span> 2.</li>
+<li><span class="hmath">m</span> is an integer, 
+ downsampling/decimation factor. For <b class="math">resample</b>, 
+ <span class="math">m</span> <span class="math">&ge;</span> 2.</li>
+<li><b class="hmath">f</b>, 
+ (optional) is a vector of FIR lowpass filter coefficients used between 
+ upsampling and downsampling. Default filter has length 32, gain <span class="math">n</span>, windowed with a Hanning taper, with 
+ cutoff .45 times the min(1/<span class="math">n</span>,1/<span class="math">m</span>).</li>
+</ul>
+ 
+ <hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

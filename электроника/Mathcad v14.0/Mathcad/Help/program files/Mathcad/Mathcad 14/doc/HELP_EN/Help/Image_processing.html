@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Reading and Writing Image Files</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nFile Access\nReading and Writing Image Files");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Reading and Writing Image Files</h1></td>
+	</tr>
+</table>
+
+The following functions read image files in various formats into a Mathcad <a href="Vectors_and_matrices.html">matrix</a>. 
+<p><b class="hmath">READ_IMAGE(&quot;file&quot;)</b> Creates an array containing 
+  a grayscale representation of the image file.</p>
+
+<p><b class="hmath">READBMP(&quot;file&quot;)</b> Creates an array containing 
+  a grayscale representation of a bitmap format image file. <i>(deprecated)</i></p>
+
+<p><b class="hmath">READRGB(&quot;file&quot;)</b> Creates an array containing 
+  a red-green-blue packed matrix representation of the image file.</p>
+ 
+<p><b class="hmath">READ_RED(&quot;file&quot;)</span></b><span class="hmath">, 
+  <b>READ_GREEN(&quot;file&quot;)</b>, <b>READ_BLUE(&quot;file&quot;)</b></span> 
+  Create an array containing only the red, green, or blue component from a color 
+  image file.</p>
+
+<p><b class="hmath">WRITEBMP(&quot;file&quot;, [M])</b> Creates an grayscale bitmap 
+  image file. This function can be used either on the right or the left side of 
+  the <a href="Equal_sign_for_definition.html">definition operator</a>. When used 
+  on the right, you must supply the argument <b>M</b>, the name of the matrix 
+  to write to the file. In this case, the function returns 0. When used on the 
+  left, do not supply the argument <b>M</b>, but instead place it on the right 
+  hand side of the definition.</p>
+
+<p><b class="hmath">WRITERGB(&quot;file&quot;, [M])</b> Creates an 16-million-color 
+  bitmap image file. This function can be used either on the right or the left 
+  side of the <a href="Equal_sign_for_definition.html">definition operator</a>. 
+  Notes for <b>WRITEBMP</b> apply.</p>
+  
+<p><b class="hmath">READ_HLS(&quot;file&quot;) </b>Creates an array containing 
+  a hue, lightness, and saturation representation of the image file.</p>
+
+<p><b class="hmath">READ_HLS_HUE(&quot;file&quot;)</span></b><span class="hmath">, 
+  <b>READ_HLS_LIGHT(&quot;file&quot;)</b>, <b>READ_HLS_SAT(&quot;file&quot;)</b></span> 
+  Extract only the hue, light, or saturation component from a color image.</p>
+
+<p><b class="hmath">READ_HSV(&quot;file&quot;)</b> Creates an array containing 
+  a hue, saturation, and value representation of the image file.</p>
+
+<p><b class="hmath">READ_HSV_HUE(&quot;file&quot;)</span></b><span class="hmath">, 
+  <b>READ_HSV_SAT(&quot;file&quot;)</b>, <b>READ_HSV_VALUE(&quot;file&quot;)</b></span> 
+  Extract only the hue, saturation, or value component from a color image.</p>
+
+<p><b class="hmath">WRITE_HSV(&quot;file&quot;, [M])</b> Creates an 16-million-color 
+  bitmap image file. This function can be used either on the right or the left 
+  side of the <a href="Equal_sign_for_definition.html">definition operator</a>. 
+  Notes for <b>WRITEBMP</b> apply.</p>
+
+<p><b class="hmath">WRITE_HLS(&quot;file&quot;, [M])</b> Creates an 16-million-color 
+  bitmap image file. This function can be used either on the right or the left 
+  side of the <a href="Equal_sign_for_definition.html">definition operator</a>. 
+  Notes for <b>WRITEBMP</b> apply.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><span class="hmath">&quot;file&quot;</span> is a <a href="Creating_a_String.html">string</a> 
+    containing the file name or the full <a href="Pathname.html">pathname</a> 
+    and the file name. Recognized image formats are BMP, GIF, JPG, PCX, or TGA.</li>
+  <li><b class="hmath">M</b> is a matrix.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li>Function names are all UPPERCASE.</li>
+  <li><a name="matrixformat"></a>Regardless of original image file format, images 
+    in Mathcad are matrices with values between 0 (black) and 255 (white), which 
+    can be displayed with the <a href="Insert_-_Picture.html">Picture operator</a>. 
+    Each matrix element represents the intensity of one pixel. RGB Color images 
+    are stored as three packed <span class="math">m x n </span>matrices, <a href="Joining_arrays.html">augmented</a> 
+    as follows:
+    <p><img src="Graphics/IPEXAMP1.GIF" alt="RGB Matrix" width="121" height="46"></p>
+    The first <span class="math">n</span> columns represent the red component 
+    of the <span class="math">n x m</span> image. The second and third sets of 
+    <span class="math">n</span> columns represent the green and blue components 
+    of the image. HSV or HLS images are also stored in packed format. </li>
+  <li>If you wish to view an image but not manipulate it mathematically, you can 
+    paste it or <a href="Insert_Object_Dialog_Box.html">insert it as an object</a> 
+    in your document.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object>
+</p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('tutorial\\features\\feat_12.xmcd')"
+	   class="fakelink">Tutorial - Image Processing</a></h5>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Visualization\\grayimg.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

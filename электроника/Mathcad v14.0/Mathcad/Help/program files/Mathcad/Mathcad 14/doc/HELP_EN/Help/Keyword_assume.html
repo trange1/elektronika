@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Making Assumptions About Variables</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Symbolic Evaluation">	
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Symbolics and Keywords\nWorking with Variables in Symbolic Expressions\nMaking Assumptions About Variables");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Making Assumptions About Variables</h1></td>
+	</tr>
+</table>
+
+<p>To make assumptions about the domain of a variable in a symbolic expression, such as restricting it to be a real number, place the cursor at the end of the line containing the expression and either:</p>
+  
+<ul type="disc">	
+	<li>Press <b>[Ctrl]&nbsp;[Shift]&nbsp;[.]</b> and type the <a href="Keywords.html">keyword</a> &quot;assume,&quot; followed by a comma.
+	
+	<p>- or -</p>
+	</li>
+ 
+	<li>Click <b>assume</b> on the <a href="Symbolic_toolbar.html"><b>Symbolic</b> toolbar</a>.</li>
+</ul>
+
+<p>In the placeholder that appears after &quot;assume,&quot; type a <a href="#modifiers">modifying expression</a> specifying the assumption on the variable(s).</p>
+    
+<p>Then press <b>[Enter]</b>.</p>
+
+<p>If you insert &quot;assume&quot; after another keyword, the assumption on the variables applies to the operation performed by first keyword.</p>
+
+<p>The following table lists the types of modifying expressions you can insert after &quot;assume&quot;:</p>
+
+<table class="blockindent" cellspacing="2" cellpadding="2" border="0">
+<tr>
+	<td width="200"><a name="modifiers"><b>Modifying Expressions</b></a></td>
+	<td><b>Assumption</b></td>
+</tr>
+<tr>
+	<td width="150">x&nbsp;<b>=</b>&nbsp;real</td>
+	<td><span class="math">x</span> is a real number</td>
+</tr>
+<tr>
+	<td>x&nbsp;<b>=</b>&nbsp;integer</td>
+	<td><span class="math">x</span> is an integer</td>
+</tr>
+<tr>
+	<td>x&nbsp;<b>&gt;</b>&nbsp;a</td>
+	<td><span class="math">x</span> is a real number greater than a</td>
+</tr>
+<tr>
+	<td>x&nbsp;<b>&ge;</b>&nbsp;a</td>
+	<td><span class="math">x</span> is a real number greater than or equal to a</td>
+</tr>
+<tr>
+	<td>x&nbsp;<b>&lt;</b>&nbsp;b</td>
+	<td><span class="math">x</span> is a real number less than b</td>
+</tr>
+<tr>
+	<td>x&nbsp;<b>&le;</b>&nbsp;b</td>
+	<td><span class="math">x</span> is a real number less than or equal to b</td>
+</tr>
+<tr>
+	<td>x&nbsp;<b>=</b>&nbsp;RealRange(a,b)</td>
+	<td><span class="math">x</span> is a real number in the range <span class="math">a&nbsp;&lt;&nbsp;x&nbsp;&lt;&nbsp;b</span>, where <span class="math">a&nbsp;&lt;&nbsp;b</span><table width="8"></table></td>
+</tr>
+<tr>
+	<td>n&nbsp;<b>=</b>&nbsp;even</td>
+	<td><span class="math">n</span> is an even integer.</td>
+</tr>
+<tr>
+	<td>n&nbsp;<b>=</b>&nbsp;odd</td>
+	<td><span class="math">n</span> is an odd integer.</td>
+</tr>
+</table>
+
+<p>Use <a href="Equal_to_operator.html">Boolean equals</a> (<b>[Ctrl]&nbsp;[=]</b>) to specify the equalities in the preceding list.</p>
+
+<h4>Example:</h4>
+
+<p class="blockindent"><img src="Graphics/assume_two_variables.GIF" alt="Applying " assume " to two variables" width="177" height="40" border="0"></p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Restricting Multiple Variables</td></tr>
+</table>
+</h2>
+
+<p>To restrict the domain of more than one variable in the expression, insert a comma-separated list of modifying expressions after &quot;assume.&quot; For example,</p>
+
+<p class="vmath">assume,&nbsp;x&nbsp;<b>=</b>&nbsp;real,&nbsp;y&nbsp;&gt;&nbsp;0,&nbsp;z&nbsp;&gt;&nbsp;0</p>
+
+<p>To restrict the domain of all variables in the expression, insert the word &quot;ALL&quot; in the modifying expression. For example,</p> 
+
+<p class="blockindent"><img src="Graphics/assume_ALL.GIF" alt="Applying " assume " to all variables in an expression" width="289" height="38" border="0"></p>
+
+<h4>Note:</h4>
+
+<ul type="disc">
+<li><p>The keyword &quot;assume&quot; does not make an assignment or substitution. Use a variable <a href="Defining_a_Variable.html">definition</a> or the keyword &quot;<a href="Substitution.html">substitute</a>&quot; for this purpose. To exclude or substitute numerically defined   variables, use the keyword &quot;<a href="Explicit_calculation.html">explicit</a>.&quot; The keyword &quot;assume&quot; merely constrains the region over which Mathcad finds a result, and is primarily useful for simplification and symbolic integration.</p></li>
+  </ul>
+  
+   <p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object>
+</p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Symbolics\\sym13.xmcd')"
+	   class="fakelink">QuickSheet - Symbolic Solutions of Equations</a></h5>
+
+<p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Functions that Can Be Evaluated Both Numerically and Symbolically','Built_in_functions_symbolic.html','Modifiers','Modifiers.html','Overview of Symbolic Calculation','Symbolic_calculation.html','Solving Equations Symbolically','Symbolic_solving.html','Substitutions','Substitution.html','Symbolic Arithmetic and Functions','Symbolic_arithmetic.html','Symbolic display of explicit values','Explicit_calculation.html','Symbolic Equal Sign','Symbolic_equal_sign.html','Symbolic Evaluation of Operators','Symbolic_integration.html','Symbolic Functions','Special_Symbolic_Results.html','Symbolic Optimization','Tools_-_Optimization.html','Using Keywords for Symbolic Operations','Keywords.html','Writing Complex Numbers in Standard Form','Keyword_complex.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+  
+ <hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

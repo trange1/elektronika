@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Symbolic display of explicit values</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Symbolic Evaluation">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Symbolics and Keywords\nExplicit Calculation");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top">
+      <h1>Symbolic Display of Explicit Values Before Reduction</h1>
+    </td>
+	</tr>
+</table>
+
+<p>To replace specified variables in an expression with their assigned values, but
+  without performing any other operations, select the entire expression and either:</p>
+
+<ul type="disc">
+    <li>Press <b>[Ctrl]&nbsp;[Shift]&nbsp;[.]</b> and type the <a href="Keywords.html">keyword</a> &quot;explicit.&quot;
+	<p>- or -</p>
+	</li>
+    <li>Click <b>explicit</b> on the <a href="Symbolic_toolbar.html"><b>Symbolic</b> toolbar</a>.</li>
+	</ul>
+
+<p>Then press <b>[Enter]</b>.</p>
+
+<p>If you want to display explicit values for any variables, you must also type a comma after &quot;explicit,&quot; and then type a comma-separated list of those variable(s) in the placeholder.</p>
+
+<p>The explicit command replaces each variable you specify with its assigned value, if it has one, but 
+  does not replace any other variables with their values, or perform any other numeric or symbolic operations on the expression.</p> 
+
+<h4>Examples:</h4>
+
+<p class="vmath">a:= 30.7</p>
+<p class="vmath">b:= 5.9</p>
+<p class="vmath">d:= 2.36</p>
+<p class="vmath">a + b &minus; d + 13 explicit a,b,d &rarr; 30.7 + 5.9 &minus; 2.36 + 13</p>
+
+<p>For any variable in the expression that you omit after &quot;explicit,&quot; or that is undefined, Mathcad returns the variable name. For example,</p>
+
+<p class="vmath">a + b &minus; d + 13 explicit b,d &rarr; a + 5.9 &minus; 2.36 + 13</p>
+
+<p>If you do not enter any variables after &quot;explicit,&quot; Mathcad returns the original expression unchanged.</p> 
+
+<p>If you evaluate a variable that is defined by an expression containing other variables with assigned values, &quot;explicit&quot; substitutes the expression in terms of the variables, not their 
+  assigned values. For example, if you define <span class="math">d</span> in the example 
+  above to be <span class="math">a + b</span> and then perform the explicit calculation of <span class="math">d</span>,</p>
+
+<p class="vmath">d:= a + b</p>
+<p class="vmath">d explicit, d &rarr; a + b</p>
+  
+<p>you get back <span class="math">a + b</span>, rather than <span class="math">30.7 + 5.9</span>. To return the 
+  numerical values, you must request all intermediate names be substituted, that 
+  is</p>
+<p class="vmath">d explicit, d, a, b &rarr; 30.7 + 5.9</p>
+  
+<p>To substitute the evaluated value of <span class="math">d</span>, add a symbolic equal sign after the definition of <span class="math">d</span>, and then
+perform the explicit calculation.</p>
+  
+<p class="vmath">d := a + b &rarr; 36.6</p>
+<p class="vmath">d explicit, d &rarr; 36.6</p>
+	
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="suppress_variable">Suppressing the Value of a Variable</a></td></tr>
+</table>	
+</h2>
+
+<p>You can use &quot;explicit&quot; to force Mathcad to temporarily ignore the assigned value of a variable. For example, suppose you have assigned
+<span class="math">x</span> the value <span class="math">5</span> and then try to factor the polynomial <span class="math">x<sup>2</sup>&nbsp;-&nbsp;3x&nbsp;+&nbsp;2</span>:</p> 
+
+<p class="vmath">x:=&nbsp;5</p>
+                       <p class="vmath">x<sup>2</sup>&nbsp;&minus;&nbsp;3x&nbsp;+&nbsp;2&nbsp;factor&nbsp;&rarr;&nbsp;2<sup>2</sup>&middot;3</p>
+
+<p>Mathcad first substitutes <span class="math">5</span> for <span class="math">x</span> in the polynomial to get <span class="math">12</span>, and then factors <span class="math">12</span> over the integers. If instead you want to factor the polynomial without substituting 
+<span class="math">x&nbsp;<b>=</b>&nbsp;5</span>, use the keyword
+&quot;explicit&quot; before &quot;factor&quot; to suppress the value of <span class="math">x</span> in a single symbolic evaluation, as shown in the following example:</p>
+
+<p class="blockindent"><img src="Graphics/explicit_with_factor.GIF" alt="Using explicit with factor" width="222" height="42" border="0"></p>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li> You can combine the explicit command in a single line with a numerical evaluation (=) or a numerical 
+    definition (:=), as with all symbolic operations.</li>
+  <li>If you want to show intermediate values as part of reporting, you may wish 
+    to hide keywords or the entire left-hand side using the right-click menus 
+    for symbolic expressions.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('tutorial\\Features\\explicit.xmcd')"
+	   class="fakelink">Tutorial - Explicit Calculation</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Functions that Can Be Evaluated Both Numerically and Symbolically','Built_in_functions_symbolic.html','Making Assumptions About Variables','Keyword_assume.html','Modifiers','Modifiers.html','Overview of Symbolic Calculation','Symbolic_calculation.html','Solving Equations Symbolically','Symbolic_solving.html','Substitutions','Substitution.html','Symbolic Arithmetic and Functions','Symbolic_arithmetic.html','Symbolic Equal Sign','Symbolic_equal_sign.html','Symbolic Evaluation of Operators','Symbolic_integration.html','Symbolic Functions','Special_Symbolic_Results.html','Symbolic Optimization','Tools_-_Optimization.html','Using Keywords for Symbolic Operations','Keywords.html','Writing Complex Numbers in Standard Form','Keyword_complex.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

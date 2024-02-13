@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Solver Algorithms and AutoSelect</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <META NAME="MS-HAID" CONTENT="Solving">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+ol.whs2 {margin-left: 60px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Solving\nSolver Algorithms and Autoselect");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Solver Algorithms and AutoSelect</h1></td>
+	</tr>
+</table>
+
+<p>When you use the functions <a href="find.html"><b>Find</b></a>, <a href="Approximate_solutions.html"><b>Minerr</b></a>, <a href="Maximizing_or_minimizing_a_function.html"><b>Minimize</b></a>, and <a href="Maximizing_or_minimizing_a_function.html"><b>Maximize</b></a>, the AutoSelect feature automatically determines the kind of problem you are solving and attempts appropriate solving algorithms until one of the methods converges. To see which algorithm was used:</p>
+
+<ol type="1">
+	<li><p>Right-click on the function to bring up the menu.</p></li>
+	<li><p>AutoSelect and one of the following methods are checked:</p>
+		<ul type="disc">
+			<li><b>Linear</b></li>
+			<li><b>Nonlinear: Levenberg-Marquardt </b></li>
+			<li><b>Nonlinear: Conjugate Gradient</b></li>
+			<li><b>Nonlinear: Quasi-Newton</b></li>
+		</ul>
+	</li>
+</ol>
+
+<p>AutoSelect is used by default. If the problem is linear, the Linear method is applied. If the problem calls for a nonlinear solver, AutoSelect uses the Levenberg-Marquardt solver; if that fails to converge, the Conjugate Gradient solver; if that too fails, the Quasi-Newton solver. These methods use different algorithms to determine the curvature and direction in which the search is to proceed.</p>
+
+<p>Although it is usually convenient to have AutoSelect turned on, you can right-click the function and choose a specific method from the menu if necessary.</p>
+  
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="Algorithms">Algorithm Descriptions</a></td></tr>
+</table>
+</h2>
+
+<h3>Linear Method</h3>
+
+<p class="blockindent"><b>Linear</b> - a simplex method with branch/bound techniques. The guess values, while required, have no effect on the solution values, as the simplex method does not iterate starting with a guess value. In the case of a problem whose solution is an array, the guess value for the array indicates the size of the solution. The <b>Linear</b> option does not use the built-in variable <a href="Accuracy.html">TOL</a> when solving.</p>
+  
+<h3>Nonlinear Methods</h3>
+
+<p class="blockindent">All methods for nonlinear minimization are iterative. They require the following information:</p>
+
+<ol class="whs2">
+	<li>A gradient direction given by the Jacobian matrix of estimated first derivatives.</li>
+	<li>A step size to move in the gradient direction.</li>
+</ol>
+
+<p class="blockindent">In addition, the algorithm must examine the Hessian matrix (2nd derivatives) to determine if the solution is converging towards a minimum, maximum or a saddle point.</p>
+
+<p class="blockindent"><b>Nonlinear: Levenberg-Marquardt </b>&ndash; The MINPACK algorithm is the basis of the L-M solver, which is a variant on the quasi-Newton method. It attempts to find the zeros of, or, at worst, minimize the sum of squares of the errors in the constraints. For this reason you get better performance from the L-M method by expressing your system as the vector of residuals set equal to zero, rather than summing and squaring the error in the Solve Block.</p>
+  
+<p class="blockindent">Modifications to the MINPACK routine: The first time the solver stops at a point that is not a solution, a small random amount is added to all the variables, and the solver restarts, similar to the Conjugate Gradient method. This helps avoid getting stuck in local minima. L-M does this only once per solve, the first time the solver stops on a point that is not a solution. If the system includes inequality constraints, the subsystem consisting of only the inequalities is solved first before adding in the equality constraints. This is equivalent to moving the guesses into an area where the inequalities are all satisfied.</p>
+  
+<p class="blockindent"><b>Nonlinear: Conjugate Gradient</b> &ndash; The generalized reduced-gradient method generates search directions without storing a Hessian matrix, and is useful in circumstances where matrix factorization is not viable because the matrix is too large or too dense. The termination criterion uses restarting with the steepest-descent direction, and can be useful if the problem has discontinuities or very flat regions.</p>
+  
+<p class="blockindent"><b>Nonlinear: Quasi-Newton</b> &ndash; Newton-type methods use the curvature information provided by the Hessian matrix, creating a local quadratic model of the objective function to determine search direction. Quasi-Newton methods build up curvature information as the iterations calculating direction of descent proceed.</p>
+  
+<p class="blockindent">Convergence rates for the above three methods vary, as does the ability of the solver to converge, depending on the steepness of the objective function. As the gradient becomes shallow near the minimum, increasingly many steps are needed to slide down to the minimum. Linear methods are good far away from the minimum (when the gradient is steep) but are less efficient near a minimum. On the other hand quadratic methods are very sensitive to guess values and time-consuming.</p>
+
+<p class="blockindent">Algorithms in between these two extremes implement different logic to come up with a good step size while avoiding updating the Jacobian at every step. L-M is one such method. It can be thought of as a linear method far away from a minimum and as near-quadratic near the minimum while continuously and smoothly updating the step size.</p>
+   
+<p class="blockindent">Nonlinear methods terminate when the errors are less than <a href="Accuracy.html">TOL and CTOL</a>, or when the direction of search, based on the gradient of the objective function, is less than TOL (no preferred search direction), or when a maximum number of iterations is reached. They also terminate when roundoff errors make it unlikely that further computation would increase accuracy of the solution, typically when TOL is set to a value below <span class="math">10<sup>&minus;15</sup></span>. After the termination criteria are met, if the final error for each of the equations is less than TOL, an answer is returned, and the value of the sum of squares of the errors is assigned to the internal variable ERR. If not, an error is returned. In these cases, you may wish to try <a href="Approximate_solutions.html"><b>Minerr</b></a>, which returns a value even if the solver did not converge to a sufficiently small answer.</p>
+  
+<h4>Notes:</h4>
+
+<ul type="disc">
+	<li><p>If you have trouble finding a solution:</p>
+		<ul class="doubleindent">
+			<li>Try a different method. A particular method may work better or worse than the others on the problem you're attempting to solve. If you've upgraded from an earlier version of Mathcad, AutoSelect may be choosing a different method than in your previous version.</li>
+			<li>Try a different guess value or add an inequality constraint. Provide a complex guess value if you are solving for a complex solution.</li>
+			<li>Use <a href="Approximate_solutions.html"><b>Minerr</b></a> instead of <a href="find.html"><b>Find</b></a> to reach an approximate solution.</li>
+			<li>Try a different value of <a href="Accuracy.html">TOL or CTOL</a>.</li>
+			<li>Try adjusting the <a href="Solve_Block_Advanced_options.html">Advanced Options</a> from the right-click menu for the C-G or Quasi-Newton methods. If it's not clear which is the profitable search direction, for example, if the objective function's surface is nearly flat, or has discontinuities, the &quot;central differences&quot; choice on the Advanced tab may provide extra accuracy from the derivative, since the numerical estimate is taken symmetrically around the current guess rather than all to one side of the guess (&quot;forward differences&quot;). Other options may also be tried.</li>
+		</ul>
+	</li>
+	<li><p>For systems having more than one solution, the solution returned depends on the guess values. Adding inequalities may also force the solver to find a different solution.</p></li>
+	<li><p>The ERR built-in variable gives the error for the system as a whole. There is no built-in variable for determining the size of the error for individual solutions to the unknowns.</p></li>
+</ul>
+  
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Data_Analysis\\sminerr.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">References</td></tr>
+</table>
+</h2>
+
+<p><i>User's Guide to Minpack I</i>. &nbsp;More, Jorge J., Burton S. Garbow, and Kenneth E. Hillstrom, Argonne National Laboratory publication ANL-80-74, 1980.</p>
+
+<p><i>Numerical Recipes in C</i>. &nbsp;Press, W. H., W. T. Flannery, S. A. Teukolsky, and B. P. Vetterling, New York: Cambridge University Press, 1992.</p>
+
+<p><i>Optimization &ndash; Algorithms and Consistent Approximations</i>. Polak, E.,  New York: Springer-Verlag, 1997.</p>
+
+<p><i>Operations Research: Applications and Algorithms</i>. Winston, W., Belmont: Wadsworth, 1994.</p>
+
+<p><i>Practical Optimization</i>. Gill, P., W. Murray, and M. Wright, San Diego: Academic Press, 1981.</p>
+
+<p><a href="http://www.solver.com/technology4.htm" target="_blank">Solver.com</a>, Frontline Systems.</p>
+ 
+<p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Approximate Solutions of Equations','Approximate_solutions.html','Finding Roots','Finding_roots.html','Mathcad Solve Block','Solve_Block.html','Minimizing or Maximizing a Function','Maximizing_or_minimizing_a_function.html','Solving Linear Systems','solving_linear_systems.html','Solving Systems of Equations','find.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+</html>

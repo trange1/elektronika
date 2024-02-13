@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>DataValue Class for Scriptable Objects</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Scripting Custom OLE Objects\nDataValue Class for Scriptable Objects");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>DataValue Class for Scriptable Objects</h1></td>
+	</tr>
+</table>
+
+<p>The inputs and outputs for any Mathcad <a href="ScriptableObject.html">scripted component</a> form a <b><a href="Script_datavalues.html">DataValue</a></b><a href="Script_datavalues.html"> collection</a>. Each item in the collection is of type <b>DataValue</b>, and has the following properties. Components can take any valid Mathcad data type as an input, so the <b>DataValue</b> object is capable of handling scalars, arrays, and strings, and is of type <a href="Script_VariantArrays.html">variant</a>.</p>
+
+<h3><a name="Value">Value and IValue</a></h3>
+
+<p>The <b>Value</b> property is used to access the real portion of the data in the <b>DataValue</b> object, and the <b>IValue</b> property accesses the imaginary portion. The <i>row </i>and <i>col </i>parameters are optional. If these parameters are omitted, then the value is returned as a variant array of doubles or a scalar, depending on the type of data contained in the DataValue object. If the row and col parameters are specified, a scalar value at the specified row/column is returned.</p>
+
+<table cellspacing="1" cellpadding="10" width="500" border="0">
+<tr>
+	<td valign="top"><code><i>x</i> = objDataValue.<b>Value</b>(<i> [row, col] </i>)<br>
+objDataValue.<b>Value</b>(<i> [row, col] </i>) = <i>x</i></code></td>
+	<td valign="top"><code><i>x</i> = objDataValue.<b>IValue</b>(<i> [row, col] </i>)&nbsp;<br>
+objDataValue.<b>IValue</b><i>(<i> [row, col] </i>)&nbsp;= x</i></code></td>
+</tr>
+</table>
+
+<br>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+<tr>
+	<td valign="top"><p><i>x</i></p></td>
+	<td valign="top"><p>The real portion of the data at this position.</p></td>
+</tr>
+<tr>
+	<td valign="top"><p><i>row</i></p></td>
+	<td valign="top"><p>The integer index of the desired row.</p></td>
+</tr>
+<tr>
+	<td valign="top"><p>col</p></td>
+	<td valign="top"><p>The integer index of the desired column.</p></td>
+</tr>
+</table>
+
+<h4>Note:</h4>
+
+<ul type="disc">
+	<li><p>When the <b>Value</b> or <b>IValue</b> property is used on the left hand side of an assignment, the array automatically grows (if necessary) to fit the data. For example, if <span class="math">Outputs(0)</span> initially contains no data and the script writer does the following:</p>
+
+<code>Outputs(0).Value(1,2) = 1</code>
+
+<p>a 2 row, 3 column data value is created which contains the value &quot;1&quot; at row 1, col 2. If a value already exists and an assignment is made which exceeds the current maximum row or column, the value is automatically re-dimensioned to fit the new data. This feature of the <b>Value</b> property allows languages that do not directly support <a href="Script_VariantArrays.html">variant arrays</a> (such as JScript) to create and access <b>DataValue</b> arrays.</p></li>
+</ul>
+
+<h3><a name="Rows">Rows and Cols</a></h3>
+
+<p>The <b>Rows</b> and <b>Cols</b> properties are read-only values returning the number of rows or columns in the <b>DataValue</b> object. Can be used to determine the dimensions of a vector of array stored at a particular element at run-time. This provides flexibility and allows the programmer to avoid hard-coding a fixed number of rows.</p>
+
+<table cellspacing="1" cellpadding="3" width="500" border="0">
+<tr>
+	<td valign="top"><code><i>x</i> = objDataValue.<b>Rows</b></code></td>
+	<td valign="top"><code><i>x</i> = objDataValue.<b>Cols</b></code></td>
+</tr>
+</table>
+
+<br>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+<tr>
+	<td valign="top"><p><i>x</i></p></td>
+	<td valign="top"><p>The integer number of rows or columns.</p></td>
+</tr>
+</table>
+
+<h3><a name="IsComplex">IsComplex</a></h3>
+
+<p>The <b>IsComplex</b> property is a read-only value which returns TRUE if the value has a valid imaginary portion (accessed through the IValue property), or FALSE if the value has only a real portion. This property can be used for error trapping if particular types of inputs or outputs are expected.</p>
+
+<code><i>bool</i> = objDataValue.<b>IsComplex</b><br>
+<br></code>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+<tr>
+	<td valign="top"><p><i>bool</i></p></td>
+	<td valign="top"><p>TRUE (1) if the value has an imaginary part, FALSE (0) if it does not.</p></td>
+</tr>
+</table>
+
+<h3>Example</h3>
+
+<code><span class="comment">'check a particular input and inform the user whether complex or real</span><br>
+if (Inputs(0).IsComplex ) then<br>
+<span class="blockindent">MsgBox( &quot;Complex Value!&quot; )</span><br>
+else<br>
+<span class="blockindent">MsgBox( &quot;Real Value!&quot; )</span><br>
+end if<br></code>
+
+<br>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

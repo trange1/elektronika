@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Creating an HBK File</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Creating an Electronic Book\nSteps to Create an Electronic Book\nCreating an HBK File");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Author.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Creating an HBK File</h1></td>
+	</tr>
+</table>
+
+<p>An HBK file for a Mathcad E-book serves the same function as a traditional book binding: it specifies the order for the individual files in the book as the reader browses through it. The HBK file is a simple text file that provides:</p>
+
+<ul>
+	<li>The browse order or sequence of Mathcad files in your book.</li>
+	<li>The Mathcad files corresponding to the table of contents, index, and the opening page.</li>
+	<li>The text appearing in the title bar of the E-book window when a reader turns to a particular section.</li>
+	<li>The title of the book seen in the title bar and Open Book menu.</li>
+	<li>Title bar messages that appear when a reader clicks a hyperlink.</li>
+	<li>The ability for a reader to make annotations or edits to the E-book without changing your original content.</li>
+</ul>
+
+<p>To create an HBK file:</p>
+
+<ol>
+	<li>Use any text editor or word processing application.</li>
+	<li>Enter the following four keywords at the beginning of the HBK file:</li>
+</ol>
+
+<p class="doubleindent">
+.version 14<br>
+.title Title of your E-book<br>
+.pathfolder with name of folder that the Mathcad files are in<br>
+.pathfolder\subfolder if you have subfolders<br>
+.pathfolder\subfolder if you have subfolders<br>
+TOC toc.xmcd : Table of Contents<br>
+file file.xmcd : Title of file<br>
+;use a semicolon for comments<br>
+</p>
+
+<p>All of this including the TOC keyword is required at the beginning of your HBK file. Note that TOC must be capitalized.</p>
+ 
+<p>In the HBK file lines that begin with a semicolon [;] are ignored and can be used to provide comments. Also, you should use tabs to separate text entries into columns.</p>
+ 
+<ul type="disc">
+	<li>To disable script warnings for files in your E-book that contain <a href="../DevRef/DevRef.htm#ScriptableObject.html" target="_top">Scripted Objects</a> or <a href="../DevRef/DevRef.htm#Controls.html" target="_top">Mathsoft Controls</a>,	add <b>.noscriptwarning</b>.</li>
+	<li>.pathqsheet\pop-ups lists all subfolders for the E-book</li>
+</ul>
+
+<p>In the second column of these lines, follow .title with the title of the book and follow TOC with the names of Mathcad files. See the figure below.</p>
+
+<p class="blockindent"><img src="Graphics/hbkfile.bmp" alt="A sample HBK file" width="683" height="293" border="1"></p>
+
+<ol type="1">
+	<li>Enter a line with three columns for each file in the book. Use tabs to separate columns. In the first column, type the logical name of the file (the filename without the extension). In the second column, type the filename. In the third column, type a colon [:], a space, and the title of the file that will appear in the title bar of the E-book window. See the figure above.</li>
+	<li>Save the HBK file as a text-only file with an .HBK extension and a name that is the same as the name of the folder containing the Mathcad worksheets. For example, if a folder called ALGEBRA contains all the worksheets and subfolders for the E-book &quot;Explorations in Algebra,&quot; save the HBK file as ALGEBRA.HBK.</li>
+	 <li>The HBK file must be saved as Unicode file. To do so, open it in Notepad and Save As choosing Save As Type: Text Documents (*.txt) and Encoding: Unicode. Be sure to keep the HBK file extension.</li>
+	<li>Look for a subfolder called HANDBOOK located within your Mathcad folder. If you do not have a subfolder called HANDBOOK, create one.</li>
+	<li>Place the HBK file and the folder containing your worksheets in the HANDBOOK folder.</li>
+</ol>
+
+<p>At this point, Mathcad has all the information it needs to create a functional E-book. All that remains is to <a href="Checking_your_HBK_file.htm">check the HBK file for errors</a>. You may also <a href="Creating_index_entries_in_regions.htm">create an index</a> for your E-book to help users find specific topics.</p>
+
+<h4>Notes:</h4>
+
+<ul>
+	<li>The file names in the first and second columns should not contain any spaces, nor should there be any spaces between the lines in the HBK file.</li>
+	<li>Be sure to save the HBK file as text-only and Unicode.</li>
+	<li>You can <a href="Using_subfolders.htm">group files into subfolders</a> to better organize them.</li>
+	<li>Abbreviate long titles so that they aren't cut off in the Resources Window titlebar.</li>
+	<li>Don't list pop-up files, non-Mathcad files, or Web files in the HBK file.</li>
+	<li>If you include a space and the keyword &quot;skip&quot; following the name of a file in the second column of the HBK file, a reader of the book will not be able to browse to that file. This is helpful if you want people to link to a file, like a solution or extra details, but not browse to it.</li>
+</ul>
+
+<p class="doubleindent"><img src="Graphics/skip.gif" alt="Skip is used to omit a file from the browse sequence" width="438" height="134" border="0"></p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

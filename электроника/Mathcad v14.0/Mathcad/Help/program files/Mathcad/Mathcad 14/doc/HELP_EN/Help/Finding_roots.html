@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Finding Roots</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <META NAME="MS-HAID" CONTENT="Solving">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nSolving and Optimization\nFinding Roots");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Finding Roots</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">root(f(var1, var2, ...), var1, [a, b])</b> Returns the value 
+  of <span class="math">var1</span> to make the function<span class="math"> 
+  f </span> equal to zero. If <span class="math">a</span> and <span class="math">b</span> are specified, <b>root</b> finds <span class="math">var1</span> on the interval <span class="math">[a,b]</span>. Otherwise, <span class="math">var1</span> must be <a href="Defining_a_Variable.html">defined</a> with a guess value before <b>root </b>is called. When a guess value is used, <b>root </b> uses the Secant or Mueller method; in the case where root bracketing is used, <b>root</b> uses the Ridder or Brent method.</p>
+
+<p><b class="hmath">polyroots(v)</b> Returns a vector containing the roots of 
+  the polynomial whose coefficients are in <b class="math">v</b>. By default, 
+  <b>polyroots</b> uses a LaGuerre method. If you want to use the Companion Matrix 
+  method instead, right-click on the <b>polyroots</b> function and select the desired method from the menu. LaGuerre's 
+  method is iterative and searches for solutions in the complex plane. The 
+  Companion Matrix method converts the equations into an eigenvalue problem. <br>
+</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><span class="hmath">f</span> is a scalar-valued function of any number 
+    of variables.</li>
+  <li><span class="hmath">var1</span> is a scalar variable found in <span class="hmath">f</span>, 
+    the variable with respect to which the root is found. Define a complex guess 
+    to solve for a complex root.</li>
+  <li><span class="hmath">a, b</span> (optional) are real numbers, <span class="math">a 
+    &lt; b</span>, such that <span class="math">f(a)</span> and <span class="math">f(b)</span> 
+    have opposite signs. <b>root</b> searches for a root on the interval <span class="math">a&nbsp;&le;&nbsp;x&nbsp;&le;&nbsp;b</span>. To evaluate <b>root</b> with the <a href="Symbolic_equal_sign.html">symbolic equal sign</a>, 
+	you must supply <span class="math">a</span> and <span class="math">b</span>.</li>
+  <li><b class="hmath">v</b> is a vector containing coefficients of a polynomial 
+    in which the first element is the constant term, and <span class="math">2 
+    &le; length(<b>v</b>) &le; 99</span>.
+  </li>
+</ul>
+
+<p> The <b>root</b> function can only solve one equation in one unknown. To solve several
+ equations simultaneously, use <a href="find.html"><b>Find</b></a> or <a href="Approximate_solutions.html"><b>Minerr</b></a>. </p>
+
+<h4>Notes:</h4>
+
+<ul>
+  <li>The <b>root</b> function is dependent on TOL, but does not respond to a 
+    TOL that is larger than <span class="math">10<sup>-5</sup></span>. This is 
+    the maximum convergence criteria. In addition, values of TOL smaller than 
+    <span class="math">10<sup>-12</sup></span> do not likely produce superior 
+    results, and may cause the algorithm not to converge.</li>
+  <li>For functions with multiple roots, the root returned depends on the guess 
+    value. If the guess value is very close to a minimum or maximum of <span class="math">f</span>, 
+    the <b>root</b> function may fail to converge or converge to a root far away 
+    from the guess value. In choosing an appropriate guess value or brackets, 
+    it helps to <a href="X-y_plot.html">graph</a> the function.</li>
+  <li>
+    <p>Other problems that may cause the <b>root</b> function to fail to converge, 
+      or to converge to an unexpected root are:</p>
+    <ul type="disc">
+      <li>no roots to the expression</li>
+      <li>the roots are too far from the initial guess</li>
+      <li>local maxima and minima between the guess value and the root </li>
+      <li>discontinuities between the initial guess and the roots </li>
+      <li>the expression has a complex root but the initial guess was real (or 
+        vice versa)</li>
+      <li>multiple closely-spaced roots (try reducing the value of <a href="Accuracy.html">TOL</a> to distinguish between them)</li>
+      <li>roots in flat function regions (try reducing the value of <a href="Accuracy.html">TOL</a>, or finding the root of <span class="math">f(x)</span> 
+        divided by its derivative)</li>
+    </ul>
+  </li>
+  <li>Functions with rapid variation can cause the root solver to return tiny 
+    complex parts even when a real result is expected. </li>
+  <li>If you wish to solve an equation of the form <span class="math">f(x) = g(x)</span>, 
+    use an expression like <span class="math"><br>
+    x0 := root(f(x) &minus; g(x),x)</span>.</li>
+  <li>If two roots are close together, you may have to reduce TOL to distinguish 
+    between them.</li>
+  <li>For an expression <span class="math">f(x)</span> with a known root <span
+	 class="math">r</span>, solving for additional roots of <span class="math">f(x)</span> 
+    is equivalent to solving for roots of <span class="math">h(x) = (f(x))/ (x 
+    – r)</span>. Dividing out known roots like this is useful for resolving two 
+    roots that may be close together. It's often easier to solve for roots of 
+    <span class="math">h(x)</span> as defined here than it is to try to find other 
+    roots for <span class="math">f(x)</span> with different guesses.</li>
+  <li>If <span class="math">f(x)</span> has a small slope near its root, then 
+    <span
+	 class="math">root(f(x),x)</span> may converge to a value <span class="math">r</span> 
+    that is relatively far from the actual root. In such cases, even though <span
+	 class ="math">|f(r)|&lt; TOL</span>, <span class ="math">r</span> may be far 
+    from the point where <span class ="math">f(r) = 0</span>. To find a more accurate 
+    root, decrease the value of TOL. Or, try finding <span class ="math">root(g(x),x)</span>, 
+    where <span
+	 class="math">g(x) = [f(x))]/[(d/dx)*f(x)]</span>).</li>
+  <li>You can also solve equations in one unknown symbolically, using the <a href="Symbolic_solving.html">solve</a> 
+    keyword.</li>
+</ul>
+	   
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Solving\\solvroot.xmcd')"
+	   class="fakelink">QuickSheet: root</a></h5>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Solving\\proot.xmcd')"
+	   class="fakelink">QuickSheet: polyroots</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Approximate Solutions of Equations','Approximate_solutions.html','Mathcad Solve Block','Solve_Block.html','Minimizing or Maximizing a Function','Maximizing_or_minimizing_a_function.html','Solver Algorithms and AutoSelect','Solving_algorithms.html','Solving Linear Systems','solving_linear_systems.html','Solving Systems of Equations','find.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>
+
+

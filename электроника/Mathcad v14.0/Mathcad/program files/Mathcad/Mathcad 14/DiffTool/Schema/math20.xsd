@@ -1,0 +1,1245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 sp2 U (http://www.altova.com) by Jeremy Lew (Mathsoft) -->
+<xs:schema xmlns="http://schemas.mathsoft.com/math20" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:u="http://schemas.mathsoft.com/units10" xmlns:p="http://schemas.mathsoft.com/provenance10" targetNamespace="http://schemas.mathsoft.com/math20" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0.0">
+	<xs:import namespace="http://schemas.mathsoft.com/units10" schemaLocation="units10.xsd"/>
+	<xs:import namespace="http://schemas.mathsoft.com/provenance10" schemaLocation="provenance10.xsd"/>
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="W3C-CopyOf-xml.xsd">
+		<xs:annotation>
+			<xs:documentation>
+		       Get access to the xml: attribute groups such as xml:lang and xml:space
+			</xs:documentation>
+		</xs:annotation>
+	</xs:import>
+	<xs:group name="binaryOpClass">
+		<xs:annotation>
+			<xs:documentation>Operator which expects exactly two argument expressions</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="and"/>
+				<xs:element ref="crossProduct"/>
+				<xs:element ref="div"/>
+				<xs:element ref="equal"/>
+				<xs:element ref="greaterOrEqual"/>
+				<xs:element ref="greaterThan"/>
+				<xs:element ref="indexer"/>
+				<xs:element ref="lessOrEqual"/>
+				<xs:element ref="lessThan"/>
+				<xs:element ref="log"/>
+				<xs:element ref="matrow"/>
+				<xs:element ref="matcol"/>
+				<xs:element ref="minus"/>
+				<xs:element ref="mult"/>
+				<xs:element ref="notEqual"/>
+				<xs:element ref="nthRoot"/>
+				<xs:element ref="or"/>
+				<xs:element ref="unknownOp"/>
+				<xs:element ref="plus"/>
+				<xs:element ref="pow"/>
+				<xs:element ref="xor"/>
+			</xs:choice>
+			<xs:group ref="expressionClass" minOccurs="2" maxOccurs="2">
+				<xs:annotation>
+					<xs:documentation>left argument</xs:documentation>
+				</xs:annotation>
+			</xs:group>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="controlConstructsClass">
+		<xs:annotation>
+			<xs:documentation>Flow-of-control constructs</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="ifThen"/>
+			<xs:element ref="otherwise"/>
+			<xs:element ref="break"/>
+			<xs:element ref="continue"/>
+			<xs:element ref="program"/>
+			<xs:element ref="while"/>
+			<xs:element ref="tryCatch"/>
+			<xs:element ref="for"/>
+			<xs:element ref="return"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="definitionClass">
+		<xs:choice>
+			<xs:element ref="define"/>
+			<xs:element ref="globalDefine"/>
+			<xs:element ref="localDefine"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="expressionClass">
+		<xs:annotation>
+			<xs:documentation>Base expression group, derives expressionClass</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="apply"/>
+			<xs:element ref="eval"/>
+			<xs:element ref="mixed"/>
+			<xs:element ref="parens"/>
+			<xs:element ref="provenance"/>
+			<xs:element ref="function"/>
+			<xs:element ref="range"/>
+			<xs:element ref="sequence"/>
+			<xs:element ref="symEval"/>
+			<xs:element ref="id"/>
+			<xs:element ref="chem"/>
+			<xs:element ref="polyroots"/>
+			<xs:element ref="genfit"/>
+			<xs:element ref="Pdesolve"/>
+			<xs:element ref="Find"/>
+			<xs:element ref="Minimize"/>
+			<xs:element ref="Maximize"/>
+			<xs:element ref="Minerr"/>
+			<xs:element ref="numol"/>
+			<xs:element ref="Odesolve"/>
+			<xs:group ref="definitionClass"/>
+			<xs:group ref="controlConstructsClass"/>
+			<xs:group ref="valueClass"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="functionApplicationClass">
+		<xs:sequence>
+			<xs:group ref="expressionClass" minOccurs="2" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="lambdaOpClass">
+		<xs:choice>
+			<xs:sequence>
+				<xs:element ref="limit"/>
+				<xs:element ref="lambda"/>
+				<xs:group ref="expressionClass"/>
+			</xs:sequence>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element ref="product"/>
+					<xs:element ref="summation"/>
+				</xs:choice>
+				<xs:element ref="lambda"/>
+				<xs:element ref="bounds" minOccurs="0"/>
+			</xs:sequence>
+			<xs:sequence>
+				<xs:element ref="derivative"/>
+				<xs:element ref="lambda"/>
+				<xs:element name="degree" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:group ref="expressionClass"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:sequence>
+				<xs:element ref="integral"/>
+				<xs:element ref="lambda"/>
+				<xs:element ref="bounds" minOccurs="0"/>
+			</xs:sequence>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="relationalOpClass">
+		<xs:annotation>
+			<xs:documentation>Relational operators</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="equal"/>
+				<xs:element ref="notEqual"/>
+				<xs:element ref="greaterOrEqual"/>
+				<xs:element ref="greaterThan"/>
+				<xs:element ref="lessOrEqual"/>
+				<xs:element ref="lessThan"/>
+			</xs:choice>
+			<xs:group ref="expressionClass" minOccurs="2" maxOccurs="2"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="unaryOpClass">
+		<xs:annotation>
+			<xs:documentation>Operator which expects exactly one argument expression</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="absval"/>
+				<xs:element ref="conjugate"/>
+				<xs:element ref="factorial"/>
+				<xs:element ref="neg"/>
+				<xs:element ref="not"/>
+				<xs:element ref="sqrt"/>
+				<xs:element ref="transpose"/>
+				<xs:element ref="vectorize"/>
+				<xs:element ref="vectorSum"/>
+				<xs:element ref="determinant"/>
+			</xs:choice>
+			<xs:group ref="expressionClass"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="baseValueClass">
+		<xs:annotation>
+			<xs:documentation>Base value types (no units)</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="real"/>
+			<xs:element ref="imag"/>
+			<xs:element ref="complex"/>
+			<xs:element ref="str"/>
+			<xs:element ref="matrix"/>
+			<xs:element ref="placeholder"/>
+		</xs:choice>
+	</xs:group>
+	<xs:attributeGroup name="exprElementAttrs">
+		<xs:annotation>
+			<xs:documentation>Attributes for expression elements, to be used by exprElementType and any other element which cannot derive from exprElementType due to differing content requirements.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="expr-id" type="xs:nonNegativeInteger" use="optional"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="fontAttrsVariable">
+		<xs:annotation>
+			<xs:documentation>Font attribute, with a default value of MATH_VARIABLE_FONT (0).</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="font" type="xs:unsignedByte" use="optional" default="0"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="fontAttrsConstant">
+		<xs:annotation>
+			<xs:documentation>Font attribute, with a default value of MATH_CONSTANT_FONT (1).</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="font" type="xs:unsignedByte" use="optional" default="1"/>
+	</xs:attributeGroup>
+	<xs:complexType name="exprElementType">
+		<xs:annotation>
+			<xs:documentation>Base type for expression elements</xs:documentation>
+		</xs:annotation>
+		<xs:attributeGroup ref="exprElementAttrs"/>
+	</xs:complexType>
+	<xs:group name="valueClass">
+		<xs:annotation>
+			<xs:documentation>Literal value representation, including united values</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:group ref="baseValueClass"/>
+			<xs:element ref="unitedValue"/>
+		</xs:choice>
+	</xs:group>
+	<xs:complexType name="annotType">
+		<xs:sequence>
+			<xs:group ref="p:annotClass"/>
+			<xs:group ref="expressionClass"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="fontableOpType">
+		<xs:complexContent>
+			<xs:extension base="exprElementType">
+				<xs:attributeGroup ref="fontAttrsVariable"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="solveTerminatorType">
+		<xs:complexContent>
+			<xs:extension base="fontableOpType">
+				<xs:attribute name="auto-method" type="xs:boolean" use="optional" default="true"/>
+				<xs:attribute name="method" use="optional" default="conjugate">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="linear"/>
+							<xs:enumeration value="conjugate"/>
+							<xs:enumeration value="newton"/>
+							<xs:enumeration value="quadratic"/>
+							<xs:enumeration value="levenberg"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="derivative-estimation" use="optional" default="central">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="central"/>
+							<xs:enumeration value="forward"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="variable-estimation" use="optional" default="tangent">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="tangent"/>
+							<xs:enumeration value="quadratic"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+				<xs:attribute name="linear-check" type="xs:boolean" use="optional" default="false"/>
+				<xs:attribute name="multistart" type="xs:boolean" use="optional" default="false"/>
+				<xs:attribute name="evolutionary" type="xs:boolean" use="optional" default="false"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="baseType" final="restriction">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="8"/>
+			<xs:enumeration value="10"/>
+			<xs:enumeration value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="binaryItemIDType">
+		<xs:restriction base="xs:nonNegativeInteger"/>
+	</xs:simpleType>
+	<xs:simpleType name="fixityType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="infix"/>
+			<xs:enumeration value="prefix"/>
+			<xs:enumeration value="postfix"/>
+			<xs:enumeration value="tree"/>
+			<xs:enumeration value="define"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numberType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="identifierType">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="integralAlgorithmType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="equal-interval"/>
+			<xs:enumeration value="adaptive"/>
+			<xs:enumeration value="infinite"/>
+			<xs:enumeration value="oscillating"/>
+			<xs:enumeration value="limit-end-points"/>
+			<xs:enumeration value="romberg"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="symEvalStyleType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="default"/>
+			<xs:enumeration value="right-arrow"/>
+			<xs:enumeration value="equals"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="multStyleType">
+		<xs:annotation>
+			<xs:documentation>Multiplication styles</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="default"/>
+			<xs:enumeration value="auto-select"/>
+			<xs:enumeration value="dot"/>
+			<xs:enumeration value="narrow-dot"/>
+			<xs:enumeration value="large-dot"/>
+			<xs:enumeration value="x"/>
+			<xs:enumeration value="thin-space"/>
+			<xs:enumeration value="no-space"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="pdeSolveMethodType">
+		<xs:annotation>
+			<xs:documentation>Shared by pdeSolve,numol's </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="polynomial"/>
+			<xs:enumeration value="central-diff"/>
+			<xs:enumeration value="5-pt-diff"/>
+			<xs:enumeration value="r-5-pt-diff"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="absval" type="exprElementType">
+		<xs:annotation>
+			<xs:documentation>Absolute value operator</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="and" type="exprElementType">
+		<xs:annotation>
+			<xs:documentation>Logical AND operator</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="apply">
+		<xs:annotation>
+			<xs:documentation>Function/operator application</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:choice>
+						<xs:group ref="functionApplicationClass"/>
+						<xs:group ref="binaryOpClass"/>
+						<xs:group ref="unaryOpClass"/>
+						<xs:group ref="lambdaOpClass"/>
+					</xs:choice>
+					<xs:attribute name="fixity" type="fixityType" use="optional"/>
+					<xs:attribute name="unpaired" type="xs:boolean" use="optional" default="false"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bounds">
+		<xs:annotation>
+			<xs:documentation>A pair of lower and upper bounds used in integral, summation, and product.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group ref="expressionClass" minOccurs="2" maxOccurs="2"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="boundVars">
+		<xs:complexType>
+			<xs:group ref="expressionClass" maxOccurs="unbounded"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="branch">
+		<xs:annotation>
+			<xs:documentation>Logical program branch</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="break" type="exprElementType">
+		<xs:annotation>
+			<xs:documentation>Loop break flow-of-control construct</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="chem">
+		<xs:annotation>
+			<xs:documentation>Chemical notation</xs:documentation>
+			<xs:documentation>Chemical notation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:group ref="expressionClass"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="command">
+		<xs:annotation>
+			<xs:documentation>Mathcad symbolic commands names and parameters</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group ref="expressionClass" maxOccurs="2"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="complex" nillable="false">
+		<xs:annotation>
+			<xs:documentation>Complex number value type</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:element ref="real" minOccurs="0"/>
+						<xs:element ref="imag" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="component">
+		<xs:complexType>
+			<xs:attribute name="item-idref" type="binaryItemIDType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="conjugate">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="continue" type="exprElementType">
+		<xs:annotation>
+			<xs:documentation>Loop continuation flow-of-control construct,</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="crossProduct">
+		<xs:annotation>
+			<xs:documentation>Crossproduct operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="define">
+		<xs:annotation>
+			<xs:documentation>Normal function or variable definition</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="expressionClass"/>
+						<xs:choice>
+							<xs:group ref="expressionClass"/>
+							<xs:element ref="component"/>
+							<xs:element ref="lambda"/>
+						</xs:choice>
+					</xs:sequence>
+					<xs:attribute name="warning" type="xs:string" use="optional"/>
+					<xs:attribute name="style" use="optional" default="default">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="default"/>
+								<xs:enumeration value="colon-equal"/>
+								<xs:enumeration value="equal"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="denominator">
+		<xs:complexType>
+			<xs:group ref="expressionClass"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="derivative">
+		<xs:annotation>
+			<xs:documentation>Derivative operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="style" use="optional" default="default">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="default"/>
+						<xs:enumeration value="derivative"/>
+						<xs:enumeration value="partial"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="determinant">
+		<xs:annotation>
+			<xs:documentation>Determinant</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="div">
+		<xs:complexType>
+			<xs:attribute name="inline" type="xs:boolean" use="optional" default="false"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="equal">
+		<xs:annotation>
+			<xs:documentation>is-equal operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="style" use="optional" default="default">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="default"/>
+						<xs:enumeration value="bold-equal"/>
+						<xs:enumeration value="equal"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="eval">
+		<xs:annotation>
+			<xs:documentation>Numeric evaluation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="expressionClass"/>
+						<xs:element name="unitOverride" minOccurs="0">
+							<xs:complexType>
+								<xs:group ref="expressionClass"/>
+							</xs:complexType>
+						</xs:element>
+						<xs:element ref="result" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="factorial">
+		<xs:annotation>
+			<xs:documentation>Factorial operator</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="for">
+		<xs:annotation>
+			<xs:documentation>For loop specifier.  First child is the looping variable.  Second is the looping range.  Third child is the loop body expression.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="expressionClass"/>
+						<xs:group ref="expressionClass"/>
+						<xs:group ref="expressionClass"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="function">
+		<xs:annotation>
+			<xs:documentation>Function specifier used in definitions.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="expressionClass"/>
+						<xs:element ref="boundVars"/>
+					</xs:sequence>
+					<xs:attribute name="unpaired" type="xs:boolean" use="optional" default="false"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="genfit">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="fontableOpType">
+					<xs:attribute name="method" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="levenberg-marquardt"/>
+								<xs:enumeration value="optimized levenberg-marquardt"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="globalDefine">
+		<xs:annotation>
+			<xs:documentation>Global definition operator (triple-equals)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence minOccurs="2" maxOccurs="2">
+						<xs:group ref="expressionClass"/>
+					</xs:sequence>
+					<xs:attribute name="style" use="optional" default="default">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="default"/>
+								<xs:enumeration value="equal"/>
+								<xs:enumeration value="triple-equal"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="greaterOrEqual">
+		<xs:annotation>
+			<xs:documentation>Greater-than-or-equa operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="greaterThan">
+		<xs:annotation>
+			<xs:documentation>Greater-than operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="id">
+		<xs:annotation>
+			<xs:documentation>Reusable generic identifier element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="identifierType">
+					<xs:attributeGroup ref="fontAttrsVariable"/>
+					<xs:attributeGroup ref="exprElementAttrs"/>
+					<xs:attribute name="subscript" type="xs:string" use="optional"/>
+					<xs:attribute name="subscript-size">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="small"/>
+								<xs:enumeration value="large"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="module" type="xs:string" use="optional"/>
+					<xs:attribute ref="xml:space"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ifThen">
+		<xs:annotation>
+			<xs:documentation>"If" part of an if/then/[otherwise] construct</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="expressionClass" minOccurs="2" maxOccurs="2"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="imag">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="numberType">
+					<xs:attribute name="base" type="baseType" use="optional" default="10"/>
+					<xs:attribute name="symbol" use="optional" default="i">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="i"/>
+								<xs:enumeration value="j"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attributeGroup ref="fontAttrsConstant"/>
+					<xs:attributeGroup ref="exprElementAttrs"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="indexer">
+		<xs:annotation>
+			<xs:documentation>Matrix/array indexer</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="inputs">
+		<xs:complexType>
+			<xs:group ref="expressionClass"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="integral">
+		<xs:annotation>
+			<xs:documentation>Definite integral</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="algorithm" type="integralAlgorithmType" use="optional" default="adaptive">
+				<xs:annotation>
+					<xs:documentation>Method of integration
+</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="auto-algorithm" type="xs:boolean" use="optional" default="true"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="lambda">
+		<xs:annotation>
+			<xs:documentation>Function abstraction (unnamed function)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="boundVars"/>
+				<xs:group ref="expressionClass"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="lessOrEqual">
+		<xs:annotation>
+			<xs:documentation>Less-than or equal operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="lessThan">
+		<xs:annotation>
+			<xs:documentation>Less-than operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="limit">
+		<xs:annotation>
+			<xs:documentation>Limit operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="direction" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">Specifies limit taken from the left or right.  If omitted, represents a bidirectional limit</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="left"/>
+						<xs:enumeration value="right"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="localDefine">
+		<xs:annotation>
+			<xs:documentation>Assignment expression</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:group ref="expressionClass" minOccurs="2" maxOccurs="2"/>
+					<xs:attribute name="style" use="optional" default="default">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="default"/>
+								<xs:enumeration value="left-arrow"/>
+								<xs:enumeration value="equal"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="log"/>
+	<xs:element name="matcol">
+		<xs:annotation>
+			<xs:documentation>Matrix column operator</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="matrow">
+		<xs:annotation>
+			<xs:documentation>Matrix row operator</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="matrix">
+		<xs:annotation>
+			<xs:documentation>Matrix definition.  </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="expressionClass" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="rows" type="xs:integer" use="optional">
+						<xs:annotation>
+							<xs:documentation>Specifies number of rows contained in the matrix.  This attribute is optional, since the number of rows can be inferred from the markup.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="cols" type="xs:integer" use="optional">
+						<xs:annotation>
+							<xs:documentation>Number of columns in the matrix.  Although not specified in the schema, each row must have the same number of columns.</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="minus">
+		<xs:annotation>
+			<xs:documentation>Subtraction operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="mixed">
+		<xs:annotation>
+			<xs:documentation>Mixed number value type</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:element ref="whole"/>
+						<xs:element ref="numerator"/>
+						<xs:element ref="denominator"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="mult">
+		<xs:annotation>
+			<xs:documentation>Multiplication operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="style" type="multStyleType" use="optional" default="default"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="multiDef">
+		<xs:annotation>
+			<xs:documentation>Array-style definition (of multiple simultaneous expressions)</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="matrix"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="neg">
+		<xs:annotation>
+			<xs:documentation>Negation operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="not">
+		<xs:annotation>
+			<xs:documentation>Logical not</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="notEqual">
+		<xs:annotation>
+			<xs:documentation>is-not-equal operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="nthRoot">
+		<xs:annotation>
+			<xs:documentation>nthRoot operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="numerator">
+		<xs:annotation>
+			<xs:documentation>Numerator of fractional part</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:group ref="expressionClass"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="or">
+		<xs:annotation>
+			<xs:documentation>Logical OR operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="otherwise">
+		<xs:annotation>
+			<xs:documentation>Otherwise (else) clause of an if/then/otherwise flow-of-control construct</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="expressionClass"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="outputs">
+		<xs:complexType>
+			<xs:group ref="expressionClass"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="parens">
+		<xs:annotation>
+			<xs:documentation>Parentheses</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:group ref="expressionClass"/>
+					<xs:attribute name="unpaired" type="xs:boolean" use="optional" default="false"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="placeholder" type="exprElementType">
+		<xs:annotation>
+			<xs:documentation>Undefined placeholder element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="plus">
+		<xs:complexType>
+			<xs:attribute name="split" type="xs:boolean" use="optional" default="false"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="polyroots">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="fontableOpType">
+					<xs:attribute name="method" use="optional" default="laguerre">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="laguerre"/>
+								<xs:enumeration value="companion-matrix"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="userText" type="xs:string" use="optional" default="polyroots"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pow">
+		<xs:annotation>
+			<xs:documentation>Power</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="product">
+		<xs:annotation>
+			<xs:documentation>Product operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="program">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="expressionClass" minOccurs="2" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="provenance">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="annotType">
+					<xs:attributeGroup ref="exprElementAttrs"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="real">
+		<xs:annotation>
+			<xs:documentation>Simple numeric value type</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="numberType">
+					<xs:attributeGroup ref="fontAttrsConstant"/>
+					<xs:attributeGroup ref="exprElementAttrs"/>
+					<xs:attribute name="base" type="baseType" use="optional" default="10"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="result">
+		<xs:annotation>
+			<xs:documentation>Result of numeric evaluation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:group ref="expressionClass" minOccurs="0"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="range">
+		<xs:annotation>
+			<xs:documentation>Mathcad range loop</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:group ref="expressionClass" minOccurs="2" maxOccurs="2"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="return">
+		<xs:annotation>
+			<xs:documentation>Returns the value of the contained expression.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="expressionClass"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sequence">
+		<xs:annotation>
+			<xs:documentation>Arbitrarily long sequence of expressions.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:group ref="expressionClass" minOccurs="2" maxOccurs="unbounded"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sqrt">
+		<xs:annotation>
+			<xs:documentation>Square root operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="str">
+		<xs:annotation>
+			<xs:documentation>String value stype</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attributeGroup ref="exprElementAttrs"/>
+					<xs:attribute ref="xml:space"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="summation">
+		<xs:annotation>
+			<xs:documentation>Summation operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="symEval">
+		<xs:annotation>
+			<xs:documentation>Symbolic evaluation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="expressionClass"/>
+						<xs:element ref="command" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="symResult" minOccurs="0">
+							<xs:complexType>
+								<xs:group ref="expressionClass"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="hide-lhs" type="xs:boolean" use="optional" default="false"/>
+					<xs:attribute name="hide-keywords" type="xs:boolean" use="optional" default="false"/>
+					<xs:attribute name="style" type="symEvalStyleType" use="optional" default="default"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="throw">
+		<xs:annotation>
+			<xs:documentation>Throws an exception specified by the contained expression.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group ref="expressionClass"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="transpose">
+		<xs:annotation>
+			<xs:documentation>Transpose operator</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="tryCatch">
+		<xs:annotation>
+			<xs:documentation>Try block, always followed by a catch block</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="expressionClass" minOccurs="2" maxOccurs="2"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="vectorize">
+		<xs:annotation>
+			<xs:documentation>Vectorization</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="vectorSum">
+		<xs:annotation>
+			<xs:documentation>Vector sum</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="while">
+		<xs:annotation>
+			<xs:documentation>While flow-of-control construct</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="expressionClass"/>
+						<xs:group ref="expressionClass"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="whole">
+		<xs:annotation>
+			<xs:documentation>Whole part</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:group ref="expressionClass"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="xor">
+		<xs:annotation>
+			<xs:documentation>Logical XOR op</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="unknownOp">
+		<xs:annotation>
+			<xs:documentation>Placeholder for operator</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Odesolve">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="fontableOpType">
+					<xs:attribute name="method" use="optional" default="adaptive">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="adaptive"/>
+								<xs:enumeration value="fixed"/>
+								<xs:enumeration value="stiff"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Pdesolve">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="fontableOpType">
+					<xs:attribute name="method" type="pdeSolveMethodType" use="optional" default="r-5-pt-diff"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Find">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="solveTerminatorType"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Minimize">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="solveTerminatorType"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Maximize">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="solveTerminatorType"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Minerr">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="solveTerminatorType"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="numol">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="fontableOpType">
+					<xs:attribute name="method" type="pdeSolveMethodType" use="optional" default="r-5-pt-diff"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="unitedValue">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="exprElementType">
+					<xs:sequence>
+						<xs:group ref="baseValueClass"/>
+						<xs:element ref="u:unitMonomial"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

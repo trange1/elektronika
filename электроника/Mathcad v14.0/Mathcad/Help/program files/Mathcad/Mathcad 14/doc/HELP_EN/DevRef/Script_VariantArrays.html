@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Variant Arrays</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Scripting Custom OLE Objects\nVariant Arrays");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Variant Arrays</h1></td>
+	</tr>
+</table>
+
+<p>Arrays in VBScript follow the standard Automation variant object. That is, if you create a variant array used in Automation, the array elements can be directly accessed via VBScript. JScript uses an internal representation for arrays and therefore will not be able to access variant arrays - a serious limitation, since most Automation objects which deal in arrays represent them as variant arrays.</p>
+
+<p>To avoid this limitation for the arrays represented in a <a HREF="Script_datavalues.html">DataValue object</a>, the <a HREF="Script_dataval.html">Value</a> and <a HREF="Script_dataval.html">IValue</a> properties of the <b>DataValue</b> object are overloaded to allow a column and row index to be supplied. This means that scripting languages that do not support variant arrays natively can still access data values through the use of indexing.</p>
+
+<p>Internally created JScript arrays (that is,<span class="math"> x = new Array()</span>) cannot be assigned to the methods or properties of Automation objects which expect variant arrays, since JScript represents arrays in a different format. Therefore the following sequence of statements is not valid in JScript:</p>
+
+<code>
+var jsArray = new Array(5);<br>
+<br>
+Outputs(0).Value = jsArray;<br>
+<br>
+</code>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

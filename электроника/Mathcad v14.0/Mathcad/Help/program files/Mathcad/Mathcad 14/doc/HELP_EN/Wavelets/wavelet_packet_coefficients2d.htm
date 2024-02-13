@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+
+<title>Two-dimensional wavelet packet coefficients</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Coefficients\nTwo-dimensional wavelet packet coefficients");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Wavelets.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+<tr class="whs1">
+<td valign=top>
+<h1>Two-dimensional wavelet packet coefficients</h1></td></tr>
+</table>
+
+<p><b class="hmath">get_detail2d(M,l,ds) </b>Returns 
+ the result of extracting the subband indicated by the string <span class="math">ds</span> 
+ of wavelet packet coefficients at level <span class="math">l</span> 
+ from the 2-dimensional wavelet packet transform <b class="math">M</b>.</p>
+
+<p><b class="hmath">get_smooth2d(M,l)</b> Returns the 
+ result of extracting the (0,0)th subband of wavelet packet coefficients 
+ at level <span class="math">l</span> from the 2-dimensional 
+ wavelet packet transform <b class="math">M</b>.</p>
+
+<p><b class="hmath">put_detail2d(M,l,N,ds)</b> Returns 
+ the result of inserting the matrix <b class="math">N</b> 
+ into the subband indicated by the string <span class="math">ds</span> of wavelet packet coefficients 
+ at level <span class="math">l</span> of the 2-dimensional 
+ wavelet packet transform <b class="math">M</b>.</p>
+
+<p><b class="hmath">put_smooth2d(M,l,N)</b> Returns 
+ the result of inserting the matrix <b class="math">N</b> 
+ into the index-(0,0) subband of wavelet packet coefficients at level <span class="math">l</span> of the 2-dimensional wavelet packet 
+ transform <b class="math">M</b>.</p>
+
+<h4>Arguments:</h4>
+
+<ul>
+<li><b class="hmath">M</b> is a matrix 
+ having at least <span class="math">2<sup>l</sup></span> 
+ rows and columns.</li>
+<li><span class="hmath">l</span> is an integer.</li>
+  <li><b class="hmath">N</b> is a matrix which is the same size as the matrix 
+    returned by <b>get_detail2d</b>(<b class="math">M</b>,<span class="math">l</span>,ds) 
+    or <b>get_smooth2d</b>(<b class="math">M</b>,<span class="math">l</span>).</li>
+<li><span class="hmath">ds</span> is 
+ either <span class="math">&quot;H&quot;</span>, <span class="math">&quot;V&quot;</span>, or <span class="math">&quot;D&quot;</span>, and indicates either 
+ the index-(1,0), index-(0,1), or index-(1,1) subband.</li>
+</ul>
+
+
+<h4>Notes:</h4>
+<ul>
+<li><b>get_smooth2d</b>(<b class="math">w</b>,<span class="math">l</span>) = <b>get_subband2d</b>(<b class="math">w</b>,<span class="math">l</span>,0,0)</li>
+
+<li><b>put_smooth2d</b>(<b class="math">w</b>,<span class="math">l</span>,y) = <b>put_subband2d</b>(<b class="math">w</b>,<span class="math">l</span>,0,0,<b class="math">N</b>)</li>
+
+<li><p><b>get_detail2d</b>(<b class="math">w</b>,<span class="math">l</span>,&quot;H&quot;) = <b>get_subband2d</b>(<b class="math">w</b>,<span class="math">l</span>,1,0)<br>
+<b>get_detail2d</b>(<b class="math">w</b>,<span class="math">l</span>,&quot;V&quot;) = <b>get_subband2d</b>(<b class="math">w</b>,<span class="math">l</span>,0,1)<br>
+<b>get_detail2d</b>(<b class="math">w</b>,<span class="math">l</span>,&quot;D&quot;) = <b>get_subband2d</b>(<b class="math">w</b>,<span class="math">l</span>,1,1)</p></li>
+
+<li><p><b>put_detail2d</b>(<b class="math">w</b>,<span class="math">l</span>,<b class="math">N</b>,&quot;H&quot;) = <b>put_subband2d</b>(<b class="math">w</b>,<span class="math">l</span>,1,0,<b class="math">N</b>)<br>
+<b>put_detail2d</b>(<b class="math">w</b>,<span class="math">l</span>,<b class="math">N</b>,&quot;V&quot;) = <b>put_subband2d</b>(<b class="math">w</b>,<span class="math">l</span>,0,1,<b class="math">N</b>)<br>
+<b>put_detail2d</b>(<b class="math">w</b>,<span class="math">l</span>,<b class="math">N</b>,&quot;D&quot;) = <b>put_subband2d</b>(<b class="math">w</b>,<span class="math">l</span>,1,1,<b class="math">N</b>)</p>
+</li>
+
+</ul>
+
+
+
+
+
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+ 	   onMouseOut="document.body.style.cursor='arrow'"
+ 	   onClick="objLaunchMathcad.OpenResourceCenter('..\\handbook\\wavelets\\put_subb.xmcd')"
+ 	   class="fakelink">Mathcad Example</a></h5>
+	   
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+ 	   onMouseOut="document.body.style.cursor='arrow'"
+ 	   onClick="objLaunchMathcad.OpenResourceCenter('..\\handbook\\wavelets\\get_subb.xmcd')"
+ 	   class="fakelink">Mathcad Example</a></h5>
+
+<hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

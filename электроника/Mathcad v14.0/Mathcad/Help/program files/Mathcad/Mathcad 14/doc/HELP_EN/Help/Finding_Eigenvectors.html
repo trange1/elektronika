@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Eigenvectors and Eigenvalues</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nVector and Matrix\nEigenvectors and Eigenvalues");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Eigenvectors and Eigenvalues</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">eigenvals(M)</b> Returns a vector whose elements are the eigenvalues of <b class="math">M</b>.</p>
+<p><b class="hmath">eigenvec(M, z)</b> Returns a single normalized eigenvector 
+  associated with eigenvalue <span class="math">z</span> of <b class="math">M</b>. 
+  The eigenvector is normalized to unit length. Uses an inverse iteration algorithm.</p>
+<p></p>
+<p><b class="hmath">eigenvecs(M, [&quot;L&quot;])</b> Returns a matrix containing 
+  all normalized eigenvectors of the matrix <b class="math">M</b>. The <span class="math">n</span>th 
+  column of the matrix returned is an eigenvector corresponding to the <span class="math">n</span>th 
+  eigenvalue returned by <b>eigenvals</b>. The right eigenvector is returned by 
+  default. Can also return the left eigenvector, satisfying <span class="math">v<sup>H</sup>&middot;M 
+  =z&middot;v<sup>H</sup></span>, where H indicates conjugate transpose. </p>
+<p><b class="hmath">genvals(M, N)</b> Returns a vector of computed eigenvalues, 
+  <span class="math">v<sub>i</sub></span>, each of which satisfies the generalized 
+  eigenvalue problem <span class="math"><b>M&middot;x</b> = v<sub>i</sub><b>&middot;N&middot;x</b></span> 
+  for its associated eigenvector <span class="math"><b>x<sub>i</sub></b></span>.</p>
+<p><b class="hmath">genvecs(M, N, [&quot;L&quot;])</b> Returns a matrix containing 
+  the normalized eigenvectors corresponding to the eigenvalues in <b class="math">v</b>, 
+  the vector returned by <b>genvals</b>. The <span class="math">i</span>th column 
+  of this matrix is the eigenvector <b class="math">x</b> satisfying the generalized 
+  eigenvalue problem.</p>
+<p><b class="hmath">tr(M)</b> Returns the trace of <b class="math">M</b>, that is, 
+  the sum of the elements along the diagonal of <b class="math">M</b>. This is 
+  equal to the sum of the eigenvalues.</p>
+<p> The BLAS/LAPACK libraries (<a href="http://www.intel.com/software/products/mkl/features/lin_alg.htm" target="_blank">http://www.intel.com/software/products/mkl/features/lin_alg.htm</a>) 
+  from Intel are used in all these functions.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><b class="hmath">M, N</b> are square matrices of real or complex numbers 
+    of equal size. </li>
+  <li><b class="hmath">&quot;L&quot; </b> (optional) is a string. When used, the 
+    string &quot;L&quot; specifies the left eigenvector, and &quot;R&quot; the 
+    right. &quot;R&quot; is the default.</li>
+  <li><b class="hmath">z</b> is an eigenvalue of <b class="hmath">M</b>.</li>
+</ul>
+<h4>Notes:</h4>
+<ul type="disc">
+  <li>The results returned by <b>eigenvec </b>and <b>eigenvecs</b> are not necessarily 
+    identical. For a given eigenvalue, there are infinitely many eigenvectors, 
+    and the one found depends on the algorithm used. Every eigenvector for 
+    a particular eigenvalue is a multiple of other eigenvectors. </li>
+  <li>The <a href="Symbolic_calculation.html">symbolic processor</a> doesn't necessarily 
+    produce identical results with numerical evaluation, for the same reasons. 
+    There may be different normalizations, sign ambiguities, and other differences 
+    in the two types of results, although all are correct. Eigenvectors are returned 
+    in largest to smallest order for both results. The <b>eigenvec</b> function 
+    is not available symbolically, but <b>eigenvecs</b> is.</li>
+  <li>You may wish to solve linear systems of equations using <a href="solving_linear_systems.html">lsolve</a>, 
+    or a <a href="find.html">solve block</a>. </li>
+  <li>You may wish to check whether your matrix is singular, or nearly so, using 
+    the <a href="Condition_number.html">condition number</a>.</li>
+</ul>
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Vector_and_Matrix\\meigen32.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

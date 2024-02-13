@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Singular Value Decomposition</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Decomposition">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nVector and Matrix\nSingular Value Decomposition");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Singular Value Decomposition</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">svds(A)</b> (deprecated) Returns a vector containing the singular 
+  values of <b class="math">A</b>, the positive square roots of the <a href="Finding_Eigenvectors.html">eigenvalues</a> 
+  of the matrix <b class="math">A<sup>H</sup>&middot;A</b>, where <b class="math">A<sup>H</sup></b> is the conjugate transpose of A. You can compute <b class="math">A<sup>H</sup></b> in Mathcad using the 
+  <a href="Transpose_operator.html">transpose</a> and <a href="Complex_conjugate_operator.html">complex conjugate</a> operators as follows.</p>
+  
+<p class="blockindent"><img src="Graphics/Hermitian_transpose.GIF" alt="Hermitian transpose of A" width="32" height="28" border="0"></p>
+  
+<p><b class="hmath">svd(A)</b> (deprecated) Returns one matrix containing two 
+  stacked matrices <b class="math">U</b> and <b class="math">V</b> satisfying 
+  the equation <span class="math"><b>A = U&middot;diag(s)&middot;V<sup>T</sup></b></span>, 
+  where <b class="math">s</b> is the vector returned by <b>svds</b>. The upper 
+  matrix, <b class="math">U</b>, is the same size as <b class="math">A</b>. The 
+  lower matrix, <b class="math">V</b>, is a square matrix with the same number 
+  of columns as <b class="math">A</b>. Use <a href="Joining_arrays.html"><b>submatrix</b></a> 
+  to extract these smaller matrices.</p>
+<p><b class="hmath">svd2(A)</b> Returns a vector of 3 nested arrays. The first 
+  array contains the vector <b class="math">s</b> of singular values returned by <b>svds</b>. The next 
+  two arrays are matrices <b class="math">U</b> and <b class="math">V<sup>H</sup></b> satisfying
+  <span class="math"><b>A = U&middot;diag(s)&middot;V<sup>H</sup></b></span>. Note that the third entry is 
+   <b class="math">V<sup>H</sup></b>, the conjugate transpose of <b class="math">V</b>. This function uses the <a href="http://www.intel.com/software/products/mkl/features/lin_alg.htm" target="_blank">BLAS/LAPACK 
+  libraries from Intel</a>.</p>
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li> 
+    <p><b class="hmath">A</b> is an <span class="math">m &times; n</span> array, 
+      where <span class="math">m &ge; n</span>. For <b>svd</b>, 
+      the array elements must be real numbers; for <b>svd2</b> and <b>svds</b>, complex values 
+      are allowed.</p>
+  </li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li>Singular values are always real and positive. Very small values should be 
+    interpreted as 0.</li>
+  <li>The <b>svd</b> function returns a singular value decomposition for <b class="math">A</b>. 
+    The decomposition is not unique.</li>
+  <li>The <b>svd2</b> function is faster and more usable than <b>svd</b> and <b>svds</b>, 
+    and we recommend that you upgrade to the newer function. The <b>svd</b> and 
+    <b>svds</b> functions have been deprecated, but will be available in several 
+    versions for backwards compatibility with old worksheets.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Vector_and_Matrix\\svd.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Cholesky Decomposition','Cholesky_decomposition.html','LU Decomposition','LU_decomposition.html','QR Decomposition','QR_decomposition.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

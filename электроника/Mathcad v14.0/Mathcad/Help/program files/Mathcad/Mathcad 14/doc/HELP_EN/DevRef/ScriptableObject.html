@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Scriptable Object Component</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Scripting Custom OLE Objects");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Scriptable Object Component</h1></td>
+	</tr>
+</table>
+
+<p>The Scriptable Object component, available from the <b>Insert &gt; Component</b> menu, is used to script any Windows object with a scripting or Automation API, including Windows Applications, <a href="Controls.html">Mathsoft Controls</a>, or the <a href="Script_automation.html">Mathcad worksheet</a> itself. The component uses the Microsoft ActiveX Scripting specification, allowing you to use standard scripting languages to automate the object. The component additionally provides a mechanism for processing inputs and sending outputs to and from the Mathcad worksheet, and react to updates in variable values just like any other Mathcad definition.</p>
+
+<p>This section is a reference for all methods, properties, and events exposed for scripts in the component. The Scripting Model is fairly abbreviated as the component itself is really just a container for external objects with their own Automation classes. As such, the native methods, properties and events are largely in place to support sending data in and out of the component from the worksheet. Classes for the Mathsoft Controls are also included here, as these properties, methods and events may be useful for triggering how a scripted object appears and is activated by the user.</p>
+  
+<ul type="disc">
+	<li><a href="Script_Events.html">Events</a></li>
+	<li><a href="Script_globalfunctions.html">Alert and error message</a> Functions</li>
+	<li>Inputs and Outputs <a href="Script_datavalues.html">Collection</a> and <a href="Script_dataval.html">Object</a> Properties</li>
+	<li><a href="Script_buttonclass.html">Button class</a></li>
+	<li><a href="Script_textboxclass.html">TextBox class</a></li>
+	<li><a href="Script_listboxclass.html">ListBox class</a></li>
+	<li><a href="Script_sliderclass.html">Slider class</a></li>
+</ul>
+
+<p>Finally, all scripted components can be <a href="Script_Exporting.html">exported</a>, and registered for use on other Mathcad-equipped systems so they appear on Mathcad's <b>Insert > Component</b> menu. This allows you to make customized components and distribute them to others in your company or to clients as part of a Mathcad solution.</p>
+
+<h3>Inputs and Outputs</h3>
+
+<p>The Scriptable Object wizard will ask you to assign the number of input and output placeholders. The overall number can be modified after creation by right-clicking on the object and choosing <b>Add/Delete Input Variable</b> or <b>Output Variable</b>. These values can then be addressed as <span class="math">Inputs(n).Value</span> or <span class="math">Outputs(n).Value</span>, and are members of <a href="Script_datavalues.html">DataValue Collections</a>. Indexing of input and output variables starts at 0. Inputs and outputs may be of any Mathcad supported data type including numbers, arrays, and strings.</p>
+
+<p>Note that you can also get and set values in the worksheet by using Mathcad's <a href="Script_automation.html">Automation</a> commands in the script, <a href="IMWGetValue.html">GetValue</a> and <a href="IMWSetValue.html">SetValue</a>. However, you may need to explicitly include a Recalculate method for the control or the worksheet, since this activity is automatically handled by the Input and Output variables on the control, but not by Automation commands. You will also need to include the variable name you are getting as an input, to preserve calculation order. Further, values that you get through Automation must be defined only once in the worksheet.</p>
+
+<h3>Recalculating from a Scripted Object</h3>
+
+<p>An OCX wishing to force a recalculation in Mathcad should fire an OLE event with DISPID 516. Mathcad will recalculate the region and its dependents immediately if AutoCalc is on, or in response to F9 otherwise. This is what the Mathsoft controls do when the script's Click handler calls a <a href="Control_btnmethod.html">Recalculate method</a>.</p>
+
+<h3>Examples</h3>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+               id="objLaunchMathcad"
+               border="0"
+               width="1"
+               height="1"
+               align="left">
+</object></p>
+
+<p>These examples are intended to show the syntactic conventions and how they apply to various object methods and properties, rather than production quality scripts. Examples use VBScript style syntax unless otherwise noted.</p>
+  
+<ul type="disc">
+	<li>A component which opens an <a onMouseOver="document.body.style.cursor='hand'"
+	 onMouseOut="document.body.style.cursor='arrow'"
+	 onClick="objLaunchMathcad.OpenResourceCenter('samples\\excel\\ExcelSelect.xmcd')"
+	 class="fakelink">Excel Worksheet</a>, and assigns the output to whatever set of cells within the sheet the user has selected.</li>
+	<li>A component which opens a <a onMouseOver="document.body.style.cursor='hand'"
+	 onMouseOut="document.body.style.cursor='arrow'"
+	 onClick="objLaunchMathcad.OpenResourceCenter('samples\\scripted\\FreqResp.xmcd')"
+	 class="fakelink">LabView Virtual Instrument</a>, passes adjusted settings into it from Mathcad, then returns the acquired data to Mathcad.</li>
+	<li><a href="Script_VBExample.html">VBScript</a> and <a href="Script_JSExample.html">JScript</a> for scripting the worksheet which contains the Scriptable Object Component through the Automation interface. The scripts iterate through the available inputs, display the value of the first element in a popup message box, assign the input to the output, and finally add one to the first element of each output, returning it to the worksheet.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

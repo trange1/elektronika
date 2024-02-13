@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Unit Scaling in Common Formats</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nSpecial\nUnit Scaling in Common Formats");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top">
+      <h1>Unit Scaling in Common Formats</h1>
+    </td>
+	</tr>
+</table>
+
+<p>The scaling functions are useful in converting data given in industry-standard 
+  formats into values with <a href="Units_and_Dimensions.html">units</a>, and 
+  to scale the display of outputs in the <a href="Unit_Conversions.html">unit placeholder</a>. 
+</p>
+<p><b class="hmath">&deg;F(x)</b> and <b class="hmath">&deg;C(x)</b> Return the 
+  Kelvin temperature specified by the Fahrenheit or Celsius value <span class="math">x</span>. 
+  When used in the units placeholder, the inverse function <span class="math">/<b>&deg;</b>F(x) 
+  </span> or <span class="math">/<b>&deg;</b>C(x) </span> is applied to a real 
+  temperature in degrees Kelvin, scaling the value to Fahrenheit or Celsius, respectively.</p>
+<p><b class="hmath">FIF(sFIF)</b> Returns the length specified by the feet-inches-fractions 
+  (FIF) representation in the argument. When used in the units placeholder, the 
+  inverse function <span class="math">/FIF(x) </span> is applied to a real length 
+  and displays the value as a string in FIF format.</p>
+<p><b class="hmath">hhmmss(shms)</b> Returns the time specified by the hours-minutes-seconds 
+  (hhmmss) representation in the argument. When used in the units placeholder, 
+  the inverse function <span class="math">/hhmmss(x) </span> is applied to a real 
+  time and displays the value as a string in hh:mm:ss.sss format.</p>
+<p><b class="hmath">DMS(v)</b> Returns the angle, in radians, specified by the 
+  degrees-minutes-seconds (DMS) representation in the argument. When used in the 
+  units placeholder, the inverse function <span class="math">/DMS(x) </span> is 
+  applied to a real angle, and displays the value as a vector in DMS format.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><span class="hmath">x</span> is a unitless real scalar. When used with the 
+    inverse function, <span class="math">x</span> has units of temperature.</li>
+  <li><span class="hmath">sFIF</span> is a string of format <span class="math">&quot;n' 
+    m-p/q&quot;</span>, where <span class="math">n</span>, <span class="math">m</span>, 
+    <span class="math">p</span>, and <span class="math">q</span> are integers. 
+    For example, <span class="math">&quot;9' 6-1/4&quot; </span>produces the length 
+    <span class="math">9.521&middot;ft</span>. Alternatively, <span class="math">sFIF</span> 
+    is three scalar arguments, giving the feet, inches, and fractions of an inch 
+    separately.</li>
+  <li><span class="hmath">shms</span> is a string of format <span class="math">&quot;hh:mm:ss.sss&quot;</span>, 
+    where <span class="math">h</span>, <span class="math">m</span>, and <span class="math">s</span> 
+    are integers. For example, <span class="math">&quot;00:02:03&quot; </span>produces 
+    the time <span class="math">123&middot;s</span>. Alternatively, <span class="math">shms</span> 
+    is three scalar arguments, giving the hours, minutes, and seconds separately.</li>
+  <li><b class="hmath">v</b> is a vector of real elements for degrees, minutes 
+    and seconds, or three scalar arguments giving degrees, minutes and seconds.</li>
+</ul>
+<h4>Notes:</h4>
+<ul>
+  <li>To make these functions display like units or operators, rather than as 
+    function calls, use the <a href="Defining_a_Custom_Operator.html#using">postfix 
+    operator</a>. You can enter the postfix operator by typing <b>[Ctrl]&nbsp;[Shift]&nbsp;X</b>.</li>
+  <li> Type the names for the inverse /&deg;C and /&deg;F functions  
+    through a <a href="Variable_and_function_names.html#special_symbols">special 
+    keyboard mode</a> with alternate characters. The characters are also available from 
+    the <a href="Toolbars_-_Custom.html">Custom Characters toolbar</a> and the 
+    <a href="Insert_unit_dialog_box.html">Insert Units</a> dialog.</li>
+</ul>
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Techniques\\raddms.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

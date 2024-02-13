@@ -1,0 +1,78 @@
+// 20-Oct-00 $$1  JJE  Created
+// 01-Dec-00 $$2  JJE  Dump flexclient section
+// 30-Jan-01 $$3  TWH  Add CmdType Prop values
+// 04-Mar-03 K-01-06  $$4  TWH  LpcfgWindows->ScreenWindows
+// 24-Feb-05 K-03-21  $$5  JJE  Add rsd_name.gif
+// 18-Apr-05 K-01-37+      MAZ  SPR 1139804: use new rsd.ico icon file
+// 21-Apr-05 K-03-23  $$6  MAZ  Sub to K-03
+// 15-Sep-05 K-01-42       TWH  Add Ad_list
+// 26-Sep-05 K-03-32  $$7  TWH  Submit to K-03
+
+(Product rs_designer
+    (Name                      "Routed Systems Designer")
+    (WelcomeImage              "rsd_name.gif")
+    (Packages                  "pkg_rs_designer"
+                               "ptcutil"
+                               "uninstall")
+    (LpDirName                 "rsdesigner")
+    (Screens                   "ScreenProd")
+    (Installed                 True)
+    (VersionDir                False)
+    (Ad_list                   "whatsnew_auto"
+                               "whatsnew_dataexchange"
+                               "whatsnew_newui"
+                               "whatsnew_p2p"
+                               "whatsnew_3ddrawings"
+                               "whatsnew_ID"
+                               "whatsnew_rs"
+                               "whatsnew_simulation"
+                               "whatsnew_production"
+                               "installscreen_casestudy"
+                               "tools_menumapper"
+                               "tools_onlinehelp"
+                               "tools_productivityT"
+                               "tools_refcards"
+                               "tools_tutorials")
+)
+
+(Package pkg_rs_designer
+    (Name                      "Routed Systems Designer")
+    (Cdsections                "rsdesigner"
+                               "Install"
+                               "flexclient")
+    (Installed                 True)
+    (Required                  True)
+    (Screens                   "ScreenLicList"
+                               "ScreenWindows"
+                               "ScreenDftCmds"
+                               "LpcfgInterOpt"
+                               "LpcfgCmdList"
+                               "LpcfgBrowser")
+	(CmdTypes                  "rsd")
+)
+
+(CmdType rsd
+    (Name                      "rsdesigner")
+    (Type                      "Routed Systems Designer")
+    (DefName                   "rsdesigner")
+    (Prefixes                  "RSDESIGNER_")
+    (Featvars                  "__RSDESIGNER_FEATURE_NAME__")
+    (Template                  "rsdesigner")
+    (IconPath                  "_LP_\install\nt\rsd.ico")
+    (IconIndex                 "0")
+    (UseExtensions             False)
+    (UseOptions                False)
+)
+
+(ProductInteraction proiclient 
+    (Decorated                 True)
+    (Label                     "@@ProdI_Ilinkopt_label")
+    (RegKeyName                "Pro/INTRALINK Client")
+    (ShowLP                    True)
+    (LPRequired                False)
+    (LPEnv                     "INTRALINK_DIR")
+    (ShowCmd                   False)
+    (CmdTypeTag                "ilink")
+    (CmdRequired               False)
+    (CmdEnv                   "ILINK_CMD_NAME")
+)

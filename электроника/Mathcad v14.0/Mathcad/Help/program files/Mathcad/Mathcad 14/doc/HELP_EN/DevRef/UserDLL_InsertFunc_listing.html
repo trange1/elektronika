@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Listing your Functions in the Insert Function Dialog Box</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Writing Mathcad DLLs\nListing your Functions in the Insert Function Dialog Box");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Listing Functions in the Insert Function Dialog</h1></td>
+	</tr>
+</table>
+
+<p>In order to make a new user function and its description appear in the <a href="../Help/Mcad.htm#Insert_Function_Dialog_Options.html" target="_top">Insert Function </a>dialog box, you must provide information in the file <b>USER_EN.XML</b>, located in the <b>\DOC\FUNCDOC</b> subdirectory of your Mathcad install directory. The <b>EN</b> in the .xml file name indicates the English language interface. If you need to provide function definitions for other localized versions of Mathcad, use the appropriate file:</p>
+
+<ul type="disc">
+	<li>USER_DE.xml for German</li>
+	<li>USER_FR.xml for French</li>
+	<li>USER_JP.xml for Japanese</li>
+</ul>
+
+<p>You can edit the XML file using a simple text editor such as Notepad or WordPad. For the <a href="UserDLL_code.html">example function</a>, you can enter the following:</p>
+
+<code>
+&lt;function&gt;<br>
+&lt;name&gt;<br>
+<span class="doubleindent"><b>multiply</b></span><br>
+&lt;/name&gt;<br>
+&lt;params&gt;<br>
+<span class="doubleindent"><b>a, M</b></span><br>
+&lt;/params&gt;<br>
+&lt;category&gt;<br>
+<span class="doubleindent"><b>User defined</b></span><br>
+&lt;/category&gt;<br>
+&lt;description&gt;<br>
+<span class="doubleindent"><b>Returns the product of real scalar a and real array M</b></span><br>
+&lt;/description&gt;<br>
+&lt;/function&gt;<br>
+<br>
+</code>
+
+<p>Save the file. Start Mathcad and verify that <b>multiply</b> appears in the Insert Function dialog box. You are now ready to use <b>multiply</b> in Mathcad.</p>
+
+<p>In addition, note the lines near the top of the file:</p>
+
+<code>
+&lt;help_file&gt;help_%s\user\userHelp.htm<br>
+&lt;!-- Insert the name of your custom help file and path here --&gt;<br>
+&lt;!-- help_%s looks in the help file in ..\doc that corresponds --&gt;<br>
+&lt;!-- to your language version. The user folder is there. --&gt;<br>
+&lt;/help_file&gt;</span><br>
+</code>
+
+<p>This allows you to specify an <a href="UserDLL_Help.html">HTML help file</a> that will appear when the user presses <b>F1</b> on your new function names.</p>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	<li>The <b>params</b> tag controls how many placeholders are included when you insert your function.</li>
+	<li>Since you are writing an XML file, you must use closing tags. Failure to do so may cause problems when you access the function in the Insert Function dialog box.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

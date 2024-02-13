@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Jacobian</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Operators\nCalculus Operators\nJacobian");
+addTocInfo("Functions\nDifferential Equation Solving\nJacobian");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Jacobian</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">Jacob(F(x), x, k)</b></p>
+
+<p>Returns the Jacobian of the vector function <span class="math">F(x)</span> with respect to the variables in the vector <span class="math">x</span>.</p>
+  
+<h4>Arguments:</h4>
+
+<ul type="disc">
+
+	<li><b class="hmath">F</b> is a vector function of the form <span class="math">F(x)</span> written as a column vector of scalar-valued functions, which can have complex values.</li>
+	<li><b class="hmath">x</b> is a vector of variables for the functions in <b class="math">F</b>. If <span class="math">x</span> is numerically undefined, you can only evaluate the Jacobian <a href="Symbolic_calculation.html">symbolically</a>.</li>
+	<li><b class="hmath">k</b> is an optional integer argument specifies the number of variables for the Jacobian.</li>
+</ul>
+
+<h4>Example:</h4>
+ 
+<p class="blockindent"><img src="Graphics/jacobian_ex2.GIF" alt="Jacobian of a function written in terms of subscripted variables" width="361" height="125" border="0"></p>  
+
+<p>The Jacobian is the matrix</p>
+
+<p class="blockindent"><img src="Graphics/jacobian_ex.GIF" alt="Form of the Jacobian matrix" width="141" height="98" border="0"></p>
+
+<p>where</p>
+
+<p class="blockindent"><img src="Graphics/jacobian_coord_functions.GIF" alt="Coordinate functions for vector function F" width="160" height="52" border="0"></p>
+
+<p>are the coordinate functions in <span class="math">F</span>.</p>
+
+<p><b>Note:</b> The preceding example, and the remarks that follow, assume that the built-in variable <a href="Array_origin.html"><span class="math">ORIGIN</span></a>, which sets the starting index for all arrays, has its default value of <span class="math">0</span>. <a href="#origin">Changing the Value of ORIGIN</a> describes how changing <span class="math">ORIGIN</span> the affects the behavior of <b>Jacob</b>.</p>
+
+<p>In the preceding example, the variable with the largest subscript appearing in <span class="math">F</span> is <span class="math">x<sub>2</sub></span>. As a result, Mathcad assumes that there are three variables, <span class="math">x<sub>0</sub>,&nbsp;x<sub>1</sub></span> and <span class="math">x<sub>2</sub></span>, and returns a Jacobian with three columns, containing the partial derivatives with respect to these variables. Note that if either <span class="math">x<sub>0</sub></span> or <span class="math">x<sub>1</sub></span> did not appear in <span class="math">F</span>, Mathcad would still return a matrix with three columns, but the columns corresponding to variables not appearing in <span class="math">F</span> would contain all zeros.</p>
+
+<p>In general, if the largest subscript appearing in <span class="math">F</span> is <span class="math">n</span>, Mathcad assumes that there are <span class="math">n&nbsp;+&nbsp;1</span> variables, <span class="math">x<sub>0</sub>,&nbsp;x<sub>1</sub>, ... , x<sub>n</sub></span>. If the vector function <span class="math">F</span> contains <span class="matha">m</span> coordinate functions, the Jacobian has <span class="matha">m</span> rows and <span class="math">n&nbsp;+&nbsp;1</span> columns, and has the following form:</p> 
+
+<p class="blockindent"><img src="Graphics/jacobian_gen_form.GIF" alt="General form of the Jacobian" width="158" height="170" border="0"></p>
+
+<p>In the special case in which <span class="math">F</span> contains a single real-valued function, the Jacobian is the gradient of <span class="math">F(x)</span>. Note that <span class="math">Jacob(F(x), x)</span> returns the gradient as a row vector, while the <a href="Gradient_operator.html">gradient</a> operator returns the gradient as a column vector.</p>
+
+<p>If you want to specify additional variables for the Jacobian, which have subscripts greater than <span class="math">n</span>, the largest subscript appearing in <span class="math">F</span>, you can provide a third integer argument, <span class="math">k</span>, which specifies the number of variables. <span class="math">k</span> must be greater than or equal to <span class="math">n</span>, and the columns of the Jacobian corresponding to variables with subscripts greater than <span class="math">n</span> (which do not appear in <span class="math">F</span>) contain all zeros.</p>
+
+<p>If you set <span class="math">k&nbsp;=&nbsp;4</span> in the preceding example, Mathcad assumes there are five variables, <span class="math">x<sub>0</sub>,&nbsp;x<sub>1</sub>,&nbsp;x<sub>2</sub>,&nbsp;x<sub>3</sub></span> and <span>x<sub>4</sub></span>, where the variables <span class="math">x<sub>3</sub></span> and <span class="math">x<sub>4</sub></span> do not appear in <span class="math">F</span>.</p>
+
+<p class="blockindent"><img src="Graphics/jacobian_third_arg.GIF" alt="Jacob with third argument" width="414" height="52" border="0"></p>
+
+<p>If you define the vector <span class="math">x</span> numerically, you can evaluate <b>Jacob</b> with the equal sign (=). Mathcad evaluates the Jacobian at the values in <span class="math">x</span> and returns a matrix of numbers, representing the Jacobian at the point <span class="math">x</span>. The length of <span class="math">x</span> must be greater than the largest subscript appearing in <span class="math">F</span>, and Mathcad returns a Jacobian with <span class="math">length(x)</span> columns. For example, if you define <span class="math">x</span> by</p>
+
+<p class="blockindent"><img src="Graphics/jacobian_ex3.GIF" alt="Jacobian evaluated for a numerical vector" width="54" height="83" border="0"></p>
+
+<p><b>Jacob</b> computes the Jacobian at </p>
+
+<p class="blockindent"><img src="Graphics/jacobian_ex4.GIF" alt="Values of subscripted variables" width="165" height="36" border="0"></p>
+
+<p>The result is</p>
+
+<p class="blockindent"><img src="Graphics/jacobian_ex5.GIF" alt="Jacobian evaluated at a numerical vector x" width="217" height="87" border="0"></p>
+
+
+<p>If the length of <span class="math">x</span> is greater than <span class="math">n&nbsp;+&nbsp;1</span>, where <span class="math">n</span> is the largest subscript appearing in <span class="math">F</span>, Mathcad still returns a Jacobian with <span class="math">length(x)</span> columns, but the columns corresponding to subscripts greater than <span class="math">x<sub>n+1</sub></span> contain all zeros.</p>
+
+<h2>
+	<table>
+		<tr>
+			<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+			<td valign="top"><a name="origin">Changing the Value of ORIGIN</a></td>
+		</tr>
+	</table>
+</h2>
+
+<p>If you change the value of <span class="math">ORIGIN</span> to a positive integer <span class="math">p</span>, then all subscripts in <span class="math">F</span> must be greater than or equal to <span class="math">p</span>. If <span class="math">n</span> is the largest subscript appearing in <span class="math">F</span>, Mathcad assumes that there are <span class="math">n&nbsp;&minus;&nbsp;p&nbsp;+&nbsp;1</span> variables, <span class="math">x<sub>p</sub>,&nbsp;x<sub>p+1</sub>,&nbsp;...,&nbsp;x<sub>n</sub></span>. The Jacobian has <span class="math">n&nbsp;&minus;&nbsp;p&nbsp;+&nbsp;1</span> columns.</p>
+  
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object>
+</p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Calculus_DEs\\jacob.xmcd')"
+	   class="fakelink">QuickSheet - Jacobian Matrix for Stiff ODEs</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

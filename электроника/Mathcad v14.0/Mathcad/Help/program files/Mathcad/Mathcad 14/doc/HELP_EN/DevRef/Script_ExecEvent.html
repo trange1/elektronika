@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Exec Event</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Scripting Custom OLE Objects\nEvents for Scriptable Objects\nExec Event");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Exec Event</h1></td>
+	</tr>
+</table>
+
+<p>This event is executed after the Start Event every time a component is executed. It is the event to which Mathcad supplies inputs and output variables for a <a href="Controls.html">Control</a> or <a href="ScriptableObject.html">Scripted component</a> as visible in the Mathcad worksheet. These are defined as two parameter collections: <span class="math">Inputs</span> and <span class="math">Outputs</span>. These parameters are objects of type <span class="math"> DataValue</span>. See <a href="Script_datavalues.html">DataValues Collection</a> for details.</p>
+
+<p>In this sample, the object is a <a href="Control_Slider.html">slider control</a> and its output is being programmed in the Exec event.</p>
+
+<h3>Example </h3>
+
+<code>
+Sub SliderEvent_Exec(Inputs,Outputs)</span><br>
+<span class="blockindent">Outputs(0).Value = Slider.Position</span><br>
+End Sub</span><br>
+</code>
+
+<h4>Note:</h4>
+
+<ul>
+<li>It is possible for this event function to be called many times after a single <a HREF="Script_StartEvent.html">Start event</a> is triggered. Script writers should put any &quot;one-time&quot; initialization code in the Start event so that the script is able to handle repeated calls to Exec for processing of input and output data.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

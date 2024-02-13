@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+
+<title>Linear Prediction</title>
+
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+ <link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Interpolation and Prediction">
+
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nInterpolation and Prediction\nLinear Prediction");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table><tr class="whs1">
+<td valign=top>
+<h1>Linear Prediction</h1></td></tr>
+</table>
+
+<p><b class="hmath">predict(v, m, n)</b> Returns a vector 
+ of <span class="math">n</span> predicted values past the last value in <b 
+ class="math">v</b>. The <b>predict</b> function uses Burg's method to calculate 
+ autocorrelation coefficients for the last <span class="math">m</span> points 
+ in <b class="math">v</b>. These are used to predict the value of the <span 
+ class="math">(m + 1)</span>th point; this procedure repeats in a sliding 
+ window.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+	
+	<li><b class="hmath">v</b> is a real data 
+ vector of equally spaced data samples.</li>
+	
+	<li><span class="hmath">m, n</span> are positive integers, 
+ <span class="math">0 &lt; m &lt; length(<b>v</b>) &minus; 1</span>. 
+ In practice, <span class="math">m</span> should be much smaller than <span 
+ class="math">length(<b>v</b>)</span>.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	
+	<li><b>predict</b> can be 
+ used to estimate prior values by reversing the order of <b class="math">v</b>.</li>
+	
+	<li>Linear prediction can be used for extrapolation, 
+ but should not be confused with linear or polynomial extrapolation. This 
+ algorithm is useful when data is smooth and oscillatory, though not necessarily 
+ periodic. </li>
+	
+	<li>As you increase the number of predicted points <span 
+ class="math">n</span> larger than <span class="math">m</span>, predicted values 
+ are computed based only on previously predicted values, perhaps producing 
+ undesirable results. </li>
+</ul>
+
+<p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','B-spline Interpolation','Bspline_interpolation.html','Cubic Spline Interpolation','Cubic_spline_interpolation.html','Linear Interpolation','Linear_interpolation.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

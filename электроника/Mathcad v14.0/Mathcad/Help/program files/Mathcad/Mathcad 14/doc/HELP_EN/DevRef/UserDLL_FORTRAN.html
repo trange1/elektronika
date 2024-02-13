@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Using FORTRAN in Your DLL</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Writing Mathcad DLLs\nUsing FORTRAN in Your DLL");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Using FORTRAN in your DLL</h1></td>
+	</tr>
+</table>
+
+<p>It is possible to wrap compiled FORTRAN code in C or C++, allowing Mathcad to run it. In this way, legacy FORTRAN code can be reused as a Mathcad function. We have had success compiling with Compaq Visual Fortran (formerly MS Fortran) and MS Visual C++ 6 or 7.</p>
+
+<p>First, follow the directions for <a href="UserDLL_Compiling.html">Compiling and Linking your <acronym lang="en" title="Dynamically Linked Library">DLL</acronym></a> to set up the Visual Studio environment with all the appropriate settings for creating a UserDLL. Next, create a static library from the FORTRAN subroutine. Link the C code to the FORTRAN code, and compile a DLL in the usual manner for Mathcad use.</p>
+ 
+<h3>Create the Fortran Library</h3>
+
+<ol type="1">
+	<li>Create a new &quot;FORTRAN Static Library&quot; project in Compaq Visual Fortran 6.6B, and add your files to the project.</li>
+	<li>Under the <b>Build</b> menu, select &quot;Set Active Configuration&quot; and choose &quot;Release.&quot;</li>
+	<li>Compile and build. The Release subfolder of your FORTRAN project now contains [myfortranlib].lib.</li>
+</ol>
+
+<h3>Modify the C code for the UserDLL</h3>
+
+<p>Once you have the FORTRAN library, you need to add in your <a href="UserDLL_code.html">C code</a>:</p>
+
+
+<code>
+<span class="blockindent">extern void __stdcall FORTRANFUNCTION(const double *array1, const double *scalar1 [, etc.]);</span><br>
+<span class="blockindent"><span class="comment">// Since FORTRAN typically expects arguments by reference, arguments are passed</span></span><br>
+<span class="blockindent"><span class="comment">// as pointers. To pass values, the FORTRAN code must contain a compiler directive</span></span><br>
+<span class="blockindent"><span class="comment">// telling the function to expect a value rather than an address.</span></span><br>
+<span class="blockindent"><a href="UserDLL_LRESULT.html">LRESULT</a> mcadfunction(<a href="UserDLL_COMPLEXSCALAR.html">LPCOMPLEXARRAY</a> array1, <a href="UserDLL_COMPLEXARRAY.html">LPCCOMPLEXSCALAR</a> scalar1, etc.)</span><br>
+<br>
+<span class="blockindent"><span class="comment">// this defines the function before <a href="UserDLL_FUNCTIONINFO.html">FUNCTIONINFO</a>, using the same variable names</span></span><br>
+<span class="blockindent"><span class="comment">// called by the external FORTRAN function.</span></span><br>
+<span class="blockindent">{</span><br>
+<span class="doubleindent"><span class="comment">// some error checking goes here, followed by the</span></span><br>
+<span class="doubleindent"><span class="comment">// actual call to the FORTRAN function. For example, </span></span><br>
+<span class="doubleindent">FORTRANFUNCTION(&amp;array1-&gt;<a href="UserDLL_COMPLEXARRAY.html">hReal[0][0]</a>, &amp;scalar1-&gt;real [, etc.]);</span><br>
+<br>
+<span class="doubleindent"><span class="comment">// Either the function call must be in UPPERCASE, or you will have to set</span></span><br>
+<span class="doubleindent"><span class="comment">// <b>Settings-&gt;FORTRAN-&gt;External procedures-&gt;External name implementation</b></span></span><br>
+<span class="doubleindent"><span class="comment">// to &quot;Upper case&quot; in your FORTRAN compiler. Any other C functionality follows...</span></span><br>
+<span class="doubleindent">return 0;</span><br>
+<br>
+}</code>
+
+<h3>Link the Library</h3>
+
+<ol type="1">
+	<li>In an existing C project in MS Visual C++ or Visual Studio, select the <b>Link</b> tab and then <b>Input</b> from the <b>Category</b> dropdown menu. Enter &quot;[myfortranlib].lib&quot; in the &quot;Object/library modules&quot; textbox at the end of the list.</li>
+	<li>Enter &quot;libc.lib&quot; in the <b>Ignore libraries</b> text box.</li>
+	<li>Enter the path of the [myfortranlib].lib file in the <b>Additional Library</b> Path text box, for example, &quot;C:\temp.&quot;</li>
+	<li>Compile and build the DLL.</li>
+</ol>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	<li>FORTRAN code should be run as a separate thread, rather than directly as a function. This way, if the process is terminated - for example, by a user pressing <b>[Esc]</b> - the whole thread can be killed without checking which FORTRAN subroutine is currently active.</li>
+	<li>It is useful to replace all &quot;STOP&quot; statements in FORTRAN code with a special function returning an error code to the calling C which will terminate the thread gracefully.</li>
+	<li><p>If the FORTRAN code contains &quot;PRINT&quot; to console statements, these can be converted by reassigning console to a file, so output goes to a file instead of the screen. If the FORTRAN routine terminates with an error, the C++ front-end can be programmed to read this &quot;log&quot; file and display it as a window. For example:</p>
+
+<code>
+SUBROUTINE INIT_STDOUT ()<br>
+<span class="comment">c this subro which redirects FORTRAN output to file</span><br>
+use dfwin<br>
+integer res<br>
+<br>
+<span class="comment">c CALL close_stdout</span><br>
+res=SETENVQQ(&quot;FOR_PRINT=C:\FORT_OUT.TXT&quot;)<br>
+<br>
+<span class="comment">c PRINT *, 'Print a character to initialize '</span><br>
+PRINT *,' '<br>
+RETURN<br>
+END<br>
+<br>
+</code>
+
+</li>
+	<li>If you wish to distribute a FORTRAN-based DLL, the computer which runs it will need to have the appropriate FORTRAN runtime libraries installed. These can be any of the following: DFORRT.DLL, DFORRTD.DLL, DFORMD.DLL, DFORMDD.DLL, DFDLG100.DLL, or MSVCRT.DLL. If these DLLs are missing, &quot;file not found&quot; errors will result. These DLLs are freely distributable, and should come with your FORTRAN compiler. They must be installed in the <b>Windows/system32/</b> or <b>WINNT/system32/</b> directory.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

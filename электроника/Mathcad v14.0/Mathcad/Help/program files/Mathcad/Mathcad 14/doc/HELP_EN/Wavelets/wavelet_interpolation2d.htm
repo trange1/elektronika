@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+
+<title>Two-dimensional wavelet interpolation</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Wavelet interpolation\nTwo-dimensional wavelet interpolation");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Wavelets.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+<tr class="whs1">
+<td valign=top>
+<h1>Two-dimensional wavelet interpolation</h1></td></tr>
+</table>
+
+<p><b class="hmath">waveterp2d(x,y,v,j,m,n,f,[o,[i]])</b> 
+ Returns the value at (<span class="math">x,y</span>) of 
+ the periodic multiresolution approximation of <b class="math">v</b> 
+ corresponding to subband (<span class="math">m,n</span>) 
+ at level <span class="math">j</span>, based on the filter <b class="math">f</b>. 
+ <b class="math">f</b> can have an offset <span class="math">o</span> 
+ and negation <span class="math">i</span>.</p>
+
+<p><b class="hmath">swaveterp2d(x,y,v,j,m,n,f)</b> Returns 
+ the value at (<span class="math">x,y</span>) of the symmetric 
+ multiresolution approximation of <b class="math">v</b> 
+ corresponding to subband (<span class="math">m,n</span>) 
+ at level j, based on the filter <b class="math">f</b>.</p>
+
+<h4>Arguments:</h4>
+
+
+<ul>
+<li><span class="hmath">x</span> and <span class="hmath">y</span> are real scalars.</li>
+<li><b class="hmath">v</b> is a matrix. 
+ For <b>waveterp2d</b>, the rows(<b class="math">v</b>) and cols(<b class="math">v</b>) 
+ must be divisible by <span class="math">2<sup>j</sup></span>. For 
+ <b>swaveterp2d</b>, rows(<b class="math">v</b>) <span class="math">&ge; 2<sup>j</sup></span> and cols(<b class="math">v</b>) <span class="math">&ge; 2<sup>j</sup></span>.</li>
+<li><span class="hmath">j</span> is an integer.</li>
+<li><span class="hmath">m</span> and <span class="hmath">n</span> are integers less than 2<sup>j</sup> 
+ giving the indices of the desired subband in sequential order.</li>
+<li><p><b class="hmath">f</b> is a vector 
+ of low pass filter coefficients for an orthonormal filter. Alternatively, 
+ for a biorthogonal filter, <b class="math">f</b> is 
+ a 2-column matrix whose first column contains the low pass filter coefficients 
+ and whose second column contains the inverse low pass filter coefficients.</p>
+
+	<ul>
+	<li><p>For <b>waveterp2d</b>, 
+ <b class="math">f</b> is the result from a function, 
+ such as <b>daublet</b> or <b>Bspline</b>, 
+ that creates the filter coefficients for a particular wavelet or <b class="math">f</b> is an array of user-defined filter 
+ coefficients.</p></li>
+	<li><p>For <b>swaveterp2d</b>, 
+ <b class="math">f</b> is <b class="math">bl</b>, 
+ <b>Bspline</b>, or <b>daublet</b>(2).</p></li>
+	</ul>
+</li>
+
+<li><span class="hmath">o</span> (optional) 
+ is a real scalar, for an orthonormal filter, or a <span class="math">1 &times; 2</span> matrix of real scalars 
+ for a biorthogonal filter. <span class="math">o</span> 
+ is the offset(s) corresponding to the filter <b class="math">f</b>. 
+ If not specified, <span class="math">o</span> is a default 
+ offset.</li>
+<li><span class="hmath">i</span> (optional) 
+ is zero or one for an orthonormal filter or, for a biorthogonal filter, 
+ <span class="math">i</span> is a <span class="math">1 &times; 2</span> matrix whose elements 
+ are zero or one. <span class="math">i</span> = 0 specifies 
+ no negation of the default high pass coefficients; <span class="math">i</span> 
+ = 1 specifies negation. If not specified, <span class="math">i</span> 
+ = 0.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+ 	   onMouseOut="document.body.style.cursor='arrow'"
+ 	   onClick="objLaunchMathcad.OpenResourceCenter('..\\handbook\\wavelets\\wavete2d.xmcd')"
+ 	   class="fakelink">Mathcad Example</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

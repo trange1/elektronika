@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Reading and Writing Binary Data</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Datafiles">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nFile Access\nReading and Writing Binary Data");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Reading and Writing Binary Data </h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">READBIN(&quot;file&quot;, &quot;type&quot;, 
+  [[endian], [cols], [skip], [maxrows]])</b> Returns an <a href="Vectors_and_matrices.html">array</a> 
+  containing the binary data in <span class ="math">file</span>.</p>
+
+<p><b class="hmath">WRITEBIN(&quot;file&quot;, &quot;type&quot;, endian, [M])</b> writes an 
+  <a href="Vectors_and_matrices.html">array</a> of scalars to the binary data 
+  file named <span class ="math">file</span>. This function can be used either on the right or the 
+  left side of the <a href="Equal_sign_for_definition.html">definition operator</a>. 
+  When used on the right, you must supply the argument <b class="math">M</b>, the name of the 
+  matrix to write to the file. In this case, the function returns the contents 
+  of the matrix. When used on the left, do not supply the argument <b class="math">M</b>, but 
+  instead place it on the right-hand side of the definition. See the QuickSheet 
+  Example.</p>
+
+<h4>Arguments: </h4>
+
+<ul type="disc">
+  <li><p><span class="hmath">file</span> is a <a href="Creating_a_String.html">string</a> 
+    containing the filename or the full <a href="Pathname.html">pathname</a> and 
+    filename. Pathnames are relative to the <a href="Current_working_directory.html">current 
+    working directory</a>.</p></li>
+  <li><p><span class="hmath">type</span> is a <a href="Creating_a_String.html">string</a> that specifies 
+    the data format used in the file. <b>READBIN</b> supports the following data types:</p>
+  <ul type="disc">
+      <li><b>byte</b> - 8-bit unsigned integer.</li>
+      <li><b>double</b> - 64-bit floating point number.</li>
+      <li><b>float</b> - 32-bit floating point number.</li>
+      <li><b>int16</b> - signed 16-bit integer.</li>
+      <li><b>int32</b> - signed 32-bit integer.</li>
+      <li><b>uint16</b> - unsigned 16-bit integer.</li>
+      <li><b>uint32</b> - unsigned 32-bit integer.</li>
+    </ul><br>
+	</li>
+  <li><span class="hmath">endian</span> (optional for READBIN) indicates whether the data in the file 
+    is big-endian (high byte first) or little-endian (low byte first). Big-endian 
+    is represented by a 1, while little-endian is represented by a 0. If no value 
+    is specified, <span class="math">endian</span> is assumed to be 0.</li>
+  <li><span class="hmath">cols</span> (optional) is the positive integer number of columns per row 
+    in the input file. Default is 1.</li>
+  <li><span class="hmath">skip</span> (optional) is the non-negative integer number of bytes at the 
+    beginning of the file to ignore before reading in data. Default is 0.</li>
+  <li><span class="hmath">maxrows</span> (optional) is the non-negative integer maximum number of rows 
+    of data to be read from the data file. Default is 0 (no limit).</li>
+</ul>
+
+<h4>Note:</h4>
+
+<ul type="disc"><li>If you are not 
+ sure whether your data is written in big-endian (the Macintosh standard) 
+ or little-endian (the IBM-PC standard) format, please consult the system 
+ documentation for your data source before relying upon the accuracy of 
+ any result from <b>READBIN</b> or <b>WRITEBIN</b>.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Data_Analysis\\fileIO.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Data File Input and Data File Output: Options','Dialog_File_ReadWrite_component_properties.html','Data Import Wizard','Data_wizard.html','Excel Component','Component_Excel.html','Reading and Writing Data (READPRN, WRITEPRN, APPENDPRN)','Read_ASCII.html','Reading Arbitrary Data Formats','READFILE.html','Reading Data from a Data File','Reading_data.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

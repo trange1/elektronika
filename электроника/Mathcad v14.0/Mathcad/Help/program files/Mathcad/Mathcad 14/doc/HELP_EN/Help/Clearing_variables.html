@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Clearing Previous Definitions of Variables</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Symbolics and Keywords\nWorking with Variables in Symbolic Expressions\nClearing Previous Definitions of Variables");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Clearing Previous Definitions of Variables</h1></td>
+	</tr>
+</table>
+
+<p>When you apply a <a href="Keywords.html">keyword</a> to an expression that contains a variable with an assigned value, Mathcad first substitutes the variable's value in the expression and then
+performs the keyword operation. For example,</p>
+
+<p class="vmath">x&nbsp;:=&nbsp;4</p>
+
+<p class="vmath">x<sup>2</sup>&minus;&nbsp;2x&nbsp;+&nbsp;4&nbsp;factor&nbsp;&rarr;&nbsp;2<sup>2</sup>&middot;3</p>
+
+<p>Sometimes, you might want to clear the assigned value of a variable, to make the variable &quot;free.&quot; 
+For example, if you have assigned <span class="math">x</span> the value <span class="math">4</span> as above, and then try to solve a polynomial in <span class="math">x</span> using the keyword &quot;solve,&quot; Mathcad returns an error message:</p>
+
+<p class="blockindent"><img src="Graphics/symbolic_variable_error.GIF" alt="Applying solve to a variable with an assigned value" width="217" height="52" border="0"></p>
+
+<p>This happens because Mathcad first replaces <span class="math">x</span> with <span class="math">4</span> in the equation. As a result, the equation has no <i>indeterminate</i> - a variable without an assigned value - to solve for.</p> 
+
+<p>To clear the symbolic value of <span class="math">x</span>, type</p>
+
+<p class="vmath">x&nbsp;:=&nbsp;x</p>
+
+<p>This resets the symbolic value of <span class="math">x</span> to be just <span class="math">x</span>.</p>
+
+<p class="vmath">x&nbsp;&rarr;&nbsp;x</p>
+
+<p>You can now solve the equation, provided you type it below the line <span class="math">x:=&nbsp;x</span>.</p>
+
+<p class="vmath">x&nbsp;&minus;&nbsp;27&nbsp;<b>=</b>&nbsp;0&nbsp;solve&nbsp;&rarr;&nbsp;27</p>
+						   
+<p>Note that while the symbolic value of <span class="math">x</span> is now <span class="math">x</span>, its numerical value is still <span class="math">5</span>:</p>
+
+<p class="vmath">x&nbsp;=&nbsp;5</p>	
+
+			   
+<p>As an alternative to typing <span class="math">x:=&nbsp;x</span>, you can use the keyword &quot;<a href="Explicit_calculation.html">explicit</a>&quot; to temporarily suppress the value of <span class="math">x</span> for a single symbolic evaluation. See <a href="Explicit_calculation.html#suppress_variable">Suppressing the Value of a Variable</a> for an example.</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Reading Arbitrary Data Formats</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Datafiles">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nFile Access\nReading Arbitrary Data Formats");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Reading Arbitrary Data Formats</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">READFILE(&quot;file&quot;, &quot;type&quot;, 
+  [colwidths], [rows], [cols], [emptyfill])</b> Returns an <a href="Vectors_and_matrices.html">array</a> 
+  containing the data in <span class="math">file</span>. The optional arguments give much of the same flexibility found in the Data Import Wizard, for use in programs.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+	<li><p><span class="hmath">file</span> is a <a href="Creating_a_String.html">string</a> containing the filename or the full <a href="Pathname.html">pathname</a> and filename. Non-absolute pathnames are relative to the <a href="Current_working_directory.html">current working directory</a>.</p></li>
+	<li><p><span class="hmath">type</span> is a <a href="Creating_a_String.html">string</a> that specifies the data format used in the file:</p>
+	<ul type="disc">
+		<li><b>delimited</b> - data columns separated by a consistent delimiter (including those produced by <a href="Read_ASCII.html"><b>WRITEPRN</b> and <b>APPENDPRN</b></a>).</li>
+		<li><b>fixed</b> - fixed-column-width data.</li>
+		<li><b>Excel</b> - Excel file formats.</li>
+    </ul><br></li>
+	<li><b class="hmath">colwidths</b> (required for type <b>fixed</b>, omitted otherwise) an <span class="math">n &times; 1</span> column vector specifying the number of characters in each fixed-width column, where n is the total number of columns in the datafile. </li>
+	<li><b class="hmath">rows</b> (optional) either a scalar specifying the first row to read, or a 2-element vector specifying the range of rows (inclusive) to read. If this argument is omitted, <b>READFILE</b> reads in every row of the file.</li>
+	<li><b class="hmath">cols</b> (optional) either a scalar specifying the first column to read from the file or a 2-element vector specifying the range of columns (inclusive) to read from the file. If this argument is omitted, <b>READFILE</b> reads in every column of the entire datafile.</li>
+	<li><b class="hmath">emptyfill</b> (optional) a string, scalar, or NaN, which is substituted for missing entries in the data file. NaN is the default.</li>
+	<li><b class="hmath">M</b> a matrix of values to write (or append) to the specified <span class="math">file</span>.</li>
+	<li><b class="hmath">header</b> (optional) a string of descriptive, non-data text to appear in the file.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	<li>Both <span class="math">rows</span> and <span class="math">cols</span> are indexes that start with 1. <a href="Array_origin.html"><b>ORIGIN</b></a> does not affect the behavior of <b>READFILE</b>.</li>
+	<li>Behavior of any function that reads from or writes to data files is unpredictable if the worksheet has never been saved. Path information for a file is uncertain until the file is saved in a particular location.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Data_Analysis\\fileIO.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('tutorial\\migration\\mg_data.xmcd')"
+	   class="fakelink">New Feature - Data and String Calculation Strategies</a></h5>
+
+<p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Data File Input and Data File Output: Options','Dialog_File_ReadWrite_component_properties.html','Data Import Wizard','Data_wizard.html','Excel Component','Component_Excel.html','Reading and Writing Binary Data','READBIN_function.html','Reading and Writing Data (READPRN, WRITEPRN, APPENDPRN)','Read_ASCII.html','Reading Data from a Data File','Reading_data.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Mapping Functions</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nGraphing\nMapping Functions");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Mapping Functions</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">xy2pol(x, y)</b> or <b class="hmath">xy2pol(v)</b> Converts 
+  the rectangular coordinates of a point <span class="math">(x, y)</span> to polar 
+  coordinates <span class="math">(r, &theta;)</span>.</p>
+
+<p><b class="hmath">pol2xy(r, &theta;)</b> or <b class="hmath">pol2xy(v)</b> Converts 
+  the polar coordinates of a point <span class="math">(r, &theta;)</span> to rectangular 
+  coordinates <span class="math">(x, y)</span>.</p>
+
+<p><b class="hmath">xyz2sph(x, y, z)</b> or <b class="hmath">xyz2sph(v)</b> Converts 
+  the rectangular coordinates of a point <span class="math">(x, y, z)</span> to 
+  spherical coordinates <span class="math">(r, &theta;, &phi;)</span>.</p>
+
+<p><b class="hmath">sph2xyz(r, &theta;, &phi;)</b> or <b class="hmath">sph2xyz(v)</b> 
+  Converts the spherical coordinates of a point <span class="math">(r, &theta;, 
+  &phi;)</span> to rectangular coordinates <span class="math">(x, y, z)</span>. 
+</p>
+
+<p><b class="hmath">xyz2cyl(x, y, z)</b> or <b class="hmath">xyz2cyl(v)</b> Converts 
+  the rectangular coordinates of a point <span class="math">(x, y, z)</span> to 
+  cylindrical coordinates <span class="math">(r, &theta;, z)</span>.</p>
+
+<p><b class="hmath">cyl2xyz(r, &theta;, z)</b> or <b class="hmath">cyl2xyz(v)</b> 
+  Converts the cylindrical coordinates of a point <span class="math">(r, &theta;, 
+  z)</span> to rectangular coordinates <span class="math">(x, y, z)</span>.</p>
+<p>Each function returns a three-element column vector with the new coordinates. 
+  Angles are given in radians.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li> <span class="hmath">x, y, z, r, &theta;, &phi;</span> are real 
+    numbers. Angles are given in radians.</li>
+  <li><b class="hmath">v</b> is a two or three-element vector giving the coordinates 
+    to transform in the alternate argument structure of these functions.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li>These functions are useful as the last argument to <b><a href="CreateMesh.html">CreateMesh</a></b><a href="CreateMesh.html"> 
+    and <b>CreateSpace</b></a>.</li>
+  <li>You can also switch coordinate systems within a <a href="3D_Plot_Format_Dialog_Box_(QuickPlot_Data_Tab).html">3D 
+    plot</a>, rather than explicitly converting coordinates to Cartesian.</li>
+	<li>Because <b>sph2xyz(r, &theta;, &phi;)</b> and <b>cyl2xyz(r, &theta;, z)</b> take <span class="math">r</span> as their first argument, they can not be used with <b><a href="CreateMesh.html">CreateMesh</a></b><a href="CreateMesh.html"> 
+    and <b>CreateSpace</b></a> if you want to get the same results as the 3D plot.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Visualization\\param2d.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

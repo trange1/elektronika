@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Creating Help for your Functions </title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Writing Mathcad DLLs\nCreating Help for your Functions");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign=top><h1>Creating Help for your functions</h1></td>
+	</tr>
+</table>
+
+<p>You can create HTML-based help for your functions that will appear any time a user presses the <b>[F1]</b> key when selecting the name of your new functions, just as with any built-in Mathcad function. Your Help files should be considered as a Web site, containing either a single HTML page or a series of linked pages. Mathcad online Help uses RoboHelp to create frames and a collapsible/expandable table of contents, but any basic HTML page will do.</p>
+
+<p>In order to specify the location of the Help site for your functions, add the following lines to the file <b><a href="UserDLL_InsertFunc_listing.html">USER_EN.XML</a></b>, located in the <b>\DOC\FUNCDOC</b> subdirectory of your Mathcad install directory:</p>
+
+<code>
+<span class="blockindent">&lt;help_file&gt;help_%s\user\userHelp.htm</span><br>
+<span class="blockindent">&lt;!-- Insert the name of your custom help file here --&gt;</span><br>
+<span class="blockindent">&lt;/help_file&gt;</span><br>
+</code>
+
+<p>Where user is a directory in your <b>\DOC\Help_EN</b> (or \DOC\Help_DE, etc.) directory, and contains the main Help file userHelp.htm. There is a sample of this file shipped with Mathcad.</p>
+
+<p>Then, in the description of each function, fill in the following tags, if desired:</p>
+
+<code>
+<span class="blockindent">&lt;help_topic&gt;</span><br>
+<span class="blockindent">target in the help file you want to link to</span><br>
+<span class="blockindent">&lt;/help_topic&gt;</span><br>
+</code>
+
+<p>These tags are writing hashes and targets after the main Help file name. Your main page, as specified in the<span class="math"> &lt;help_file&gt;</span> tag, might have navigation to each function's page, or it could be one long file with <span class="math">&lt;a name=&quot;target&quot;&gt;&lt;/a&gt;</span> tags to specify a scroll-point in the file. To see exactly what URL is being passed to the Resources Window when you press <b>[F1]</b> on a function name, choose <b>View &gt; Address Bar</b> from the window's menus.</p>
+
+<p>Note that you could use Javascript to write an HTML frameset file that would parse hashes (#), which would allow you to link to individual help pages for different functions. Anything you can do in a client-side scripted Web site you can do with the Mathcad Resources window.</p>
+
+<h4>Notes:</h4>
+
+<p>The <b>EN</b> in the .xml file name indicates the English language interface. If you need to provide function definitions for other localized versions of Mathcad, use the appropriate files and folders:</p>
+
+<ul>
+	<li>_DE.xml for German</li>
+	<li>_FR.xml for French</li>
+	<li>_JP.xml for Japanese</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

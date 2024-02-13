@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+<head>
+	<title>Static Unit Checking</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Units\nStatic Unit Checking");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Static Unit Checking</h1></td>
+	</tr>
+</table>
+
+<p><i>Static unit checking</i> refers to the process by which Mathcad internally balances the <a href="Units_and_Dimensions.html">units</a> for equations in your worksheets. Expressions are balanced before calculation to ensure consistent results when using units. This guarantees unit correctness without the need to perform a single calculation. In addition, static unit checking can speed up large, iterative calculations.</p>
+
+<p>In most cases, static unit checking does not substantially impact calculation of a worksheet. The most-visible change is that unit-balancing errors can now appear on a <a href="Defining_a_Function.html">function's definition</a>, rather than its <a href="Evaluating_a_function.html">evaluation</a>. Some instances where static unit checking can substantially impact your worksheets are:</p>
+
+<ol type="1">
+	<li>Programs containing <a href="Program_Conditional.html">conditional statements</a> that return output of varying units.
+	
+	<p>Conditional statements in programs cannot return values of different dimensions. Problematic practices include using the <a href="Program_error.html">on error</a> operator to trap and correct unit errors, and defining variables with different dimensions on the conditional branches.</p></li>
+	
+	<li>Programs that rely on incomplete conditional definitions.
+	
+	<p>When you fail to properly account for all possible inputs to a conditional block, Mathcad must &quot;guess&quot; the definition in any undefined instance. The assumed definition is generally the result of the previous instruction in the program. This may cause the conditional to return an inconsistently-united result.</p></li>
+	
+	<li>Values with units raised to a variable <a href="Exponentiation_operator.html">power</a>.
+	
+	<p>To unit balance an exponential or derivative equation before evaluation, the units of the result must depend only on the units of the arguments, not on their numeric value.</p></li>
+	
+	<li><a href="Defining_a_range_variable.html">Range variables</a> defined with units.
+	
+	<p>Mathcad requires that you specify the step size when you define a united range variable. For example, the definition</p>
+
+	<p class="math">x := 0ft..5ft</p>
+	
+	<p>must be written as </p>
+	
+	<p class="math">x := 0ft,1ft..5ft</p>
+	
+	<p>for Mathcad to accept it.</p></li>
+</ol>
+
+<p>You can find more information on the effects of static unit checking, including information on how you can rewrite problematic worksheets, in the Migration Guide, found in the Tutorials section of the Mathcad Resources.</p>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('tutorial\\migration\\mg_units.xmcd')"
+	   class="fakelink">Migration Guide: Units in Functions and Operators</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+</html>

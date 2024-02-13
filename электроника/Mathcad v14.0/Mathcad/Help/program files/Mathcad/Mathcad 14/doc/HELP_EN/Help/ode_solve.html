@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Solving Ordinary Differential Equations</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Differential Equations">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nDifferential Equation Solving\nOrdinary Differential Equations Solve Blocks");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Ordinary Differential Equation Solve Blocks</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">Odesolve([vector], x, b, [npoints]) </b> Returns the solution to an ordinary differential equation (<acronym lang="en" title="Ordinary Differential Equation">ODE</acronym>), subject to initial value or boundary value constraints. The ODE must be linear in its highest derivative term, and the number of initial and boundary conditions must equal the order(s) of the ODE(s). To use <b>Odesolve</b>, create a <a href="Solve_Block.html">solve block</a> that ends with the <b>Odesolve</b> command.</p>
+ 
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><p><b class="hmath">vector</b> (used only for <i>systems</i> of ODEs) is a vector of function names (with no variable names included) as they appear within the solve block. For example, if you are solving for the functions <span class="math">f(x)</span> and <span class="math">g(x)</span>, <b class="math">vector</b> would be</p>
+
+<p class="blockindent"><img src="Graphics/PDEfunc.gif" width="27" height="39" alt="vector of for the functions f(x) and g(x)"></p>
+
+    <p>You cannot use <a href="Array_subscript_operator.html">array subscripts</a> to name functions, but you can use <a href="Literal_Subscript_Operator.html">literal subscripts</a>.</p></li>
+  <li><span class="hmath">x</span> is the name of the variable of integration.</li>
+  <li><span class="hmath">b</span> is the real terminal point of the integration interval. <span class="math">b</span> can be greater than or less than the initial value, which is inferred from the initial conditions in the solve block.</li>
+  <li><span class="hmath">npoints</span> (optional) is the integer number of points used to interpolate the solution function. The default value of npoints is 1000.</li>
+</ul>
+
+<p><b>Odesolve</b> returns the solution as a function of the independent variable. To evaluate this function, <b>Odesolve</b> saves solutions at npoints equally spaced points in the integration interval, and then interpolates between those points using the function <a href="Cubic_spline_interpolation.html"><b>lspline</b></a>.</p>
+
+<p><b>Note:</b> The larger the value of npoints, the more accurate the interpolated solution function is. Usually, the default value of npoints is sufficient to obtain good results, but if you are solving the ODE over a large interval, 
+set npoints to a value larger than the default.</p>
+
+<h4>Example:</h4>
+
+<p>To solve the ODE</p>
+
+<p class="blockindent">y&Prime;&nbsp;+&nbsp;3y&nbsp;=&nbsp;0</p> 
+
+<p>subject to the initial conditions</p> 
+
+<p class="blockindent">y(0)&nbsp;=&nbsp;1,&nbsp;y&prime;(0)&nbsp;=&nbsp;2</p>
+
+<p>create the following solve block, using <a href="Equal_to_operator.html">Boolean equals</a> (<b>[Ctrl]&nbsp;[=]</b>) in the differential equation and initial conditions. To insert the derivative symbols for <span class="math">y&prime;</span> and <span class="math">y&Prime;</span>, press <b>[Ctrl]&nbsp;[F7]</b>.</p>
+
+<p class="blockindent"><img src="Graphics/Odesolve_example.GIF" alt="ODE defined by a solve block" width="181" height="121" border="0"></p>
+
+<p>The solution <span class="math">y</span> is a function of the variable <span class="math">x</span> specified by the first argument to <b>Odesolve</b>. The graph of the solution is shown below:</p>
+
+<p class="blockindent"><img src="Graphics/Odesolve_graph.GIF" alt="graph of the solution of Odesolve example" width="213" height="168" border="0"></p>
+
+<h4>Algorithms:</h4>
+
+<p>You can choose the method for solving the ODE by right-clicking on <b>Odesolve</b> in the solve block and
+selecting one of the following from the drop-down menu:</p>
+
+<ul>
+<li><p><b>Adams/BDF</b> - The default method. <b>Odesolve</b> dynamically detects whether the ODE is stiff or non-stiff, and calls one of the following solvers accordingly:</p>
+	<ul type="disc">
+	<li>For non-stiff systems, Odesolve calls the solver <a href="ODE_solvers.html"><b>Adams</b></a>, which uses Adams-Bashforth methods.</li>
+	<li>For stiff systems, Odesolve calls the solver <a href="ODE_solvers.html"><b>BDF</b></a>, which uses backward differentiation formula (BDF) methods.</li>
+	</ul>
+</li>
+
+<li><b>Fixed</b> - Calls the solver <a href="ODE_solvers.html"><b>rkfixed</b></a>, which uses a fixed-step Runge-Kutta method.</li>
+<li><b>Adaptive</b> - Calls the solver <a href="ODE_solvers.html"><b>Rkadapt</b></a>, which uses a Runge-Kutta method with adaptive step-size.</li>
+<li><b>Radau</b> - Calls the solver <a href="ODE_solvers.html"><b>Radau</b></a>, which uses a Radau algorithm for systems that are stiff or have algebraic constraints.</li>
+</ul>
+
+<p><b>Radau</b> is the only method that solves systems with algebraic constraints. If your system has such constraints, <b>Odesolve</b> automatically uses the Radau algorithm, regardless of your selection from the drop-down menu.</p>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+
+  <li>The interval of integration should not contain any singularities for the function or functions in the solve block. Otherwise, the
+  results of <b>Odesolve</b> might not be reliable.</li>
+  <li><p>The following notes on constructing <a href="Solve_Block.html">solve blocks</a> apply. Within the body of the block:</p>
+    <ul type="disc">
+      <li><b>Unknown functions:</b> You must define functions explicitly in terms of their variables. For example, use <span class="math">y(x),</span> not just <span class="math">y</span>.</li>
+      <li><b>ODE Equations:</b> You must define equations using <a href="Equal_to_operator.html">Boolean equals</a>. You can write equations either using the derivative operators, such as <span class="math">d/dx</span> and<span class="math"> d<sup>2</sup>/dx<sup>2</sup></span>, or using prime notation, <span class="math">y(x)</span> and <span class="math">y'(x)</span>. (The keystroke for the prime character is <b>[Ctrl]&nbsp;[F7]</b>.)</li>
+      <li><b>Initial and boundary conditions:</b> For a single <i>n</i>th-order ODE, the initial or boundary conditions must satisfy the following:
+		  <ul type="disc">
+		  <li>There must be <span class="math">n</span> independent equality constraints for an nth order differential equation.</li>
+		  <li>For an initial value problem, the values of <span class="math">y(x)</span> and its first <span class="math">n&nbsp;&minus;&nbsp;1</span> derivatives at a single initial point <span class="math">a</span> are required.</li>
+		 <li>For a boundary value problem, the <span class="math">n</span> constraints must specify certain values of <span class="math">y(x)</span> and its derivatives at the initial point <span class="math">a</span> or the terminal point <span class="math">b</span>. The constraints must satisfy the requirements for the inputs to the function <a href="Linear_shooting.html"><b>sbval</b></a>, which <b>Odesolve</b> calls when you provide boundary value conditions.</li> 
+		  </ul> 
+      In each case, the endpoints used in boundary conditions must match the endpoints specified in the <b>Odesolve</b> command. Mathcad checks for the correct type and number of conditions and returns an error if there is a mistake.</li>
+
+      <li><b>Constraints:</b> Mathcad accepts algebraic constraints, such as <span class="math">y(b)&nbsp;+&nbsp;z(b)&nbsp;=&nbsp;w(b)</span>. Algebraic constraints add an extra unknown function, <span class="math">w</span>, to the system, which must be specified as one of the output functions in  <b>Odesolve</b>. Inequality constraints are not allowed.</li>
+    </ul>
+  </li>
+  
+  <li>Assign the output of the <b>Odesolve</b> function to a function name or vector of function names, without arguments. These functions are understood to have the integration variable as an argument. You can parameterize the solve block, but you then have to assign the output with particular parameter values to another function name, then call that with the integration variable.</li>
+
+  <li>Both the adaptive and stiff methods use non-uniform step sizes, adding more steps in regions of greater variation of the solution. </li>
+
+  <li>The default value of 1000 for <span class="math">npoints</span> is usually large enough give an accurate interpolated solution, but you can increase this value to capture fine details in the solution. Doing so requires <b>Odesolve</b> to save more points to interpolate between, and might increase calculation time. Reducing the value of npoints can reduce calculation time, but also runs the risk of missing details in the solution.</li>
+  
+  <li>To solve an ODE that is not linear in the highest derivative term or to solve ODEs in a program loop, use <a href="ODE_solvers.html"><b>rkfixed</b></a> or one of the other command-line <a href="Differential_equation_solvers.html">ODE solvers</a>. You can also assign the output of a parameterized solve block in a program loop using <a href="Local_Assignment_Operator.html">local functions</a>.</li>
+	
+  <li>Depending on the scale of the problem, and the relative step size used, you may need to reduce the value of <a href="Accuracy.html">TOL</a> to get appropriate solutions. Try this when you get an error relating to &quot;too many integrator steps.&quot;</li>
+
+  <li>Beware of aliasing when solving problems with periodic behavior over many cycles. Be sure you have sampled with enough interpolation points to get the frequencies in your results you expect.</li>
+
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object>
+</p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Calculus_DEs\\odeqs1.xmcd')"
+	   class="fakelink">QuickSheet - Solving First-Order ODEs</a>
+</h5>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Calculus_DEs\\odeqs3.xmcd')"
+	   class="fakelink">QuickSheet - Solving a First-Order System of ODEs</a>
+</h5>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Calculus_DEs\\pendulum.xmcd')"
+	   class="fakelink">QuickSheet - Simple Pendulum Motion</a>
+</h5>
+
+<p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Deriving Initial Conditions for an ODE','Linear_shooting.html','Differential Equation Solvers','Differential_equation_solvers.html','ODE Solvers','ODE_solvers.html','Partial Differential Equation solver','numol.html','Relaxation PDE Solver','Poissons_equation.html','Solving Partial Differential Equations','PDE_solve.html','State Space ODE Solver','Statespace.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

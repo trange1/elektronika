@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>CheckBox Control </title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Mathsoft Controls\nButtons\nCheckBox Control");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Mathsoft CheckBox Control </h1></td>
+	</tr>
+</table>
+
+<p>The Mathsoft CheckBox <a href="Controls.html">control</a> returns either a 1 or a 0 (on or off), much like the related <a href="Control_button.html">PushButton</a> control. More sophisticated behavior is programmed through a script using the <a href="Script_buttonclass.html">Button class</a>, and other features of your scripting language. <a href="Control_RadioButton.html">Radio buttons</a> are used to select between an arbitrarily large collection of choices.</p>
+
+<p>You can change the appearance of a check box by right-clicking and choosing <b>Properties</b>, or, in some cases, you can access formatting properties through the script.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Simple Annotated Example</td></tr>
+</table>
+</h2>
+
+<p>Here's an example that shows the default script and the resulting behavior of the CheckBox control in the worksheet.</p>
+
+<h3>Default Script</h3>
+
+<code>
+Sub CheckBoxEvent_Start()<br>
+&nbsp;&nbsp;&nbsp;Rem TODO: Add your code here<br>
+End Sub<br>
+<br>
+Sub CheckBoxEvent_Exec(Inputs,Outputs)<br>
+&nbsp;&nbsp;&nbsp;If CheckBox.check Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outputs(0).Value = 1<br>
+&nbsp;&nbsp;&nbsp;Else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outputs(0).Value = 0<br>
+&nbsp;&nbsp;&nbsp;End If<br>
+End Sub<br>
+<br>
+Sub CheckBoxEvent_Stop()<br>
+&nbsp;&nbsp;&nbsp;Rem TODO: Add your code here<br>
+End Sub<br>
+<br>
+Sub CheckBox_Click()<br>
+&nbsp;&nbsp;&nbsp;CheckBox.Recalculate()<br>
+End Sub<br>
+<br>
+</code>
+
+<h3>How It Appears in the Worksheet</h3>
+
+<p class="blockindent"><img src="Graphics/SIMPLE_CHECK_BOX.GIF" alt="simple checkbox" width="124" height="72" border="0"></p>
+
+<h3>Comments</h3>
+
+<p>In the script, notice that there are four events, <a href="Script_StartEvent.html">Start</a>, <a href="Script_ExecEvent.html">Exec</a>, <a href="Script_StopEvent.html">Stop</a>, and <a href="Control_btnevents.html">Click</a>. The Exec event is where inputs and outputs can be processed, namely returning the state of the button. In the case of check boxes, this is where state changes are handled because both check boxes and radio buttons support the Check property which delivers the state of the button. Procedures for formatting the button itself can be taken care of in the Start event or using the Properties dialog box. The Click event is where the control is re-executed after the user has changed their selection. Here's a slightly modified piece of script and its effect on the appearance and behavior of the control:</p>
+
+<h3>Modified Script</h3>
+
+<code>
+Sub CheckBoxEvent_Start()<br>
+&nbsp;&nbsp;&nbsp;CheckBox.Text = &quot;Check here to enable default parameters in the worksheet.&quot;<br>
+End Sub<br>
+<br>
+Sub CheckBoxEvent_Exec(Inputs,Outputs)<br>
+&nbsp;&nbsp;&nbsp;If CheckBox.check Then<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outputs(0).Value = 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outputs(1).Value = 2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outputs(2).Value = 3<br>
+&nbsp;&nbsp;&nbsp;Else<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outputs(0).Value = &quot;no value specified&quot;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outputs(1).Value = &quot;no value specified&quot;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outputs(2).Value = &quot;no value specified&quot;<br>
+&nbsp;&nbsp;&nbsp;End If<br>
+End Sub<br>
+<br>
+Sub CheckBoxEvent_Stop()<br>
+&nbsp;&nbsp;&nbsp;Rem TODO: Add your code here<br>
+End Sub<br>
+<br>
+Sub CheckBox_Click()<br>
+&nbsp;&nbsp;&nbsp;CheckBox.Recalculate()<br>
+End Sub<br>
+</code>
+
+<h3>How It Appears in the Worksheet</h3>
+
+<p class="blockindent"><img src="Graphics/MODIFIED_CHECK_BOX.GIF" alt="modified checkbox" width="349" height="172" border="0"></p>
+
+<h3>Comments</h3>
+
+<p>In this script, two more output variables were added and the script in the Exec event was modified to send data out to these variables. Also, the text of the check box was changed to prompt the user to check the box.</p>
+
+<h3>Sample File</h3>
+
+<p>Here is a sample file that demonstrates various uses of buttons in a worksheet.</p>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+               id="objLaunchMathcad"
+               border="0"
+               width="1"
+               height="1"
+               align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('samples\\controls\\controls.xmcd')"
+	   class="fakelink">Mathcad Example</a></h5>
+	   
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

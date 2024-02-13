@@ -1,0 +1,68 @@
+// 21-Nov-03 K-01-26 $$1  TWH  Create
+// 16-Apr-04 K-01-26+$$2  TWH  Updates
+// 27-Apr-04 K-01-26+$$3  TWH  Add JRE cdsection
+// 19-Jul-04 K-03-06 $$4  TWH  Add ScreenDataserver.RunCfg
+// 13-May-05 K-03-25 $$5  TWH  Add MOR property
+
+(Product dataserver_std
+    (Name                      "Pro/INTRALINK Data Server Standard")
+    (WelcomeImage              "dataserver_name.gif")
+    (Packages                  "dbs"
+                               "demos"
+                               "uninstall")
+    (ProgramFiles              False)
+    (LpDirName                 "dataserver")
+    (Screens                   "ScreenProd")
+    (PossibleArchs             "sun4_solaris"
+                              "hpux11_pa32"
+                               "ibm_rs6000"
+                               "i486_nt")
+    (Installed                 True)
+    (OldTag                    "ilnkdataserver")
+    (LpcfgMS_SS.MS_SS_Radio    "MS")
+    (ScreenDataserver.RunCfg   True)
+    (ScreenProdPostFunc.AllowPreCheck True)
+    (MOR                       "http://www.ptc.com/cs/doc/swupdate.htm")
+    (RC_README_TPL             "ds_readme")
+    (No_Bin_Dir                True)
+    (LicenseSimplification     True)
+    (Ad_list                   "whatsnew_auto"
+                               "whatsnew_dataexchange"
+                               "whatsnew_newui"
+                               "whatsnew_p2p"
+                               "whatsnew_3ddrawings"
+                               "whatsnew_ID"
+                               "whatsnew_rs"
+                               "whatsnew_simulation"
+                               "whatsnew_production"
+                               "installscreen_casestudy"
+                               "tools_menumapper"
+                               "tools_onlinehelp"
+                               "tools_productivityT"
+                               "tools_refcards"
+                               "tools_tutorials")
+)
+
+(Package dbs
+    (Name                      "Pro/INTRALINK Data Server Standard")
+    (Screens                   "ScreenDataserver"
+	                       "ScreenVault"
+                               "LpcfgOrapwd"
+                               "LpcfgMS_SS")
+    (Required                  True)
+    (Cdsections                "dbs"
+                               "JRE"
+                               "ilinkpatches"
+                               "adminutils"
+                               "Install")
+    (Installed                 True)
+    (EnvVarValues              "Append=PATH=_LP_\intralink\bin"
+                               "Append=PATH=_LP_\intralink\tools\bin")
+)
+
+(Package Demos
+    (Name                      "Demos")
+    (Cdsections                "clientdemo")
+    (Installed                 True)
+)
+

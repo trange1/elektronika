@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Creating and Loading Colormaps</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nGraphing\nCreating and Loading Colormaps");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Creating and Loading Colormaps </h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">SaveColormap(&quot;file,&quot; M)</b> Creates a colormap file 
+  for use with <a href="Insert_Graph.html#3D">3D Plots</a> containing the values 
+  in M. Returns the number of rows written to the file. Once the colormap is saved, 
+  it is available on the Advanced tab in the 3D Plot Format dialog box.</p>
+
+<p><b class="hmath">LoadColormap(&quot;file&quot;)</b> Returns an array containing 
+  the values in the <a href="Insert_Graph.html#3D">3D Plot</a> colormap file.</p>
+
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><p><b class="hmath">file</b> is a <a href="Creating_a_String.html">string</a> 
+    containing the name, <i>but not the file extension</i>, of a colormap located 
+    in the CMAPS subfolder of the Mathcad installation folder.</p></li>
+  <li><p><b class="hmath">M</b> is a 3-column matrix of integers between 0 and 255. 
+    Nonintegers are truncated. Each row number corresponds to a level of gray, 
+    and each entry in the row corresponds to the intensity of red, green, or blue 
+    to associate with the gray level.</p></li>
+</ul>					
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	<li>There are usually 256 rows in a colormap. Each row of values specifies a color
+	 consisting of red, green, and blue to which a grayscale value is mapped. If there
+	 are fewer than 256 rows in the colormap, Mathcad linearly interpolates over 256
+	 values.</li>
+	<li><p>Any values in <b class="math">M</b> that are not between 0 and 255 are
+	 increased to 0 or decreased to 255.</p></li>
+	<li>Some built-in colormaps such as Rainbow and Grayscale do not appear as *.CMP
+	 files in the CMAPS folder.</li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

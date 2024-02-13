@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+<head>
+	<title>Numerical Integration Methods and AutoSelect</title>
+		<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Operators\nCalculus Operators\nNumerical Integration Methods and Autoselect");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Numerical Integration Methods and AutoSelect</h1></td>
+	</tr>
+</table>
+
+<p>There are four numerical integration methods available within the <a href="Integration_operator.html">integration</a> 
+operator. Mathcad attempts to autoselect the most appropriate method from the 
+following list when the integral is evaluated:</p> 
+<ul type="disc">
+  <li> <b>Romberg:</b> applicable to most integrands, this method uses trapezoidal 
+    approximations over an even number of subintervals, then compares sequential 
+    estimates by summing the areas of the trapezoids. The method terminates when 
+    the four most recent estimates differ by less than the value of the built-in 
+    variable <a href="Accuracy.html">TOL</a>. Because the Romberg integration 
+    method divides the integration interval into four subintervals, then successively 
+    doubles the number of points, it can return incorrect answers for periodic 
+    functions having periods <span class="math">1/2<sup>n</sup></span> times the length 
+    of the interval. To avoid this problem, divide the interval into two uneven 
+    subintervals and integrate over each subinterval separately. Mathcad sets 
+    a limit on the number of times it will iterate this procedure. If the routine 
+    reaches this limit without converging, or if the integrand is singular at 
+    one or both of the endpoints of the interval of integration, then Mathcad 
+    switches to the Singular Endpoint method.</li>
+  <li> <b>Adaptive:</b> adaptive quadrature method for functions that change 
+    rapidly over the interval of integration.</li>
+  <li> <b>Infinite Limit:</b> appropriate for integrals where one or both of 
+    the limits are infinite. The function being integrated must be real.</li>
+  <li> <b>Singular Endpoint:</b> an open-ended Romberg method appropriate for 
+    integrals which have singularities/infinities at one or both limits of integration. 
+    Preliminary estimates to the integral are obtained using the midpoints of 
+    subintervals, so the function is not evaluated at the endpoints <span class="math">a</span> and <span class="math">b</span>. Estimates 
+    are concentrated near the ends of the integration interval, where integrands 
+    that are singular or that have an infinite derivative are likely to be changing 
+    most rapidly. The number of subintervals is tripled at each step. There is 
+    a set limit on the number of iterations through the open-ended Romberg method. 
+    If the routine reaches this limit without returning an answer, the integral 
+    is marked with an <a href="Numerical_Errors.html#TooManyIntegratorSteps">error</a> 
+    indicating that it did not converge.</li>
+</ul>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Modifying AutoSelect</td></tr>
+</table>
+</h2>
+
+<p>To see which method was chosen, or to override the chosen method:</p>
+
+<ol type="1">
+  <li>Right-click the integral symbol in an evaluated integration. The menu shows AutoSelect with a check next to it, and the chosen 
+    method is indicated with a dot.</li>
+  <li>If you wish to override the chosen method, click on another method in the list.</li>
+  <li>Click outside the integration expression in your worksheet.</li>
+</ol>
+
+<p>The integral is reevaluated using the method you selected and is evaluated 
+  that way until you specify another method or choose AutoSelect again.</p>
+
+<h4>Notes:</h4> 
+<ul type="disc">
+  <li> 
+    <p>Decreasing <a href="Accuracy.html">TOL</a> may improve your results, but 
+      at some point will make the integral fail to converge. A good working range 
+      is 10<sup>-4</sup> to 10<sup>-6</sup>.</p>
+  </li>
+  <li> 
+    <p>Setting large-valued endpoints to infinity and using the infinite endpoint 
+      algorithm may yield better answers.</p>
+  </li>
+  <li> 
+    <p>Sharply peaked integrands, or functions whose shape is not readily characterized 
+      by a single length scale, do not evaluate accurately. This is the nature 
+      of numerical integration. Accurate results may be obtained by breaking an 
+      integral into pieces and separately integrating around the peak and away 
+      from the peak.</p>
+  </li>
+  <li> 
+    <p>Mathcad generally cannot integrate functions that have singularities 
+      on the interval of integration. Functions such as step and sawtooth functions 
+      with many finite discontinuities may also lead to nonconverging integrals. 
+      If you know the location of singularities in the integrand, you can often 
+      obtain a correct numerical evaluation by splitting the integral into a sum 
+      of integrals with these points as limits. A <a href="X-y_plot.html">plot</a> 
+      of the integrand may help to indicate trouble spots.</p>
+    
+  </li>
+</ul>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

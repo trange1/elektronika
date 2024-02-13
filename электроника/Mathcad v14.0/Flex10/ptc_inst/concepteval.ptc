@@ -1,0 +1,70 @@
+// 11-Mar-03 K-01-03 $$1  OTT  Created.
+// 11-Apr-03 K-01-05 $$2  OTT  Added Help screen
+// 21-Jul-03 K-01-11 $$3  JJE  Add ptcborrow and ptcreturn scripts
+// 15-Dec-03 K-01-20 $$4  MAZ  Remove borrow scripts
+// 08-jan-05 K-03-17 $$5  MCS  added Ad_list and changed Name.
+// 03-Jan-06 K-03-39 $$6  TWH  chg ProgramID
+
+(Product concepteval
+    (Name                      "Pro|CONCEPT Trial")
+    (Packages                  "concepteval" 
+                               "ptcutil"
+                               "uninstall")
+    (ProgramFiles              False)
+    (LpDirName                 "concept_trybuy")
+    (Screens                   "ScreenProd")
+                               
+    (WebRegHyperLink           "webreg_proconcept.html")
+    (ProgramID                 "proconcepteval4")
+    (Installed                 True)
+   (Ad_list                    "whatsnew_auto"
+                               "whatsnew_dataexchange"
+                               "whatsnew_newui"
+                               "whatsnew_p2p"
+                               "whatsnew_3ddrawings"
+                               "whatsnew_ID"
+                               "whatsnew_rs"
+                               "whatsnew_simulation"
+                               "whatsnew_production"
+                               "installscreen_casestudy"
+                               "tools_menumapper"
+                               "tools_onlinehelp"
+                               "tools_productivityT"
+                               "tools_refcards"
+                               "tools_tutorials")
+)
+
+(Package concepteval
+    (Name                      "Pro|CONCEPT")
+    (Screens                   "ScreenStudentLic"
+                               "ScreenWindows"
+                               "LpcfgProHelp")
+    (CmdTypes                  "concept_eval")
+    (Binscripts                "concept_trybuy"
+                               "ptchostid"
+                               "ptcflush"
+                               "ptcstatus")
+    (Cdsections                "3dpaint Tree"
+                               "3dpaint"
+                               "painthelp"
+                               "Demos"
+                               "Tutorial"
+                               "Install"
+                               "flexclient")
+    (Installed                 True)
+)
+
+(Package demos
+    (Name                      "Demo Files")
+    (Installed                 False)
+    (Cdsections                "Demos")
+)
+
+(CmdType concept_eval
+    (Name                      "Pro/CONCEPT Try Before You Buy")
+    (Type                      "Shortcut")
+    (CmdPath                   "_LP_\bin\concept_trybuy.bat")
+    (IconPath                  "_LP_\install\nt\concept.ico")
+    (IconIndex                 "0")
+)
+

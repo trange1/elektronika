@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>FFT/IFFT of Real Data</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Fourier Transforms">
+	<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nFourier and Wavelet Transforms\nFFT/IFFT of Real Data");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>FFT/IFFT of Real Data</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">fft(v)</b> Returns the Fast Fourier Transform of an <span class="math">n</span>-element 
+  vector <b class="math">v</b>, where <span class="math">n = 2<sup>m</sup></span>. 
+  Result is a <span class="math">1 + 2<sup>m-1</sup></span> element vector whose 
+  <span class="math">j</span>th element is given by:</p>
+
+
+  <p class="doubleindent"><img src="Graphics/fft_fft.gif" alt="example of a Fast Fourier Transform of a vector" width="176" height="35" align="bottom" border="0"></p>
+
+<p>where <span class="math">n</span> is the number of elements in <b class="math">v</b> 
+  and <span class="math">i</span> is the imaginary unit. Calculated using the 
+  Cooley-Tukey algorithm.</p>
+  
+<p><b class="hmath">ifft(u)</b> Returns the inverse Fourier transform for <b class="math">u</b> 
+  created with <b>fft</b>. Result is a <span class="math">2<sup>m</sup></span> 
+  element vector whose jth element is given by:</p>
+
+  
+<p class="doubleindent"><img src="Graphics/fft_ifft.gif" alt="example of an inverse Fourier transform for u created with fft" width="176" height="35" align="bottom" border="0"></p>
+
+<p><b class="hmath">FFT(v)</b> Returns the Fast Fourier Transform of a vector <b class="math">v</b>. The formula is equivalent to <b>fft</b>, but is scaled by <span class="math">1/n</span> instead of <span class="math">1/&radic;n</span>, and uses a negative exponent going from the time to the frequency domain.</p>
+
+<p><b class="hmath">IFFT(u)</b> Returns the inverse Fourier transform for <b class="math">u</b> 
+  created with <b>FFT</b>. The formula is equivalent to <b>ifft</b>, but is scaled 
+  by <span class="math">1</span> instead of <span class="math">1/&radic;n</span>, 
+  and uses a positive exponent going from the frequency to the time domain.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><b class="hmath">v</b> is a real-valued vector with <span class="math">2<sup>m</sup></span> 
+    elements (<span class="math">m &gt; 2</span>), representing samples at regular 
+    time intervals. </li>
+  <li><b class="hmath">u</b> is a complex-valued vector with <span class="math">1 
+    + 2<sup>m-1</sup></span> elements (<span class="math">m &gt; 2</span>), representing 
+    samples at frequencies. </li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li><p>The frequency associated with the <span class="math">k</span>th element 
+    in the calculated FFT spectrum is given by:</p> 
+    <p class="doubleindent"><img src="Graphics/freq.gif" alt="The frequency associated with the kth element in the calculated FFT spectrum" width="63" height="38" border="0"></p>
+		
+    <p>where <span class="math">f<sub>s</sub></span><b> </b>is the sampling frequency 
+    of the original signal and <span class="math">n</span> is the number of samples. 
+    As a consequence, since <a href="Array_subscript_operator.html">k must be 
+    an integer</a>, spreading in the spectrum occurs unless the sampling frequency 
+    is chosen so that</p>
+	
+	<p class="doubleindent"><img src="Graphics/fftfreq.gif" alt="frequency spacing resulting from FFT" width="40" height="50" border="0"></p>
+    <p>is always equal to an integer for any period <span class="math">1/T</span> 
+    in the signal.</p></li>
+  <li>The sampling frequency is distinct from the frequency(ies) of the original 
+    time-domain signal.</li>
+  <li>The <b>fft/ifft</b> functions take advantage of the complex conjugate symmetry 
+    of the Fourier transform, which only applies for real input data. To save time 
+    and memory, Mathcad does not calculate the second half of the frequency spectrum. For vectors with complex values, or with an arbitrary number of 
+    elements, use <a href="ffts_of_complex_data.html"><b>cfft</b></a> or <a href="ffts_of_complex_data.html"><b>CFFT</b></a> 
+    instead. Likewise, for 2-dimensional Fourier transforms, use <a href="ffts_of_complex_data.html"><b>cfft</b>/<b>CFFT</b></a> 
+    instead.</li>
+  <li>You can also evaluate Fourier transforms <a href="Symbolic_Transforms.html">symbolically</a>.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Applications\\f060.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Correlation','correl2d.html','DFT/IDFT of Complex Data','ffts_of_complex_data.html','Discrete Transform Functions','Discrete_transform_functions.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

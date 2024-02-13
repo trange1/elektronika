@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>State Space ODE Solver</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Differential Equations">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nDifferential Equation Solving\nState Space ODE Solver");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>State Space ODE Solver</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">statespace(init, t1, t2, npoints, A, [B], [u])</b> Returns the solution to a system of linear, first-order ordinary differential equations of the following form:</p>
+
+<p class="blockindent"><img src="Graphics/statespace.GIF" alt="Form of the ODE for the statespace solver" width="184" height="34" border="0"></p>
+
+<p>where</p>
+
+
+<ul type="disc">
+<li><span class="hmath">x(t)</span> is a vector of unknown states.</li>
+<li><span class="hmath">A(t)</span> is the coupling, or state matrix between the functions in the vector <span class="math">x(t)</span>.</li>
+<li><span class="hmath">B(t)</span> is an input matrix that describes the coupling between terms in the input vector <span class="math">u(t)</span>.</li>
+<li><span class="hmath">u(t)</span> is the input vector.</li>
+</ul>
+
+<p><b>Note:</b> This notation, in which <span class="math">x(t)</span> represents a vector of unknowns for the independent variable <span class="math">t</span>, differs from the notation used in the Help pages for the other <a href="ODE_solvers.html">ODE solvers</a>, in which the letter <span class="math">x</span> represents the independent variable and <span class="math">y(x)</span> represents the vector of unknowns.</p>
+
+<h4>Arguments</h4>
+
+<ul type="disc">
+<li><span class="hmath">init</span> is a column vector of initial conditions, whose length is the number of unknown states.</li>
+<li><span class="hmath">t1</span> is a real number specifying the starting point of the integration interval.</li>
+<li><span class="hmath">t2</span> is a real number specifying the ending point of the integration interval.</li>
+<li><span class="hmath">npoints</span> is the integer number of points beyond the initial point at which the solution is to be approximated. The number of solutions returned is <span class="math">npoints&nbsp;+&nbsp;1</span>.</li>
+<li><span class="hmath">A</span> is an <span class="math">n&times;n</span> matrix function of the form <span class="math">A(t)</span>, where <span class="math">n</span> is the number of unknown states. The entries of <span class="math">A(t)</span> are functions of the independent variable <span class="math">t</span>.</li>
+<li><span class="hmath">B</span> is an optional matrix or vector function of the form <span class="math">B(t)</span>, whose entries are functions of <span class="math">t</span>. <span class="math">B(t)</span> can be either
+an <span class="math">n&times;n</span> matrix, in which case you must also provide the input vector <span class="math">u</span> of length <span class="math">n</span>. Alternatively,  
+<span class="math">B(t)</span> can be an <span class="math">n&times;1</span> column vector, in which case <span class="math">u(t)</span> must be a scalar function.</li>
+<li><span class="hmath">u</span> is vector or scalar function of the form <span class="math">u(t)</span>, whose entries are functions of <span class="math">t</span>.</li>
+</ul>
+
+<p><b>Note:</b> <span class="math">u</span> is required if you provide the argument <span class="math">B</span>.</p>
+
+<p><b>statespace</b> returns an <span class="math">(npoints&nbsp;+&nbsp;1)&nbsp;&times&nbsp;(n&nbsp;+&nbsp;1)</span> solution matrix, where <span class="math">n</span> is the number of unknown states. The first column of the matrix contains the values of <span class="math">t</span> at which the solutions are evaluated. These values are <span class="math">npoints&nbsp;+&nbsp;1</span> evenly spaced numbers between <span class="math">t<sub>1</sub></span> and <span class="math">t<sub>2</sub></span>. The remaining columns contain the values of the solutions <span class="math">x<sub>0</sub>,&nbsp;x<sub>1</sub>,&nbsp;...,&nbsp;x<sub>n - 1</sub></span> corresponding to the values of <span class="math">t</span> in the first column.</p>
+
+	 
+	 <p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Calculus_DEs\\statespace.xmcd')"
+	   class="fakelink">QuickSheet - State Space Solver</a></h5>
+
+<p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Deriving Initial Conditions for an ODE','Linear_shooting.html','Differential Equation Solvers','Differential_equation_solvers.html','ODE Solvers','ODE_solvers.html','Partial Differential Equation solver','numol.html','Relaxation PDE Solver','Poissons_equation.html','Solving Ordinary Differential Equations','ode_solve.html','Solving Partial Differential Equations','PDE_solve.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+</html>

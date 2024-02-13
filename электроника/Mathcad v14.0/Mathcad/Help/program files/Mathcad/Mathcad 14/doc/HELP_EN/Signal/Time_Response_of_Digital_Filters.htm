@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+
+<title>Time Response of Digital Filters</title>
+
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+ <link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Digital Filtering\nTime Response of Digital Filters");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Signal.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Time Response of Digital Filters</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">response(v, C1, n) </b>Returns a n-element vector giving the 
+  response of input vector <b class="math">v</b> to an FIR or IIR filter with 
+  coefficient array <b class="math">C1</b>. Uses direct evaluation of the convolution. 
+  For a long input signal, this method can be quite slow. </p>
+<p> <b class="hmath">fftfilt(v, C2, [nfft]) </b>Returns a vector giving the response 
+  of input vector <b class="math">v</b> to an FIR filter with coefficients <b class="math">C2</b>. 
+  Applies the DFT of optional length <span class="math">nfft</span> to successive 
+  segments of the input, then combines the results with the overlap-add method. 
+  For the case of an FIR filter with an impulse response much shorter than the 
+  input signal, this may be faster than the <b>response</b> function.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><b class="hmath">v</b> is a real or complex-valued signal vector or multichannel 
+    matrix, filtered individually by column.</li>
+  <li><b class="hmath">C1</b> is a real or complex-valued vector (FIR) or 2-column 
+    matrix (IIR) of filter coefficients. In the case of an IIR filter, the first 
+    column contains coefficients of the numerator, the second contains coefficients 
+    of the denominator. IIR transfer functions must be normalized so that the 
+    constant term in the denominator is 1.</li>
+  <li><b class="hmath">C2</b> is a real or complex-valued vector of FIR filter 
+    coefficients.</li>
+  <li><span class="hmath">n</span> is a positive integer, the size of the output 
+    vector, no greater than the length of the input.</li>
+  <li><span class="hmath">nfft</span> (optional) is a positive integer, the length 
+    of the FFT in the overlap-add method. It may not be greater than the length 
+    of the signal. If omitted, <span class="math">nfft</span> is the length of 
+    the filter.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li> 
+    <p>If the final transient response is desired, zero pad the input signal to 
+      the appropriate length, and then increase n.</p>
+  </li>
+  <li> 
+    <p>For an IIR filter, <b class="math">response</b> must always be used. For 
+      an FIR filter with an impulse response much shorter than the input signal, 
+      <b
+	 class="math">fftfilt</b> may be used, and often provides a faster result.</p>
+  </li>
+  <li>If <span class="math">nfft &gt; length(x) + length(C) - 1</span>, then <b>fftfilt</b> 
+    does not use the overlap-add method. Instead it convolves the signal and filter 
+    in one step in the Fourier domain, after zero-padding the signal and filter 
+    vectors so that they are the length of <span class="math">nfft</span>.</li>
+</ul>
+
+<hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

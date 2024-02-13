@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+<title>Polynomial Regression, Localized</title>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name="MS-HAID" content="Polynomial Regression">
+<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+ <link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nCurve Fitting and Smoothing\nPolynomial Regression, Localized");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+<tr class="whs1">
+<td valign=top>
+<h1>Localized Polynomial Regression</h1></td></tr>
+</table>
+
+<p><b class="hmath">loess(vx, vy, span)</b> or <b class="hmath">loess(Mx, 
+ vy, span) </b>Returns a vector which <b>interp</b> uses to find a set 
+ of second-order polynomials that best fit 
+ the neighborhood of <span class="math">x</span> and <span class="math">y</span> 
+ data values in <b class="math">vx</b> and <b class="math">vy</b> in the least-squares 
+ sense. The size of the neighborhood is controlled by <span class="math">span</span>. 
+ Can also be used for multivariate regression, where a matrix <b class="math">Mxy</b> 
+ of <span class="math">k</span> independent variables and a vector of dependent 
+ values, <b class="math">vy</b>, are used to fit second-order polynomial 
+ surfaces in <span class="math">k</span> dimensions.</p>
+
+<p><b class="hmath">interp(vs, vx, vy, x)</b> or <b class="hmath">interp(vs, 
+ Mx, vy, X) </b>Returns the interpolated <span class="math">y</span>-value 
+ corresponding to <span class="math">x</span> using the output vector <b 
+ class="math">vs</b> from <b>loess</b>. If <b>loess</b> has been used to 
+ fit a multidimensional surface, <b class="math">X</b> is a vector of independent 
+ variables at which to calculate the interpolated <span class="math">y</span>-value.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+	
+	<li><b class="hmath">vx</b> and <b class="hmath">vy</b> 
+ are vectors of real data values and are of the same length.</li>
+	
+	<li><b class="hmath">Mx</b> is a matrix of 
+ real data values. There is one column for each independent variable (<span 
+ class="math">k &le; 4</span> columns). In this case, <b class="math">vy</b> 
+ has the same number of rows as <b class="math">Mx</b>.</li>
+	
+	<li><b class="hmath">vs</b> is a vector generated 
+ by <b>loess</b>.</li>
+	
+	<li><span class="hmath">span</span> is a positive real 
+ number specifying the size of the data neighborhood. Use larger values 
+ of <span class="math">span</span> when the data behaves very differently 
+ over different ranges of <span class="math">x</span>. A good default value 
+ is <span class="math">span = 0.75</span>.</li>
+	
+	<li><span class="hmath">x</span> is the value of the independent 
+ variable at which you want to evaluate the regression curve. </li>
+	
+	<li><b class="hmath">X</b> is the vector 
+ of values of the independent variables at which you want to evaluate the 
+ regression surface. </li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	
+	<li>The <b>loess</b> function tries to fit different 
+ second order polynomials depending on where you are on the curve. It does 
+ this by examining the data in a small neighborhood of the point you are 
+ interested in. The <span class="math">span</span> argument controls the 
+ size of this neighborhood. As <span class="math">span</span> gets larger, 
+ <b>loess</b> becomes equivalent to <a href="Polynomial_regression.html"><b>regress</b></a> 
+ with <span class="math">n = 2</span>.</li>
+	
+	<li>To fit a single polynomial to your data, use <a href="Polynomial_regression.html"><b>regress</b></a>.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+			id=objLaunchMathcad
+			border=0
+			width=1
+			height=1
+			align=left>
+</object></p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+		onMouseOut="document.body.style.cursor='arrow'"
+		onClick="objLaunchMathcad.OpenResourceCenter('Data_Analysis\\multivar.xmcd')"
+		class=fakelink>QuickSheet</a></h5>
+
+<p>
+
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Exponential Regression','Exponential_regression.html','Fitting Arbitrary Nonlinear Functions to Data','Genfit.html','Linear Regression','Linear_regression.html','Logarithmic Regression','Logarithmic_regression.html','Logistic Regression','Logistic_regression.html','Polynomial Regression','Polynomial_regression.html','Power Regression','Power_regression.html','Sinusoidal Regression','Sinusoidal_regression.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+
+ </p>
+
+
+
+<hr size="2" width="100%" align="center">
+
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

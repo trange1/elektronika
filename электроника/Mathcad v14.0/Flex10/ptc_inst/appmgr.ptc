@@ -1,0 +1,52 @@
+// 12-Apr-99 $$1  JJE  Created.
+// 30-Sep-99 $$2  MAZ  Add uninstall pkg
+// 12-Nov-99 $$3  MYA  add proappmgr
+// 20-Jan-00 $$4  JJE  Add linkpath screen
+// 15-Mar-00 $$5  TWH  Unix only from now on
+// 04-Apr-01 $$6  ALG  CdSections -> Cdsections
+// 12-Nov-01 $$7  MAZ  SPR 901847: Don't select product by default
+// 18-DEC-02 $$8  J-03-39 MTP  Do not ship for linux, but other unix plats
+// 25-Aug-03 $$9  K-01-13 TWH  Add WelcomeImage
+// 07-Oct-03 $$10 K-01-16 TWH  Add Ad list
+// 15-Mar-04 $$11 K-01-25 TWH  New Ad list
+// 28-Feb-05 $$12 K-03-20 TWH  New Ad list
+// 25-OCT-05 $$13 K-03-34 MTP  sun_solaris_x64 support
+
+(Product appmgr
+    (Name                      "PTC Application Manager")
+    (WelcomeImage              "appmgr_name.gif")
+    (Packages                  "appmgr_pkg"
+                               "uninstall")
+    (ProgramFiles              True)
+    (LpDirName                 "appmgr")
+    (Screens                   "ScreenProd"
+                               "ScreenAppMgr")
+    (Installed                 False)
+    (HostArchs                 "sun4_solaris"
+                               "sun4_solaris_64"
+                               "sun_solaris_x64"
+                               "hpux11_pa32"
+                               "hpux_pa64"
+                               "sgi_elf4")
+    (Ad_list                   "whatsnew_continuerd"
+                               "whatsnew_coredrivepattern"
+                               "whatsnew_lightweightwarp"
+                               "whatsnew_manufactpro"
+                               "whatsnew_mateditor"
+                               "whatsnew_ncgeometry"
+                               "whatsnew_processguide"
+                               "whatsnew_robustmesh"
+                               "whatsnew_shadeddraw"
+                               "whatsnew_sketcherpal"
+                               "whatsnew_sweptblend"
+                               "whatsnew_toolpath")
+)
+
+(Package appmgr_pkg
+    (Name                      "PTC Application Manager")
+    (Cdsections                "appmgr"
+                               "Install")
+    (Screens                   "LpcfgLinkpath")
+    (Binscripts                "proappmgr")
+    (Installed                 True)
+)

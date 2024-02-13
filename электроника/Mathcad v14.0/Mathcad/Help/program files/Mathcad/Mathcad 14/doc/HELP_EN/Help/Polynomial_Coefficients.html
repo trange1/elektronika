@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Finding the Coefficients of a Polynomial</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Symbolics and Keywords\nFinding the Coefficients of a Polynomial");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Finding the Coefficients of a Polynomial</h1></td>
+	</tr>
+</table>
+
+<p>To return the coefficients of a polynomial with respect to a particular variable, place the cursor at the end of the
+polynomial and either:</p>
+
+<ul type="disc">	
+	<li>Press <b>[Ctrl]&nbsp;[Shift]&nbsp;[.]</b> and type the <a href="Keywords.html">keyword</a> &quot;coeffs&quot; in the placeholder to the right of the polynomial.  
+	
+	<p>- or -</p>
+	</li>
+ 
+	<li>Click <b>coeffs</b> on the <a href="Symbolic_toolbar.html"><b>Symbolic</b> toolbar</a>.</li>
+</ul>
+
+<p>Then press <b>[Enter]</b>.</p>
+
+<p>If the polynomial contains more than one variable, type a comma after &quot;coeffs,&quot; followed by the variable with respect to which you want the coefficients expressed.</p>
+
+<p>Mathcad returns a vector containing the coefficients of the polynomial. If all the exponents are positive, the first element of the vector corresponds to the constant term. If all exponents are negative, the last element corresponds to the constant term. Otherwise, Mathcad returns the coefficients for the smallest exponent to the largest, in order, with zeros for any skipped exponents in the expression, always including the constant term.</p>
+ 
+ <p>For an expression containing several variables, Mathcad internally writes the expression as a polynomial in the variable you specify after &quot;coeffs.&quot; (This is the same operation that the keyword &quot;<a href="Collecting_terms.html">collect</a>&quot; performs.) Mathcad then returns a vector containing the coefficients of the polynomial. The coefficients are expressions involving the variables other than the one you specify.</p>
+ 
+ <h4>Examples:</h4>
+
+<p class="blockindent"><img src="Graphics/coeffs_example1.GIF" alt="Finding the coefficients of a polynomial in one variable" width="191" height="102" border="0"></p>
+
+<p>The first entry of the vector is <span class="math">0</span> because the constant term of the polynomial is <span class="math">0</span>.</p>
+
+<p>To return a second column containing the exponents corresponding to each coefficient, type the optional modifier &quot;degree&quot; after &quot;coeffs.&quot; For example,</p>
+
+<p class="blockindent"><img src="Graphics/coeffs_degree.GIF" alt="Using coeffs with the optional argument degree." width="332" height="139" border="0"></p>
+
+<p>If the expression contains more than one variable, you must specify a variable after &quot;coeffs.&quot; Mathcad internally rewrites the expression as a polynomial in that variable and returns a vector containing the coefficients of the polynomial. For example,</p>
+
+<p class="blockindent"><img src="Graphics/coeffs_example2.GIF" alt="Finding the coefficients with respect to x of a polynomial in two variables" width="329" height="74" border="0">
+</p>
+<p>Note that internally, Mathcad first rewrites the expression as a polynomial in x. That is, it performs the same operation as the keyword &quot;collect.&quot;</p>
+
+<p class="vmath">3x<sup>2</sup>&middot;y&nbsp;+&nbsp;5x<sup>2</sup>&middot;y<sup>2</sup>&nbsp;+&nbsp;7x&middot;y<sup>2</sup>&nbsp;+&nbsp;x&middot;y&nbsp;collect,&nbsp;x&nbsp;&rarr;&nbsp;(5&middot;y<sup>2</sup>&nbsp;+&nbsp;3&middot;y)&middot;x<sup>2</sup>&nbsp;+&nbsp;(7&middot;y<sup>2</sup>&nbsp;+&nbsp;y)&middot;x</p>
+
+<p>If instead you specify the variable <span class="math">y</span>, the result is</p>
+
+<p class="blockindent"><img src="Graphics/coeffs_example3.GIF" alt="Finding the coefficients of a polynomial in two variables with respect to y" width="329" height="71" border="0"></p>
+ 
+<h4>Notes:</h4> 
+
+<ul>
+<li><p>Another method is to select just the variable for the polynomial (not the entire expression) and click <b>Polynomial Coefficients</b> on the <a href="Symbolics_Menu.html"><b>Symbolics</b> menu</a>. In this case the result will not automatically update if you make changes elsewhere in the worksheet.</p>
+</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Solving\\proot.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

@@ -1,0 +1,992 @@
+	<xsl:output method="xml" encoding="UTF-8" indent="no" omit-xml-declaration="yes" standalone="no"/>
+	
+	<xsl:param name="prepend-url-with"/>
+	<xsl:param name="image-dir"><xsl:text>.\</xsl:text></xsl:param>
+	<xsl:param name="region-border-width">1px</xsl:param>
+	<xsl:param name="force-borders" select="false()"/>
+	<xsl:param name="prepend-styles-with" />
+    <xsl:param name="generator"/>
+
+	<xsl:param name="dpi">
+		<xsl:variable name="screen-dpi-override" select="/ws:worksheet/ws:metadata/ws:userData/ws:customValues/ws:customValue[@name='screen-dpi']"/>
+		<xsl:choose>
+			<xsl:when test="$screen-dpi-override"><xsl:value-of select="$screen-dpi-override"/></xsl:when>
+			<xsl:otherwise>96</xsl:otherwise>
+		</xsl:choose>
+	</xsl:param>
+
+	<!-- Set to fragment to true() to omit the html,head, and body elements.  This will produce output
+		 suitable for embedding in other XML -->
+	<xsl:param name="fragment" select="false()"/>	
+
+	<!-- If text regions have been rendered as images, setting this flag to TRUE will
+	 	cause the images to be displayed by the HTML rather than converting the 
+	 	text to HTML markup. -->
+	<xsl:param name="render-text-images" select="false()"/>
+	<xsl:param name="disable-images" select="false()"/>
+
+	<xsl:key name="style-names" match="ws:textStyle" use="@name"/>
+	<xsl:variable name="image-extension">
+		<xsl:variable name="val" select="/ws:worksheet/ws:settings/ws:fileFormat/@image-type"/>
+		<xsl:choose>
+			<xsl:when test="$val='image/png'">png</xsl:when>
+			<xsl:when test="$val='image/jpg'">jpg</xsl:when>
+			<xsl:otherwise>none</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+
+	<!-- generate images for denoting areas -->
+	<xsl:variable name="area-top-image">
+		<xsl:value-of select=" user:writeImage(msxsl:node-set($area-top-image-binary), string($image-dir), string($image-extension)) "/>
+	</xsl:variable>
+	<xsl:variable name="area-bottom-image">
+		<xsl:value-of select=" user:writeImage(msxsl:node-set($area-bottom-image-binary), string($image-dir), string($image-extension)) "/>
+	</xsl:variable>
+	<xsl:variable name="area-locked-image">
+		<xsl:value-of select=" user:writeImage(msxsl:node-set($area-locked-image-binary), string($image-dir), string($image-extension)) "/>
+	</xsl:variable>
+
+
+	<!-- **************** BEGIN Emit HTML Sections **********************************-->
+	<xsl:template match="/">
+		<xsl:apply-templates/>
+	</xsl:template>
+	
+	<xsl:template match="ws:worksheet">						
+		<xsl:choose>
+			<xsl:when test="$fragment">				
+				<xsl:variable name="bgcolor" select="ws:settings/ws:presentation/ws:colorModel/@background-color"/>
+				<!-- Calculate the container div width and height, which should be the just enough to contain the 
+					 rhs and bottom of the right-most and bottom-most region.  Exclude pageBreaks and areas from width
+					 calculation because Mathcad outputs huge numbers for these.  Exclute pageBreaks  from height as well
+					 because pageBreaks are not displayed at all.
+			     -->
+				<xsl:variable name="div-height" select=" user:calcXMCDHeight(//ws:region[not(ws:pageBreak)]) "/>
+				<xsl:variable name="div-width" select=" user:calcXMCDWidth(//ws:region[not(ws:pageBreak|ws:area)]) "/>
+				<div id="TransformContent" style="position:absolute; width:{$div-width}pt; height:{$div-height}pt; background-color:{bgcolor};">
+					<xsl:call-template name="text-style-css"/>
+					<xsl:apply-templates select="ws:regions/ws:region"/>
+
+					<!-- If a region's id matches the querystring value of ClipRegionId, extract xml -->
+					<div>
+						<xsl:apply-templates select="ws:regions//ws:region[@region-id=$clip-region-id]" mode="render-clipboard" />
+					</div>
+				</div>				
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="html"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>		
+
+	<!-- Generate html element -->
+	<xsl:template name="html">
+		<html>
+			<xsl:call-template name="head"/>
+			<xsl:call-template name="scripts"/>
+			<xsl:call-template name="body"/>
+		</html>
+	</xsl:template>
+
+	<!-- Generate server scripts -->
+	<xsl:template name="scripts">
+	</xsl:template>
+
+	<!-- Generate HTML head -->
+	<xsl:template name="head">
+		<head>
+			<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+			<meta name="generator">
+				<xsl:attribute name="content"><xsl:value-of select="$generator"/></xsl:attribute>
+			</meta>
+			<xsl:call-template name="title"/>
+			<xsl:call-template name="text-style-css"/>
+		</head>
+	</xsl:template>
+
+	<xsl:template name="title">
+			<title>
+				<xsl:value-of select="ws:metadata/ws:userData/ws:title"/>
+			</title>
+	</xsl:template>
+	
+	<!-- Generate HTML body -->
+	<xsl:template name="body">
+		<body>
+			<xsl:apply-templates select="ws:regions/ws:region"/>
+			<!-- If a region's id matches the querystring value of ClipRegionId, extract xml -->
+			<div>
+				<xsl:apply-templates select="ws:regions//ws:region[@region-id=$clip-region-id]" mode="render-clipboard" />
+			</div>
+		</body>
+	</xsl:template>
+	<!-- **************** END Emit HTML Sections **********************************-->
+	
+	<!-- **************** BEGIN Render Regions **********************************-->
+	<xsl:template match="ws:item">
+	</xsl:template>	
+	
+	<!-- Render regions with links -->
+	<xsl:template match="ws:region">
+		<xsl:param name="is-embedded">0</xsl:param>
+		<xsl:call-template name="render-region-content">
+			<xsl:with-param name="is-embedded" select="$is-embedded"/>
+		</xsl:call-template>
+	</xsl:template>
+	
+	<xsl:template match="ws:region[ws:area[@is-collapsed='false']]">
+		<xsl:apply-templates select="." mode="area-top"/>
+		<xsl:apply-templates select="ws:area/ws:region"/>
+		<xsl:apply-templates select="." mode="area-bottom"/>
+	</xsl:template>
+	
+	<xsl:template match="ws:region[ws:area[@is-collapsed='true']|ws:pageBreak]">		
+		<!-- Collapsed areas and pageBreaks are ignored -->
+	</xsl:template>		
+	
+	<xsl:template match="*" mode="encode-javascript">
+		<xsl:value-of select="normalize-space(.)"/>
+	</xsl:template>
+	
+	<xsl:template match="*" mode="encode-statustext">
+		<xsl:value-of select="normalize-space(.)"/>
+	</xsl:template>
+
+	<xsl:template name="is-rendered-as-image">
+		<xsl:value-of select="(ws:text and $render-text-images and ws:rendering) or ( not(ws:text) and ws:rendering)"/>
+	</xsl:template>
+
+	<xsl:template match="ws:region" mode="area-top">	
+		<xsl:variable name="image-file">
+			<xsl:apply-templates select="ws:area" mode="get-area-image">
+				<xsl:with-param name="default-area-image" select="$area-top-image"/>
+			</xsl:apply-templates>
+		</xsl:variable>
+
+		<div>
+			<xsl:attribute name="style">position:absolute;top:<xsl:value-of select="@top"/>pt;left:<xsl:value-of select="@left"/>pt;border-top:#808080 1pt solid;width:<xsl:value-of select="@width"/>pt;</xsl:attribute>
+			<img>
+				<xsl:attribute name="src"><xsl:value-of select="$image-file"/></xsl:attribute>
+			</img>
+		</div>
+	</xsl:template>
+
+	<xsl:template match="ws:region" mode="area-bottom">
+		<xsl:variable name="image-file">
+			<xsl:apply-templates select="ws:area" mode="get-area-image">
+				<xsl:with-param name="default-area-image" select="$area-bottom-image"/>
+			</xsl:apply-templates>
+		</xsl:variable>
+
+		<div>
+			<xsl:attribute name="style">position:absolute;top:<xsl:value-of select="@top + @height - 13"/>pt;left:<xsl:value-of select="@left"/>pt;border-bottom:#808080 1pt solid;width:<xsl:value-of select="@width"/>pt;</xsl:attribute>
+			<img>
+				<xsl:attribute name="src"><xsl:value-of select="$image-file"/></xsl:attribute>
+			</img>
+		</div>
+	</xsl:template>
+
+	<xsl:template match="ws:area" mode="get-area-image">
+		<xsl:param name="default-area-image"/>
+		<xsl:choose>
+			<xsl:when test="@is-locked='true'">
+				<xsl:value-of select="$area-locked-image"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="$default-area-image"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<!-- output a region which has a picture rendering -->
+	<xsl:template name="render-region-content">
+		<xsl:param name="is-embedded">0</xsl:param>
+		<xsl:choose>
+			<xsl:when test="$is-embedded = 0">
+				<div>
+					<xsl:call-template name="render-region-content-2">
+						<xsl:with-param name="is-embedded" select="$is-embedded"/>
+					</xsl:call-template>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="render-region-content-2">
+					<xsl:with-param name="is-embedded" select="$is-embedded"/>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template name="render-error">
+		<xsl:param name="is-embedded">0</xsl:param>
+			<a>
+				<xsl:attribute name="href"><xsl:text>javascript:alert('</xsl:text><xsl:value-of select=" user:encodeAlertText(string(ws:math/@error)) "/><xsl:text>');</xsl:text></xsl:attribute>
+				<xsl:attribute name="onmouseover"><xsl:text>window.status='</xsl:text><xsl:value-of select=" user:encodeStatusText(string(ws:math/@error)) "/><xsl:text>'; return true;</xsl:text></xsl:attribute>
+				<xsl:apply-templates select="*[1]" mode="render-region">
+					<xsl:with-param name="is-embedded" select="$is-embedded"/>
+				</xsl:apply-templates>
+			</a>
+	</xsl:template>
+
+	<xsl:template name="render-link">
+		<xsl:param name="is-embedded">0</xsl:param>
+		<!--a href="{concat($prepend-url-with, ws:link/@href)}"-->
+		<!--<xsl:apply-templates select="ws:link/@*"/>-->
+		<a>
+			<xsl:attribute name="href">
+				<!-- $target-document is declared in CopyRegionToClipboard.xslt, which is the current document's URL-->
+				<xsl:value-of select=" user:GetURLForDocument(string(ws:link/@href), $target-document) " />
+			</xsl:attribute>
+			<xsl:apply-templates select="*[1]" mode="render-region">
+				<xsl:with-param name="is-embedded" select="$is-embedded"/>
+			</xsl:apply-templates>
+		</a>
+	</xsl:template>
+
+	<xsl:template name="region-attributes">
+		<xsl:param name="is-embedded">0</xsl:param>
+
+		<!-- Position the region and set the border via the style attribute -->
+		<xsl:attribute name="id">mc-region-<xsl:value-of select="@region-id"/></xsl:attribute>
+		<xsl:attribute name="style">
+			<xsl:if test="$is-embedded = 0">
+				<xsl:call-template name="region-position-css"/>
+			</xsl:if>
+			<xsl:call-template name="region-border-css"/>
+			<xsl:call-template name="region-background-css"/>
+		</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template name="render-region-content-2">
+		<xsl:param name="is-embedded">0</xsl:param>
+
+		<xsl:call-template name="region-attributes">
+			<xsl:with-param name="is-embedded" select="$is-embedded"/>
+		</xsl:call-template>
+		
+		<xsl:if test="@tag">
+			<a>
+				<xsl:attribute name='name'>
+					<xsl:value-of select="@tag"/>
+				</xsl:attribute>
+			</a>
+		</xsl:if>
+
+		<xsl:choose>		
+			<xsl:when test="ws:math[@error]">
+				<xsl:call-template name="render-error">
+					<xsl:with-param name="is-embedded" select="$is-embedded"/>
+				</xsl:call-template>
+			</xsl:when>
+
+			<xsl:when test="ws:link">
+				<xsl:call-template name="render-link">
+					<xsl:with-param name="is-embedded" select="$is-embedded"/>
+				</xsl:call-template>
+			</xsl:when>
+
+			<xsl:otherwise>
+				<xsl:apply-templates select="*[1]" mode="render-region">
+					<xsl:with-param name="is-embedded" select="$is-embedded"/>
+				</xsl:apply-templates>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<!-- Render a text region, either using images or HTML markup depending on settings and
+	       availability of images. -->
+	<xsl:template match="ws:text" mode="render-region">
+		<xsl:choose>
+			<xsl:when test="$render-text-images and count(following-sibling::*[local-name()-'rendering']) > 0">
+				<xsl:apply-templates select="following-sibling::*[ws:rendering]"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="output-paragraph-group"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>		
+
+	<!-- Render any other region type which has an image rendering -->
+	<xsl:template match="ws:*[following-sibling::*[local-name()='rendering']]" mode="render-region">
+		<xsl:apply-templates select="following-sibling::*[local-name()='rendering']"/>
+	</xsl:template>
+
+	<!-- Render any image type except text which has no image rendering -->
+	<xsl:template match="ws:*" mode="render-region">
+		<img src="no_image" alt="no rendering available for this region" border="0"/>
+	</xsl:template>
+
+	<!-- Extract image data to an image file and construct an img element pointing to it -->
+	<xsl:template match="math">
+		<xsl:copy-of select="*" />
+	</xsl:template>
+
+	<xsl:template match="ws:rendering">
+		<xsl:variable name="itemref" select="@item-idref"/>
+		<xsl:variable name="regionref" select="../@region-id"/>
+
+		<xsl:variable name="image-path">
+			<xsl:if test="not($disable-images)">
+				<xsl:value-of select=" user:writeImage(//ws:binaryContent/ws:item[@item-id=$itemref],string($image-dir), string($image-extension)) "/>
+			</xsl:if>
+		</xsl:variable>
+
+		<img border="0">
+			<xsl:attribute name="src"><xsl:value-of select="$image-path" /></xsl:attribute>
+			<xsl:attribute name="id">generatedImage<xsl:value-of select="$regionref" /></xsl:attribute>
+			<xsl:attribute name="path"><xsl:value-of select="$image-path" /></xsl:attribute>
+			<xsl:attribute name="style"><xsl:text>width: </xsl:text><xsl:value-of select="parent::*/@width"/><xsl:text>pt;</xsl:text>
+				<xsl:if test="not(preceding-sibling::ws:area or preceding-sibling::ws:confidentialArea)">
+					<xsl:text>height: </xsl:text><xsl:value-of select="parent::*/@height"/><xsl:text>pt;</xsl:text>
+				</xsl:if>
+			</xsl:attribute>
+
+			<!-- Override the context menu if there's a sibling that is a math region -->
+			<xsl:apply-templates select="preceding-sibling::ws:math" mode="display-context-menu">
+				<xsl:with-param name="regionref" select="$regionref" />
+			</xsl:apply-templates>
+
+			<xsl:if test="preceding-sibling::ws:math and $show-clip-copy">
+				<xsl:attribute name="onmouseover">
+					<xsl:text>this.style.border='1px solid #FF9900'; this.style.filter='progid:DXImageTransform.Microsoft.dropShadow( Color=DDDDDD,offX=3,offY=3,positive=true)';</xsl:text>
+				</xsl:attribute>
+				<xsl:attribute name="onmouseout">
+					<xsl:text>this.style.border='0px'; this.style.filter='';</xsl:text>
+				</xsl:attribute>
+			</xsl:if>
+		</img>
+	</xsl:template>
+
+	<!-- Region position and width as inline CSS -->
+	<xsl:template name="region-position-css">
+		<xsl:text>position: absolute; top: </xsl:text>
+		<xsl:value-of select="@top"/>
+		<xsl:text>pt; left: </xsl:text>
+		<xsl:value-of select="@left"/>
+		<xsl:text>pt; width: </xsl:text>
+		<xsl:variable name="extra-width">
+			<!-- fudge factor of 5 pts seems to lessen undesirable wrapping of text regions-->
+			<xsl:choose>
+				<xsl:when test="ws:text">5</xsl:when>
+				<xsl:otherwise>0</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:value-of select="@width + $extra-width"/>
+		<xsl:text>pt; </xsl:text>
+	</xsl:template>
+
+	<!-- Region border as inline CSS -->
+	<xsl:template name="region-border-css">
+		<xsl:variable name="using-image">
+			<xsl:call-template name="render-as-image"/>
+		</xsl:variable>
+		<xsl:if test="(@show-border='true' and $using-image = 0) or $force-borders">
+			<xsl:text>border-width:</xsl:text><xsl:value-of select="$region-border-width"/><xsl:text>;</xsl:text>
+			<xsl:text>border-style: solid;</xsl:text>
+		</xsl:if>
+	</xsl:template>
+
+	<!-- Region background as CSS -->
+	<xsl:template name="region-background-css">
+		<xsl:if test="@show-highlight='true'">
+			<xsl:text>background-color: </xsl:text>
+			<xsl:value-of select="@background-color"/>
+			<xsl:text>; </xsl:text>
+		</xsl:if>
+	</xsl:template>
+
+	<!-- Indicates whether the current text region should be rendered as an image or not -->
+	<xsl:template name="render-as-image">
+		<xsl:choose>
+			<xsl:when test="ws:rendering">
+				<xsl:choose>
+					<xsl:when test="$render-text-images and local-name()='text'">
+						<xsl:value-of select="false()"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="true()"/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select="false()"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<!-- Href for anchors 
+	<xsl:template match="ws:link/@href">		
+		<xsl:copy/>
+	</xsl:template>-->
+
+	<!-- Ignore other link attributes -->
+	<xsl:template match="ws:link/@*">
+		<xsl:copy/>
+	</xsl:template>
+
+	<!-- Rollover behavior for anchors -->
+	<xsl:template match="ws:link/@title[string-length(normalize-space(.)) > 0]">
+		<xsl:attribute name="onmouseover"><xsl:text>window.status='</xsl:text><xsl:value-of select=" user:encodeStatusText(string(.)) "/><xsl:text>';return true;</xsl:text></xsl:attribute>
+		<xsl:attribute name="onmouseout"><xsl:text>;return true</xsl:text></xsl:attribute>
+	</xsl:template>
+
+	<!-- *********************** BEGIN CSS Style Generation ********************************** -->
+	<xsl:template name="text-style-css">
+		<style type="text/css">
+			<xsl:text>
+				<!-- These should match the Mathcad defaults as closely as possible -->
+		p 
+		{ 
+			margin: 0 0 0 0; 
+			font-family: Arial, sans-serif;
+			font-size:</xsl:text><xsl:value-of select=" user:FixFontSize(10,number($dpi)) "/><xsl:text>pt;
+			font-weight: normal;
+			font-style: normal;
+			vertical-align: baseline;
+			color: black;
+			text-decoration: none;			
+		}
+		div
+		{
+			border-width:0px;
+			border-style: solid;
+			border-color: red;
+			
+		}
+		</xsl:text>
+		<xsl:if test="not($fragment)">
+			body
+			{			
+				<xsl:call-template name="page-background-css"/>				
+			}
+		</xsl:if>
+		<xsl:text>
+		p img { vertical-align: middle; }
+		p b, li b { font-weight : bold; }
+		p i, li i { font-style : italic; }
+		p u, li u { text-decoration : underline; }
+		p so, li so { text-decoration : line-through; }
+		p sub, p sub { font-size : 70%; vertical-align: sub; }
+		p sup, p sup { font-size : 70%; vertical-align: super; }
+		ul
+		{
+			padding-left	: 2em; /* for mozilla list marker box */
+			margin-left		: 0;   /* for IE list marker box */
+		}
+		ol
+		{
+			padding-left	: 2em; /* for mozilla list marker box */
+			margin-right 	: -0.5em;
+			margin-left		: 0;   /* for IE list marker box */
+		}
+		</xsl:text>
+			<xsl:apply-templates select="ws:settings/ws:presentation/ws:textRendering/ws:textStyles/ws:textStyle"/>
+		</style>
+	</xsl:template>
+
+	<!-- Extract the worksheet background color, if specified -->
+	<xsl:template name="page-background-css">
+		<xsl:variable name="background-color" select="/ws:worksheet/ws:settings/ws:presentation/ws:colorModel/@background-color"/>
+		<xsl:text>background-color: </xsl:text>
+		<xsl:choose>
+			<xsl:when test="$background-color">
+				<xsl:value-of select="$background-color"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:text>white</xsl:text>
+			</xsl:otherwise>
+		</xsl:choose>
+		<xsl:text>;</xsl:text>
+	</xsl:template>
+
+	<!-- Emit a CSS paragraph style for the given Mathcad text style -->
+	<xsl:template match="ws:textStyle">
+		<!-- Mathcad style names may not work as CSS style names, so translate the name into StyleXXX, 
+			where XXX is its position in the textStyle -->
+		p.<xsl:value-of select="$prepend-styles-with"/>Style<xsl:value-of select="position()"/>, li.<xsl:value-of select="$prepend-styles-with"/>Style<xsl:value-of select="position()"/> /*<xsl:value-of select="@name"/>*/
+		{
+			<xsl:apply-templates/>
+		}
+	</xsl:template>
+
+	<!-- Emit blockAttr as a CSS compound style string-->
+	<xsl:template match="ws:blockAttr">
+		<xsl:apply-templates select="@*"/>
+	</xsl:template>
+
+	<!-- Reached the top of the inheritance chain for a blockAttr attribute -->
+	<xsl:template match="ws:blockAttr/@*[ . != 'inherit']">
+		<xsl:apply-templates select="." mode="blockAttr"/>
+	</xsl:template>
+
+	<!-- Continue walking up the chain of inheritance for the given blockAttr attribute -->
+	<xsl:template match="ws:blockAttr/@*[ . = 'inherit']">
+		<xsl:apply-templates select="." mode="inheritAttr"/>
+	</xsl:template>
+
+	<!-- inherit inlineAttr and blockAttrs from base styles, if possible -->
+	<xsl:template match="@*[. = 'inherit' ]" mode="inheritAttr">
+		<xsl:variable name="base-style" select="parent::*/parent::*/@base-style"/>
+		<xsl:if test="string-length($base-style) > 0">
+			<xsl:variable name="attr-name" select="local-name()"/>
+			<xsl:variable name="attr-element-name" select="name(parent::*)"/>
+			<xsl:variable name="attr-val">
+				<xsl:apply-templates select="key('style-names',$base-style)/*[name()=$attr-element-name]/@*[name()=$attr-name]" mode="inheritAttr"/>
+			</xsl:variable>
+			<xsl:if test="string-length($attr-val) > 0">
+				<xsl:value-of select="$attr-val"/>
+			</xsl:if>
+		</xsl:if>
+	</xsl:template>
+
+	<!-- Convert the matched attribute to the appropriate CSS value -->
+	<xsl:template match="@*[ . != 'inherit']" mode="inheritAttr">
+		<!-- Dispatch to the appropriate mode -->
+		<xsl:choose>
+			<xsl:when test="name(parent::*)='inlineAttr'">
+				<xsl:apply-templates select="." mode="inlineAttr"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:apply-templates select="." mode="blockAttr"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<!-- Mathcad-to-CSS margin directives -->
+	<xsl:template match="@margin-left|@margin-right|@text-indent" mode="blockAttr">
+		<xsl:param name="attr-val">
+			<xsl:value-of select="."/>
+		</xsl:param>
+		<xsl:value-of select="name()"/>
+		<xsl:text>: </xsl:text>
+		<xsl:value-of select="$attr-val"/>
+		<xsl:text>pt</xsl:text>
+		<xsl:text>;
+		</xsl:text>
+	</xsl:template>
+
+	<!-- Mathcad-toCSS text-align directive -->
+	<xsl:template match="@text-align|@list-style-type" mode="blockAttr">
+		<xsl:value-of select="name()"/>
+		<xsl:text>: </xsl:text>
+		<xsl:value-of select="."/>
+		<xsl:text>;
+		</xsl:text>
+	</xsl:template>
+
+	<!-- Ignore block attributes which aren't explicitly handled -->
+	<xsl:template match="@*" mode="blockAttr">	
+	</xsl:template>
+
+	<!-- ********************** TEXT INLINE ATTRIBUTES *********************** -->
+	<!-- Text decoration -->
+	<xsl:template match="ws:textStyle/ws:inlineAttr">
+		<xsl:apply-templates select="@*[. != 'inherit']" mode="inlineAttr"/>
+		<xsl:call-template name="text-decoration-css"/>
+		<xsl:apply-templates select="@*[. = 'inherit']" mode="inheritAttr"/>
+	</xsl:template>
+
+	<!-- Various font/color/text related attributes -->
+	<xsl:template match="@font-style|@font-weight|@vertical-align|@color" mode="inlineAttr">
+		<xsl:value-of select="name()"/>
+		<xsl:text>: </xsl:text>
+		<xsl:value-of select="."/>
+		<xsl:text>;
+		</xsl:text>
+	</xsl:template>
+
+	<!-- Font family CSS name/value-->
+	<xsl:template match="@font-family" mode="inlineAttr">
+		<xsl:text>font-family: </xsl:text>
+		<xsl:call-template name="font-family-css"/>
+		<xsl:text>;
+		</xsl:text>
+	</xsl:template>
+
+	<!-- Font family CSS value -->
+	<xsl:template name="font-family-css">
+		<!-- Font family names must be inside quotes because they sometimes contain spaces -->
+		<xsl:text>'</xsl:text>
+		<xsl:value-of select="."/>
+		<xsl:text>'</xsl:text>
+		<xsl:if test=". != 'inherit'">
+			<xsl:text>, sans-serif</xsl:text>
+		</xsl:if>
+		<xsl:text>;</xsl:text>
+	</xsl:template>
+
+	<!-- Font size CSS name/value -->
+	<xsl:template match="@font-size" mode="inlineAttr">
+		<xsl:text>font-size: </xsl:text>
+		<xsl:choose>
+			<xsl:when test=".='inherit'">
+			<xsl:text>inherit;</xsl:text>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:value-of select=" user:FixFontSize(number(.),number($dpi)) "/>
+				<xsl:text>pt;</xsl:text>
+			</xsl:otherwise>		
+		</xsl:choose>
+	</xsl:template>
+
+	<!-- Ignore any inline attr which we don't handle explicitly elsewhere -->
+	<xsl:template match="@*" mode="inlineAttr"/>
+	<!-- Generate text-decoration CSS from underline and/or line-through -->
+	<xsl:template name="text-decoration-css">
+		<xsl:variable name="underline">
+			<xsl:apply-templates select="@underline" mode="inherit-decoration"/>
+		</xsl:variable>
+		<xsl:variable name="line-through">
+			<xsl:apply-templates select="@line-through" mode="inherit-decoration"/>
+		</xsl:variable>
+		<xsl:if test="string-length($underline) > 0 or string-length($line-through) > 0">
+			<xsl:text>text-decoration: </xsl:text>
+			<xsl:value-of select="$underline"/>
+			<xsl:text> </xsl:text>
+			<xsl:value-of select="$line-through"/>
+			<xsl:text>;
+			</xsl:text>
+		</xsl:if>
+	</xsl:template>
+
+	<!-- Walk up the style inheritance tree, constructing a text-decoration CSS value -->
+	<xsl:template match="@*" mode="inherit-decoration">
+		<xsl:choose>
+			<xsl:when test=". = 'inherit'">
+				<xsl:variable name="base-style-name" select="parent::*/parent::*[1]/@base-style"/>
+				<xsl:variable name="attr-name" select="name()"/>
+				<xsl:if test="$base-style-name">
+					<xsl:apply-templates select="key('style-names',$base-style-name)/ws:inlineAttr/@*[name()=$attr-name]" mode="inherit-decoration"/>
+				</xsl:if>
+			</xsl:when>
+			<xsl:when test=". = 'true'">
+				<xsl:value-of select="name()"/>
+			</xsl:when>
+		</xsl:choose>
+	</xsl:template>
+
+	<!-- Generate CSS style attribute based on the context element's block attributes -->
+	<xsl:template name="block-style-attr">
+		<xsl:variable name="style-val">
+			<xsl:call-template name="normalized-block-attrs"/>
+		</xsl:variable>
+		<!-- Only create a style attribute if the value is nonempty -->
+		<xsl:if test="$style-val != ''">
+			<xsl:attribute name="style"><xsl:value-of select="$style-val"/></xsl:attribute>
+		</xsl:if>
+	</xsl:template>
+
+	<!-- Generate block attribute values in a form suitable for
+	       a style="..." value (newlines stripped)-->
+	<xsl:template name="normalized-block-attrs">
+		<xsl:variable name="attrs">
+			<xsl:apply-templates select="@*[.!='inherit']" mode="blockAttr"/>
+		</xsl:variable>
+		<xsl:value-of select="normalize-space($attrs)"/>
+	</xsl:template>
+
+	<!-- Generate CSS style attribute based on the context element's block attributes -->
+	<xsl:template name="inline-style-attr">
+		<xsl:variable name="style-val">
+			<xsl:call-template name="normalized-inline-attrs"/>
+		</xsl:variable>
+		<!-- Only create a style attribute if the value is nonempty -->
+		<xsl:if test="$style-val != ''">
+			<xsl:attribute name="style"><xsl:value-of select="$style-val"/></xsl:attribute>
+		</xsl:if>
+	</xsl:template>
+
+	<!-- Generate block attribute values in a form suitable for
+	       a style="..." value -->
+	<xsl:template name="normalized-inline-attrs">
+		<xsl:variable name="attrs">
+			<xsl:apply-templates select="@*[.!='inherit']" mode="inlineAttr"/>
+		</xsl:variable>
+		<xsl:value-of select="normalize-space($attrs)"/>
+	</xsl:template>
+	<!-- *********************** END CSS Style Generation ********************************** -->
+
+	<!-- *********************** BEGIN Text Region Rendering ****************************** -->
+	<xsl:template name="output-paragraph-group">
+		<!-- position() of first paragraph in the output group -->
+		<xsl:param name="start-num">1</xsl:param>
+		<!-- Figure out whether this is the start of a bulleted list, numbered list, or is not a list at all -->
+		<xsl:variable name="list-element-name">
+			<xsl:apply-templates select="ws:p[position()=$start-num]" mode="get-list-element-name"/>
+		</xsl:variable>
+		<!-- Count the number of consecutive paragraphs (including this one) which have the same list property -->
+		<xsl:variable name="para-count">
+			<xsl:variable name="following-count">
+				<xsl:apply-templates select="ws:p[position() = $start-num + 1]" mode="count-para-group-items">
+					<xsl:with-param name="list-element-name" select="$list-element-name"/>
+				</xsl:apply-templates>
+			</xsl:variable>
+			<xsl:choose>
+				<xsl:when test="string-length($following-count)">
+					<xsl:value-of select="1+$following-count"/>
+				</xsl:when>
+				<xsl:otherwise>1</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<!-- Output the consecutive paragraphs which we counted above -->
+		<xsl:choose>
+			<!-- List style is 'none', simply render the paragraphs -->
+			<xsl:when test="$list-element-name = ''">
+				<xsl:for-each select="ws:p[position() >= $start-num and position() &lt; $start-num + $para-count ]">
+					<xsl:choose>
+						<xsl:when test="descendant::text()">
+							<xsl:apply-templates select="."/>
+						</xsl:when>
+						<xsl:otherwise>	<!-- replace empty <p></p> with <br/> -->
+							<br/>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:for-each>
+			</xsl:when>
+			<!-- List style is disc or decimal, generate an ordered or unordered list whose elements are the 
+				paragraphs we counted above -->
+			<xsl:otherwise>
+				<!-- ul or ol element -->
+				<xsl:element name="{$list-element-name}">
+					<!-- Render each paragraph as a list element -->
+					<xsl:for-each select="ws:p[position() >= $start-num and position() &lt; $start-num + $para-count ]">
+						<xsl:apply-templates select=".">
+							<xsl:with-param name="block-element-name">li</xsl:with-param>
+						</xsl:apply-templates>
+					</xsl:for-each>
+				</xsl:element>
+			</xsl:otherwise>
+		</xsl:choose>
+		<!-- If there are more paragraphcs in the current region, recurse to the next one -->
+		<xsl:if test="ws:p[position() = $start-num + $para-count] ">
+			<xsl:call-template name="output-paragraph-group">
+				<xsl:with-param name="start-num" select="$start-num + $para-count"/>
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+
+	<!-- Looks up the blockAttr/@list-style-type for this paragraph's style and decides whether
+	       this paragraph belongs in a numbered list, a bulleted list, or no list at all.  Returns 
+	       the XHTML element name "ul", "ol", or nothing, respectively -->
+	<xsl:template match="ws:p" mode="get-list-element-name">
+		<xsl:variable name="list-style">
+			<xsl:choose>
+				<xsl:when test="@list-style-type='inherit' ">
+			<xsl:variable name="temp">
+				<!-- Applying templates to the @list-style-type attribute will cause the style-inheritance-lookup
+					mechanism to figure out the value for this style's list type. -->
+				<xsl:apply-templates select="key('style-names',@style)/ws:blockAttr/@list-style-type"/>
+			</xsl:variable>
+			<xsl:value-of select="normalize-space( substring-before( substring-after( $temp, ':' ), ';' ) )"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="@list-style-type"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:choose>
+			<xsl:when test="$list-style='disc'">
+				<xsl:text>ul</xsl:text>
+			</xsl:when>
+			<xsl:when test="$list-style='decimal'">
+				<xsl:text>ol</xsl:text>
+			</xsl:when>
+		</xsl:choose>
+	</xsl:template>
+
+	<!-- Recursive counter of consecutive paragraphs which have the specified list-style-type property.  
+		This allows them to be grouped into ordered or un-ordered HTML lists.
+	 -->
+	<xsl:template match="ws:p" mode="count-para-group-items">
+		<!-- The list element name identifiying the current group -->
+		<xsl:param name="list-element-name"/>
+		<!-- The list element name identifying this paragraph -->
+		<xsl:variable name="this-name">
+			<xsl:apply-templates select="." mode="get-list-element-name"/>
+		</xsl:variable>
+		<xsl:choose>
+			<!-- If this paragraph is a group member, return 1 + the count of all consecutive members
+				following this one -->
+			<xsl:when test="$this-name=$list-element-name">
+				<xsl:choose>
+					<xsl:when test="following-sibling::*">
+						<!-- Count the following group members by recursing down the following-sibling axis -->
+						<xsl:variable name="following-count">
+							<xsl:apply-templates select="following-sibling::*[1]" mode="count-para-group-items">
+								<xsl:with-param name="list-element-name" select="$list-element-name"/>
+							</xsl:apply-templates>
+						</xsl:variable>
+						<!-- return value -->
+						<xsl:value-of select="1 + $following-count"/>
+					</xsl:when>
+					<!-- no following paragraphs, return 1 -->
+					<xsl:otherwise>1</xsl:otherwise>
+				</xsl:choose>
+			</xsl:when>
+			<!-- This paragraph is not a group member, stop recursion and return 0 -->
+			<xsl:otherwise>
+				<xsl:text>0</xsl:text>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<!-- text paragraph -->
+	<xsl:template match="ws:p">
+		<!-- Specifies the name of the block element we are emitting for this paragraph. Paragraph by default,
+			but could be any valid block element (like a <li> for a list item) -->
+		<xsl:param name="block-element-name">p</xsl:param>
+		<xsl:element name="{$block-element-name}">
+			<xsl:attribute name="class"><xsl:variable name="style-name" select="@style"/><xsl:value-of select="$prepend-styles-with"/><xsl:text>Style</xsl:text><xsl:value-of select="count(key('style-names',$style-name)/preceding-sibling::*)+1"/></xsl:attribute>
+			<xsl:call-template name="block-style-attr"/>
+			<xsl:apply-templates>
+				<xsl:with-param name="is-embedded">1</xsl:with-param>
+			</xsl:apply-templates>
+		</xsl:element>
+	</xsl:template>
+
+	<!-- inline text attributes -->
+	<xsl:template match="ws:inlineAttr">
+		<span>
+			<xsl:call-template name="inline-style-attr"/>
+			<xsl:apply-templates/>
+		</span>
+	</xsl:template>
+
+	<!-- font family -->
+	<xsl:template match="ws:f/@family">
+		<xsl:text>font-family: </xsl:text>
+		<xsl:call-template name="font-family-css"/>
+	</xsl:template>
+
+	<!-- Inline font specifier -->
+	<xsl:template match="ws:f">
+		<span>
+			<xsl:variable name="style">
+				<xsl:if test="@size and @size != 'inherit'">
+					<xsl:text>font-size: </xsl:text>
+					<xsl:value-of select=" user:FixFontSize(number(@size),number($dpi)) "/>
+					<xsl:text>pt; </xsl:text>
+				</xsl:if>
+				<xsl:if test="@family">
+					<xsl:apply-templates select="@family"/>
+				</xsl:if>
+			</xsl:variable>
+			<xsl:if test="string-length($style) > 0">
+				<xsl:attribute name="style"><xsl:value-of select="$style"/></xsl:attribute>
+			</xsl:if>
+			<xsl:apply-templates/>
+		</span>
+	</xsl:template>
+
+	<!-- Superscript, subscript,strikeout -->
+	<xsl:template match="ws:sup|ws:sub|ws:i|ws:b|ws:u|ws:so">
+		<xsl:element name="{local-name()}">
+			<xsl:apply-templates/>
+		</xsl:element>
+	</xsl:template>
+
+	<!-- text color -->
+	<xsl:template match="ws:c">
+		<span>
+			<xsl:attribute name="style"><xsl:text>color: </xsl:text><xsl:value-of select="@val"/><xsl:text>; </xsl:text><xsl:call-template name="propagate-decoration"/></xsl:attribute>
+			<xsl:apply-templates/>
+		</span>
+	</xsl:template>
+
+	<!-- After an inline color change, we must re-state the text-decoration so that the underline/overstrike will
+	      have the same color as the text.  In HTML, 
+	      		<span style="text-decoration: underline;">
+	      			<span style="color: red">SOME RED TEXT</span>
+	      		</span>
+	      	...will render as red text with a black underline, which is not what Mathcad does.  To correct this	      	
+	      	situation, whenever there is a color change, a new span is put inside it:
+	      		<span style="text-decoration: underline;">
+	      			<span style="color: red">
+	      				<span style="text-decoration: underline">SOME RED TEXT</span>
+      				</span>
+	      		</span>
+	-->
+	<xsl:template name="propagate-decoration">
+		<xsl:variable name="underline">
+			<xsl:if test="ancestor::*[local-name()='u' or @underline]">
+				<xsl:choose>
+					<xsl:when test="ancestor::*[local-name()='u' or @underline][1]/@underline='false'"/>
+					<xsl:otherwise>underline</xsl:otherwise>
+				</xsl:choose>
+			</xsl:if>
+		</xsl:variable>
+		<xsl:variable name="strikeout">
+			<xsl:if test="ancestor::*[local-name()='so' or @line-through]">
+				<xsl:choose>
+					<xsl:when test="ancestor::*[local-name()='so' or @line-through][1]/@line-through='false'"/>
+					<xsl:otherwise>line-through</xsl:otherwise>
+				</xsl:choose>
+			</xsl:if>
+		</xsl:variable>
+		<xsl:if test="string-length($underline) or string-length($strikeout)">
+			<xsl:text>text-decoration: </xsl:text>
+			<xsl:value-of select="$underline"/>
+			<xsl:text> </xsl:text>
+			<xsl:value-of select="$strikeout"/>
+			<xsl:text>;</xsl:text>
+		</xsl:if>
+	</xsl:template>
+
+	<!-- Link within a text region -->
+	<xsl:template match="ws:link">
+		<a>
+			<xsl:attribute name="href">
+				<!-- $target-document is declared in CopyRegionToClipboard.xslt, which is the current document's URL-->
+				<xsl:value-of select=" user:GetURLForDocument(string(@href), $target-document) " />
+			</xsl:attribute>
+			<xsl:apply-templates/>
+		</a>
+	</xsl:template>
+
+	<!-- Tab element.  Without the ability to measure strings, the best we can do here
+		 is to replace tabs with spaces -->
+	<xsl:template match="ws:tab">
+		<xsl:text> </xsl:text>
+	</xsl:template>
+	<!-- Whitespace element, expand to appropriate number of spaces -->
+	<xsl:template match="ws:sp">
+		<xsl:param name="count">
+			<xsl:choose>
+				<xsl:when test="@count">
+					<xsl:value-of select="@count"/>
+				</xsl:when>
+				<xsl:otherwise>1</xsl:otherwise>
+			</xsl:choose>
+		</xsl:param>
+		<!-- Recursively emit spaces until count reaches zero -->
+		<xsl:if test="$count > 0">
+			<xsl:text> </xsl:text>
+			<xsl:apply-templates select=".">
+				<xsl:with-param name="count" select="$count - 1"/>
+			</xsl:apply-templates>
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template match="ws:br">
+		<br/>
+	</xsl:template>
+	
+	<!-- *********************** END Text Region Rendering ****************************** -->
+
+	<!-- *********************** BEGIN Encoded Images For Area rendering***************** -->
+
+	<xsl:variable name="area-top-image-binary">iVBORw0KGgoAAAANSUhEUgAAAAsAAAANCAYAAAB/9ZQ7AAAAAXNSR0IArs4c6QAAAARnQU1B
+	AACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAA
+	AEZJREFUKFNjZGBg+A/ERIP/xACYocSoBdkOdgGNFUOtgVmHQoOsxnAGNg0wN2J1M7IGZM/g
+	9CA2T9MpNAgFNtwZ+IINWQ4AGrV8kyVZAyYAAAAASUVORK5CYII=</xsl:variable>
+	<xsl:variable name="area-bottom-image-binary">iVBORw0KGgoAAAANSUhEUgAAAAsAAAANCAYAAAB/9ZQ7AAAAAXNSR0IArs4c6QAAAARnQU1B
+	AACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAA
+	AERJREFUKFNjZGBg+A/ERIP/xACYocSoBdkOdgFlirEZgNVkqCDYWmSAoRhZIYwN04CiGJtC
+	ZA3U8SC24KGDyfg8hywHADS3fJPpBapjAAAAAElFTkSuQmCC</xsl:variable>
+	<xsl:variable name="area-locked-image-binary">iVBORw0KGgoAAAANSUhEUgAAAAsAAAANCAYAAAB/9ZQ7AAAAAXNSR0IArs4c6QAAAARnQU1B
+	AACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAA
+	AGRJREFUKFOVUFEWwCAI0vsfurSp0WK95o9KmII2C4lQ1Swrw7OIk2MgyyXbVPWjWgB79P6N
+	DR6SkcDwf+RceZmnAKoQDHCLTpzpxCMarAEnmCPbz3g7rgx8P4Od9klmIop8aVvrbfJnqxx0
+	6SsAAAAASUVORK5CYII=</xsl:variable>
+
+	<!-- *********************** END Encoded Images For Area rendering***************** -->

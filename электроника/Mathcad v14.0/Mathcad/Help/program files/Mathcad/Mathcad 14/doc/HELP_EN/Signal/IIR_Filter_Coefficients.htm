@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+
+<head>
+
+<title>IIR Filter Coefficients</title>
+
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+ <link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Digital Filtering\nIIR Filter Coefficients");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Signal.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>IIR Filter Coefficients</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">bessel(n, scale)</b> Returns coefficients 
+ for an analog Bessel filter of order <span class="math">n</span>; 
+ scale controls the gain at cutoff. The output is used as an argument to 
+ one of the <a HREF="IIR_Filters.htm">IIR filter functions</a>.</p>
+
+<p><b class="hmath">butter(n) </b>Returns coefficients 
+ for an analog Butterworth filter of order <span class="math">n</span>. 
+ The output is used as an argument to one of the <a HREF="IIR_Filters.htm">IIR filter functions</a>.</p>
+
+<p><b class="hmath">cheby1(n, e)</b> Returns coefficients 
+ for a Type I Chebyshev analog filter of order n; ripple is controlled 
+ by the parameter e. The output is used as an argument to one of the <a HREF="IIR_Filters.htm">IIR filter functions</a>.</p>
+
+<p><b class="hmath">cheby2(n, scale, atten)</b> Returns 
+ coefficients for a Type II Chebyshev analog filter of order <span class="math">n</span> 
+ with the lower edge of the stopband at s and stopband attenuation atten. 
+ The output is an argument to the <a HREF="IIR_Filters.htm">IIR filter 
+ functions</a>.</p>
+
+<h4>Arguments:</h4>
+
+<ul>
+<li><span class="hmath">n</span> is an integer 
+ filter order. For bessel filters <span class="math">n</span> 
+ is between 1 and 35. For all others, it is between 1 and 200.</li>
+<li><span class="hmath">e</span> is a positive 
+ real number representing the allowable passband ripple.</li>
+<li><span class="hmath">scale</span> for <b class="math">bessel</b> is a real number greater than 
+ 0 which sets the lower edge of the stopband. <span class="math">scale</span> 
+ for <b class="math">cheby2</b> is a calculated real number greater than 1 setting the lower edge of the stopband.</li>
+<li><span class="hmath">atten</span> is a real 
+ number greater than 1, the stopband attenuation factor.</li>
+</ul>
+
+<h4>Note:</h4>
+
+<ul>	
+	<li><p>These functions produce coefficient arrays with 
+ an even number of columns. If there are two columns, as in the output 
+ of <b class="math">bessel</b>, the filter consists 
+ of a single section: column 1 contains coefficients of the transfer function 
+ numerator, column 2 contains denominator coefficients. If there are more 
+ than two columns, each pair represents a section of a filter in cascade 
+ form.</p></li>
+</ul>
+
+<hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

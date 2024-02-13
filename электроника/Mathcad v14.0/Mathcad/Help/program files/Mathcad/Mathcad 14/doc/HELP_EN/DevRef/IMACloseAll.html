@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>CloseAll Method</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Automation Interfaces\nThe Mathcad Automation API\nApplication Class\nMethods\nCloseAll Method");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>CloseAll Method</h1></td>
+	</tr>
+</table>
+
+<p>The <b>CloseAll</b> method closes all open worksheets.</p>
+
+<h3>Syntax</h3>
+
+<code><i>boolRet</i> = objMC.<b>CloseAll </b>([<i>MCSaveOption</i> SaveOption])<br>
+<br></code>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+<tr>
+	<td valign="top"><p><i>boolRet</i></p></td>
+	<td valign="top"><p>Return value indicating success or failure.</p></td>
+</tr>
+<tr>
+	<td valign="top"><p>objMC</p></td>
+	<td valign="top"><p>A Mathcad application object.</p></td>
+</tr>
+<tr>
+	<td valign="top"><p><i><a href="enumMCSaveOption.html">MCSaveOption</a></i></p></td>
+	<td valign="top"><p>Optional argument specifying how to handle unsaved worksheets. The default is <i>McPromptToSaveChanges</i>.</p></td>
+</tr>
+</table>
+
+<h3>Remarks</h3>
+
+<p>The <b>CloseAll</b> method can fail if the save failed to complete for any reason, such as insufficient disk space or canceling out of the save operation.</p>
+
+<p>To close a single worksheet, use the <a href="IMWClose.html">Close</a> method of the <a href="IMathcadWorksheet.html">Worksheet</a> class.</p>
+
+<h3>Example</h3>
+
+<p>The following Visual Basic code demonstrates usage of the CloseAll method. If the <b>optSave</b> flag has been set (in this case, via user interaction), the CloseAll method is invoked with the corresponding argument enumerated in <a href="enumMCSaveOption.html">MCSaveOption</a>.</p>
+
+<code>Select Case optSave<br>
+<br>
+<span class="blockindent">Case None</span><br>
+<span class="blockindent">'Default option</span><br>
+<span class="blockindent">objMathcadApp.CloseAll</span><br>
+<br>
+<span class="blockindent">Case Lose</span><br>
+<span class="blockindent">'Lose Changes</span><br>
+<span class="blockindent">objMathcadApp.CloseAll mcDiscardChanges</span><br>
+<br>
+<span class="blockindent">Case Prompt</span><br>
+<span class="blockindent">'Ask user whether to save</span><br>
+<span class="blockindent">objMathcadApp.CloseAll mcPromptToSaveChanges</span><br>
+<br>
+<span class="blockindent">Case Save</span><br>
+<span class="blockindent">'save changes</span><br>
+<span class="blockindent">objMathcadApp.CloseAll mcSaveChanges</span><br>
+<br>
+<span class="blockindent">Case Else</span><br>
+<span class="blockindent">'invalid options - unsuccessful closing of worksheets</span><br>
+<span class="blockindent">MsgBox (&quot;Close Failed&quot;)</span><br>
+<br>
+End Select<br>
+</code>
+
+<br>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

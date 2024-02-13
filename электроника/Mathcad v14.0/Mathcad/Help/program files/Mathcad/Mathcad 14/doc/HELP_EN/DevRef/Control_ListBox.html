@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Overview of ListBoxes</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Mathsoft Controls\nListBoxes");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Mathsoft ListBox Control</h1></td>
+	</tr>
+</table>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Overview</td></tr>
+</table>
+</h2>
+
+<p>The Mathsoft ListBox <a href="Controls.html">control</a> allows you to accept user input as a selection from a list. The default output is the number of the item selected in the list, but it can be converted to the selected label, or other data type in the script using the <a href="Script_listboxclass.html">ListBox class</a>. You can change the appearance of a list box using the Properties dialog box or access its properties through the script. Descriptions and code examples for all properties are given in the Help pages that follow.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Simple Annotated Example</td></tr>
+</table>
+</h2>
+
+<p>Here's an example that shows the default script and the resulting behavior of the ListBox control in the worksheet.</p>
+
+<h3>Default Script</h3>
+
+<code>
+<span class="comment">Rem Initialize List Box</span><br>
+ListBox.ResetContent()<br>
+<br>
+<span class="comment">Rem Add Strings here as needed</span><br>
+ListBox.AddString(&quot;One&quot;)<br>
+ListBox.AddString(&quot;Two&quot;)<br>
+ListBox.AddString(&quot;Three&quot;)<br>
+<br>
+<span class="comment">Rem Initialize Selection If desired</span><br>
+ListBox.CurSel = 0<br>
+<br>
+Sub ListBoxEvent_Start()<br>
+<span class="comment">Rem TODO: Add your code here</span><br>
+End Sub<br>
+<br>
+Sub ListBoxEvent_Exec(Inputs,Outputs)<br>
+Outputs(0).Value = ListBox.CurSel + 1<br>
+End Sub<br>
+<br>
+Sub ListBoxEvent_Stop()<br>
+<span class="comment">Rem TODO: Add your code here</span><br>
+End Sub<br>
+<br>
+Sub ListBox_SelChanged()<br>
+ListBox.Recalculate()<br>
+End Sub<br>
+<br>
+Sub ListBox_DblClick()<br>
+ListBox.Recalculate()<br>
+End Sub<br>
+</code>
+
+<h3>How It Appears in the Worksheet</h3>
+
+<p class="blockindent"><img src="Graphics/SIMPLE_LIST_BOX.GIF" alt="simple listbox" width="139" height="99" border="1"></p>
+
+<h3>Comments</h3>
+
+<p>In the script, notice that there are five events, <a href="Script_StartEvent.html">Start</a>, <a href="Script_ExecEvent.html">Exec</a>, <a href="Script_StopEvent.html">Stop</a>, <a href="Control_lstevent.html#SelChanged">SelChanged</a>, and <a href="Control_btnevents.html">DblClick</a>. However, the list box is initialized and populated outside these events so that the control calculates and sends output to the worksheet whether the user has actively selected a list box item or not. If you wish to effect changes in the contents of the list based on other events in the worksheet, you have to move this code inside the Start event.</p>
+  
+<p>In general, the Start event may be used to further modify or manipulate the appearance of the list box or the elements within it. Alternatively, procedures for formatting the list box can be done using the Properties dialog box, including font formatting, which may only be done through the Properties dialog. The Exec event is where inputs and outputs can be processed, including converting the selection from the default integer output to other numerical or string output. The SelChanged and DblClick events are generally used to re-execute the control after the user has changed their selection, though these events might fire other actions, such as alerts or script-based calculations. Here's a slightly modified piece of script and a picture showing its effect on the appearance and behavior of the control:</p>
+
+<h3>Modified Script</h3>
+
+<code>
+Rem Initialize List Box<br>
+ListBox.ResetContent()<br>
+<br>
+Rem Add Strings here as needed<br>
+ListBox.AddString(&quot;tetrahedron&quot;)<br>
+ListBox.AddString(&quot;cube&quot;)<br>
+ListBox.AddString(&quot;octahedron&quot;)<br>
+ListBox.AddString(&quot;icosahedron&quot;)<br>
+ListBox.AddString(&quot;dodecahedron&quot;)<br>
+<br>
+Rem Initialize Selection If desired<br>
+ListBox.CurSel = 0<br>
+<br>
+Sub ListBoxEvent_Start()<br>
+Rem TODO: Add your code here<br>
+End Sub<br>
+<br>
+Sub ListBoxEvent_Exec(Inputs,Outputs)<br>
+Outputs(0).Value = ListBox.GetText(CurSel)<br>
+End Sub<br>
+<br>
+Sub ListBoxEvent_Stop()<br>
+Rem TODO: Add your code here<br>
+End Sub<br>
+<br>
+Sub ListBox_SelChanged()<br>
+ListBox.Recalculate()<br>
+End Sub<br>
+<br>
+Sub ListBox_DblClick()<br>
+ListBox.Recalculate()<br>
+End Sub<br>
+</code>
+
+<h3>How It Appears in the Worksheet</h3>
+
+<p class="blockindent"><img src="Graphics/MODIFIED_LIST_BOX.GIF" alt="modified listbox" width="247" height="391" border="1"></p>
+
+<h3>Comments</h3>
+
+<p>In this script, the items in the list box have been modified and the output has been converted to a string using the GetText method supported by the ListBox control.</p>
+  
+<h3>Properties Dialog Box</h3>
+
+<p>If you would like to change the appearance of a list box without using the script, you can use the Properties Dialog box by right-clicking on the control and selecting <b>Mathsoft ListBox Control Object > Properties</b> from the menu. You see:</p>
+
+<p class="blockindent"><img src="Graphics/LIST_BOX_PROPERTIES.GIF" alt="ListBox Properties" width="406" height="284" border="0"></p>
+
+<p>Note that you can only change font settings for the ListBox control using the Properties dialog box. Font-related properties are not available through the script.</p>
+ 
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+ 	   onMouseOut="document.body.style.cursor='arrow'"
+ 	   onClick="objLaunchMathcad.OpenResourceCenter('samples\\controls\\controls.xmcd')"
+ 	   class="fakelink">Mathcad Example</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

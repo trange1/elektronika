@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Using Controls Together</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Mathsoft Controls\nUsing Controls Together");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Using Controls Together</h1></td>
+	</tr>
+</table>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Overview</td></tr>
+</table>
+</h2>
+
+<p>In your use of controls, you will probably find it necessary to mix them in your worksheets. For example, you might want the user to select from among choices in a list box, then specify some numerical parameters directly using either a slider or a text box. Sometimes, you may want to use these controls interdependently such that output from one control is used as input from another control.</p>
+
+<p>You can do this by adding <a href="Controls.html#inputs">input variables</a> to one or more controls, then using output variables from a previous control as the value for these inputs. Controls follow the same dependencies as any other regions in the worksheet, so place any dependent controls to the right or below the controls and variables upon which they are dependent.</p>
+
+<p>You can also link one control to another using Mathcad's <a href="Script_automation.html">Automation</a>  commands to get values out of the worksheet. You can, of course, use Automation to set values in the worksheet as well, but remember that this will behave as if you have set the value at the very start of the sheet. This may produce unexpected results.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Example</td></tr>
+</table>
+</h2>
+
+<p>The following shows scripts for both a ListBox control and an associated TextBox control. The list box generates an index variable, 1 through 4, which is used as input to the text box. The text box uses this index to display feedback to the user. The output variable from the list box is assigned, in the Mathcad worksheet, to the variable name <span class="math">op</span>. This value is also used in subsequent calculations. </p>
+
+<p>The text box script calls the worksheet variable, <span class="math">op</span>, through Mathcad's Automation interface, rather than using it from its input value. The input value must still be assigned, however. Otherwise, the text box will not automatically recalculate when <span class="math">op</span> is changed.</p>
+    
+<table cellspacing="1" cellpadding="5" border="1">
+<tr>
+	<td width="50%" valign="middle"><p align="center"><b>List Box</b></p></td>
+	<td width="50%" valign="middle"><p align="center"><b>Text Box</b></p></td>
+</tr>
+<tr>
+    <td valign="top"> 
+      <code>
+	  <span class="comment">Rem Initialize List Box</span><br>
+       ListBox.ResetContent()<br>
+       ListBox.AddString(&quot;Addition&quot;)<br>
+       ListBox.AddString(&quot;Subtraction&quot;)<br>
+       ListBox.AddString(&quot;Multiplication&quot;)<br>
+       ListBox.AddString(&quot;Division&quot;)<br>
+       ListBox.CurSel = 0<br>
+	   <br>
+       Sub ListBoxEvent_Start()<br>
+       <span class="comment">Rem TODO: Add your code here</span><br>
+       End Sub<br>
+	   <br>
+       Sub ListBoxEvent_Exec(Inputs,Outputs)<br>
+       Outputs(0).Value = ListBox.CurSel + 1<br>
+       End Sub</span><br>
+	   <br>
+       Sub ListBoxEvent_Stop()<br>
+       <span class="comment">Rem TODO: Add your code here</span><br>
+        End Sub<br>
+	</code>
+    </td>
+    <td valign="top"> 
+      <code>Sub TextBoxEvent_Start()<br>
+       TextBox.Text=&quot;Choose an operation&quot;<br>
+       TextBox.Multiline = True<br>
+       End Sub<br>
+	   <br>
+       Sub TextBoxEvent_Exec(Inputs,Outputs)<br>
+       operation = Worksheet.getValue(&quot;op&quot;)<br>
+       If operation=1 Then<br>
+       TextBox.Text=&quot;Performing addition&quot;<br>
+       ElseIf operation=2 Then<br>
+       TextBox.Text=&quot;Performing subtraction&quot;<br>
+       ElseIf operation=3 Then<br>
+       TextBox.Text=&quot;Performing multiplication&quot;<br>
+       Else<br>
+       TextBox.Text=&quot;Performing division&quot;<br>
+       End If<br>
+       End Sub<br>
+	   <br>
+       Sub TextBoxEvent_Stop()<br>
+       <span class="comment">Rem TODO: Add your code here</span><br>
+       End Sub<br>
+	   <br>
+	   </code>
+    </td></tr>
+</table>
+
+<h3>How It Appears in the Worksheet</h3>
+
+<p class="blockindent"><img src="Graphics/MIXED_1.GIF" alt="list box and text box" width="469" height="114" border="1"></p>
+
+<p>To make this set of controls more streamlined looking in your worksheet, it is a good idea to hide the arguments. Right-click the control and select <b>Hide Arguments</b> from the menu. Here is the sample worksheet with the arguments hidden:</p>
+
+<p class="blockindent"><img src="Graphics/MIXED_2.GIF" alt="list box and text box" width="469" height="448" border="1"></p>
+
+<p>Other worksheets containing controls are located in the <b>qsheet\Samples\Controls</b> 
+  subdirectory of your installation of Mathcad. See the Programming section of 
+  QuickSheets. </p>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('samples\\controls\\mixing.xmcd')"
+	   class="fakelink">Mathcad Example</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

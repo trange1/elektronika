@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Program Debugging</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Programming">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nProgram Debugging");
+addTocInfo("Programming\nProgram Debugging");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top">
+      <h1>Program Debugging</h1>
+    </td>
+	</tr>
+</table>
+
+<p><b class="hmath">trace(S, x, y, z, ...)<br>
+  </b><b class="hmath">pause(S, x, y, z, ...) </b></p>
+<p>If <a href="Toolbar_debug.html">debugging mode</a> is on, these functions print 
+  a string to the <a href="View_Menu.html#Trace">Trace Window</a>. The <b>pause</b> 
+  function pauses execution of the worksheet when Debug mode is on. Execution 
+  can be resumed or interrupted using buttons on the <b>Debug</b> toolbar. The 
+  printed string contains the value of the arguments <span class="math">x, y, 
+  z, ...</span> with print order and surrounding text specified by <span class="math">S</span>. 
+  If the argument is an <span class="math">n</span>-element vector, <b class="math">v</b>, 
+  the result has the format</p>
+
+<p class="vmath">&quot;vector{n} [v<sub>0</sub>, v<sub>1</sub>, ..., v<sub>n</sub>]&quot;</p>
+
+<p>where <span class="math">v0, v1, ..., vn</span> are the values of each entry. 
+  If the argument is an <span class="math">m &times; n</span> matrix, <b class="math">M</b>, 
+  the result has the format</p>
+
+  <p class="vmath">&quot;matrix{m, n} [[M<sub>0,0</sub>, M<sub>0,1</sub>, ..., 
+    M<sub>0,n</sub>], ..., [M<sub>m,0</sub>, M<sub>m,1</sub>, ..., M<sub>m,n</sub>]]&quot;</p>
+
+<p>Both functions return 0 to the worksheet.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><p><span class="hmath">S</span> (optional for one-variable case) is a string 
+    containing control codes to specify location of traced argument(s) in the 
+    output. Each argument is referenced as <span class="math">{#}</span>, starting 
+    with 0. For example,</p> 
+    <p class="vmath">x := 0.2&middot;sec&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y := 30&middot;ms</p>
+    <p class="vmath">trace(&quot;x = {0}, y = {1}&quot;, x, y) = &quot;x = 0.2, y = 0.03&quot;</p>
+  </li>
+  <li><span class="hmath">x, y, z, ...</span> are any valid Mathcad expressions.</li>
+</ul>
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li><a href="Toolbar_debug.html">Debugging mode</a><b> </b> must be on and 
+    the Trace Window must be visible to see the traced output and to pause calculations.</li>
+  <li>Values with units are scaled to the <a href="Dialog_Worksheet_Options.html#UnitSystem">
+  base 
+    SI units</a>. To scale a united value specifically, divide by the desired 
+    unit in the argument to the trace or pause function.</li>
+  <li>Pausing and then interrupting a calculation is equivalent 
+  to <a href="Automatic_Calculation_Mode.html">pressing 
+    <b>[Esc]</b></a>.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object>
+</p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('tutorial\\Features\\debug.xmcd')"
+	   class="fakelink">Tutorial</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Conditional (if and otherwise) Operators','Program_Conditional.html','Defining a Function with a Program','Defining_a_Program.html','Error Handling in Programs','Program_error.html','Exiting Loops and Programs','Program_Control.html','Program Loops','Program_Loops.html','Programming','Programming.html','Programming Operator','Add_line_operator.html','Programming Toolbar','Programming_toolbar.html','Recursion','Recursion.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

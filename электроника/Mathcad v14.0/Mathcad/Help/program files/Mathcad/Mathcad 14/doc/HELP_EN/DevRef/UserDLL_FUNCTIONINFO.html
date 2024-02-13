@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>FUNCTIONINFO Structure</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Writing Mathcad DLLs\nStructure and Function Definitions\nFUNCTIONINFO Structure");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>FUNCTIONINFO Structure</h1></td>
+	</tr>
+</table>
+
+<p>The <b>FUNCTIONINFO</b> structure, defined in <a href="UserDLL_coderef.html">mcadincl.h</a>, is used for registering a DLL function with Mathcad. It contains information about the name by which Mathcad recognizes the function, the description of the function parameters, its arguments, its return value, and the pointer to the code which executes the function.</p>
+
+<h3>Example</h3>
+
+<code>
+FUNCTIONINFO Multiply =<br>
+{<br>
+<span class="blockindent"><span class="comment">// The function name, as it should appear in Mathcad</span></span><br>
+<span class="blockindent">&quot;Multiply&quot;,</span><br>
+<br>
+<span class="blockindent"><span class="comment">// The function arguments</span></span><br>
+<span class="blockindent">&quot;a,M&quot;,</span><br>
+<br>
+<span class="blockindent"><span class="comment">// A brief description of the function</span></span><br>
+<span class="blockindent">&quot;Returns the product of the scalar a and the matrix M&quot;,</span><br>
+<br>
+<span class="blockindent"><span class="comment">// The call to your code</span></span><br>
+<span class="blockindent">(<a href="UserDLL_LRESULT.html">LPCFUNCTION</a>)MyCFunctionname;</span><br>
+<br>
+<span class="blockindent"><span class="comment">// The type of the result</span></span><br>
+<span class="blockindent">COMPLEX_ARRAY,</span><br>
+<br>
+<span class="blockindent"><span class="comment">// The number and type of the arguments</span></span><br>
+<span class="blockindent">2,</span><br>
+<span class="blockindent">{COMPLEX_SCALAR, COMPLEX_ARRAY}</span><br>
+};<br>
+</code>
+
+<p>In versions previous to Mathcad 8, this description was used to populate the <b>Insert Function</b> dialog. The code has since changed; you must update the <a href="UserDLL_InsertFunc_listing.html">User_EN.xml</a> document separately to make your function definition appear in this dialog box.</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

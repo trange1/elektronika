@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Input and Output Values Collection</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Input and Output Values Collection</h1></td>
+	</tr>
+</table>
+
+<p>Collections are an Automation concept that allows a set of associated elements to be bundled together. The DataValues collection is defined as a class for use with Mathcad scripted components. A method and a property are provided to access to each of the elements in the collection. Each input element in the collection is itself an object of type <b><a href="Script_dataval.html">DataValue</a></b>, so values and dimensions of individual elements are accessed from those <a href="Script_dataval.html">class properties</a>.</p>
+
+<p>Two <b>DataValue</b> collections are used as parameters the <a href="Script_ExecEvent.html">Exec event</a> for all <a href="ScriptableObject.html">scripted components</a> and <a href="Controls.html">controls</a>. The first collection, <b>Inputs</b>, corresponds to the placeholders specified below the component, added when you right-click and select <b>Add Input Value</b> from the menu. The second collection, <b>Outputs</b>, corresponds to placeholders to the left of the definition symbol for the component. These two collections can have an arbitrary number of elements. Script authors may get or set the data for each input and output object in the collections.</p>
+
+<p>These two collections are what allow a scripted component to interact with a Mathcad worksheet's calculations. By associating a component or control with input and output values, you define its place in the calculation order of the worksheet, and notify it to recalculate when input values change, as well as notify the worksheet when to update the output values. It is therefore important that you assign input and output values to any component that will use these worksheet variables, even if you access the value of the variable through Mathcad's Automation interface using <a href="IMWGetValue.html">GetValue</a> or <a href="IMWSetValue.html">SetValue</a> methods. It is also important that any variable name accessed through Automation is defined only once in the worksheet.</p>
+
+<h3>Properties</h3>
+
+<p><b>DataValue</b> collections have one property, the read-only <b>Count</b> property, which can be used to query the total number of elements in the collection.</p>
+
+<code><i>num</i> = collDataValues.<b>Count</b><br>
+<br></code>
+
+<h3>Methods</h3>
+
+<p><b>DataValue</b> collections have one method, the <b>Item</b> method, used to specify an individual element in the collection. The <b>DataValue</b> collection is zero-based, so the item numbers range from 0 to <b>Count</b> –1. The <b>Item</b> method is the default method for this object; this means that the method name can be omitted for languages that support it, in which case the default method is implied.</p>
+  
+<code>collDataValues.<b>Item</b>(<i>integerindex</i>), or, equivalently<br>
+collDataValues(<i>integerindex</i>)<br>
+<br></code>
+  
+<h3>Example</h3>
+
+<code>
+<span class="comment">'cycle through the collection, assigning each item to val</span><br>
+for i=0 to Inputs.Count–1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val(i) = Inputs.Item(i)<br>
+&nbsp;&nbsp;&nbsp;'additional code...<br>
+next<br>
+<br>
+or, since <b>Item</b> is the default property, the following is also valid:<br>
+<br>
+<span class="comment">'cycle through the collection, assigning each item to val</span><br>
+for i=0 to Inputs.Count–1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val(i) = Inputs(i)<br>
+&nbsp;&nbsp;&nbsp;'additional code...<br>
+next<br>
+<br>
+</code>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

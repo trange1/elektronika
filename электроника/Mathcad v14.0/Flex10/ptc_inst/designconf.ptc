@@ -1,0 +1,84 @@
+// 23-Apr-02 $$1  MAZ  Created.
+// 02-May-02 $$2  MAZ  Add UseInstallDirKey
+// 10-May-02 $$3  ALG  Remove "uninstall" cdsection; Add "uninstall" package
+// 07-Jun-02 $$4  MAZ  SPR 955557: drop PTC from shortcut name
+// 10-Jul-02 $$5  MAZ  Use new ptclogo.ico icon
+// 28-Aug-02 $$6  ALG  Remove shortcut creation (951801, 952267, 969008)
+// 15-Nov-02          MAZ       SPR 989046: HostArchs instead of HostArchTypes
+// 19-Nov-02 J-03-38  MAZ  $$7  SPR 989560: reinstate the csd shrtcut (to vconf)
+// 05-Dev-02 J-03-39  MAZ  $$8  SPR 992183: Add ptcvconf to binscripts
+// 12-Dec-02 J-03-39+ MAZ  $$9  SPR 993208: Set Conf Server Installed to False 
+// 13-Dec-02 J-03-39+ MAZ  $$10 SPR 993208: Check Conf Server by default (again)
+// 13-Dec-02 J-03-39+ ALG  $$11 SPR 993604: New ptcvconf cdsections
+// 23-Dec-02 J-03-39+ MAZ  $$12 Use vconf.ico icon
+// 08-Jan-03 J-03-39+ MAZ  $$13 SPR 997037: Change Name and add ToolTipMsg
+// 15-Apr-03 K-01-05  MAZ  $$14 Modify vconf cmdtype to handle psf files
+// 04-Mar-03 K-01-06  TWH  $$15 LpcfgWindows->ScreenWindows
+// 19-May-03 K-01-07  MAZ  $$16 Quote ptcvconf CmdArgs
+// 07-Oct-03 K-01-16  TWH  $$17 Add Ad list
+// 27-Oct-03 K-01-17  MAZ  $$18 Add CurVer and BuildNumber
+// 13-Nov-03 K-01-17+ TWH  $$19 New cdsection fileopensaveas
+// 05-Jan-04 K-01-21  TWH  $$20 Add WelcomeImage
+// 09-Mar-04 K-01-25  MAZ       Add Cdonlysecs
+// 15-Mar-04 K-01-25  TWH  $$21 New Ad list
+
+(Product designconf 
+    (Name                      "Collaboration Tools")
+    (WelcomeImage              "designconf_name.gif")
+    (OldName                   "PTC Conference Server")
+    (Packages                  "conference_server"
+                               "uninstall")
+    (ProgramFiles              True)
+    (LpDirName                 "PTC Collaboration Tools")
+    (Screens                   "ScreenProd")
+    (Installed                 True)
+    (VersionDir                False)
+    (UseInstallDirKey          True)
+    (HostArchs                 "i486_nt")
+    (ToolTipMsg                "@@Prod_designconf_Desc")
+    (PSF_EXE                   "proe.exe")
+    (Ad_list                   "whatsnew_auto"
+                               "whatsnew_dataexchange"
+                               "whatsnew_newui"
+                               "whatsnew_p2p"
+                               "whatsnew_3ddrawings"
+                               "whatsnew_ID"
+                               "whatsnew_rs"
+                               "whatsnew_simulation"
+                               "whatsnew_production"
+                               "installscreen_casestudy"
+                               "tools_menumapper"
+                               "tools_onlinehelp"
+                               "tools_productivityT"
+                               "tools_refcards"
+                               "tools_tutorials")
+// The version info should always be up to date with 
+// $PTCSRC/auxobjs/i486_nt/GROOVECUR/groovever.txt    
+    (CurVer                    "2.5")
+    (BuildNumber               "1748")
+)
+
+(Package conference_server 
+    (Name                      "Collaboration Tools")
+    (CmdTypes                  "vconf")
+    (Screens                   "ScreenWindows")
+    (Binscripts                "csd"
+                               "ptcvconf")
+    (Cdsections                "csd"
+                               "ptcvconf"
+                               "ptcvconfhelp"
+                               "fileopensaveas"
+                               "applstart"
+                               "Install")
+    (Installed                 True)
+    (Cdonlysecs                "groove")
+)
+
+(CmdType vconf
+    (Name                      "Conference Center")
+    (Type                      "Shortcut")
+    (CmdPath                   "_LP_\bin\proe.exe")
+    (CmdArgs                   "\"_LP_\bin\ptcvconf.psf\"")
+    (IconPath                  "_LP_\install\nt\vconf.ico")
+    (IconIndex                 "0")
+)

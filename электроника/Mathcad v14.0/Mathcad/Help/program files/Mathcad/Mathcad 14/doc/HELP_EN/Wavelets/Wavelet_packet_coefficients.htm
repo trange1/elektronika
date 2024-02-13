@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+
+<title>Wavelet packet coefficients</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta name=generator content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Coefficients\nWavelet packet coefficients");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Wavelets.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+<tr class="whs1">
+<td valign=top>
+<h1>Wavelet packet coefficients</h1></td></tr>
+</table>
+
+<p><b class="hmath">get_detail(w,l) </b>Returns the 
+ result of extracting the index-1 block of wavelet packet coefficients 
+ at level <span class="math">l</span> from the wavelet packet 
+ transform <b class="math">w</b>.</p>
+
+<p><b class="hmath">get_smooth(w,l) </b>Returns the 
+ result of extracting the 0th block of wavelet packet coefficients at level 
+ <span class="math">l</span> from the wavelet packet transform 
+ <b class="math">w</b>.</p>
+
+<p><b class="hmath">put_detail(w,l,y)</b> Returns the 
+ result of inserting the vector <b class="math">y</b> 
+ into the index-1 block of wavelet packet coefficients of <b class="math">w</b> 
+ at level <span class="math">l</span>.</p>
+
+<p><b class="hmath">put_smooth(w,l,y)</b> Returns the 
+ result of inserting the vector <b class="math">y</b> 
+ into the index-0 block of wavelet packet coefficients of <b class="math">w</b> 
+ at level <span class="math">l</span>.</p>
+
+<h4>Arguments:</h4>
+
+<ul>
+<li><b class="hmath">w</b> is a vector 
+ whose length is at least <span class="math">2<sup>l</sup></span>.</li>
+<li><span class="hmath">l</span> is an integer.</li>
+<li><b class="hmath">y</b> is a vector 
+ whose length is the same as the vector returned by <b>get_detail</b>(<b class="math">w</b>,<span class="math">l</span>) 
+ or <b>get_smooth</b>(<b class="math">w</b>,<span class="math">l</span>).</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul>
+<li><b>get_smooth</b>(<b class="math">w</b>,<span class="math">l</span>) = <b>get_subband</b>(<b class="math">w</b>,<span class="math">l</span>,0)</li>
+<li><b>put_smooth</b>(<b class="math">w</b>,<span class="math">l</span>,y) = <b>put_subband</b>(<b class="math">w</b>,<span class="math">l</span>,0,y)</li>
+<li><b>get_detail</b>(<b class="math">w</b>,<span class="math">l</span>) = <b>get_subband</b>(<b class="math">w</b>,<span class="math">l</span>,1)</li>
+<li><b>put detail</b>(<b class="math">w</b>,<span class="math">l</span>,y) = <b>put_subband</b>(<b class="math">w</b>,<span class="math">l</span>,1,y)</li>
+</ul>
+
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+ 	   onMouseOut="document.body.style.cursor='arrow'"
+ 	   onClick="objLaunchMathcad.OpenResourceCenter('..\\handbook\\wavelets\\put_subb.xmcd')"
+ 	   class="fakelink">Mathcad Example</a></h5>
+	   
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+ 	   onMouseOut="document.body.style.cursor='arrow'"
+ 	   onClick="objLaunchMathcad.OpenResourceCenter('..\\handbook\\wavelets\\get_subb.xmcd')"
+ 	   class="fakelink">Mathcad Example</a></h5>
+
+<hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

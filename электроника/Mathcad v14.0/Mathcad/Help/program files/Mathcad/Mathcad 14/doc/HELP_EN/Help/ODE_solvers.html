@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>ODE Solvers</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Differential Equations">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nDifferential Equation Solving\nODE Solvers");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign=top><h1>ODE Solvers</h1></td>
+	</tr>
+</table>
+
+
+<p>To solve an ODE directly without creating a solve block, use one of the <i>ODE solvers</i>, which solve systems of ODEs of the form</p>
+
+<p class="blockindent"><img src="Graphics/ODE_form.gif" alt="Form of ODE system for solvers" width="100" height="91" border="0"></p>
+
+<p>where <span class="math">y</span> is vector of unknown functions of the independent variable <span class="math">x</span>. To solve a higher-order ODE, <a href="#rewriting">rewrite it as a system of first order ODEs</a>.</p>
+
+<p>The ODE solvers are divided into two types: solvers for stiff systems and solvers for non-stiff systems. A system of ODEs written in matrix form as <span class="math">y&nbsp;=&nbsp;<b>A</b>x,</span> is called <i>stiff</i> if the matrix <b class="math">A</b> is nearly singular. Otherwise, the system is <i>non-stiff</i>.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Solvers for Non-Stiff Systems</td></tr>
+</table>
+</h2>
+
+<p class="blockindent"><b class="hmath">Adams(init, x1, x2, npoints, D, [tol])</b> Uses Adams methods.</p>
+
+<p class="blockindent"><b class="hmath">rkfixed(init, x1, x2, npoints, D) </b>Uses the fourth-order Runge-Kutta fixed-step method.</p>
+
+<p class="blockindent"><b class="hmath">Rkadapt(init, x1, x2, npoints, D)</b> Uses the fourth-order Runge-Kutta with adaptive step-size.</p>
+
+<p class="blockindent"><b class="hmath">Bulstoer(init, x1, x2, npoints, D) </b>Uses the Bulirsch-Stoer method, which is slightly more accurate than Runge-Kutta, but requires a smoothly varying system.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="stiff">Solvers for Stiff Systems</a></td></tr>
+</table>
+</h2>
+
+<p class="blockindent"><b class="hmath">BDF(init, x1, x2, npoints, D, [J], [tol])</b> Uses backward differentiation formula methods. You can use either of the optional arguments <b>J</b> or <b>tol</b> and omit the other.</p>
+
+<p class="blockindent"><b class="hmath">Radau(init, x1, x2, npoints, D, [J], [M], [tol])</b> Uses the Radau5 method. You can use any combination of the optional arguments <b>J</b>, <b>M</b>, and <b>tol</b> and omit the options you do not wish to use.</p>
+ 
+<p class="blockindent"><b class="hmath">Stiffb(init, x1, x2, npoints, D, AJ)</b> Uses the Bulirsch-Stoer method.</p>
+
+<p class="blockindent"><b class="hmath">Stiffr(init, x1, x2, npoints, D, AJ)</b> Uses Rosenbrock method.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="stiff">Hybrid Solver</a></td></tr>
+</table>
+</h2>
+
+<p class="blockindent"><b class="hmath">AdamsBDF(init, x1, x2, npoints, D, [J], [tol])</b> Determines whether a system is stiff or non-stiff and calls <b>Adams</b> or <b>BDF</b> accordingly. You can use either of the optional arguments <b>J</b> or <b>tol</b> and omit the other.
+</p>
+
+<p class="blockindent"><b>Note</b>: <b>AdamsBDF</b> is the default solver for <b><a href="ode_solve.html">Odesolve</a></b>. </p>
+
+<p>Each of these functions returns an <span class="math">(npoints&nbsp;+&nbsp;1)&nbsp;&times&nbsp;(n&nbsp;+&nbsp;1)</span> solution matrix, where <span class="math">n</span> is the number of unknowns. The first column of the matrix contains the values of <span class="math">x</span> at which the solutions are evaluated. These values are <span class="math">npoints&nbsp;+&nbsp;1</span> evenly spaced numbers between <span class="math">x<sub>1</sub></span> and <span class="math">x<sub>2</sub></span>. The remaining columns contain the values of the solutions <span class="math">y<sub>0</sub>,&nbsp;y<sub>1</sub>,&nbsp;...,&nbsp;y<sub>n - 1</sub></span> corresponding to the values of <span class="math">x</span> in the first column.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+	
+	<li><b class="hmath">init</b> is either a vector of <span class="math">n</span> real initial values, where <span class="math">n</span> is the number of unknowns, or a single scalar initial value, in the case of a single ODE.</li>
+	
+	<li><span class="hmath">x1</span> and <span class="hmath">x2</span> are real, scalar endpoints of the interval over which the solution to the ODE(s) is evaluated. Initial values in <b class="math">init</b> are the values of the ODE function(s) evaluated at <span class="math">x1</span>.</li>
+	
+	<li><span class="hmath">npoints</span> is the integer number of points beyond the initial point at which the solution is approximated. The number of solutions returned is <span class="math">npoints&nbsp;+&nbsp;1</span>.</li>
+ 
+ 	<li><p><b class="hmath">D</b> is a vector function of the form <span class="math">D(x,y)</span> specifying the right-hand side of the system.</p>
+	
+	<p class="blockindent"><img src="Graphics/ODE_form2.gif" alt="Definition of vector function D(x,y)" width="164" height="90" border="0"></p></li>
+	
+	<li><p><b class="hmath">tol</b> is an optional real value, or a vector of real values, specifying tolerances for each independent variable in the system. The <i>tolerance</i> is the required accuracy for a solution variable. Set <b>tol</b> to be less than or equal to <span class="math">10<sup>-5</sup></span>. The smaller the value of <b>tol</b>, the more steps the solver algorithm performs to achieve the required accuracy.</p>
+	     <p>If you are solving a system of equations, setting <b>tol</b> to be a scalar specifies the same tolerance for all variables in the system. Setting <b>tol</b> to be a vector, whose length equals the numbers of variables in the system, specifies individual tolerances for each of the variables.</p>
+		 <p><b>Note</b>: <b>tol</b> is not available when using <a href="ode_solve.html"><b>odesolve</b></a> with a solve block.</p></li>
+
+	<li><p><b class="hmath">J</b> is a function of the form <span class="math">J(x,y)</span> that returns the Jacobian matrix - the matrix of partial derivatives of the functions in <b class="math">D</b> with respect to <span class="math">y<sub>0</sub>,&nbsp;y<sub>1</sub>,&nbsp;...&nbsp;y<sub>n-1</sub></span>. 
+	See <a href="#Jacob">Computing the Jacobian Matrix</a>.</p></li>
+	
+	<li><b class="hmath">M</b> is a real matrix representing any coupling between the variables in the form <span class="math">M dy/dt = f(t,y)</span>.</li>
+	
+	<li><p><b class="hmath">AJ</b> is a function of the form <span class="math">AJ(x,y)</span> that returns the <i>augmented</i> Jacobian, whose first column contains the partial derivatives, with respect to x, of the functions on the right-hand side of the system. The remaining columns are the columns of the Jacobian J, containing the partial derivatives with respect to <span class="math">y<sub>0</sub>,&nbsp;y<sub>1</sub>,&nbsp;...&nbsp;y<sub>n-1</sub></span>, as described above. See <a href="#Jacob">Computing the Jacobian Matrix</a>.</li></p>
+</ul>
+
+<p><b>Note</b>: For the solvers <b>rkfixed</b>, <b>RkAdapt</b>, <b>Bulstoer</b>, <b>Stiffb</b>, and <b>Stiffr</b>, you can specify a scalar tolerance for the solution by defining the variable <span class="math">TOL</span> before calling the solver. For example,</p>
+
+<p class="vmath">TOL:=&nbsp;10<sup>-6</sup></p>
+
+<p>sets the tolerance for all variables as <span class="math">10<sup>-6</sup></span>.</p> 
+
+<p>Note that <span class="math">TOL</span> does <b>not</b> affect the tolerances for the solvers <b>Adams</b>, <b>BDF</b>, or <b>Radau</b>. For these solvers, you must use the optional argument <span class="math"><b>tol</b></span>, described above, to specify tolerances.</p>
+
+<h2>
+	<table>
+		<tr>
+			<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+			<td valign="top"><a name="rewriting">Rewriting a Higher-Order ODE as a System of First-Order ODEs</a></td>
+		</tr>
+	</table>
+</h2>
+
+<p>To rewrite the n<sup>th</sup>-order ODE</p>
+
+<p class="blockindent"><img src="Graphics/higher_order_ODE.GIF" alt="A general nth order ODE" width="421" height="38" border="0"></p>
+
+<p>as a system of first-order ODEs, define variables <span class="math">y<sub>0</sub>,&nbsp;y<sub>1</sub></span>,&nbsp;...&nbsp;y<sub>n</sub> as follows:</p>
+
+<p class="blockindent"><img src="Graphics/ODE_new_vars.GIF" alt="Define new variables for nth order ODE" width="79" height="182" border="0"></p>
+
+<p>In terms of the new variables, the original equation becomes</p>
+
+<p class="blockindent"><img src="Graphics/ODE_system_new_vars.GIF" alt="nth order ODE in terms of new variables" width="301" height="21" border="0"></p>
+
+<p>This is equivalent to the following system of first-order ODEs:</p>
+
+<p class="blockindent"><img src="Graphics/ODE_first_order_system1.GIF" align="middle" alt="System of first-order ODEs" width="71" height="85" border="0">&nbsp;&nbsp;&nbsp;where&nbsp;&nbsp;&nbsp;<img src="Graphics/ODE_first_order_system2.GIF" align="middle" alt="System of first-order ODEs" width="70" height="90" border="0"></p>
+
+<p>If you solve the original equation for <span class="math">y<sub>n</sub></span> and substitute the result in the vector, you get a vector function that you can apply the ODE solvers to:</p>
+
+<p class="blockindent"><img src="Graphics/ODE_system_final_form.GIF" alt="Final form for the system of first-order ODEs" width="395" height="112" border="0"></p>
+
+<h4>Example:</h4>
+
+<p>For example, you can rewrite the second-order ODE</p>
+	
+	<p class="blockindent"><img src="Graphics/ODE.gif" alt="single- function ODE" width="210" height="41" border="0"></p>
+	
+	<p>using <a href="Array_subscript_operator.html">vector subscripts</a>, as</p> 
+	
+	<p class="blockindent"><img src="Graphics/ODEderiv.gif" alt="Rewritten ODE" width="178" height="63" align="middle" border="0"> with implied left-hand-side <img src="Graphics/ODElhs.gif" alt="implied left-hand side" width="55" height="85" align="middle" border="0"></p>
+
+<h2>
+	<table>
+		<tr>
+			<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+			<td valign="top"><a name="Jacob">Computing the Jacobian Matrix</a></td>
+		</tr>
+	</table>
+</h2>
+
+<p>You can compute the Jacobian matrix, used by the solvers <b>BDF</b> and <b>Radau</b> using the function <a href="Jacobian.html">Jacob</a>. For the preceding example, the Jacobian matrix <b class="math">J</b> is</p>
+
+<p class="blockindent"><img src="Graphics/ODEjacob.gif" alt="Jacobian matrix of partial derivatives of the system of equations in D" width="259" height="50" border="0"></p>
+	 
+<p>To compute the augmented Jacobian, used by the solvers <b>Stiffb</b> and <b>Stiffr</b>, start by computing the first column of the matrix, using the function <strong>Jacob</strong>, as follows:</p>
+
+	<p class="blockindent"><img src="Graphics/aug_Jacob_col1.GIF" alt="First column of augmented Jacobian matrix." width="197" height="45" border="0"></p>
+ 
+<p>Then concatenate this column with the matrix <span class="math">J</span>, using the <a href="Joining_arrays.html"><strong>augment</strong></a> function, as follows:</p>
+	
+	<p class="blockindent"><img src="Graphics/augmented_Jacobian.GIF" alt="Augmented Jacobian matrix" width="510" height="41" border="0"></p>
+		
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li>The functions <b class="math">D</b>, <b class="math">J</b>, and <b class="math">AJ</b> are provided to the solver without their arguments, and the functions <span class="math">y<sub>n</sub>(x)</span> are specified in <b class="math">D</b>, <b class="math">J</b>, and <b class="math">AJ</b> without their argument. The second argument to <b class="math">D</b>. <b class="math">J</b>, and <b class="math">AJ</b> must be subscripted as a vector, even if there is only a single entry.</li>
+	
+  <li><b>Rkadapt</b> uses non-uniform step sizes internally when it solves the differential equation, adding more steps in regions of greater variation of the solution, but returns the solution at the number of equally spaced points specified in <span class="math">npoints</span>.</li>
+	
+  <li>You may wish to use <a href="ode_solve.html">ODE Solve Blocks</a> to simplify the entry of your equations and initial conditions.</li>
+	
+  <li>To solve stiff or algebraic ODE problems, try <a href="#stiff"><b>BDF</b>, <b>Radau</b>, <b>Stiffb</b>, or <b>Stiffr</b></a>.</li>
+
+  <li>An advantage to using <b>Radau</b> is that no symbolic Jacobian input is needed, although if <b class="math">J</b> is readily available, using it tends to increase accuracy. <b>Radau</b> uses non-uniform step sizes internally when it solves the differential equation, adding more steps in regions of greater variation of the solution, but returns the solution at the number of equally spaced points specified in <span class="math">npoints</span>.</li>
+
+  <li>Depending on the scale of the problem, and the relative step size used, you may need to reduce the value of <a href="Accuracy.html">TOL</a> to get appropriate solutions.</li>
+	
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+			id=objLaunchMathcad
+			border=0
+			width=1
+			height=1
+			align=left>
+</object></p>
+
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+		onMouseOut="document.body.style.cursor='arrow'"
+		onClick="objLaunchMathcad.OpenResourceCenter('Calculus_DEs\\odeqs1.xmcd')"
+		class=fakelink>QuickSheet - First-Order ODE Initial Value Problem</a></h5>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+		onMouseOut="document.body.style.cursor='arrow'"
+		onClick="objLaunchMathcad.OpenResourceCenter('Calculus_DEs\\odeqs3.xmcd')"
+		class=fakelink>QuickSheet - First-Order System of ODEs</a></h5>
+		
+<p>
+
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Deriving Initial Conditions for an ODE','Linear_shooting.html','Differential Equation Solvers','Differential_equation_solvers.html','Partial Differential Equation solver','numol.html','Relaxation PDE Solver','Poissons_equation.html','Solving Ordinary Differential Equations','ode_solve.html','Solving Partial Differential Equations','PDE_solve.html','State Space ODE Solver','Statespace.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+
+ </p>
+
+<hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

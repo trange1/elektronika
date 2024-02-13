@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Automation Example: Excel Table</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Automation Interfaces\nThe Mathcad Automation API\nAutomation Example: Excel Table");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Automation Example: Excel Table of Measurements</h1></td>
+	</tr>
+</table>
+
+<p>For any Windows Application that supports scripting, Mathcad's <a href="Automation.html">Automation interface </a>can be used to pass data from the application into Mathcad for further calculation, then return the data to the application. For example, Microsoft Excel is one application that can be used for storing tabular measured information as well as the repeated results of a Mathcad calculation on the measurements.</p>
+ 
+<p>In the <b>Thermocouple.xls</b> spreadsheet in the <b>qsheet/samples/excel</b> folder, you can enter a new voltage, select the cell containing the voltage, then press <b>[Ctrl]&nbsp;[Shift]&nbsp;T</b> (for temperature) to calculate a new temperature measurement in Mathcad. The temperature and the date the calculation was performed are recorded in Excel.</p>
+
+<h3>Setting Up the Environment</h3>
+
+<p>In Excel, create columns or rows that will hold your data. Much of Excel's scripting relies on knowing the row and column references for a cell, so you'll want a stable cell setup before you begin scripting. Then, to create a script, choose <b>Macro > Macros</b> from the <b>Tools</b> menu to name a new macro script and edit it. The script in the sample file is shown below.</p>
+
+<p>As with any application that supports scripting, you'll have to familiarize yourself with the classes available within that application. Excel includes a large subset of the VB commands, along with many classes unique to Excel to specify selected cells, OLEObjects, Worksheets, and so on. Pressing <b>[F1]</b> when on any script command in the script editor will bring up the documentation.</p>
+
+<p>In this example, the macro to recalculate a cell is called from the key sequence <b>[Ctrl]&nbps;[Shift]&nbsp;T</b>. Choose <b>Macro &gt; Macros</b> from the <b>Tools</b> menu to bring up the macro name box, then choose Options to assign a shortcut key.</p>
+
+<p>There are some important techniques you should use when coding an Excel macro to control Mathcad:</p>
+
+<ul type="disc">
+  <li>In this example, the Mathcad worksheet is embedded in the Excel sheet (<b>Insert &gt; Object</b>) for equation reference and portability. The Mathcad sheet is <b>not</b> linked, which would open Mathcad in a separate window when activated, and which causes errors in the VB Automation code. It is also possible to use the techniques shown in the <a href="Automation_ex1.html">VB application example</a> to drive a worksheet completely external to the Excel sheet. Since the sheet is embedded, the <a href="IMathcadWorksheet.html">Mathcad.Worksheet</a> object is called as a property of Excel's <b>OLEObjects</b> collection.</li>
+  <li>All values set using <a href="IMWSetValue.html">Mathcad.Application.Worksheet.SetValue</a> are set before other evaluations in the worksheet take place. Beware of resetting or reusing variable names in your calculations; you may wish to make external variable names unique.</li>
+  <li>It's possible to pass the <b>ActiveSheet.Range.Value</b> property directly as an array into Mathcad using <b>SetValue</b>, however, you must dimension the variable to which you assign it as type <i>variant</i>.</li>
+  <li>Windows XP defaults to disable macros in Excel unless they are signed, you may need to change your Excel Preferences to allow macros to execute.</li>
+</ul>
+
+<h3>Code</h3>
+
+<code>
+Sub mcadexecute()<br>
+<br>
+<span class="comment">'Make sure a cell with numeric data is selected.</span><br>
+If TypeName(Selection) &lt;&gt; &quot;Range&quot; Then<br>
+&nbsp;&nbsp;&nbsp;MsgBox &quot;No cell selected.&quot;<br>
+&nbsp;&nbsp;&nbsp;Exit Sub<br>
+End If<br>
+<br>
+<span class="comment">'Get the value in the selected cell</span><br>
+s = Selection.Value<br>
+<br>
+<span class="comment">'Make sure the cell isn't empty</span><br>
+If s = &quot;&quot; Then<br>
+&nbsp;&nbsp;&nbsp;MsgBox &quot;Empty cell selected.&quot;<br>
+&nbsp;&nbsp;&nbsp;Exit Sub<br>
+End If<br>
+<br>
+<span class="comment">'Activate the Mathcad object</span><br>
+Dim obj As OLEObject<br>
+Set obj = ActiveSheet.OLEObjects(1)<br>
+obj.Activate<br>
+<br>
+<span class="comment">' Get the Mathcad worksheet</span><br>
+Set Mcws = <a href="IMathcadWorksheet.html">obj.Object.Worksheet</a><br>
+<br>
+<span class="comment">'Take data from the selected cell and enter it in the worksheet</span><br>
+<a href="IMWSetValue.html">Mcws.SetValue</a> &quot;voltage&quot;, s<br>
+<br>
+<span class="comment">'Now take the 13 calibration coefficients from the worksheet, for use<br>
+'in the temperature calculation formula, and make a vector</span><br>
+Dim coeff(13) As Double<br>
+<br>
+For I = 0 To 12<br>
+&nbsp;&nbsp;&nbsp;coeff(I) = ActiveSheet.Range(&quot;A3:A15&quot;).Cells(I + 1, 1).Value<br>
+Next I<br>
+<br>
+<span class="comment">'Pass the vector to Mathcad</span><br>
+<a href="IMWSetValue.html">Mcws.SetValue</a> &quot;K&quot;, coeff<br>
+<br>
+<a href="IMWRecalculate.html">Mcws.Recalculate</a><br>
+<br>
+<span class="comment">'Figure out which row the return data should populate</span><br>
+rowNum = Selection.Rows(1).Row<br>
+<br>
+<span class="comment">' Put the output data into the cells.</span><br>
+On Error Resume Next<br>
+Cells(rowNum, 4) = <a href="IMWGetValue.html">Mcws.getValue(&quot;temp&quot;)</a><br>
+<br>
+<span class="comment">' Report bad returns from Mathcad</span><br>
+If Err Then<br>
+&nbsp;&nbsp;&nbsp;Cells(rowNum, 4) = &quot;error in calc&quot;<br>
+End If<br>
+<br>
+Cells(rowNum, 5) = Date<br>
+<br>
+End Sub<br>
+<br>
+</code>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

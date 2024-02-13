@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Relaxation PDE Solver</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Differential Equations">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nDifferential Equation Solving\nRelaxation Method for Partial Differential Equations");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Relaxation Method for Partial Differential Equations</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">relax(A, B, C, D, E, S, U, rjac)</b></p>
+<p><b class="hmath">multigrid(M, ncycle)</b></p>
+
+<p>Return a square matrix in which an element's location in the matrix corresponds to
+ its location within a square region, and an element's value approximates the solution
+ to Poisson's <acronym lang="en" title="Partial Differential Equation">PDE</acronym></p>
+
+<p class="blockindent"><img src="Graphics/POISSON.GIF" ALT="Poisson's PDE" width="123" height="47" align="middle"></p>
+
+<p>at that point. The <b>relax</b> function solves Poisson's Equation using modified 
+  Gauss-Seidel with successive overrelaxation over the grid. The <b>multigrid</b> 
+  function solves for the special case where all boundary conditions in <b class="math">U</b> 
+  are zero, using the multigrid method.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+  <li><b class="hmath">A, B, C, D, E</b> are real square matrices 
+    of the same size containing coefficients of the discretized Laplacian approximation 
+    to the function u at the four nearest neighbors and the approximation point.</li>
+  <li><b class="hmath">S</b> is a square matrix containing the source term at 
+    each point inside the square.</li>
+  <li><b class="hmath">U</b> is a square matrix containing boundary values along 
+    the edges of the region and initial guesses for the solution inside the region.</li>
+  <li><span class="hmath">rjac</span> is a real value <span class="math">0 &lt; 
+    rjac &lt; 1</span>, the spectral radius of the Jacobi iteration. This controls 
+    the convergence of the relaxation algorithm. Its optimal value depends on 
+    the details of your problem, but <img src="Graphics/rjac.gif" alt="A good starting point for the spectral radius of the Jaconi iteration" width="64" height="38" align="middle"> 
+    is a good starting value, where <span class="math">n</span> is the number 
+    of points in each direction on the grid.</li>
+  <li><b class="hmath">M</b> is a <span class="math">1 + 2<sup>n</sup></span> 
+    square matrix whose elements correspond to the source term at the corresponding 
+    point in the square domain.</li>
+  <li><span class="hmath">ncycle</span> is the integer number of cycles at each 
+    level of the <b>multigrid</b> iteration. A value of 2 generally gives 
+    a good approximation of the solution.</li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+  <li>If your boundary conditions are constant and equal on all four sides, transform 
+    the equation to have zero boundary conditions on all sides and use <b>multigrid</b>, 
+    as it is faster and easier to set up.</li>
+  <li>Poisson's equation reduces to Laplace's equation in the case <span class="math">&rho; 
+    = 0</span>.</li>
+  <li>If you are trying to solve a hyperbolic or parabolic PDE, or system of 
+    PDEs, use <a href="numol.html">numol</a> or <a href="PDE_solve.html">Pdesolve</a>.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Calculus_DEs\\heat.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Deriving Initial Conditions for an ODE','Linear_shooting.html','Differential Equation Solvers','Differential_equation_solvers.html','ODE Solvers','ODE_solvers.html','Partial Differential Equation solver','numol.html','Solving Ordinary Differential Equations','ode_solve.html','Solving Partial Differential Equations','PDE_solve.html','State Space ODE Solver','Statespace.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

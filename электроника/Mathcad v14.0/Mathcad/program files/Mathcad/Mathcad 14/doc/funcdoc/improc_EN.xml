@@ -1,0 +1,916 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FUNCTIONS>
+	<help_file>help_%s\improc\improc.htm</help_file>
+	<function>
+		<name>addnoise</name>
+		<local_name>addnoise</local_name>
+		<params>M, p, n</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M with added noise, where the noise has probabilty p/2 to add n to a pixel, and p/2 to subtract n.</description>
+		<help_topic>noise.htm</help_topic>
+	</function>
+	<function>
+		<name>and</name>
+		<local_name>and</local_name>
+		<params>M, N</params>
+		<category>Image Processing</category>
+		<description>Returns the boolean AND of two image matrices M and N, which must be the same size.</description>
+		<help_topic>boolean_functions.htm</help_topic>
+	</function>
+	<function>
+		<name>augment3</name>
+		<local_name>augment3</local_name>
+		<params>X, Y, Z</params>
+		<category>Image Processing</category>
+		<description>Returns a matrix formed by putting matrices (or vectors) X, Y, and Z side by side. They must all have the same number of rows.</description>
+		<help_topic>working_with_matrices.htm</help_topic>
+	</function>
+	<function>
+		<name>binarize</name>
+		<local_name>binarize</local_name>
+		<params>M, thresh</params>
+		<category>Image Processing</category>
+		<description>Returns a binarized version of matrix M with pixels above threshold thresh set to 1 and below to 0.</description>
+		<help_topic>binarization.htm</help_topic>
+	</function>
+	<function>
+		<name>binarize2</name>
+		<local_name>binarize2</local_name>
+		<params>M, lowThresh, highThresh, inValue, outValue</params>
+		<category>Image Processing</category>
+		<description>Returns a binarized version of matrix M with pixels between lowThresh and highThresh set to inValue, and pixels outside to outValue.</description>
+		<help_topic>binarization.htm</help_topic>
+	</function>
+	<function>
+		<name>binarize_auto</name>
+		<local_name>binarize_auto</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns a binarized version of matrix M, choosing the threshold automatically.</description>
+		<help_topic>binarization.htm</help_topic>
+	</function>
+	<function>
+		<name>blend</name>
+		<local_name>blend</local_name>
+		<params>M, N</params>
+		<category>Image Processing</category>
+		<description>Returns a blend of same-size matrices M and N (pixelwise sum - [product/255]).</description>
+		<help_topic>blending_and_masking.htm</help_topic>
+	</function>
+	<function>
+		<name>canny</name>
+		<local_name>canny</local_name>
+		<params>M, sigma, low, high</params>
+		<category>Image Processing</category>
+		<description>Returns a binary edge image resulting from Canny edge detection on matrix M, using standard deviation sigma and hysteresis thresholds low and high.</description>
+		<help_topic>canny_edge_finder.htm</help_topic>
+	</function>
+	<function>
+		<name>center</name>
+		<local_name>center</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns fourier transform image matrix M tansformed so that DC is in the center.</description>
+		<help_topic>recentering_an_image.htm</help_topic>
+	</function>
+	<function>
+		<name>centsmooth</name>
+		<local_name>centsmooth</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M smoothed with a 3x3 center weighted kernel.</description>
+		<help_topic>smoothing.htm</help_topic>
+	</function>
+	<function>
+		<name>clip</name>
+		<local_name>clip</local_name>
+		<params>M, Min, Max</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M with elements clipped to lie between Min and Max.</description>
+		<help_topic>scaling_and_clipping.htm</help_topic>
+	</function>
+	<function>
+		<name>close</name>
+		<local_name>close</local_name>
+		<params>M, Melem, b</params>
+		<category>Image Processing</category>
+		<description>Performs binary closing on matrix M at threshold b with structuring element Melem.</description>
+		<help_topic>opening_and_closing.htm</help_topic>
+	</function>
+	<function>
+		<name>cnvxhull</name>
+		<local_name>cnvxhull</local_name>
+		<params>M, fg</params>
+		<category>Image Processing</category>
+		<description>Returns a matrix containing the convex hull of pixels of value fg in matrix M.</description>
+		<help_topic>convex_hull.htm</help_topic>
+	</function>
+	<function>
+		<name>colgrad</name>
+		<local_name>colgrad</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the column gradient (difference by columns) of matrix M.</description>
+		<help_topic>gradients.htm</help_topic>
+	</function>
+	<function>
+		<name>compgrad</name>
+		<local_name>compgrad</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Performs edge detection by comparing the gradients of the 8 neighbors on matrix M.</description>
+		<help_topic>convolution_and_comparison.htm</help_topic>
+	</function>
+	<function>
+		<name>concomp</name>
+		<local_name>concomp</local_name>
+		<params>M, con, fg</params>
+		<category>Image Processing</category>
+		<description>Performs connected component labeling of the pixels with grayscale value fg in matrix M, considering 4-connected neighbors if con is 4 or 8-connected if con is 8.</description>
+		<help_topic>connected_component_labeling.htm</help_topic>
+	</function>
+	<function>
+		<name>convol2d</name>
+		<local_name>convol2d</local_name>
+		<params>M, K</params>
+		<category>Image Processing</category>
+		<description>Returns the convolution of matrix M with kernel K.</description>
+		<help_topic>convolution.htm</help_topic>
+	</function>
+	<function>
+		<name>convolve3</name>
+		<local_name>convolve3</local_name>
+		<params>M, K</params>
+		<category>Image Processing</category>
+		<description>Returns the quick convolution of matrix M with 3x3 kernel K.</description>
+		<help_topic>convolution.htm</help_topic>
+	</function>
+	<function>
+		<name>convolve5</name>
+		<local_name>convolve5</local_name>
+		<params>M, K</params>
+		<category>Image Processing</category>
+		<description>Returns the quick convolution of matrix M with 5x5 kernel K.</description>
+		<help_topic>convolution.htm</help_topic>
+	</function>
+	<function>
+		<name>dct2d</name>
+		<local_name>dct2d</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the 2D discrete cosine transform (type II) of matrix M.</description>
+		<help_topic>discrete_cosine_transform.htm</help_topic>
+	</function>
+	<function>
+		<name>diacrisp</name>
+		<local_name>diacrisp</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M crisped with a 3x3 diagonally weighted kernel.</description>
+		<help_topic>crisping.htm</help_topic>
+	</function>
+	<function>
+		<name>difedge</name>
+		<local_name>difedge</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Performs edge-detection by differential convolution on matrix M.</description>
+		<help_topic>convolution_edge_finders.htm</help_topic>
+	</function>
+	<function>
+		<name>dilate</name>
+		<local_name>dilate</local_name>
+		<params>M, Melem, r_origin, c_origin, b</params>
+		<category>Image Processing</category>
+		<description>Performs binary dilation on matrix M at threshold b using structuring element Melem with origin at row r_origin and column c_origin.</description>
+		<help_topic>dilation.htm</help_topic>
+	</function>
+	<function>
+		<name>dilate4</name>
+		<local_name>dilate4</local_name>
+		<params>M, b</params>
+		<category>Image Processing</category>
+		<description>Performs dilation on matrix M at threshold b using 4 neighbors.</description>
+		<help_topic>dilation.htm</help_topic>
+	</function>
+	<function>
+		<name>dilate8</name>
+		<local_name>dilate8</local_name>
+		<params>M, b</params>
+		<category>Image Processing</category>
+		<description>Performs dilation on matrix M at threshold b using 8 neighbors.</description>
+		<help_topic>dilation.htm</help_topic>
+	</function>
+	<function>
+		<name>distform</name>
+		<local_name>distform</local_name>
+		<params>M, fg</params>
+		<category>Image Processing</category>
+		<description>Returns the distance transform of image M using foreground gray value fg.</description>
+		<help_topic>euclidean_distance_transform.htm</help_topic>
+	</function>
+	<function>
+		<name>equalize</name>
+		<local_name>equalize</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M with grayscale adjusted to form a linear cumulative histogram.</description>
+		<help_topic>equalizing.htm</help_topic>
+	</function>
+	<function>
+		<name>erode</name>
+		<local_name>erode</local_name>
+		<params>M, Melem, r_origin, c_origin, b</params>
+		<category>Image Processing</category>
+		<description>Performs binary erosion on matrix M at threshold b using structuring element Melem with origin at row r_origin and column c_origin.</description>
+		<help_topic>erosion.htm</help_topic>
+	</function>
+	<function>
+		<name>erode4</name>
+		<local_name>erode4</local_name>
+		<params>M, b</params>
+		<category>Image Processing</category>
+		<description>Performs erosion on matrix M at threshold b using 4 neighbors.</description>
+		<help_topic>erosion.htm</help_topic>
+	</function>
+	<function>
+		<name>erode8</name>
+		<local_name>erode8</local_name>
+		<params>M, b</params>
+		<category>Image Processing</category>
+		<description>Performs erosion on matrix M at threshold b using 8 neighbors.</description>
+		<help_topic>erosion.htm</help_topic>
+	</function>
+	<function>
+		<name>extract</name>
+		<local_name>extract</local_name>
+		<params>M, n</params>
+		<category>Image Processing</category>
+		<description>Returns the nth (1, 2, or 3) color component of packed 3-color matrix M.</description>
+		<help_topic>packed.htm</help_topic>
+	</function>
+	<function>
+		<name>freichen</name>
+		<local_name>freichen</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Performs edge detection by Frei-Chen convolution on matrix M.</description>
+		<help_topic>convolution_edge_finders.htm</help_topic>
+	</function>
+	<function>
+		<name>funcdeconv</name>
+		<local_name>funcdeconv</local_name>
+		<params>M, f, e</params>
+		<category>Image Processing</category>
+		<description>Deconvolution of matrix M with frequency domain function f and error e.</description>
+		<help_topic>filter_fourier.htm</help_topic>
+	</function>
+	<function>
+		<name>funconv</name>
+		<local_name>funconv</local_name>
+		<params>M, f</params>
+		<category>Image Processing</category>
+		<description>Convolution of matrix M with frequency domain function f.</description>
+		<help_topic>filter_fourier.htm</help_topic>
+	</function>
+	<function>
+		<name>funmap</name>
+		<local_name>funmap</local_name>
+		<params>M, f</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M with function f applied to each element.</description>
+		<help_topic>mapping.htm</help_topic>
+	</function>
+	<function>
+		<name>gaussconv</name>
+		<local_name>gaussconv</local_name>
+		<params>M, s</params>
+		<category>Image Processing</category>
+		<description>Convolution of matrix M with frequency domain gaussian of half-width s.</description>
+		<help_topic>filter_gauss.htm</help_topic>
+	</function>
+	<function>
+		<name>gaussdeconv</name>
+		<local_name>gaussdeconv</local_name>
+		<params>M, s, e</params>
+		<category>Image Processing</category>
+		<description>Deconvolution of matrix M with frequency domain gaussian of half-width s with error e.</description>
+		<help_topic>filter_gauss.htm</help_topic>
+	</function>
+	<function>
+		<name>getnoise</name>
+		<local_name>getnoise</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the difference between matrix M and median filtered M.</description>
+		<help_topic>median_filtering.htm</help_topic>
+	</function>
+	<function>
+		<name>gray_to_rgb</name>
+		<local_name>gray_to_rgb</local_name>
+		<params>gray, colormap</params>
+		<category>Image Processing</category>
+		<description>Returns grayscale matrix gray converted to color using color palette matrix colormap.</description>
+		<help_topic>converting_images_grayscale.htm</help_topic>
+	</function>
+	<function>
+		<name>gray_close</name>
+		<local_name>gray_close</local_name>
+		<params>M, Melem</params>
+		<category>Image Processing</category>
+		<description>Performs grayscale closing on matrix M with structuring element Melem.</description>
+		<help_topic>gray_scale_morphology.htm</help_topic>
+	</function>
+	<function>
+		<name>gray_dilate</name>
+		<local_name>gray_dilate</local_name>
+		<params>M, Melem, r_origin, c_origin</params>
+		<category>Image Processing</category>
+		<description>Performs grayscale dilation on matrix M using structuring element Melem with origin at row r_origin and column c_origin.</description>
+		<help_topic>gray_scale_morphology.htm</help_topic>
+	</function>
+	<function>
+		<name>gray_erode</name>
+		<local_name>gray_erode</local_name>
+		<params>M, Melem, r_origin, c_origin</params>
+		<category>Image Processing</category>
+		<description>Performs grayscale erosion on matrix M using structuring element Melem with origin at row r_origin and column c_origin.</description>
+		<help_topic>gray_scale_morphology.htm</help_topic>
+	</function>
+	<function>
+		<name>gray_open</name>
+		<local_name>gray_open</local_name>
+		<params>M, Melem</params>
+		<category>Image Processing</category>
+		<description>Performs grayscale opening on matrix M with structuring element Melem.</description>
+		<help_topic>gray_scale_morphology.htm</help_topic>
+	</function>
+	<function>
+		<name>hist2d</name>
+		<local_name>hist2d</local_name>
+		<params>M, N, n</params>
+		<category>Image Processing</category>
+		<description>Returns a two-dimensional histogram with n bins on equal-sized matrices M and N.</description>
+		<help_topic>histograms.htm</help_topic>
+	</function>
+	<function>
+		<name>hls_to_rgb</name>
+		<local_name>hls_to_rgb</local_name>
+		<params>HLS</params>
+		<category>Image Processing</category>
+		<description>Returns array HLS in HLS color representation converted to RGB color representation.</description>
+		<help_topic>converting_images_rgb_hlshsv.htm</help_topic>
+	</function>
+	<function>
+		<name>horzflip</name>
+		<local_name>horzflip</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the matrix M flipped horizontally.</description>
+		<help_topic>flipping.htm</help_topic>
+	</function>
+	<function>
+		<name>hsv_to_rgb</name>
+		<local_name>hsv_to_rgb</local_name>
+		<params>HSV</params>
+		<category>Image Processing</category>
+		<description>Returns array HSV in HSV color representation converted to RGB color representation.</description>
+		<help_topic>converting_images_rgb_hlshsv.htm</help_topic>
+	</function>
+	<function>
+		<name>idct2d</name>
+		<local_name>idct2d</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the inverse 2D discrete cosine transform (type II) of matrix M.</description>
+		<help_topic>discrete_cosine_transform.htm</help_topic>
+	</function>
+	<function>
+		<name>imhist</name>
+		<local_name>imhist</local_name>
+		<params>M, n</params>
+		<category>Image Processing</category>
+		<description>Returns an n-bin histogram of M for values between 0 and 255 (ignores values outside that range).</description>
+		<help_topic>histograms.htm</help_topic>
+	</function>
+	<function>
+		<name>imhist2</name>
+		<local_name>imhist2</local_name>
+		<params>M, n</params>
+		<category>Image Processing</category>
+		<description>Returns an n-bin histogram of M over its range of values.</description>
+		<help_topic>histograms.htm</help_topic>
+	</function>
+	<function>
+		<name>immse</name>
+		<local_name>immse</local_name>
+		<params>M, Q</params>
+		<category>Image Processing</category>
+		<description>Returns the mean-squared-error (MSE) between image matrices M and Q.</description>
+		<help_topic>error_measurement.htm</help_topic>
+	</function>
+	<function>
+		<name>imquant</name>
+		<local_name>imquant</local_name>
+		<params>M, n</params>
+		<category>Image Processing</category>
+		<description>Returns a quantized version of matrix M containing only n equally-spaced grayscale levels between 0 and 255.</description>
+		<help_topic>quantization.htm</help_topic>
+	</function>
+	<function>
+		<name>imquant2</name>
+		<local_name>imquant2</local_name>
+		<params>M, v</params>
+		<category>Image Processing</category>
+		<description>Returns a quantized version of matrix M containing only the grayscale levels in vector v.</description>
+		<help_topic>quantization.htm</help_topic>
+	</function>
+	<function>
+		<name>imsnr</name>
+		<local_name>imsnr</local_name>
+		<params>M, Q</params>
+		<category>Image Processing</category>
+		<description>Returns the signal-to-noise ratio (SNR) between image matrices M and Q.</description>
+		<help_topic>noise_measurement.htm</help_topic>
+	</function>
+	<function>
+		<name>invert</name>
+		<local_name>invert</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the matrix M with each element set to 255 - element.</description>
+		<help_topic>inverting.htm</help_topic>
+	</function>
+	<function>
+		<name>invert2</name>
+		<local_name>invert2</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the matrix M with each element set to max(M) - element + min(M).</description>
+		<help_topic>inverting.htm</help_topic>
+	</function>
+	<function>
+		<name>iwave2d</name>
+		<local_name>iwave2d</local_name>
+		<params>M, n</params>
+		<category>Image Processing</category>
+		<description>The n-level inverse wavelet transform of M.</description>
+		<help_topic>wavelet_transform_filtering.htm</help_topic>
+	</function>
+	<function>
+		<name>kirsch</name>
+		<local_name>kirsch</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Performs edge detection by kirsch convolution and comparison on matrix M.</description>
+		<help_topic>convolution_and_comparison.htm</help_topic>
+	</function>
+	<function>
+		<name>laplace4</name>
+		<local_name>laplace4</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the convolution of matrix M with a 3x3 Laplacian kernel. The kernel's center is 4.</description>
+		<help_topic>laplacian_edge_finders.htm</help_topic>
+	</function>
+	<function>
+		<name>laplace8</name>
+		<local_name>laplace8</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the convolution of matrix M with a 3x3 Laplacian kernel. The kernel's center is 8.</description>
+		<help_topic>laplacian_edge_finders.htm</help_topic>
+	</function>
+	<function>
+		<name>laplace24</name>
+		<local_name>laplace24</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the convolution of matrix M with a 5x5 Laplacian kernel. The kernel's center is 24.</description>
+		<help_topic>laplacian_edge_finders.htm</help_topic>
+	</function>
+	<function>
+		<name>levelmap</name>
+		<local_name>levelmap</local_name>
+		<params>M, vec</params>
+		<category>Image Processing</category>
+		<description>Returns matrix with values in vec assigned by matching vec's indices to elements in matrix M. vec must be such that the elements of M are between 0 and length(vec) - 1.</description>
+		<help_topic>mapping.htm</help_topic>
+	</function>
+	<function>
+		<name>mask</name>
+		<local_name>mask</local_name>
+		<params>M, N</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M masked by same-size matrix N (i.e. with zeros where N is zero).</description>
+		<help_topic>blending_and_masking.htm</help_topic>
+	</function>
+	<function>
+		<name>matconv</name>
+		<local_name>matconv</local_name>
+		<params>M, N</params>
+		<category>Image Processing</category>
+		<description>Convolution of matrix M with frequency domain mask N.</description>
+		<help_topic>filter_fourier.htm</help_topic>
+	</function>
+	<function>
+		<name>matdeconv</name>
+		<local_name>matdeconv</local_name>
+		<params>M, N, e</params>
+		<category>Image Processing</category>
+		<description>Deconvolution of matrix M with frequency domain mask N and error e.</description>
+		<help_topic>filter_fourier.htm</help_topic>
+	</function>
+	<function>
+		<name>medfilt</name>
+		<local_name>medfilt</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns median filtered M.</description>
+		<help_topic>median_filtering.htm</help_topic>
+	</function>
+	<function>
+		<name>moment_invariant</name>
+		<local_name>moment_invariant</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns a vector containing the seven typical moment invariants of M.</description>
+		<help_topic>moment_invariants.htm</help_topic>
+	</function>
+	<function>
+		<name>open</name>
+		<local_name>open</local_name>
+		<params>M, Melem, b</params>
+		<category>Image Processing</category>
+		<description>Performs binary opening on matrix M at threshold b using structuring element Melem.</description>
+		<help_topic>opening_and_closing.htm</help_topic>
+	</function>
+	<function>
+		<name>or</name>
+		<local_name>or</local_name>
+		<params>M, N</params>
+		<category>Image Processing</category>
+		<description>Returns boolean OR of two image matrices M and N, which must be the same size.</description>
+		<help_topic>boolean_functions.htm</help_topic>
+	</function>
+	<function>
+		<name>orthocrisp</name>
+		<local_name>orthocrisp</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M crisped with a 3x3 orthogonally weighted kernel.</description>
+		<help_topic>crisping.htm</help_topic>
+	</function>
+	<function>
+		<name>orthocrisp5</name>
+		<local_name>orthocrisp5</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M crisped with a 5x5 orthogonally weighted kernel.</description>
+		<help_topic>crisping.htm</help_topic>
+	</function>
+	<function>
+		<name>orthosmooth</name>
+		<local_name>orthosmooth</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M smoothed with a 3x3 orthogonally weighted kernel.</description>
+		<help_topic>smoothing.htm</help_topic>
+	</function>
+	<function>
+		<name>orthosmooth5</name>
+		<local_name>orthosmooth5</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M smoothed with a 5x5 orthogonally weighted kernel.</description>
+		<help_topic>smoothing.htm</help_topic>
+	</function>
+	<function>
+		<name>prewitt</name>
+		<local_name>prewitt</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Performs edge detection by Prewitt convolution on matrix M.</description>
+		<help_topic>convolution_edge_finders.htm</help_topic>
+	</function>
+	<function>
+		<name>putregion</name>
+		<local_name>putregion</local_name>
+		<params>M, N, row, col</params>
+		<category>Image Processing</category>
+		<description>Returns the matrix N inserted into M at row row and column col.</description>
+		<help_topic>replacing_part_of_an_image.htm</help_topic>
+	</function>
+	<function>
+		<name>quantfilt</name>
+		<local_name>quantfilt</local_name>
+		<params>M, elem, quantile</params>
+		<category>Image Processing</category>
+		<description>Performs quantile filtering on M using neighborhood matrix elem and quantile probability quantile.</description>
+		<help_topic>quantile_filtering.htm</help_topic>
+	</function>
+	<function>
+		<name>READRAW</name>
+		<local_name>READRAW</local_name>
+		<params>filename, rows, cols, bits, endian, skip</params>
+		<category>Image Processing</category>
+		<description>Returns the contents of a raw binary image file as a matrix. The binary file is interpreted to contain a rows x cols matrix of bits (8 or 16) bits per pixel packed integers, in "Little" or "Big" endian format, and skip bytes are skipped for header at the beginning of the file.</description>
+		<help_topic>readwrite_raw.htm</help_topic>
+	</function>
+	<function>
+		<name>reg_grow</name>
+		<local_name>reg_grow</local_name>
+		<params>M, x_gridsize, y_gridsize, num_regions</params>
+		<category>Image Processing</category>
+		<description>Performs the piecewise-constant energy-based region growing segmentation of M into num_regions regions, using initial grid spaced by x_gridsize along x and y_gridsize along y.</description>
+		<help_topic>region_growing.htm</help_topic>
+	</function>
+	<function>
+		<name>relerror</name>
+		<local_name>relerror</local_name>
+		<params>M, Q</params>
+		<category>Image Processing</category>
+		<description>Returns the relative error between matrices M and Q.</description>
+		<help_topic>error_measurement.htm</help_topic>
+	</function>
+	<function>
+		<name>replace</name>
+		<local_name>replace</local_name>
+		<params>M, N, n</params>
+		<category>Image Processing</category>
+		<description>Returns packed image matrix M with the nth (1, 2, or 3) color component replaced by matrix N, which must have the same number of rows as M and 1/3 as many columns.</description>
+		<help_topic>packed.htm</help_topic>
+	</function>
+	<function>
+		<name>rgb_to_gray</name>
+		<local_name>rgb_to_gray</local_name>
+		<params>RGB</params>
+		<category>Image Processing</category>
+		<description>Returns RGB color array RGB converted to grayscale.</description>
+		<help_topic>converting_images_grayscale.htm</help_topic>
+	</function>
+	<function>
+		<name>rgb_to_hls</name>
+		<local_name>rgb_to_hls</local_name>
+		<params>RGB</params>
+		<category>Image Processing</category>
+		<description>Returns array RGB in RGB color representation converted to HLS color representation.</description>
+		<help_topic>converting_images_rgb_hlshsv.htm</help_topic>
+	</function>
+	<function>
+		<name>rgb_to_hsv</name>
+		<local_name>rgb_to_hsv</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns array RGB in RGB color representation converted to HSV color representation.</description>
+		<help_topic>converting_images_rgb_hlshsv.htm</help_topic>
+	</function>
+	<function>
+		<name>rgb_to_ycbcr</name>
+		<local_name>rgb_to_ycbcr</local_name>
+		<params>RGB</params>
+		<category>Image Processing</category>
+		<description>Returns array RGB in RGB color representation converted to YCbCr color representation.</description>
+		<help_topic>converting_between_rgb_and_tv.htm</help_topic>
+	</function>
+	<function>
+		<name>rgb_to_yiq</name>
+		<local_name>rgb_to_yiq</local_name>
+		<params>RGB</params>
+		<category>Image Processing</category>
+		<description>Returns array RGB in RGB color representation converted to YIQ color representation.</description>
+		<help_topic>converting_between_rgb_and_tv.htm</help_topic>
+	</function>
+	<function>
+		<name>roberts</name>
+		<local_name>roberts</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Performs edge detection by Roberts convolution on matrix M.</description>
+		<help_topic>convolution_edge_finders.htm</help_topic>
+	</function>
+	<function>
+		<name>robinson3</name>
+		<local_name>robinson3</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Performs edge detection by 3x3 Robinson convolution and comparison on matrix M.</description>
+		<help_topic>convolution_and_comparison.htm</help_topic>
+	</function>
+	<function>
+		<name>robinson5</name>
+		<local_name>robinson5</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Performs edge detection by 5x5 Robinson convolution and comparison on matrix M.</description>
+		<help_topic>convolution_and_comparison.htm</help_topic>
+	</function>
+	<function>
+		<name>rotate</name>
+		<local_name>rotate</local_name>
+		<params>M, angle</params>
+		<category>Image Processing</category>
+		<description>Returns the matrix M rotated angle degrees counterclockwise.</description>
+		<help_topic>rotating.htm</help_topic>
+	</function>
+	<function>
+		<name>rotate180</name>
+		<local_name>rotate180</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the matrix M rotated 180 degrees counterclockwise.</description>
+		<help_topic>rotating.htm</help_topic>
+	</function>
+	<function>
+		<name>rotate90</name>
+		<local_name>rotate90</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the matrix M rotated 90 degrees counterclockwise.</description>
+		<help_topic>rotating.htm</help_topic>
+	</function>
+	<function>
+		<name>rotate270</name>
+		<local_name>rotate270</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the matrix M rotated 270 degrees counterclockwise.</description>
+		<help_topic>rotating.htm</help_topic>
+	</function>
+	<function>
+		<name>rowgrad</name>
+		<local_name>rowgrad</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the row gradient (difference by rows) of matrix M.</description>
+		<help_topic>gradients.htm</help_topic>
+	</function>
+	<function>
+		<name>scale</name>
+		<local_name>scale</local_name>
+		<params>M, Min, Max</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M with elements scaled between Min and Max.</description>
+		<help_topic>scaling_and_clipping.htm</help_topic>
+	</function>
+	<function>
+		<name>shape_features</name>
+		<local_name>shape_features</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns a matrix of moments and shape features for each distinct pixel value in labeled image M.</description>
+		<help_topic>shape_features.htm</help_topic>
+	</function>
+	<function>
+		<name>skeleton</name>
+		<local_name>skeleton</local_name>
+		<params>B</params>
+		<category>Image Processing</category>
+		<description>Returns binary matrix B eroded to its innermost level.</description>
+		<help_topic>thinning_and_skeletonizing.htm</help_topic>
+	</function>
+	<function>
+		<name>skeleton2</name>
+		<local_name>skeleton2</local_name>
+		<params>M, b</params>
+		<category>Image Processing</category>
+		<description>Returns the skeleton of matrix M binarized with threshold b.</description>
+		<help_topic>thinning_and_skeletonizing.htm</help_topic>
+	</function>
+	<function>
+		<name>sobel</name>
+		<local_name>sobel</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Performs edge detection by Sobel convolution on matrix M.</description>
+		<help_topic>convolution_edge_finders.htm</help_topic>
+	</function>
+	<function>
+		<name>subcolor</name>
+		<local_name>subcolor</local_name>
+		<params>M, ir, jr, ic, jc</params>
+		<category>Image Processing</category>
+		<description>Returns the submatrix from row ir to jr, column ic to jc, of packed color matrix M.</description>
+		<help_topic>working_with_matrices.htm</help_topic>
+	</function>
+	<function>
+		<name>thin</name>
+		<local_name>thin</local_name>
+		<params>M, b</params>
+		<category>Image Processing</category>
+		<description>Returns the thinned version of matrix M binarized with threshold b.</description>
+		<help_topic>thinning_and_skeletonizing.htm</help_topic>
+	</function>
+	<function>
+		<name>threshold</name>
+		<local_name>threshold</local_name>
+		<params>M, thresh</params>
+		<category>Image Processing</category>
+		<description>Returns the matrix M with every element below thresh set to thresh. If thresh is negative, every element above -thresh is set to -thresh.</description>
+		<help_topic>thresholding.htm</help_topic>
+	</function>
+	<function>
+		<name>translate</name>
+		<local_name>translate</local_name>
+		<params>M, rows, cols, pad</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M translated by rows rows and cols colums, padding unfilled matrix elements with pad.</description>
+		<help_topic>translating.htm</help_topic>
+	</function>
+	<function>
+		<name>unicrisp</name>
+		<local_name>unicrisp</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M crisped with a 3x3 uniformly weighted kernel.</description>
+		<help_topic>crisping.htm</help_topic>
+	</function>
+	<function>
+		<name>unismooth</name>
+		<local_name>unismooth</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M smoothed with a 3x3 uniformly weighted kernel.</description>
+		<help_topic>smoothing.htm</help_topic>
+	</function>
+	<function>
+		<name>unismooth5</name>
+		<local_name>unismooth5</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns matrix M smoothed with a 5x5 uniformly weighted kernel.</description>
+		<help_topic>smoothing.htm</help_topic>
+	</function>
+	<function>
+		<name>vertflip</name>
+		<local_name>vertflip</local_name>
+		<params>M</params>
+		<category>Image Processing</category>
+		<description>Returns the matrix M flipped vertically.</description>
+		<help_topic>flipping.htm</help_topic>
+	</function>
+	<function>
+		<name>warp</name>
+		<local_name>warp</local_name>
+		<params>M, T</params>
+		<category>Image Processing</category>
+		<description>Performs bilinear warping on matrix M, using tie-points stored in matrix T.</description>
+		<help_topic>warping.htm</help_topic>
+	</function>
+	<function>
+		<name>wave2d</name>
+		<local_name>wave2d</local_name>
+		<params>M, n</params>
+		<category>Image Processing</category>
+		<description>The n-level wavelet tranform of M.</description>
+		<help_topic>wavelet_transform_filtering.htm</help_topic>
+	</function>
+	<function>
+		<name>wavescale</name>
+		<local_name>wavescale</local_name>
+		<params>M, n, Min, Max</params>
+		<category>Image Processing</category>
+		<description>The n-level wavelet transform of M, scaled between Min and Max.</description>
+		<help_topic>wavelet_transform_filtering.htm</help_topic>
+	</function>
+	<function>
+		<name>wiener2d</name>
+		<local_name>wiener2d</local_name>
+		<params>M, win_h, win_w</params>
+		<category>Image Processing</category>
+		<description>Perform 2D adaptive Wiener filtering on M using a local window win_w pixels wide by win_h pixels high.</description>
+		<help_topic>wiener_filtering.htm</help_topic>
+	</function>
+	<function>
+		<name>WRITERAW</name>
+		<local_name>WRITERAW</local_name>
+		<params>filename, bits, endian</params>
+		<category>Image Processing</category>
+		<description>Writes a matrix M to raw binary integer image file filename, using either 8 or 16 bits per pixel, in "Little" or "Big" endian storage order. Set this function equal to the matrix M.</description>
+		<help_topic>readwrite_raw.htm</help_topic>
+	</function>
+	<function>
+		<name>ycbcr_to_rgb</name>
+		<local_name>ycbcr_to_rgb</local_name>
+		<params>YCbCr</params>
+		<category>Image Processing</category>
+		<description>Returns array YCbCr in YCbCr color representation converted to RGB color representation.</description>
+		<help_topic>converting_between_rgb_and_tv.htm</help_topic>
+	</function>
+	<function>
+		<name>yiq_to_rgb</name>
+		<local_name>yiq_to_rgb</local_name>
+		<params>YIQ</params>
+		<category>Image Processing</category>
+		<description>Returns array YIQ in YIQ color representation converted to RGB color representation.</description>
+		<help_topic>converting_between_rgb_and_tv.htm</help_topic>
+	</function>
+	<function>
+		<name>zoom</name>
+		<local_name>zoom</local_name>
+		<params>M, hscale, vscale</params>
+		<category>Image Processing</category>
+		<description>Return image matrix M resized by factor hscale horizontally and vscale vertically.</description>
+		<help_topic>zooming.htm</help_topic>
+	</function>
+</FUNCTIONS>

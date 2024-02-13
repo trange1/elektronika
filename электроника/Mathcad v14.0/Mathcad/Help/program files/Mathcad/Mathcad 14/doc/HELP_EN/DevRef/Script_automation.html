@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Automation in Scriptable Objects</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Scripting Custom OLE Objects\nAutomation in Scriptable Objects");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Automation in Scriptable Objects</h1></td>
+	</tr>
+</table>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Overview</td></tr>
+</table>
+</h2>
+
+<p>A <a href="ScriptableObject.html">Scriptable Object</a> (including any of the Mathsoft <a href="Controls.html">Controls</a>) may access <a href="Automation.html">Mathcad's Automation interface</a> in its script. Specifically, you can refer to worksheet variables - numbers, strings, arrays - directly, and you can get and set properties and call methods of the worksheet, the application, and the window.</p>
+
+<p>You may need to explicitly include a Recalculate method for the control or the worksheet, since this activity is automatically handled by the Input and Output variables on the control, but not necessarily by Automation commands.</p>
+
+<p>You can get and set worksheet values using the Automation commands <a href="IMWGetValue.html">GetValue</a> and <a href="IMWSetValue.html">SetValue</a> in a script, in addition to using the input and output values on the control. However, the <a href="Script_datavalues.html">datavalues</a> collection, presented as input and output variables to the component in the worksheet, are what allow a scripted component to interact with a Mathcad worksheet's calculations. You must assign input values to any component that will use worksheet variables, even if you access the value of the variable through <a href="IMWGetValue.html">GetValue</a> or <a href="IMWSetValue.html">SetValue</a> methods. The input and output collections are only available inside the Exec event, so you will need to use Automation methods to work with variable values in other event handlers, such as the Click() event handler shown in the example below.</p>
+
+<p>If there are multiple bindings of the same variable name in your worksheet, the <b>GetValue</b> method can crash Mathcad when used in a scripted component. If the <b>GetValue</b> method is used in a scripted component, the variable name must appear only once in the document, in addition to being supplied as an input to the component.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Simple Annotated Example</td></tr>
+</table>
+</h2>
+
+<p>Here is an annotated example that shows how a button can be used to enable and disable Automatic Calculation in the active worksheet. Other worksheets containing controls are located in the <b>qsheet\Samples\Controls</b> subdirectory of your installation of Mathcad.</p>
+
+<h3>Script</h3>
+
+<code>
+
+Dim state<br>
+<br>
+Sub PushBtnEvent_Start()<br>
+Rem TODO: Add your code here<br>
+End Sub<br>
+<br>
+Sub PushBtnEvent_Exec(Inputs,Outputs)<br>
+End Sub<br>
+<br>
+Sub PushBtnEvent_Stop()<br>
+Rem TODO: Add your code here<br>
+End Sub<br>
+<br>
+Sub PushBtn_Click()<br>
+If state = 0 Then<br>
+state = 1<br>
+PushBtn.Flat = 1<br>
+PushBtn.Text = &quot;Auto Calculation is OFF&quot;<br>
+<a href="IMWSetOption.html">Worksheet.SetOption</a> mcAutocalc, False<br>
+Else<br>
+state = 0<br>
+PushBtn.Flat = 0<br>
+PushBtn.Text = &quot;Auto Calculation is ON&quot;<br>
+Worksheet.SetOption mcAutocalc, True<br>
+End If<br>
+<br>
+<span class="comment">Recalculate is a method of PushBtn, <br>but can also be used by itself, <br>and refers to the region as a whole, causing it to recalculate</span>
+<br>
+PushBtn.Recalculate()<br>
+End Sub<br>
+<br>
+</code>
+
+<h3>How It Appears in the Worksheet</h3>
+
+<p class="blockindent"><img src="Graphics/automate1.gif" alt="list box and text box" width="204" height="129" border="1"></p>
+
+<h3>Comments</h3>
+
+<p>The Worksheet object supports a <a href="IMWSetOption.html">SetOption method</a>, an option of which is enabling and disabling Automatic Calculation. The state and appearance of the button is set in the script, too, but these settings may also be adjusted in the Properties dialog box.</p>
+
+<p>Other worksheet actions you might want to automate in a button include printing a worksheet, recalculating a worksheet, and saving a worksheet. These are all methods supported in the <a href="IMathcadWorksheet.html">Worksheet class</a>.</p>
+
+ 
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'" 
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('samples\\controls\\automation.xmcd')"
+	   class="fakelink">Mathcad Example</a></h5>
+	   
+<hr size="2" width="100%" align="center">
+	   
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

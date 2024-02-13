@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Button Events</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Mathsoft Controls\nButtons\nButton Events");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>Button Events</h1></td>
+	</tr>
+</table>
+
+<h3><a name="Click">Click and DblClick</a></h3>
+
+<code>
+Private Sub Button_<b>Click</b>()<br>
+Private Sub Button_<b>DblClick</b>()<br>
+</code>
+  
+<p>The <b>Click</b> event is fired when the button is single clicked. This event is commonly used with check box or push button styles to process code. In the Click event handler, you would likely call the <a href="Control_btnmethod.html#Recalculate">Recalculate method</a>. In the <a href="Script_ExecEvent.html">Exec event</a> handler, you would query the <a href="Control_btnstate.html">Check property</a> to determine the state of the Button. The <b>DblClick </b> event is fired when the button is double-clicked, although not commonly used for button controls.</p>
+
+<h3><a name="Error">Error</a></h3>
+
+<code>
+Private Sub Button_<b>Error</b>(<i>short Number, BSTR* Description, SCODE Scode,<br>
+&nbsp;&nbsp;BSTR Source, BSTR HelpFile, long HelpContext, boolean* CancelDisplay</i>);<br>
+</code>
+  
+<p>The <b>Error</b> event is fired when an error occurs, and can be used to create error handling that is more complex than a simple failure of the control. See the VBScript documentation from Microsoft for more information on the appropriate codes.</p>
+
+<h3><a name="KeyDown">KeyDown, KeyPress, and KeyUp</a></h3>
+
+<code>
+Private Sub Button_<b>KeyDown</b>(<i>KeyCode As Integer, Shift As Integer)</i><br>
+Private Sub Button_<b>KeyUp</b>(<i>KeyCode As Integer, Shift As Integer</i>)<br>
+Private Sub Button_<b>KeyPress</b>(<i>KeyAscii As Integer</i>)<br>
+</code>
+
+<p>The <b>KeyDown, KeyPress, and KeyUp </b> events are fired in sequence when a key is pressed and released. They are commonly used to intercept keystrokes received by a form or control. The <b>KeyPress</b> event is the most commonly handled.</p>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+	<tr>
+		<td valign="top"><p><i>KeyCode</i></p></td>
+		<td valign="top"><p>An integer that represents the key code of the key that was pressed or released.</p></td>
+	</tr>
+	<tr> 
+		<td valign="top"><p><i>Shift</i></p></td>
+		<td valign="top"><p>The state of <b>[SHIFT]</b>, <b>[CTRL]</b>, and <b>[ALT]</b>.</p></td>
+	</tr>
+	<tr> 
+		<td valign="top"><p><i>KeyAscii</i></p></td>
+		<td valign="top"><p>An integer value that represents a standard numeric ANSI  key code.</p></td>
+	</tr>
+</table>
+
+<h3><a name="MouseDown">MouseDown, MouseMove, and MouseUp</a></h3>
+
+<p><code>Private Sub Button_<b>MouseDown</b>(<i>Button As Integer, Shift As Integer,<br>
+&nbsp;&nbsp;x As OLE_XPOS_PIXELS, y As OLE_YPOS_PIXELS</i>)<br>
+Private Sub Button_<b>MouseMove</b>( <i>Button As Integer, Shift As Integer,<br>
+&nbsp;&nbsp;x As OLE_XPOS_PIXELS, y As OLE_YPOS_PIXELS</i>)<br>
+Private Sub Button_<b>MouseUp</b>(<i>Button As Integer, Shift As Integer,<br>
+&nbsp;&nbsp;x As OLE_XPOS_PIXELS, y As OLE_YPOS_PIXELS</i>)</code></p>
+
+<p>The <b>MouseDown</b> event is fired when the user presses a mouse button. The <b>MouseMove</b> event is fired when the user moves the mouse over the control. The <b>MouseUp</b> event is fired when the user releases the mouse button.</p>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+	<tr> 
+		<td valign="top"><p><i>Button</i></p></td>
+		<td valign="top"><p>An integer value that identifies which mouse button caused the event.</p></td>
+	</tr>
+	<tr> 
+		<td valign="top"><p><i>Shift</i></p></td>
+		<td valign="top"><p>The state of <b>[SHIFT]</b>, <b>[CTRL]</b>, and <b>[ALT]</b>.</p></td>
+	</tr>
+	<tr> 
+		<td valign="top"><p><i>x,y </i></p></td>
+		<td valign="top"><p>The horizontal or vertical position, in points, from th e left or top edge of the form, Frame, or Page.</p></td>
+	</tr>
+</table>
+
+<h3><a name="ReadyStateChange">ReadyStateChange</a></h3>
+
+<p><code>Private Sub Button_<b>ReadyStateChange</b>()</code></p>
+
+<p>The <b>ReadyStateChange</b> event is fired when a control transitions to the next ready state due to the amount of data received.</p>
+
+<h3><a name="SelectionChange">SelectionChange</a></h3>
+
+<p><code>Private Sub Button_<b>SelectionChange</b>()</code></p>
+
+<p>The <b>SelectionChange</b> event is fired when the selection of the Radio-Button group changes.</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

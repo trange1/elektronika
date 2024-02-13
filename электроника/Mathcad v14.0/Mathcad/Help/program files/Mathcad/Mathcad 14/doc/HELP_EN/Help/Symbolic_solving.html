@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+<title>Solving Equations Symbolically</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Symbolic Evaluation">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Symbolics and Keywords\nSolving an Equation Symbolically");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table><tr class="whs1">
+<td valign=top>
+<h1>Solving Equations Symbolically</h1></td></tr>
+</table>
+
+<p>To solve an equation symbolically, type the equation using the <a href="Equal_to_operator.html">Boolean equals sign</a> (<b>[Ctrl]&nbsp;[=]</b>) and either:</p>
+ 
+ <ul type="disc">	
+	<li>Press <b>[Ctrl]&nbsp;[Shift]&nbsp;[.]</b> and type the <a href="Keywords.html">keyword</a> &quot;solve.&quot;
+		
+	<p>- or -</p>
+	</li>
+ 
+	<li>Click <b>solve</b> on the <a href="Symbolic_toolbar.html"><b>Symbolic</b> toolbar</a>.</li>
+</ul>
+
+<p>Then press <b>[Enter]</b>.</p>
+
+<p>If the function contains more than one variable, type a comma after &quot;solve,&quot; and then type a comma-separated list of the variable(s) you want to solve for in the placeholder.</p>
+
+<p>Mathcad returns symbolic solutions to the equation, if possible. Otherwise, it returns numeric solutions.</p>
+
+<p><b>Note:</b> If you have previously assigned a numeric value to the variable you are solving for, Mathcad returns an error. To resolve this issue, either clear the variable's value by typing <span class="math">x:=&nbsp;x</span> or use the keyword &quot;explicit,&quot; as explained in <a href="#assigned_value">Solving for a Variable That Has an Assigned Value</a>.</p>
+
+<p>This page covers the following topics:</p>
+
+<ul type="disc">
+<li><a href="#results">Types of Solutions</a></li>
+<li><a href="#assigned_value">Solving for a Variable That Has an Assigned Value</a></li>
+<li><a href="#systems">Solving a System of Equations</a></li>
+</ul>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="results">Types of Solutions</a></td></tr>
+</table>
+</h2>
+
+<p>If the equation you are trying to solve has more than one solution, Mathcad returns the solutions in a vector, unless the solution is periodic.</p>
+ 
+ <p class="blockindent"><img src="Graphics/solving_cubic.GIF" alt="Solving a cubic equation" width="245" height="62" border="0"></p>
+
+<p>To solve an equation whose right-hand side is 0, you only need to type the left-hand side of the equation. For example, you can solve <span class="math">x&nbsp;&minus;&nbsp;10&nbsp;=&nbsp;0</span> as follows:</p>
+
+<p class="vmath">x&nbsp;&minus;&nbsp;10&nbsp;solve&nbsp;&rarr;&nbsp;10</p>
+
+<p>If the equation contains more than one variable, you must specify the variable you want to solve for after &quot;solve.&quot;</p>
+
+<p class="vmath">x&nbsp;&minus;&nbsp;a&nbsp;+&nbsp;5&nbsp;solve,x&nbsp;&rarr;&nbsp;a&nbsp;&minus;&nbsp;5</p>
+
+<p>If your equation includes numbers with decimal points, Mathcad returns a decimal answer.</p>
+
+<p class="vmath">5x&nbsp;&minus;&nbsp;4.5&nbsp;<b>=</b>&nbsp;0&nbsp;solve&nbsp;&rarr;&nbsp;0.9</p>
+
+<p>To solve an equation subject to restrictions on the domain of the variable - for example, solving over the real numbers - use the keyword &quot;<a href="Keyword_assume.html">assume</a>&quot; with &quot;solve.&quot;</p>
+
+<p>If an equation has a periodic solution, &quot;solve&quot; returns a single value from the set of solutions. For example:</p>
+
+<p class="vmath">sin(x)&nbsp;=&nbsp;0&nbsp;solve&nbsp;&rarr;&nbsp;0</p>
+
+<p>To see a more detailed solution, add the modifier &quot;fully&quot; after &quot;solve.&quot; </p>
+
+<p class="blockindent"><img src="Graphics/solve_periodic.GIF" alt="Periodic solution to sin(x) = 0" width="267" height="40" border="0"></p>
+
+<p>Mathcad returns the solution in terms of a new generated variable that represents an arbitrary integer. The generated variable is preceded by an underscore to avoid conflicts with other variables you might have defined elsewhere in the worksheet.</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="assigned_value">Solving for a Variable that Has an Assigned Value</a></td></tr>
+</table>
+</h2>
+
+<p>If you have previously assigned a numeric value to the variable you want to solve for, Mathcad returns an error because the variable is not &quot;free.&quot; To avoid this problem, either clear the variable's value by typing <span class="math">x:=&nbsp;x</span>, as described in <a href="Clearing_variables.html">Clearing the Symbolic Value of a Variable</a>, or use the keyword &quot;<a href="Explicit_calculation.html">explicit</a>&quot; to
+temporarily suppress the assigned value of the variable, as shown in the following example:</p>
+
+<p class="vmath">x:=&nbsp;5</p>
+
+<p class="blockindent"><img src="Graphics/explicit_with_solve.GIF" alt="Using explicit with solve" width="157" height="40" border="0"></p>
+
+<p>If you have assigned an expression to the variable you are solving for, Mathcad substitutes the expression and solves for the specified variable in the expression.</p>
+
+<p class="vmath">x:=&nbsp;a&nbsp;&minus;&nbsp;b&nbsp;+&nbsp;7</p>
+
+<p class="vmath">x&nbsp;+&nbsp;19&nbsp;solve,a&nbsp;&rarr;&nbsp;b&nbsp;&minus;&nbsp;26</p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top"><a name="systems">Solving a System of Equations</a></td></tr>
+</table>
+</h2>
+
+<p>To solve a system of equations symbolically, use a <a href="Solve_Block.html">Solve Block</a> and the <b><a href="find.html">Find</a></b> function with a live symbolic operator. Or you can <a href="Vectors_and_matrices.html">create a column vector</a> with each element holding one equation in the system, and solve using the live symbolics operator, specifying a column vector or a comma-separated list of system variables after the &quot;solve&quot; keyword.</p>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+	<li>Another method is to select just the variable you want to solve for (not the entire expression) and click <b>Variable</b> on the <a href="Symbolics_Menu.html"><b>Symbolics</b> menu</a>. In this case the result will not automatically update if you make changes elsewhere in the worksheet.</li>
+  <li>To solve an inequality, follow the above procedure except type <b>&gt;</b>, <b>&lt;</b>, <span class="math">&le;</span> (<b>[Ctrl]&nbsp;9</b>), or <span class="math">&ge;</span> (<b>[Ctrl]&nbsp;0</b>) in place of <b><nobr>[Ctrl]&nbsp;[=]</nobr></b>. </li>
+  <li>You can include constraint equations in a column vector with the equation(s) to restrict the solution to a range, for example, <span class="math">y &gt; 0</span>.</li>
+  <li>Solving systems of equations, inequality equations, or periodic equations may produce some <a href="Special_Symbolic_Results.html">special results</a> that don't have meaning when evaluated numerically.</li>
+  <li>You can find roots numerically using the <b><a href="Finding_roots.html">root</a></b> function, solve linear systems numerically using the <a href="solving_linear_systems.html"><b>lsolve</b></a> function, or solve linear/nonlinear systems using a <a href="Solve_Block.html">Solve Block</a>.</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+			id=objLaunchMathcad
+			border=0
+			width=1
+			height=1
+			align=left>
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+		onMouseOut="document.body.style.cursor='arrow'"
+		onClick="objLaunchMathcad.OpenResourceCenter('tutorial\\primers\\tu_07a.xmcd')"
+		class=fakelink>Tutorial: Using Symbolic Calculation</a></h5>
+		
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+		onMouseOut="document.body.style.cursor='arrow'"
+		onClick="objLaunchMathcad.OpenResourceCenter('Symbolics\\sym13.xmcd')"
+		class=fakelink>QuickSheet: Symbolic Solutions of Equations</a></h5>
+
+<p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Functions that Can Be Evaluated Both Numerically and Symbolically','Built_in_functions_symbolic.html','Making Assumptions About Variables','Keyword_assume.html','Modifiers','Modifiers.html','Overview of Symbolic Calculation','Symbolic_calculation.html','Substitutions','Substitution.html','Symbolic Arithmetic and Functions','Symbolic_arithmetic.html','Symbolic display of explicit values','Explicit_calculation.html','Symbolic Equal Sign','Symbolic_equal_sign.html','Symbolic Evaluation of Operators','Symbolic_integration.html','Symbolic Functions','Special_Symbolic_Results.html','Symbolic Optimization','Tools_-_Optimization.html','Using Keywords for Symbolic Operations','Keywords.html','Writing Complex Numbers in Standard Form','Keyword_complex.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+
+ </p>
+
+<hr size=2 width=100% align=center>
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

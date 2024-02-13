@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Reading and Writing Sound Files</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Functions\nFile Access\nReading and Writing Sound Files");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Reading and Writing Sound Files</h1></td>
+	</tr>
+</table>
+
+<p><b class="hmath">READWAV(&quot;file&quot;) </b>Creates 
+ a matrix containing signal amplitudes in <span class="math">file</span>. 
+ Each column represents a separate channel of data. Each row corresponds 
+ to a sample in time.</p>
+
+<p><b class="hmath">WRITEWAV(&quot;file&quot;, s, b, [M]) </b>Creates a WAV signal 
+ file out of a matrix. This function can be used either on the right or the left 
+ side of the <a href="Equal_sign_for_definition.html">definition operator</a>.  
+ When used on the right, you must supply the argument <b>M</b>, the name of the 
+ matrix to write to the file.  In this case, the function returns the contents 
+ of the matrix.  When used on the left, do not supply the argument <b>M</b>, 
+ but instead place it on the right hand side of the definition.  See the QuickSheet example.</p>
+
+<p><b class="hmath">GETWAVINFO(&quot;file&quot;) </b>Creates 
+ a vector with four elements containing information about <span class="math">file</span>. 
+ The elements correspond to the number of channels, the sample rate, the 
+ number of bits per sample (resolution), and the average number of bytes per 
+ second, respectively.</p>
+
+<h4>Arguments:</h4>
+
+<ul type="disc">
+	
+	<li><p><span class="hmath">file</span> is 
+ a <a href="Creating_a_String.html">string</a> corresponding to pulse code modulated 
+ (PCM) Microsoft WAV filename or <a href="Pathname.html">path</a> and filename.</p></li>
+	
+	<li><p><span class="hmath">s</span> is 
+ an integer sample rate.</p></li>
+	
+	<li><p><span class="hmath">b</span> is 
+ the bit resolution.</p></li>
+	
+	<li><p><b class="hmath">M</b> is a matrix 
+	of real numbers, where each column corresponds to a different channel, and each
+	row to a sample in time.</p></li>
+</ul>
+
+<h4>Notes:</h4>
+
+<ul type="disc">
+<li>If the specified bit resolution <span class="math">b</span> 
+ is 1-8, the data is written to <span class="math">file</span> as unsigned byte data. The limits 
+ values in the vector of amplitudes <b>M</b> range from 0 to 255 (2<sup>8</sup>). If <span class="math">b</span> is 9-16, word data (two bytes) is written to <span class="math">file</span>. The limits on word 
+ data are &minus;32768 to 32767 (2<sup>15</sup>).<p></p>
+</li>
+</ul>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Applications\\wavio.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

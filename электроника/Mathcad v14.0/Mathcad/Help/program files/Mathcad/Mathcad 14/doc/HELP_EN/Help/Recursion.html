@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>Recursion</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+ <meta name="MS-HAID" content="Programming">
+<style type="text/css">
+<!--
+tr.whs1 {height: 94px;}
+-->
+</style>
+<script type="text/javascript" language="JavaScript" title="BSSC Special Effects" src="ehlpdhtm.js"></script><script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Programming\nRecursion");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("Mcad.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr class="whs1">
+		<td valign="top"><h1>Recursion</h1></td>
+	</tr>
+</table>
+
+<p>Occasionally, you may find yourself needing to define a function that 
+ seems to build upon itself. One such function is the factorial, where 
+ the factorial of a given integer <span class="math">x</span> can be expressed as the product of <span class="math">x</span> times all positive integers less than <span class="math">x</span>. 
+ Rather than writing a long, complex program that contains similar expressions 
+ for each variation, you may be able to write the program <i>recursively</i>.</p>
+
+<p>Recursion is a powerful programming technique whereby a program is defined 
+ in terms of itself. Recursive function definitions consist of two parts:</p>
+
+<ul type="disc">
+	
+	<li><p>An initial condition to prevent the recursion 
+ from extending infinitely, and</p></li>
+	
+	<li><p>A definition of the function in terms of a previous 
+ value of the function.</p></li>
+</ul>
+
+<p>All Mathcad <a href="Defining_a_Function.html">function definitions</a> that 
+  depend on a function of the same name define the function in the following 
+  priority: </p>
+<ul>
+  <li>the function first looks for previous definitions of the same name, including 
+    Mathcad built-in functions, and uses those by default to create the new function.</li>
+  <li>If no previous definition is found, then the function is considered recursive.</li>
+</ul>
+<p>So, if you define</p> 
+
+<p class="vmath">sin(x):= sin(x*&pi;/180)</p>
+
+<p>you will change the value of the sin function for the worksheet, and if you define</p>
+
+<p class="vmath">f(x):= x/2 </span>&nbsp;&nbsp;then&nbsp;&nbsp;f(x):= f(x) + 1</p>
+
+<p> the second definition of f will be based on the first. If you define a function 
+  in terms of itself and there is no previous definition, Mathcad treats it 
+  recursively. If the recursion never ends, Mathcad detects the infinite loop 
+  and shows an error message. You can either choose different names for functions 
+  on either side of a definition, or use the <a href="Namespace_operator.html">namespace 
+  feature</a> to clarify which version of a function you mean. </p>
+
+<h2>
+<table>
+<tr>
+<td valign="top"><img src="Graphics/H2.gif" width="12" height="18" border="0"></td>
+<td valign="top">Using Recursion</td></tr>
+</table>
+</h2>
+
+<p>Recursion is similar to the principle of mathematical induction: if 
+ you can get <span class="math">f(n + 1)</span> from <span class="math">f(n)</span>, 
+ and you know <span class="math">f(0)</span>, then you know 
+ all there is to know about <span class="math">f</span>.</p>
+
+<p>Sometimes, functions which don't seem recursive on the surface can be 
+ written recursively, such as the greatest common denominator function:</p>
+
+<p class="blockindent"><img src="Graphics/RECURS.GIF" alt="A program calculating the greatest common denominator of two numbers; the program calculates recursively until y is evenly divisible by x." width="300" height="89"></p>
+
+<p>Keep in mind, however, that despite their elegance and conciseness, 
+ recursive function definitions are not always computationally efficient. 
+ You may find that an equivalent definition using an <a href="Program_Loops.html">iterative 
+ loop</a> evaluates more quickly.</p>
+
+<p><object classid="clsid:013500F3-1122-11DB-9380-000D56C6051A"
+		   id="objLaunchMathcad"
+		   border="0"
+		   width="1"
+		   height="1"
+		   align="left">
+</object></p>
+
+<h5><a onMouseOver="document.body.style.cursor='hand'"
+	   onMouseOut="document.body.style.cursor='arrow'"
+	   onClick="objLaunchMathcad.OpenResourceCenter('Programming\\recursv.xmcd')"
+	   class="fakelink">QuickSheet</a></h5>
+	   
+	   <p>
+<a href="javascript:void(0);" onClick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) >=2 && typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Conditional (if and otherwise) Operators','Program_Conditional.html','Defining a Function with a Program','Defining_a_Program.html','Error Handling in Programs','Program_error.html','Exiting Loops and Programs','Program_Control.html','Program Debugging','Program_debugging.html','Program Loops','Program_Loops.html','Programming','Programming.html','Programming Operator','Add_line_operator.html','Programming Toolbar','Programming_toolbar.html');return false;" title="Related Topics"><img src="ss_btn_related_topics.gif" border=0 height=16 width=74 alt="Related Topics"></a>
+</p>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="JavaScript" title="WebHelpRelatedTopics"><!--
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//--></script><script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

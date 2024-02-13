@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html>
+
+<head>
+	<title>List Box State Properties</title>
+	<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+	<meta name="generator" content="RoboHELP by eHelp Corporation - www.ehelp.com">
+	<link rel='stylesheet' href='MAIN_TOPIC_ns.css'>
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='MAIN_TOPIC.css'>");}
+//-->
+</script>
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//-->
+</script>
+<style type="text/css">
+<!--
+  div.WebHelpPopupMenu {position:absolute; left:0px; top:0px; z-index:4; visibility:hidden;}
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="whtopic.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Mathsoft Controls\nListBoxes\nListbox State Properties");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(0);
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("DevRef.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+//-->
+</script>
+<table>
+	<tr>
+		<td height="94" valign="top"><h1>List Box State Properties</h1></td>
+	</tr>
+</table>
+
+<h3><a name="Count">Count</a></h3>
+
+<p>The <b>Count</b> property is read-only and returns the number of items in the list box. This important property can be used to set up a loop to iterate through the control using methods such as <a href="Control_lstmethod.html#GetText">GetText</a>.</p>
+
+<code><i>longCount</i> = ListBox.<b>Count</b><br>
+<br>
+</code>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+	<tr>
+		<td valign="top"><p><i>longCount</i></p></td>
+		<td valign="top"><p>The integer number of items in the list box.</p></td>
+	</tr>
+</table>
+
+<h3><a name="CurSel">CurSel</a></h3>
+
+<p>The <b>CurSel</b> property sets or gets the index of the currently selected item in the list box. Index is zero-based, so the first item in the list box has an index of 0. Returns constant <a href="#LBERR">LBERR</a> if no item selected.</p>
+ 
+<code><i>longSelIndex</i> = ListBox.<b>CurSel</b><br>ListBox.<b>CurSel</b> = <i>longSelIndex</i><br>
+<br>
+</code>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+	<tr>
+		<td valign="top"><p><i>longSelIndex</i></p></td>
+		<td valign="top"><p>The index of the selected item or item to select. Zero based.</p></td>
+	</tr>
+</table>
+
+<h3><a name="LBERR">LBERR and LBERRSPACE</a></h3>
+
+<p>The <b>LBERR</b> property gets a test integer for errors on all list box properties and methods, except <a href="Control_lstmethod.html#AddString">AddString or InsertString</a> methods, in which case, use the <b>LBERRSPACE</b> property to test for insufficient memory. For example, the LBERR constant is returned as an error by the <a href="#CurSel">CurSel property</a> when no item is selected.</p>
+
+<code><i>longLBERR</i> = ListBox.<b>LBERR</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<i>longLBERRSPACE</i> = ListBox.<b>LBERRSPACE</b><br>
+<br>
+</code>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+	<tr>
+		<td valign="top"><p><i>longLBERR</i></p></td>
+		<td valign="top"><p>An integer value that indicates the setting of the LBERR or LBERRSPACE constant.</p></td>
+	</tr>
+</table>
+
+<h3><a name="RightToLeftReadingOrder">RightToLeftReadingOrder</a></h3>
+
+<p>The <b>RightToLeftReadingOrder </b>property sets or gets a value that determines whether the text is read right-to-left. Often used for Kanji.</p>
+
+<code><i>bMode</i> = ListBox.<b>RightToLeftReadingOrder</b>
+<br>ListBox.<b>RightToLeftReadingOrder</b> = <i>bMode</i><br>
+<br>
+</code>
+
+<table cellspacing="1" cellpadding="5" width="500" border="1">
+<tr>
+	<td width="26%" valign="middle"><p align="center"><b>Element</b></p></td>
+	<td width="74%" valign="middle"><p align="center"><b>Description</b></p></td>
+</tr>
+	<tr> 
+		<td valign="top"><p><i>bMode</i></p></td>
+		<td valign="top"><p>True indicates that the text ordering is right-to-left; false indicates left-to-right.</p></td>
+	</tr>
+</table>
+
+<br>
+
+<hr size="2" width="100%" align="center">
+
+<script type="text/javascript" language="javascript1.2">
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+//-->
+</script>
+</body>
+
+</html>

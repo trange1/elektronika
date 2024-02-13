@@ -1,0 +1,59 @@
+// 08-Nov-02 J-03-36 $$1  ECW  Created.
+// 12-Nov-02 J-03-37 $$2  ECW  Close Product section
+// 13-Nov-02 J-03-37 $$3  ECW  update convertFilesList
+// 19-Nov-02 J-03-38 $$4  ECW  make package names unique for help string
+// 05-Dec-02 J-03-39 $$5  ECW  remove some binscripts
+// 02-Feb-03 J-03-41 $$6  ECW  changes for production release
+// 07-Feb-03 J-03-41 $$7  ECW  fix convertFilesList entries
+
+(Product pdx
+    (Name                      "Progressive Die Extension")
+    (Packages                  "pdx_base"
+                               "pdxhelp"
+                               "ptcutil"
+                               "pdxoptions"
+                               "uninstall")
+    (ProgramFiles              True)
+    (LpDirName                 "pdx")
+    (Screens                   "ScreenProd")
+    (Installed                 True)
+    (SaveList                  "text/config.win"
+                               "text/config.pro")
+    (LicenseSimplification     True)
+)
+
+(Package pdx_base
+    (Name                      "Progressive Die Extension")
+    (Binscripts                "ptchostid")
+    (Cdsections                "PDX Tree"
+			       "pdx")
+    (convertFilesList          "_LP_/text/config.pro=_LP_/text/config.pro"
+			       "_LP_/text/protk.dat=_LP_/text/protk.dat")
+    (Installed                 True)
+)
+
+(Package pdxhelp
+    (Name                      "PDX Help Files")
+    (Installed                 True)
+    (Cdsections                "pdxhelp")
+)
+
+(Package pdxoptions
+    (Name                      "Options")
+    (SubPackages               "pdxmetric" 
+                               "pdximperial")
+    (Installed                 True)
+)
+
+(Package pdxmetric
+    (Name                      "Metric Library")
+    (Installed                 True)
+    (Cdsections                "metric")
+)
+
+(Package pdximperial
+    (Name                      "Imperial Library")
+    (Installed                 True)
+    (Cdsections                "imperial")
+)
+
